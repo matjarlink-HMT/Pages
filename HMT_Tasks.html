@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MatjarLink — Execution Plan</title>
+<style>
+  :root{
+    --maroon:#8E1B5B; --maroon-d:#6f1247; --orange:#F2A03D;
+    --ink:#2b2030; --muted:#7a6c80; --line:#ece2ee; --bg:#faf6fb; --card:#ffffff;
+    --green:#1f9d6b; --red:#d23b4e; --red-bg:#fdeaec;
+    --amber:#c9821a; --amber-bg:#fdf2e0; --blue:#2f6bd6; --blue-bg:#eaf1fd;
+    --green-bg:#e6f6ef; --purple-bg:#f3ecfb; --purple:#7a3fc9;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI","Helvetica Neue",Tahoma,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 18px 80px}
+  header{background:linear-gradient(135deg,var(--maroon),var(--maroon-d));
+    color:#fff;padding:30px 0 26px;margin-bottom:24px;box-shadow:0 6px 24px rgba(142,27,91,.25)}
+  .head-in{max-width:1100px;margin:0 auto;padding:0 18px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .logo{width:72px;height:72px;flex:0 0 auto;background:#fff;border-radius:18px;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+  .logo svg{width:50px;height:50px}
+  header h1{margin:0;font-size:25px;font-weight:800}
+  header .sub{opacity:.92;margin-top:6px;font-size:14px}
+  header .meta{margin-top:10px;font-size:12.5px;opacity:.88;display:flex;gap:18px;flex-wrap:wrap}
+  header .meta b{color:var(--orange)}
+  .head-side{margin-inline-start:auto;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+  .langsw{display:flex;gap:6px;background:rgba(255,255,255,.14);padding:4px;border-radius:30px}
+  .langsw button{border:0;background:transparent;color:#fff;border-radius:24px;padding:6px 14px;
+    font-size:13px;cursor:pointer;font-family:inherit;font-weight:700;opacity:.8;transition:.15s}
+  .langsw button.active{background:#fff;color:var(--maroon);opacity:1}
+  .overall{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin-bottom:22px}
+  .overall .bar{height:14px;background:#f0e7f2;border-radius:20px;overflow:hidden;margin-top:10px}
+  .overall .fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--maroon));width:0;border-radius:20px;transition:width .5s ease}
+  .overall .lbl{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+  .overall .lbl span{color:var(--maroon);font-size:18px}
+  .overall .sub2{margin-top:8px;font-size:12.5px;color:var(--muted)}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:26px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-align:center}
+  .stat .n{font-size:26px;font-weight:800;color:var(--maroon)}
+  .stat .t{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .stat.r .n{color:var(--red)} .stat.o .n{color:var(--amber)} .stat.g .n{color:var(--green)}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
+  .controls .grp{display:flex;gap:6px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:30px;padding:7px 15px;font-size:13px;cursor:pointer;font-family:inherit;transition:.15s}
+  .btn:hover{border-color:var(--maroon)}
+  .btn.active{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+  .btn.print{margin-inline-start:auto;background:var(--orange);color:#fff;border-color:var(--orange);font-weight:700}
+  section.block{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:16px;overflow:hidden}
+  .sec-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;
+    background:linear-gradient(90deg,#fbeef5,#fff);border-inline-start:5px solid var(--maroon)}
+  .sec-head h2{margin:0;font-size:17px;color:var(--maroon);flex:1}
+  .sec-head .goal{font-size:12.5px;color:var(--muted);font-weight:400;display:block;margin-top:3px}
+  .sec-head .mini{font-size:12px;color:var(--muted);white-space:nowrap}
+  .sec-head .chev{transition:.25s;color:var(--maroon);font-size:13px}
+  section.collapsed .chev{transform:rotate(-90deg)}
+  section.collapsed .sec-body{display:none}
+  .sec-head.crit{border-inline-start-color:var(--red);background:linear-gradient(90deg,#fdeef0,#fff)}
+  .sec-head.crit h2{color:var(--red)}
+  html[dir=ltr] section.collapsed .chev{transform:rotate(90deg)}
+  .sec-body{padding:6px 14px 16px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{color:var(--muted);font-weight:700;font-size:12px;padding:8px 10px;border-bottom:2px solid var(--line);text-align:start}
+  td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:start}
+  tr.done td{opacity:.55}
+  tr.done td .task{text-decoration:line-through}
+  .task{font-weight:600}
+  .desc{color:var(--muted);font-size:12.5px;margin-top:2px}
+  .id{color:var(--orange);font-weight:800;font-size:12px;white-space:nowrap}
+  td.chk{width:34px;text-align:center}
+  input[type=checkbox]{width:19px;height:19px;accent-color:var(--maroon);cursor:pointer}
+  .badge{display:inline-block;border-radius:20px;padding:2px 10px;font-size:11.5px;font-weight:700;white-space:nowrap}
+  .p-crit{background:var(--red-bg);color:var(--red)}
+  .p-high{background:var(--amber-bg);color:var(--amber)}
+  .p-norm{background:var(--blue-bg);color:var(--blue)}
+  .dept{display:inline-block;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;margin:1px 2px}
+  .d-dev{background:var(--blue-bg);color:var(--blue)}
+  .d-adm{background:var(--purple-bg);color:var(--purple)}
+  .d-cs{background:var(--green-bg);color:var(--green)}
+  .d-mk{background:var(--amber-bg);color:var(--amber)}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+  .reset{color:var(--red);cursor:pointer;text-decoration:underline;font-size:12px}
+  td.who select{padding:4px 6px;border:1px solid var(--line);border-radius:7px;font-family:inherit;font-size:12.5px;max-width:130px;background:#fff;color:var(--ink);cursor:pointer}
+  td.act{width:36px;text-align:center}
+  td.seqcell{width:50px}
+  .seq{width:44px;padding:4px 2px;border:1px solid var(--line);border-radius:7px;text-align:center;font-weight:800;color:var(--maroon);font-family:inherit;font-size:13.5px;background:#fff}
+  .seq:focus{outline:2px solid var(--orange);border-color:var(--orange)}
+  .sbtn{background:none;border:1px solid var(--line);border-radius:6px;font-size:11px;padding:0 6px;cursor:pointer;color:var(--maroon);vertical-align:middle;line-height:1.6}
+  .sbtn.open{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+  .stepbox{background:#fbf6fa;border:1px dashed #e2cfe0;border-radius:10px;padding:10px 14px;margin:2px 0 6px}
+  .stepbox b{color:var(--maroon);font-size:12.5px}
+  .stepbox ol{margin:6px 0 0;padding-inline-start:20px}
+  .stepbox li{margin:3px 0;font-size:13px;color:var(--ink);line-height:1.6}
+  .modal textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink);resize:vertical;line-height:1.6}
+  /* tabs */
+  .tabs{display:flex;gap:6px;background:#fff;border:1px solid var(--line);border-radius:30px;padding:5px;margin-bottom:20px;flex-wrap:wrap}
+  .tabs button{flex:1;min-width:120px;border:0;background:transparent;color:var(--muted);border-radius:24px;padding:9px 14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s}
+  .tabs button.active{background:var(--maroon);color:#fff}
+  .view{display:none} .view.active{display:block}
+  /* current user */
+  .me-sel{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);border-radius:24px;padding:4px 6px 4px 12px;color:#fff;font-size:12.5px}
+  .me-sel select{border:0;border-radius:20px;padding:5px 10px;font-family:inherit;font-size:12.5px;background:#fff;color:var(--maroon);font-weight:700;cursor:pointer}
+  /* dates */
+  td.datecell{white-space:nowrap}
+  .due{display:inline-block;font-size:12px;border-radius:6px;padding:2px 7px;font-weight:700;background:#f0e7f2;color:var(--muted)}
+  .due.over{background:var(--red-bg);color:var(--red)} .due.soon{background:var(--amber-bg);color:var(--amber)}
+  .due.ok{background:var(--green-bg);color:var(--green)}
+  .modal input[type=date]{cursor:pointer}
+  .clip{display:inline-block;background:#eef;border:1px solid #dde;color:#3a3a8a;border-radius:6px;font-size:11px;padding:1px 6px;cursor:pointer;margin-inline-start:4px;font-weight:700}
+  /* activity log */
+  .logitem{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:8px}
+  .logitem .ic{font-size:20px;flex:0 0 auto}
+  .logitem .tx{flex:1;font-size:13.5px}
+  .logitem .tx b{color:var(--maroon)}
+  .logitem .meta{font-size:11.5px;color:var(--muted);margin-top:3px}
+  .logitem .tag{font-size:11px;background:#f3ecfb;color:var(--purple);border-radius:5px;padding:1px 6px}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .toolbar input[type=text]{flex:1;min-width:180px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px}
+  .empty{text-align:center;color:var(--muted);padding:40px;font-size:14px}
+  /* files archive */
+  .fgroup{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden}
+  .fgroup h3{margin:0;padding:12px 18px;background:linear-gradient(90deg,#fbeef5,#fff);color:var(--maroon);font-size:15px;border-inline-start:4px solid var(--orange)}
+  .fitem{display:flex;align-items:center;gap:12px;padding:10px 18px;border-top:1px solid var(--line)}
+  .fitem .fic{font-size:24px}
+  .fitem .fn{flex:1;font-size:13.5px;font-weight:600;word-break:break-all}
+  .fitem .fmeta{font-size:11.5px;color:var(--muted)}
+  .fitem a.dl,.fitem button.fdel{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer;text-decoration:none;color:var(--ink);font-family:inherit}
+  .fitem a.dl:hover{border-color:var(--maroon);color:var(--maroon)} .fitem button.fdel:hover{border-color:var(--red);color:var(--red)}
+  .attlist{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+  .attlist .att{display:flex;align-items:center;gap:8px;background:#faf6fb;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:12.5px}
+  .attlist .att .an{flex:1;word-break:break-all}
+  .attlist .att button{border:0;background:none;color:var(--red);cursor:pointer;font-size:14px}
+  .ebtn{background:none;border:1px solid var(--line);border-radius:7px;padding:3px 8px;cursor:pointer;font-size:13px}
+  .ebtn:hover{border-color:var(--maroon);color:var(--maroon)}
+  .btn.add{background:var(--green);color:#fff;border-color:var(--green);font-weight:700}
+  .flbl{font-size:12px;color:var(--muted);font-weight:700;align-self:center;margin-inline-end:4px}
+  /* modal */
+  .modal-bg{position:fixed;inset:0;background:rgba(43,32,48,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+  .modal-bg.open{display:flex}
+  .modal{background:#fff;border-radius:16px;padding:22px 24px;max-width:500px;width:100%;max-height:92vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .modal h3{margin:0 0 6px;color:var(--maroon);font-size:19px}
+  .modal label.fld{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin:13px 0 4px}
+  .modal input,.modal select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)}
+  .chkrow{display:flex;gap:16px;flex-wrap:wrap;margin-top:2px}
+  .chkrow label{display:flex;align-items:center;gap:6px;margin:0;font-weight:600;color:var(--ink);cursor:pointer;font-size:13.5px}
+  .chkrow input{width:auto}
+  .modal-actions{display:flex;align-items:center;gap:8px;margin-top:22px}
+  .btn-save{background:var(--maroon);color:#fff;border:0;border-radius:9px;padding:10px 22px;font-weight:700;cursor:pointer;font-family:inherit;font-size:14px}
+  .btn-cancel{background:#eee;border:0;border-radius:9px;padding:10px 16px;cursor:pointer;font-family:inherit;font-size:14px}
+  .btn-del{background:var(--red-bg);color:var(--red);border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13.5px}
+  @media print{ td.who select{border:0;-webkit-appearance:none;appearance:none} td.act,.ebtn,.sbtn{display:none}
+    tr.steprow{display:table-row!important} }
+  @media (max-width:640px){ .desc{display:none} th.hide-m,td.hide-m{display:none} header h1{font-size:20px} }
+  @media print{ .controls,.btn.print,header .meta,.head-side{display:none}
+    section.collapsed .sec-body{display:block!important} body{background:#fff} section.block{break-inside:avoid} }
+</style>
+</head>
+<body>
+<header>
+  <div class="head-in">
+    <div class="logo">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="6" stroke-linecap="round">
+        <path d="M22 52 q0-14 14-14 q14 0 14 14" stroke="#F2A03D"/>
+        <rect x="34" y="38" width="34" height="34" rx="9" stroke="#8E1B5B"/>
+        <rect x="22" y="50" width="34" height="34" rx="9" stroke="#F2A03D"/>
+        <circle cx="34" cy="52" r="3.5" fill="#8E1B5B" stroke="none"/>
+        <circle cx="50" cy="38" r="3.5" fill="#F2A03D" stroke="none"/>
+      </svg>
+    </div>
+    <div>
+      <h1 id="h1"></h1>
+      <div class="sub" id="subtitle"></div>
+      <div class="meta">
+        <span><span id="crLabel"></span>: <b>1392087</b></span>
+        <span><span id="phaseLabel"></span>: <b id="phaseVal"></b></span>
+        <span><span id="versionLabel"></span>: <b id="versionVal"></b></span>
+      </div>
+    </div>
+    <div class="head-side">
+      <div class="langsw" id="langsw">
+        <button data-l="ar">العربية</button>
+        <button data-l="en">English</button>
+        <button data-l="fa">فارسی</button>
+      </div>
+      <div class="me-sel"><span id="meLabel"></span><select id="meSel"></select></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="tabs" id="tabs">
+    <button data-v="plan" class="active" id="tabPlan"></button>
+    <button data-v="activity" id="tabLog"></button>
+    <button data-v="files" id="tabFiles"></button>
+  </div>
+
+  <div class="view active" id="view-plan">
+  <div class="overall">
+    <div class="lbl"><div id="overallLabel"></div><span id="pct">0%</span></div>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+    <div class="sub2">
+      <span id="pgPre"></span> <b id="doneCount">0</b> <span id="pgMid"></span> <b id="totalCount">0</b> <span id="pgPost"></span>
+      · <span class="reset" id="resetBtn"></span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n" id="s-total">0</div><div class="t" id="st-total"></div></div>
+    <div class="stat r"><div class="n" id="s-crit">0</div><div class="t" id="st-crit"></div></div>
+    <div class="stat o"><div class="n" id="s-high">0</div><div class="t" id="st-high"></div></div>
+    <div class="stat"><div class="n" id="s-norm">0</div><div class="t" id="st-norm"></div></div>
+    <div class="stat g"><div class="n" id="s-done">0</div><div class="t" id="st-done"></div></div>
+  </div>
+
+  <div class="controls">
+    <span class="flbl" id="deptFlbl"></span>
+    <div class="grp" id="deptFilter">
+      <button class="btn active" data-f="all"></button>
+      <button class="btn" data-f="dev"></button>
+      <button class="btn" data-f="adm"></button>
+      <button class="btn" data-f="cs"></button>
+      <button class="btn" data-f="mk"></button>
+    </div>
+  </div>
+  <div class="controls">
+    <span class="flbl" id="personFlbl"></span>
+    <div class="grp" id="personFilter"></div>
+    <button class="btn add" id="addBtn"></button>
+    <button class="btn" id="dbBtn" title="SQLite">🗄️ <span id="dbState"></span></button>
+    <button class="btn" id="cloudBtn" onclick="openCloud()">☁️ <span id="cloudState"></span></button>
+    <button class="btn print" id="printBtn" onclick="window.print()"></button>
+  </div>
+
+  <div id="content"></div>
+  </div><!-- /view-plan -->
+
+  <div class="view" id="view-activity">
+    <div class="toolbar">
+      <input type="text" id="logSearch" oninput="renderLog()">
+      <select id="logActor" onchange="renderLog()"></select>
+      <button class="btn" id="logClearBtn"></button>
+    </div>
+    <div id="logList"></div>
+  </div><!-- /view-activity -->
+
+  <div class="view" id="view-files">
+    <div class="toolbar">
+      <input type="text" id="fileSearch" oninput="renderFiles()">
+      <span class="flbl" id="filesTotal"></span>
+    </div>
+    <div id="filesList"></div>
+  </div><!-- /view-files -->
+
+  <footer id="footer"></footer>
+</div>
+<script src="lib/sql-asm-memory-growth.js"></script>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3 id="mTitle"></h3>
+    <label class="fld" id="lbl-sec"></label>
+    <select id="m-sec"></select>
+    <label class="fld" id="lbl-task"></label>
+    <input id="m-task" type="text">
+    <label class="fld" id="lbl-desc"></label>
+    <input id="m-desc" type="text">
+    <label class="fld" id="lbl-steps"></label>
+    <textarea id="m-steps" rows="4"></textarea>
+    <label class="fld" id="lbl-dept"></label>
+    <div id="m-depts" class="chkrow"></div>
+    <label class="fld" id="lbl-pri"></label>
+    <select id="m-pri"></select>
+    <label class="fld" id="lbl-start"></label>
+    <input id="m-start" type="date">
+    <label class="fld" id="lbl-due"></label>
+    <input id="m-due" type="date">
+    <label class="fld" id="lbl-who"></label>
+    <select id="m-who"></select>
+    <div id="m-attach-wrap">
+      <label class="fld" id="lbl-attach"></label>
+      <input type="file" id="m-file" multiple>
+      <div class="attlist" id="m-attach-list"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-del" id="m-del"></button>
+      <span style="flex:1"></span>
+      <button class="btn-cancel" id="m-cancel"></button>
+      <button class="btn-save" id="m-save"></button>
+    </div>
+  </div>
+</div>
+
+<div id="dbOverlay" style="position:fixed;inset:0;background:rgba(43,32,48,.78);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:18px;padding:30px 28px;max-width:470px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div style="font-size:42px">🗄️</div>
+    <h2 id="dbT" style="color:#8E1B5B;margin:10px 0 6px;font-size:21px"></h2>
+    <p id="dbHint" style="color:#7a6c80;font-size:13.5px;line-height:1.7;margin:0 0 22px"></p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button id="dbOpen" class="btn-save" style="width:100%;padding:12px"></button>
+      <button id="dbNew" class="btn" style="width:100%;padding:11px"></button>
+      <button id="dbSkip" style="width:100%;padding:9px;border:0;background:none;color:#7a6c80;cursor:pointer;font-family:inherit;font-size:13px"></button>
+    </div>
+    <div id="dbErr" style="color:#d23b4e;font-size:12.5px;margin-top:12px"></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="cloudBg">
+  <div class="modal">
+    <h3 id="cloudTitle"></h3>
+    <div id="cloudHint" style="font-size:12.5px;color:var(--muted);margin-bottom:6px"></div>
+    <label class="fld" id="lbl-curl"></label>
+    <input id="c-url" type="text" placeholder="https://script.google.com/macros/s/.../exec">
+    <label class="fld" id="lbl-ctoken"></label>
+    <input id="c-token" type="text">
+    <div id="cloudMsg" style="font-size:13px;margin-top:10px;font-weight:700"></div>
+    <div class="modal-actions" style="flex-wrap:wrap">
+      <button class="btn-del" id="c-disc"></button>
+      <span style="flex:1"></span>
+      <button class="btn" id="c-pull"></button>
+      <button class="btn" id="c-push"></button>
+      <button class="btn-cancel" id="c-cancel"></button>
+      <button class="btn-save" id="c-save"></button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="attBg">
+  <div class="modal">
+    <h3 id="attTitle"></h3>
+    <label class="fld" id="att-lbl"></label>
+    <input type="file" id="att-file" multiple>
+    <div class="attlist" id="att-list" style="margin-top:12px"></div>
+    <div class="modal-actions"><span style="flex:1"></span><button class="btn-cancel" id="att-close"></button></div>
+  </div>
+</div>
+
+<script>
+// safe localStorage (falls back to memory when blocked, e.g. sandboxed iframes)
+const LS=(()=>{try{localStorage.setItem("__t","1");localStorage.removeItem("__t");return localStorage;}catch(e){const m={};return{getItem:k=>(k in m?m[k]:null),setItem:(k,v)=>{m[k]=String(v)},removeItem:k=>{delete m[k]}};}})();
+// ===== UI strings =====
+const UI = {
+  ar:{ dir:'rtl', docTitle:'خطة التنفيذ التفصيلية — متجرلينك',
+    h1:'خطة التنفيذ التفصيلية — متجرلينك',
+    subtitle:'تفكيك الخطة التنفيذية إلى مهام دقيقة حسب الأقسام · شركة آفاق التكنولوجيا الحديثة',
+    crLabel:'سجل تجاري', phaseLabel:'المرحلة الحالية', phaseVal:'ما قبل الإطلاق',
+    versionLabel:'الإصدار', versionVal:'يونيو ٢٠٢٦',
+    overall:'نسبة الإنجاز الكلية', pgPre:'', pgMid:'منجزة من أصل', pgPost:'مهمة',
+    reset:'تصفير التتبّع', resetConfirm:'تصفير كل علامات الإنجاز؟',
+    stTotal:'إجمالي المهام', stCrit:'🟥 حرجة', stHigh:'🟧 مهمة', stNorm:'🟦 اعتيادية', stDone:'✅ منجزة',
+    fAll:'كل الأقسام', fDev:'تطوير', fAdm:'إدارة', fCs:'خدمة عملاء', fMk:'تسويق',
+    print:'🖨 طباعة / حفظ PDF',
+    thCode:'الترتيب', thTask:'المهمة', thDept:'القسم', thPri:'الأولوية', thWho:'المسؤول',
+    pCrit:'🟥 حرج', pHigh:'🟧 مهم', pNorm:'🟦 اعتيادي',
+    dDev:'تطوير', dAdm:'إدارة', dCs:'خدمة', dMk:'تسويق',
+    deptFlbl:'حسب القسم:', personFlbl:'حسب المسؤول:', whoAll:'الكل', unassigned:'— غير محدد',
+    addBtn:'➕ إضافة مهمة', addTitle:'إضافة مهمة جديدة', editTitle:'تعديل المهمة',
+    mSec:'القسم', mTask:'نص المهمة', mDesc:'الوصف / المخرج', mSteps:'الشرح / خطوات التنفيذ (سطر لكل خطوة)', mDept:'الأقسام المعنية', mPri:'الأولوية', mWho:'المسؤول',
+    stepsTitle:'الشرح وخطوات التنفيذ',
+    save:'حفظ', cancel:'إلغاء', del:'حذف', delConfirm:'حذف هذه المهمة نهائياً؟', needTask:'الرجاء كتابة نص المهمة',
+    footer:'وثيقة داخلية — شركة آفاق التكنولوجيا الحديثة (متجرلينك) · يُحفظ كل شيء تلقائياً في هذا المتصفح · مبنية على الخطة الموحّدة ٢٠٢٦–٢٠٢٧',
+    tabPlan:'📋 الخطة', tabLog:'🕓 سجل الأحداث', tabFiles:'📎 أرشيف الملفات', meLabel:'أنا:',
+    mStart:'تاريخ البدء', mDue:'الموعد النهائي (Deadline)', thDate:'الموعد', mAttach:'الملحقات (ارفع ملفات)',
+    attachHint:'يمكن إضافة المرفقات بعد حفظ المهمة', logSearchPH:'ابحث في الأحداث…', logAll:'كل الأشخاص',
+    logClear:'تفريغ السجل', logEmpty:'لا توجد أحداث بعد', logClearConfirm:'تفريغ سجل الأحداث بالكامل؟',
+    byWord:'بواسطة', someone:'غير محدد', fileSearchPH:'ابحث في الملفات…', filesEmpty:'لا توجد ملفات مرفوعة بعد',
+    dl:'تنزيل', totalFiles:'ملف', overdue:'متأخرة',
+    ev_assign:'أسند المهمة إلى', ev_unassign:'أزال إسناد المهمة', ev_done:'أكمل المهمة', ev_undone:'أعاد فتح المهمة',
+    ev_create:'أضاف مهمة جديدة', ev_edit:'عدّل المهمة', ev_delete:'حذف المهمة', ev_date:'حدّث مواعيد المهمة',
+    ev_attach:'أرفق ملفاً', ev_attachdel:'حذف مرفقاً',
+    cloudTitle:'المزامنة السحابية (Google Apps Script)', cloudHint:'الصق رابط الـ Web app وكلمة السر (راجع دليل الإعداد في مجلد Cloud-AppsScript).',
+    lblCurl:'رابط الخادم (Web app URL)', lblCtoken:'كلمة السر (SECRET)',
+    cSave:'حفظ وربط', cCancel:'إغلاق', cPull:'⬇ تحميل من السحابة', cPush:'⬆ رفع للسحابة', cDisc:'فصل',
+    stOffline:'محلي', stConnected:'متصل ✓', stSaving:'حفظ…', stError:'خطأ', stLoading:'تحميل…',
+    msgNeedUrl:'الرجاء إدخال الرابط وكلمة السر', msgConnected:'تم الربط بنجاح ✓', msgPull:'تم التحميل من السحابة ✓',
+    msgPush:'تم الرفع للسحابة ✓', msgErr:'تعذّر الاتصال — تحقق من الرابط وكلمة السر', msgDisc:'تم الفصل (محلي فقط)',
+    dbTitle:'قاعدة بيانات اللوحة (SQLite)', dbHint:'اختر ملف قاعدة بيانات لحفظ/استعادة بياناتك، أو أنشئ ملفاً جديداً. يعمل بلا إنترنت والملف قابل للنقل بين الأجهزة.',
+    dbOpenBtn:'📂 فتح ملف قاعدة بيانات', dbNewBtn:'🆕 إنشاء قاعدة جديدة', dbSkipBtn:'المتابعة بدون حفظ (مؤقت)',
+    dbOff:'بلا قاعدة', dbSaved:'💾 محفوظ', dbMem:'⚠ غير محفوظ', dbFail:'تعذّر', dbAuto:'💾 حفظ تلقائي' },
+  en:{ dir:'ltr', docTitle:'Detailed Execution Plan — MatjarLink',
+    h1:'Detailed Execution Plan — MatjarLink',
+    subtitle:'Breaking the execution plan into precise tasks by department · Horizons of Modern Technology Co.',
+    crLabel:'Commercial Reg.', phaseLabel:'Current phase', phaseVal:'Pre-launch',
+    versionLabel:'Version', versionVal:'June 2026',
+    overall:'Overall progress', pgPre:'', pgMid:'done of', pgPost:'tasks',
+    reset:'Reset tracking', resetConfirm:'Reset all completion marks?',
+    stTotal:'Total tasks', stCrit:'🟥 Critical', stHigh:'🟧 Important', stNorm:'🟦 Normal', stDone:'✅ Done',
+    fAll:'All departments', fDev:'Development', fAdm:'Management', fCs:'Customer Service', fMk:'Marketing',
+    print:'🖨 Print / Save PDF',
+    thCode:'No.', thTask:'Task', thDept:'Dept', thPri:'Priority', thWho:'Assignee',
+    pCrit:'🟥 Critical', pHigh:'🟧 Important', pNorm:'🟦 Normal',
+    dDev:'Dev', dAdm:'Mgmt', dCs:'CS', dMk:'Mkt',
+    deptFlbl:'By department:', personFlbl:'By assignee:', whoAll:'All', unassigned:'— Unassigned',
+    addBtn:'➕ Add task', addTitle:'Add new task', editTitle:'Edit task',
+    mSec:'Section', mTask:'Task text', mDesc:'Description / Deliverable', mSteps:'Explanation / steps (one per line)', mDept:'Departments', mPri:'Priority', mWho:'Assignee',
+    stepsTitle:'Explanation & steps',
+    save:'Save', cancel:'Cancel', del:'Delete', delConfirm:'Delete this task permanently?', needTask:'Please enter the task text',
+    footer:'Internal document — Horizons of Modern Technology Co. (MatjarLink) · Everything is saved automatically in this browser · Based on the Unified Plan 2026–2027',
+    tabPlan:'📋 Plan', tabLog:'🕓 Activity log', tabFiles:'📎 Files archive', meLabel:'I am:',
+    mStart:'Start date', mDue:'Deadline', thDate:'Due', mAttach:'Attachments (upload files)',
+    attachHint:'Attachments can be added after saving the task', logSearchPH:'Search events…', logAll:'All people',
+    logClear:'Clear log', logEmpty:'No events yet', logClearConfirm:'Clear the entire activity log?',
+    byWord:'by', someone:'Unknown', fileSearchPH:'Search files…', filesEmpty:'No files uploaded yet',
+    dl:'Download', totalFiles:'file(s)', overdue:'Overdue',
+    ev_assign:'assigned the task to', ev_unassign:'removed the task assignment', ev_done:'completed the task', ev_undone:'reopened the task',
+    ev_create:'added a new task', ev_edit:'edited the task', ev_delete:'deleted the task', ev_date:'updated the task dates',
+    ev_attach:'attached a file', ev_attachdel:'removed an attachment',
+    cloudTitle:'Cloud sync (Google Apps Script)', cloudHint:'Paste the Web app URL and secret (see the setup guide in the Cloud-AppsScript folder).',
+    lblCurl:'Server URL (Web app URL)', lblCtoken:'Secret (SECRET)',
+    cSave:'Save & connect', cCancel:'Close', cPull:'⬇ Load from cloud', cPush:'⬆ Push to cloud', cDisc:'Disconnect',
+    stOffline:'Local', stConnected:'Connected ✓', stSaving:'Saving…', stError:'Error', stLoading:'Loading…',
+    msgNeedUrl:'Please enter the URL and secret', msgConnected:'Connected successfully ✓', msgPull:'Loaded from cloud ✓',
+    msgPush:'Pushed to cloud ✓', msgErr:'Connection failed — check URL and secret', msgDisc:'Disconnected (local only)',
+    dbTitle:'Board database (SQLite)', dbHint:'Pick a database file to save/restore your data, or create a new one. Works offline and the file is portable across devices.',
+    dbOpenBtn:'📂 Open database file', dbNewBtn:'🆕 Create new database', dbSkipBtn:'Continue without saving (temporary)',
+    dbOff:'No database', dbSaved:'💾 Saved', dbMem:'⚠ Unsaved', dbFail:'Failed', dbAuto:'💾 Auto-save' },
+  fa:{ dir:'rtl', docTitle:'برنامه اجرایی تفصیلی — متجرلینک',
+    h1:'برنامه اجرایی تفصیلی — متجرلینک',
+    subtitle:'تجزیه برنامه اجرایی به وظایف دقیق بر اساس بخش‌ها · شرکت افق‌های فناوری مدرن',
+    crLabel:'شماره ثبت تجاری', phaseLabel:'مرحله فعلی', phaseVal:'پیش از راه‌اندازی',
+    versionLabel:'نسخه', versionVal:'ژوئن ۲۰۲۶',
+    overall:'پیشرفت کلی', pgPre:'', pgMid:'از', pgPost:'وظیفه انجام‌شده',
+    reset:'بازنشانی پیگیری', resetConfirm:'همه علامت‌های انجام بازنشانی شوند؟',
+    stTotal:'کل وظایف', stCrit:'🟥 بحرانی', stHigh:'🟧 مهم', stNorm:'🟦 عادی', stDone:'✅ انجام‌شده',
+    fAll:'همه بخش‌ها', fDev:'توسعه', fAdm:'مدیریت', fCs:'خدمات مشتری', fMk:'بازاریابی',
+    print:'🖨 چاپ / ذخیره PDF',
+    thCode:'ترتیب', thTask:'وظیفه', thDept:'بخش', thPri:'اولویت', thWho:'مسئول',
+    pCrit:'🟥 بحرانی', pHigh:'🟧 مهم', pNorm:'🟦 عادی',
+    dDev:'توسعه', dAdm:'مدیریت', dCs:'خدمات', dMk:'بازاریابی',
+    deptFlbl:'بر اساس بخش:', personFlbl:'بر اساس مسئول:', whoAll:'همه', unassigned:'— تعیین‌نشده',
+    addBtn:'➕ افزودن وظیفه', addTitle:'افزودن وظیفه جدید', editTitle:'ویرایش وظیفه',
+    mSec:'بخش', mTask:'متن وظیفه', mDesc:'توضیح / خروجی', mSteps:'توضیح / مراحل اجرا (هر خط یک مرحله)', mDept:'بخش‌های مرتبط', mPri:'اولویت', mWho:'مسئول',
+    stepsTitle:'توضیح و مراحل اجرا',
+    save:'ذخیره', cancel:'انصراف', del:'حذف', delConfirm:'این وظیفه برای همیشه حذف شود؟', needTask:'لطفاً متن وظیفه را وارد کنید',
+    footer:'سند داخلی — شرکت افق‌های فناوری مدرن (متجرلینک) · همه چیز به‌طور خودکار در این مرورگر ذخیره می‌شود · بر اساس برنامه یکپارچه ۲۰۲۶–۲۰۲۷',
+    tabPlan:'📋 برنامه', tabLog:'🕓 گزارش رویدادها', tabFiles:'📎 بایگانی فایل‌ها', meLabel:'من:',
+    mStart:'تاریخ شروع', mDue:'مهلت نهایی', thDate:'مهلت', mAttach:'پیوست‌ها (بارگذاری فایل)',
+    attachHint:'پیوست‌ها پس از ذخیره وظیفه قابل افزودن است', logSearchPH:'جستجوی رویدادها…', logAll:'همه افراد',
+    logClear:'پاک کردن گزارش', logEmpty:'هنوز رویدادی نیست', logClearConfirm:'کل گزارش رویدادها پاک شود؟',
+    byWord:'توسط', someone:'نامشخص', fileSearchPH:'جستجوی فایل‌ها…', filesEmpty:'هنوز فایلی بارگذاری نشده',
+    dl:'دانلود', totalFiles:'فایل', overdue:'گذشته',
+    ev_assign:'وظیفه را واگذار کرد به', ev_unassign:'واگذاری وظیفه را حذف کرد', ev_done:'وظیفه را تکمیل کرد', ev_undone:'وظیفه را بازگشایی کرد',
+    ev_create:'وظیفه جدید افزود', ev_edit:'وظیفه را ویرایش کرد', ev_delete:'وظیفه را حذف کرد', ev_date:'مهلت‌های وظیفه را به‌روزرسانی کرد',
+    ev_attach:'فایلی پیوست کرد', ev_attachdel:'پیوستی را حذف کرد',
+    cloudTitle:'همگام‌سازی ابری (Google Apps Script)', cloudHint:'آدرس Web app و رمز را وارد کنید (راهنمای نصب در پوشه Cloud-AppsScript).',
+    lblCurl:'آدرس سرور (Web app URL)', lblCtoken:'رمز (SECRET)',
+    cSave:'ذخیره و اتصال', cCancel:'بستن', cPull:'⬇ بارگیری از ابر', cPush:'⬆ ارسال به ابر', cDisc:'قطع اتصال',
+    stOffline:'محلی', stConnected:'متصل ✓', stSaving:'ذخیره…', stError:'خطا', stLoading:'بارگیری…',
+    msgNeedUrl:'لطفاً آدرس و رمز را وارد کنید', msgConnected:'با موفقیت متصل شد ✓', msgPull:'از ابر بارگیری شد ✓',
+    msgPush:'به ابر ارسال شد ✓', msgErr:'اتصال ناموفق — آدرس و رمز را بررسی کنید', msgDisc:'قطع شد (فقط محلی)',
+    dbTitle:'پایگاه داده تابلو (SQLite)', dbHint:'یک فایل پایگاه داده برای ذخیره/بازیابی داده‌ها انتخاب کنید یا فایل جدیدی بسازید. آفلاین کار می‌کند و قابل انتقال بین دستگاه‌هاست.',
+    dbOpenBtn:'📂 باز کردن فایل پایگاه داده', dbNewBtn:'🆕 ساخت پایگاه داده جدید', dbSkipBtn:'ادامه بدون ذخیره (موقت)',
+    dbOff:'بدون پایگاه', dbSaved:'💾 ذخیره‌شد', dbMem:'⚠ ذخیره‌نشده', dbFail:'ناموفق', dbAuto:'💾 ذخیره خودکار' }
+};
+
+const DEPT_CLASS = {dev:'d-dev', adm:'d-adm', cs:'d-cs', mk:'d-mk'};
+const DEPT_UI = {dev:'dDev', adm:'dAdm', cs:'dCs', mk:'dMk'};
+const PRI_CLASS = {crit:'p-crit', high:'p-high', norm:'p-norm'};
+const PRI_UI = {crit:'pCrit', high:'pHigh', norm:'pNorm'};
+const PRI_ORDER = ['crit','high','norm'];
+const DEPT_ORDER = ['dev','adm','cs','mk'];
+const PEOPLE = [
+  {k:'Ibrahim', ar:'إبراهيم', en:'Ibrahim', fa:'ابراهیم'},
+  {k:'Ehsan',   ar:'إحسان',   en:'Ehsan',   fa:'احسان'},
+  {k:'Marwa',   ar:'مروى',    en:'Marwa',   fa:'مروى'},
+  {k:'Negar',   ar:'نيجار',   en:'Negar',   fa:'نگار'},
+  {k:'Zahra',   ar:'زهرة',    en:'Zahra',   fa:'زهرا'},
+];
+function personLabel(k){ const p=PEOPLE.find(x=>x.k===k); return p?p[lang]:k; }
+
+// ===== plan data: [id, {ar,en,fa} task, {ar,en,fa} desc, [depts], pri] =====
+const SECTIONS = [
+ {id:'s0', crit:true,
+  title:{ar:'(٠) الأوراق التنظيمية والقانونية للشركة',en:'(0) Company Organizational & Legal Papers',fa:'(۰) اسناد سازمانی و حقوقی شرکت'},
+  goal:{ar:'أساس مفقود يُنجز فوراً — يوجد سجل تجاري وسياسات، لكن تنقص بنية قانونية تحمي المشروع.',en:'A missing foundation to complete now — a commercial registration & policies exist, but a legal structure protecting the project is missing.',fa:'پایه‌ای مفقود که باید فوراً تکمیل شود — ثبت تجاری و سیاست‌ها وجود دارد، اما ساختار حقوقی محافظ پروژه ناقص است.'},
+  rows:[
+   ['0.1',{ar:'تسجيل العلامة التجارية «متجرلينك» رسمياً',en:'Officially register the "MatjarLink" trademark',fa:'ثبت رسمی علامت تجاری «متجرلینک»'},{ar:'لدى وزارة التجارة وحماية الملكية الفكرية',en:'With the Ministry of Commerce & IP protection',fa:'در وزارت تجارت و حمایت از مالکیت فکری'},['adm'],'crit'],
+   ['0.2',{ar:'إعداد عقود عمل للمطورين (إحسان، نكار، زهرة)',en:'Prepare employment contracts for developers (Ehsan, Nakar, Zahra)',fa:'تهیه قراردادهای کاری برنامه‌نویسان (احسان، نکار، زهرا)'},{ar:'حالياً مروة فقط موثّقة — خطر تنظيمي',en:'Currently only Marwa is documented — organizational risk',fa:'در حال حاضر فقط مروه مستند شده — ریسک سازمانی'},['adm'],'crit'],
+   ['0.3',{ar:'اتفاقية سرية ونقل ملكية فكرية (NDA + IP)',en:'NDA & IP assignment agreement',fa:'توافق‌نامه محرمانگی و انتقال مالکیت فکری (NDA + IP)'},{ar:'لضمان ملكية الشركة للكود البرمجي',en:'To ensure company ownership of the source code',fa:'برای تضمین مالکیت شرکت بر کد برنامه'},['adm','dev'],'crit'],
+   ['0.4',{ar:'اتفاقية اشتراك التاجر (Merchant Agreement)',en:'Merchant subscription agreement',fa:'توافق‌نامه اشتراک تاجر'},{ar:'منفصلة عن الشروط والأحكام — تحدد الباقة والالتزامات',en:'Separate from the T&C — defines plan & obligations',fa:'جدا از شرایط و ضوابط — تعیین بسته و تعهدات'},['adm'],'crit'],
+   ['0.5',{ar:'اتفاقية مستوى الخدمة (SLA)',en:'Service Level Agreement (SLA)',fa:'توافق‌نامه سطح خدمات (SLA)'},{ar:'وقت التوفّر، زمن الاستجابة، التعويضات',en:'Uptime, response time, compensations',fa:'زمان دسترس‌پذیری، زمان پاسخ، جبران خسارت'},['adm','dev'],'high'],
+   ['0.6',{ar:'سياسة الاسترجاع وإلغاء الاشتراك واسترداد المبالغ',en:'Refund, cancellation & money-back policy',fa:'سیاست بازگشت، لغو اشتراک و استرداد وجه'},{ar:'وثيقة منشورة',en:'Published document',fa:'سند منتشرشده'},['adm','cs'],'high'],
+   ['0.7',{ar:'اتفاقيات تبادل/معالجة البيانات مع الشحن والدفع',en:'Data exchange/processing agreements with shipping & payment',fa:'توافق‌نامه‌های تبادل/پردازش داده با حمل‌ونقل و پرداخت'},{ar:'اتفاقية لكل شريك',en:'One agreement per partner',fa:'یک توافق‌نامه برای هر شریک'},['adm'],'high'],
+   ['0.8',{ar:'التسجيل في ضريبة القيمة المضافة (VAT)',en:'VAT registration',fa:'ثبت‌نام مالیات بر ارزش افزوده (VAT)'},{ar:'والتحقق من المتطلبات الضريبية',en:'And verify tax requirements',fa:'و بررسی الزامات مالیاتی'},['adm'],'high'],
+   ['0.9',{ar:'الهيكل التنظيمي الرسمي (Org Chart)',en:'Official organizational chart',fa:'نمودار سازمانی رسمی'},{ar:'مخطط معتمد لأقسام الشركة',en:'Approved chart of company departments',fa:'نمودار تأییدشده بخش‌های شرکت'},['adm'],'norm'],
+   ['0.10',{ar:'فتح حساب بنكي تجاري + ربط بوابة دفع للاشتراكات',en:'Open a business bank account + connect payment gateway for subscriptions',fa:'افتتاح حساب بانکی تجاری + اتصال درگاه پرداخت برای اشتراک‌ها'},{ar:'حساب فعّال',en:'Active account',fa:'حساب فعال'},['adm'],'crit'],
+   ['0.11',{ar:'سجل العهد والأصول (أجهزة، خادم، حسابات)',en:'Asset & custody register (devices, server, accounts)',fa:'ثبت دارایی‌ها و اموال (دستگاه‌ها، سرور، حساب‌ها)'},{ar:'جدول عهد موقّع',en:'Signed custody sheet',fa:'برگه اموال امضاشده'},['adm','cs'],'norm'],
+   ['0.12',{ar:'بريد رسمي بنطاق الشركة (@matjarlink.om) + ترويسة',en:'Official company-domain email (@matjarlink.om) + letterhead',fa:'ایمیل رسمی با دامنه شرکت (@matjarlink.om) + سربرگ'},{ar:'حسابات بريد لكل موظف',en:'Email accounts for each employee',fa:'حساب ایمیل برای هر کارمند'},['dev'],'high'],
+   ['0.13',{ar:'التأمين الصحي للموظفين',en:'Employee health insurance',fa:'بیمه درمانی کارکنان'},{ar:'بوليصة تأمين',en:'Insurance policy',fa:'بیمه‌نامه'},['adm'],'norm'],
+   ['0.14',{ar:'ملف محاسبة الشركة (فواتير/مصروفات/إيرادات)',en:'Company accounting file (invoices/expenses/revenue)',fa:'فایل حسابداری شرکت (فاکتورها/هزینه‌ها/درآمد)'},{ar:'تسجيل فواتير الاشتراكات والمصروفات والإيرادات + تقرير شهري',en:'Record subscription invoices, expenses & revenue + monthly report',fa:'ثبت فاکتورهای اشتراک، هزینه‌ها و درآمد + گزارش ماهانه'},['adm'],'high'],
+   ['0.15',{ar:'ملف الرواتب وتحويلها (مسيّر رواتب شهري)',en:'Payroll & transfers file (monthly payroll)',fa:'فایل حقوق و واریز (لیست حقوق ماهانه)'},{ar:'كشف رواتب + قسائم + تحويل بنكي موثّق',en:'Payroll sheet + pay slips + documented bank transfer',fa:'لیست حقوق + فیش‌ها + واریز بانکی مستند'},['adm'],'high'],
+   ['0.16',{ar:'ملفات الموظفين (لكل موظف)',en:'Employee files (per employee)',fa:'پرونده کارکنان (برای هر کارمند)'},{ar:'عقد، مستندات هوية/إقامة، إقرارات، تقييمات، إجازات',en:'Contract, ID/residency docs, acknowledgments, reviews, leaves',fa:'قرارداد، مدارک هویت/اقامت، اقرارها، ارزیابی‌ها، مرخصی‌ها'},['adm'],'high'],
+  ]},
+
+ {id:'sA1',
+  title:{ar:'(أ-١) المرحلة الأولى — قسم التطوير التقني',en:'(A-1) Phase 1 — Technical Development',fa:'(الف-۱) مرحله اول — بخش توسعه فنی'},
+  goal:{ar:'استكمال جاهزية النظام والبنية التقنية قبل الإطلاق التجريبي.',en:'Complete system readiness and technical infrastructure before the pilot launch.',fa:'تکمیل آمادگی سیستم و زیرساخت فنی پیش از راه‌اندازی آزمایشی.'},
+  rows:[
+   ['A1.1',{ar:'استكمال تطوير الأقسام واختبار النظام شاملاً (E2E)',en:'Finish module development & full end-to-end testing',fa:'تکمیل توسعه بخش‌ها و آزمون کامل سیستم (E2E)'},{ar:'نظام جاهز بلا أخطاء حرجة',en:'System ready with no critical bugs',fa:'سیستم آماده بدون خطای بحرانی'},['dev'],'crit'],
+   ['A1.2',{ar:'تجهيز متطلبات الأجهزة وغرفة الخادم',en:'Set up hardware requirements & server room',fa:'تأمین تجهیزات سخت‌افزاری و اتاق سرور'},{ar:'البند ٤.٢ الناقص — بانتظار إحسان',en:'Missing item 4.2 — pending from Ehsan',fa:'بند ۴.۲ ناقص — در انتظار احسان'},['dev'],'crit'],
+   ['A1.3',{ar:'بيئة الإنتاج + نسخ احتياطي تلقائي + SSL/TLS',en:'Production environment + automatic backups + SSL/TLS',fa:'محیط تولید + پشتیبان‌گیری خودکار + SSL/TLS'},{ar:'بيئة مستقرة + نسخ يومي',en:'Stable environment + daily backups',fa:'محیط پایدار + پشتیبان روزانه'},['dev'],'crit'],
+   ['A1.4',{ar:'اختبار معالج إعداد المتجر بـ١٠ خطوات',en:'Test the 10-step store setup wizard',fa:'آزمایش راهنمای ۱۰ مرحله‌ای راه‌اندازی فروشگاه'},{ar:'تقرير قابلية الاستخدام للمبتدئ',en:'Usability report for beginners',fa:'گزارش قابلیت استفاده برای مبتدی'},['dev'],'high'],
+   ['A1.5',{ar:'جاهزية التكاملات المحلية (ثواني، بنك مسقط، نول، دليلي)',en:'Readiness of local integrations (Thawani, Bank Muscat, Nool, Dalilee)',fa:'آمادگی یکپارچه‌سازی‌های محلی (ثوانی، بانک مسقط، نول، دلیلی)'},{ar:'تقرير حالة كل تكامل',en:'Status report for each integration',fa:'گزارش وضعیت هر یکپارچه‌سازی'},['dev'],'high'],
+   ['A1.6',{ar:'تفعيل التجربة المجانية ٣٠ يوماً + فترة السماح تقنياً',en:'Enable 30-day free trial + grace period technically',fa:'فعال‌سازی فنی آزمایش رایگان ۳۰ روزه + دوره مهلت'},{ar:'الميزة مفعّلة',en:'Feature enabled',fa:'قابلیت فعال‌شده'},['dev'],'high'],
+   ['A1.7',{ar:'نشر سياسة الخصوصية والشروط على الموقع + الاسترجاع',en:'Publish privacy policy, T&C & refund policy on the site',fa:'انتشار سیاست حریم خصوصی و شرایط و سیاست بازگشت در سایت'},{ar:'صفحات منشورة وحيّة',en:'Live published pages',fa:'صفحات منتشرشده و فعال'},['dev'],'crit'],
+   ['A1.8',{ar:'تجهيز لوحة تحكم تجريبية (Demo) للمعارض',en:'Prepare a demo dashboard for exhibitions',fa:'آماده‌سازی داشبورد نمایشی برای نمایشگاه‌ها'},{ar:'حساب تجريبي جاهز',en:'Ready demo account',fa:'حساب نمایشی آماده'},['dev'],'norm'],
+   ['A1.9',{ar:'إكمال البند ٦.٣ الدعم وخدمة ما بعد البيع',en:'Complete item 6.3 — support & after-sales service',fa:'تکمیل بند ۶.۳ پشتیبانی و خدمات پس از فروش'},{ar:'الوثيقة الناقصة من إحسان',en:'Missing document from Ehsan',fa:'سند ناقص از احسان'},['dev'],'high'],
+  ]},
+
+ {id:'sA2',
+  title:{ar:'(أ-٢) المرحلة الأولى — الإدارة والتنفيذي',en:'(A-2) Phase 1 — Management & Executive',fa:'(الف-۲) مرحله اول — مدیریت و اجرایی'},
+  goal:{ar:'الجاهزية التجارية والمالية وقاعدة التجار المستهدفين.',en:'Commercial & financial readiness and the target-merchant base.',fa:'آمادگی تجاری و مالی و پایگاه تجار هدف.'},
+  rows:[
+   ['A2.1',{ar:'التعاقد مع جهة لإدارة حسابات التواصل',en:'Contract a party to manage social media accounts',fa:'عقد قرارداد برای مدیریت حساب‌های شبکه اجتماعی'},{ar:'عقد موقّع + خطة محتوى',en:'Signed contract + content plan',fa:'قرارداد امضاشده + برنامه محتوا'},['adm'],'crit'],
+   ['A2.2',{ar:'إعداد قائمة التجار المستهدفين (٢٠٠+)',en:'Build target-merchant list (200+)',fa:'تهیه فهرست تجار هدف (۲۰۰+)'},{ar:'قاعدة بيانات تجار',en:'Merchant database',fa:'پایگاه داده تجار'},['adm'],'crit'],
+   ['A2.3',{ar:'تجهيز حزمة مزايا المسجّلين مبكراً',en:'Prepare early-adopter benefits package',fa:'تهیه بسته مزایای ثبت‌نام زودهنگام'},{ar:'عرض إطلاق معتمد ومكتوب',en:'Approved written launch offer',fa:'پیشنهاد راه‌اندازی تأییدشده و مکتوب'},['adm'],'high'],
+   ['A2.4',{ar:'اعتماد هيكل الباقات والأسعار النهائي',en:'Approve final package & pricing structure',fa:'تصویب ساختار نهایی بسته‌ها و قیمت‌گذاری'},{ar:'البداية ٨ / النمو ٢٠ / الأعمال ٤٥ ر.ع',en:'Starter 8 / Growth 20 / Business 45 OMR',fa:'شروع ۸ / رشد ۲۰ / تجاری ۴۵ ریال عمان'},['adm'],'crit'],
+   ['A2.5',{ar:'استكمال قائمة شركات خدمات التاجر والتفاوض',en:'Complete merchant-service companies list & negotiate',fa:'تکمیل فهرست شرکت‌های خدمات تاجر و مذاکره'},{ar:'قائمة مكتملة + اتفاقيات مبدئية',en:'Complete list + preliminary agreements',fa:'فهرست کامل + توافق‌های اولیه'},['adm'],'high'],
+   ['A2.6',{ar:'خطة السيولة ورأس المال حتى التعادل',en:'Cash-flow & capital plan until break-even',fa:'برنامه نقدینگی و سرمایه تا نقطه سربه‌سر'},{ar:'جدول تدفق نقدي — الفجوة المالية الأهم',en:'Cash-flow table — the most important financial gap',fa:'جدول جریان نقدی — مهم‌ترین شکاف مالی'},['adm'],'crit'],
+   ['A2.7',{ar:'تأكيد حجوزات معرضي نمو مستدام وكومكس',en:'Confirm bookings for "Sustainable Growth" & COMEX expos',fa:'تأیید رزرو نمایشگاه‌های رشد پایدار و کامکس'},{ar:'حجز مؤكّد + تكلفة فعلية',en:'Confirmed booking + actual cost',fa:'رزرو تأییدشده + هزینه واقعی'},['adm'],'high'],
+  ]},
+
+ {id:'sA3',
+  title:{ar:'(أ-٣) المرحلة الأولى — خدمة العملاء والإداري',en:'(A-3) Phase 1 — Customer Service & Admin',fa:'(الف-۳) مرحله اول — خدمات مشتری و اداری'},
+  goal:{ar:'الوصول إلى ٥٠–٧٠ تاجراً مهتماً وتجهيز فريق الدعم.',en:'Reach 50–70 interested merchants and prepare the support team.',fa:'دستیابی به ۵۰–۷۰ تاجر علاقه‌مند و آماده‌سازی تیم پشتیبانی.'},
+  rows:[
+   ['A3.1',{ar:'زيارات ميدانية وجمع التسجيل المسبق',en:'Field visits & collect pre-registrations',fa:'بازدیدهای میدانی و جمع‌آوری ثبت‌نام اولیه'},{ar:'≥٥٠ تاجر مهتم موثّق',en:'≥50 documented interested merchants',fa:'≥۵۰ تاجر علاقه‌مند مستند'},['cs'],'crit'],
+   ['A3.2',{ar:'تفعيل أداة «وصلة» (واتساب) للتواصل الجماعي',en:'Activate "Wasla" (WhatsApp) for bulk outreach',fa:'فعال‌سازی ابزار «وصلة» (واتساپ) برای ارتباط گروهی'},{ar:'قائمة مراسلة جاهزة',en:'Ready mailing list',fa:'فهرست ارسال آماده'},['cs'],'high'],
+   ['A3.3',{ar:'التدريب الذاتي على النظام (متجر/POS/محاسبة/تكاملات)',en:'Self-training on the system (store/POS/accounting/integrations)',fa:'خودآموزی سیستم (فروشگاه/POS/حسابداری/یکپارچه‌سازی‌ها)'},{ar:'اجتياز تقييم داخلي',en:'Pass an internal assessment',fa:'قبولی در ارزیابی داخلی'},['cs'],'crit'],
+   ['A3.4',{ar:'إعداد نظام التذاكر و CRM وبدء التوثيق',en:'Set up ticketing & CRM and start documentation',fa:'راه‌اندازی سیستم تیکت و CRM و شروع مستندسازی'},{ar:'نظام تذاكر فعّال',en:'Active ticketing system',fa:'سیستم تیکت فعال'},['cs'],'high'],
+   ['A3.5',{ar:'إعداد بروتوكولات الدعم والتصعيد',en:'Define support & escalation protocols',fa:'تدوین پروتکل‌های پشتیبانی و ارجاع'},{ar:'دليل بروتوكول مكتوب',en:'Written protocol guide',fa:'راهنمای مکتوب پروتکل'},['cs'],'high'],
+  ]},
+
+ {id:'sA4',
+  title:{ar:'(أ-٤) المرحلة الأولى — إعداد البيانات وقوالب الإدخال',en:'(A-4) Phase 1 — Data & Import Templates',fa:'(الف-۴) مرحله اول — آماده‌سازی داده و قالب‌های ورود'},
+  goal:{ar:'تجهيز قوالب الإدخال ومراجعة وتحديث البيانات الأساسية للمنصة (الميزة التنافسية الجوهرية).',en:'Prepare import templates and review/update the platform core data (the key competitive advantage).',fa:'آماده‌سازی قالب‌های ورود و بازبینی/به‌روزرسانی داده‌های اصلی پلتفرم (مزیت رقابتی کلیدی).'},
+  rows:[
+   ['A4.1',{ar:'تجهيز ملفات قوالب إدخال البيانات للنظام',en:'Prepare the system data-import template files',fa:'آماده‌سازی فایل‌های قالب ورود داده سیستم'},{ar:'قوالب Excel/CSV يقبلها النظام (منتجات/تصنيفات/علامات/عملاء) — مسؤولية إحسان',en:'Excel/CSV templates the system accepts (products/categories/brands/customers) — Ehsan',fa:'قالب‌های Excel/CSV قابل‌قبول سیستم (محصولات/دسته‌ها/برندها/مشتریان) — احسان'},['dev'],'crit'],
+   ['A4.2',{ar:'مراجعة ملف البيانات الأساسية وتحديثه',en:'Review and update the core data file',fa:'بازبینی و به‌روزرسانی فایل داده‌های اصلی'},{ar:'مراجعة/تحديث البيانات المُدخلة مسبقاً (≈٤٩٩٠ علامة + تصنيفات)',en:'Review/update the preloaded data (~4990 brands + categories)',fa:'بازبینی/به‌روزرسانی داده‌های از پیش واردشده (~۴۹۹۰ برند + دسته)'},['dev','adm'],'high'],
+   ['A4.3',{ar:'تجهيز البيانات في قوالب الإدخال الجاهزة',en:'Populate the ready import templates with data',fa:'تکمیل قالب‌های آماده ورود با داده'},{ar:'تعبئة القوالب بالبيانات المراجَعة جاهزة للاستيراد',en:'Fill the templates with reviewed data, ready to import',fa:'تکمیل قالب‌ها با داده‌های بازبینی‌شده، آماده ورود'},['adm','cs'],'high'],
+  ]},
+
+ {id:'sB1',
+  title:{ar:'(ب-١) الملفات الواجب تجهيزها — مواد تعريفية وتسويقية',en:'(B-1) Files to Prepare — Introductory & Marketing Materials',fa:'(ب-۱) فایل‌های موردنیاز — مواد معرفی و بازاریابی'},
+  goal:{ar:'حزمة الإطلاق التعريفية المطلوبة في خطة التدريب.',en:'The introductory launch package required by the training plan.',fa:'بسته معرفی راه‌اندازی موردنیاز در برنامه آموزش.'},
+  rows:[
+   ['B1',{ar:'كتالوج تعريفي بالمنصة (PDF)',en:'Platform introductory catalog (PDF)',fa:'کاتالوگ معرفی پلتفرم (PDF)'},{ar:'نظرة عامة + مميزات + باقات + اشتراك',en:'Overview + features + plans + subscription',fa:'نمای کلی + ویژگی‌ها + بسته‌ها + اشتراک'},['mk','adm'],'crit'],
+   ['B2',{ar:'كتالوج الباقات والأسعار (بروشور)',en:'Plans & pricing catalog (brochure)',fa:'کاتالوگ بسته‌ها و قیمت‌ها (بروشور)'},{ar:'مقارنة الباقات + مزايا التسجيل المبكر',en:'Plan comparison + early-adopter benefits',fa:'مقایسه بسته‌ها + مزایای ثبت‌نام زودهنگام'},['mk'],'high'],
+   ['B3',{ar:'عرض تقديمي (Presentation) للمعارض',en:'Presentation for exhibitions',fa:'ارائه (Presentation) برای نمایشگاه‌ها'},{ar:'للعرض أمام التجار والشركاء',en:'For presenting to merchants & partners',fa:'برای ارائه به تجار و شرکا'},['cs','mk'],'high'],
+   ['B4',{ar:'رول-أب وبانرات الجناح للمعارض',en:'Roll-ups & booth banners for expos',fa:'رول‌آپ و بنرهای غرفه برای نمایشگاه‌ها'},{ar:'مواد طباعة الجناح',en:'Booth print materials',fa:'مواد چاپی غرفه'},['mk'],'norm'],
+   ['B5',{ar:'طباعة بطاقات العمل (التصميم جاهز)',en:'Print business cards (design ready)',fa:'چاپ کارت ویزیت (طراحی آماده)'},{ar:'بطاقات للفريق',en:'Cards for the team',fa:'کارت برای تیم'},['adm'],'norm'],
+  ]},
+
+ {id:'sB2',
+  title:{ar:'(ب-٢) الملفات الواجب تجهيزها — أدلة وشروحات الاستخدام',en:'(B-2) Files to Prepare — User Guides & Tutorials',fa:'(ب-۲) فایل‌های موردنیاز — راهنماها و آموزش‌های استفاده'},
+  goal:{ar:'مواد شرح المنصة للتجار وعملائهم والموظفين.',en:'Materials explaining the platform to merchants, their customers & staff.',fa:'مواد آموزش پلتفرم برای تجار، مشتریان آن‌ها و کارکنان.'},
+  rows:[
+   ['B6',{ar:'دليل خطوات تجهيز المتجر (نصي مصوّر)',en:'Store setup step-by-step guide (illustrated)',fa:'راهنمای گام‌به‌گام راه‌اندازی فروشگاه (مصوّر)'},{ar:'شرح معالج الـ١٠ خطوات خطوة بخطوة',en:'Explaining the 10-step wizard step by step',fa:'توضیح راهنمای ۱۰ مرحله‌ای گام‌به‌گام'},['cs','dev'],'crit'],
+   ['B7',{ar:'فيديوهات تعليمية (حساب/متجر/POS/محاسبة/شحن)',en:'Tutorial videos (account/store/POS/accounting/shipping)',fa:'ویدیوهای آموزشی (حساب/فروشگاه/POS/حسابداری/حمل‌ونقل)'},{ar:'سلسلة فيديو قصيرة',en:'Short video series',fa:'مجموعه ویدیوی کوتاه'},['mk','cs'],'high'],
+   ['B8',{ar:'دليل المستخدم لعميل التاجر',en:"User guide for the merchant's customer",fa:'راهنمای کاربر برای مشتری تاجر'},{ar:'تصفّح، سلة، شراء، تتبّع الطلب',en:'Browse, cart, purchase, track order',fa:'مرور، سبد، خرید، پیگیری سفارش'},['cs'],'norm'],
+   ['B9',{ar:'ملف «الرابط للبدء» (Quick Start)',en:'"Quick Start" link/file',fa:'فایل «شروع سریع» (Quick Start)'},{ar:'صفحة بداية سريعة للتاجر',en:'Quick-start page for the merchant',fa:'صفحه شروع سریع برای تاجر'},['cs','dev'],'high'],
+   ['B10',{ar:'الأسئلة الشائعة (FAQ) للموقع',en:'Website FAQ',fa:'پرسش‌های متداول (FAQ) سایت'},{ar:'أسئلة التجار وإجاباتها',en:'Merchant questions & answers',fa:'پرسش‌های تجار و پاسخ‌ها'},['cs'],'high'],
+   ['B11',{ar:'موشن جرافيك + بوسترات إرشادية',en:'Motion graphics + instructional posters',fa:'موشن‌گرافیک + پوسترهای راهنما'},{ar:'مواد بصرية تعليمية',en:'Educational visual materials',fa:'مواد بصری آموزشی'},['mk'],'norm'],
+   ['B12',{ar:'دليل تدريب الموظفين الداخلي',en:'Internal staff training guide',fa:'راهنمای آموزش داخلی کارکنان'},{ar:'منهج تدريب فريق خدمة التاجر',en:'Curriculum for the merchant-service team',fa:'برنامه آموزش تیم خدمات تاجر'},['cs','adm'],'high'],
+  ]},
+
+ {id:'sB3',
+  title:{ar:'(ب-٣) الملفات الواجب تجهيزها — صفحات ومحتوى الموقع',en:'(B-3) Files to Prepare — Website Pages & Content',fa:'(ب-۳) فایل‌های موردنیاز — صفحات و محتوای سایت'},
+  goal:{ar:'المحتوى القانوني والتعريفي المنشور على الموقع.',en:'Legal & introductory content published on the website.',fa:'محتوای حقوقی و معرفی منتشرشده در سایت.'},
+  rows:[
+   ['B13',{ar:'نشر سياسة الخصوصية + الشروط (عربي/إنجليزي)',en:'Publish privacy policy + T&C (Arabic/English)',fa:'انتشار سیاست حریم خصوصی + شرایط (عربی/انگلیسی)'},{ar:'موجودة كملفات فقط حالياً',en:'Currently only as files',fa:'در حال حاضر فقط به‌صورت فایل'},['dev'],'crit'],
+   ['B14',{ar:'نشر سياسة الاسترجاع + اتفاقية مستوى الخدمة',en:'Publish refund policy + SLA',fa:'انتشار سیاست بازگشت + توافق‌نامه سطح خدمات'},{ar:'صفحات منشورة',en:'Published pages',fa:'صفحات منتشرشده'},['dev','adm'],'high'],
+   ['B15',{ar:'صفحة «من نحن» + بيانات التواصل الرسمية',en:'"About us" page + official contact info',fa:'صفحه «درباره ما» + اطلاعات تماس رسمی'},{ar:'صفحة حيّة',en:'Live page',fa:'صفحه فعال'},['dev','mk'],'norm'],
+   ['B16',{ar:'صفحة الباقات والأسعار التفاعلية',en:'Interactive plans & pricing page',fa:'صفحه تعاملی بسته‌ها و قیمت‌ها'},{ar:'صفحة حيّة',en:'Live page',fa:'صفحه فعال'},['dev'],'high'],
+  ]},
+
+ {id:'sC',
+  title:{ar:'(ج) المرحلة الثانية — الإطلاق التجريبي',en:'(C) Phase 2 — Pilot Launch',fa:'(ج) مرحله دوم — راه‌اندازی آزمایشی'},
+  goal:{ar:'تحويل ≥٢٠٪ من المهتمين إلى ٢٠–٤٠ تاجراً نشطاً + جمع التغذية الراجعة.',en:'Convert ≥20% of interested merchants into 20–40 active ones + gather feedback.',fa:'تبدیل ≥۲۰٪ از علاقه‌مندان به ۲۰–۴۰ تاجر فعال + جمع‌آوری بازخورد.'},
+  rows:[
+   ['C1',{ar:'تفعيل قائمة التجار (وصلة/مكالمات/إنستغرام)',en:'Activate merchant list (Wasla/calls/Instagram)',fa:'فعال‌سازی فهرست تجار (وصلة/تماس/اینستاگرام)'},{ar:'تحويلهم لمسجّلين',en:'Convert them into registrants',fa:'تبدیل آن‌ها به ثبت‌نام‌کننده'},['cs','adm'],'crit'],
+   ['C2',{ar:'المساعدة في بناء متجر كل تاجر وإدخال منتجاته',en:"Help build each merchant's store & enter products",fa:'کمک به ساخت فروشگاه هر تاجر و وارد کردن محصولات'},{ar:'ميزة التسجيل المبكر',en:'Early-adopter benefit',fa:'مزیت ثبت‌نام زودهنگام'},['cs'],'high'],
+   ['C3',{ar:'متابعة شخصية لكل تاجر حتى يصبح نشطاً',en:'Personal follow-up with each merchant until active',fa:'پیگیری شخصی هر تاجر تا فعال شدن'},{ar:'تجار نشطون فعلياً',en:'Actually active merchants',fa:'تجار واقعاً فعال'},['cs'],'high'],
+   ['C4',{ar:'تصوير يومي للنظام ومميزاته ونشره',en:'Daily filming of the system & features and publishing',fa:'فیلم‌برداری روزانه از سیستم و ویژگی‌ها و انتشار'},{ar:'محتوى حيّ',en:'Live content',fa:'محتوای زنده'},['mk'],'norm'],
+   ['C5',{ar:'جمع وتحليل التغذية الراجعة ← قائمة تحسينات',en:'Collect & analyze feedback → improvements list',fa:'جمع‌آوری و تحلیل بازخورد ← فهرست بهبودها'},{ar:'تقرير أسبوعي',en:'Weekly report',fa:'گزارش هفتگی'},['dev','adm'],'high'],
+   ['C6',{ar:'إصلاح الأخطاء وإطلاق التحديثات',en:'Fix bugs & release updates',fa:'رفع خطاها و انتشار به‌روزرسانی‌ها'},{ar:'تحديثات مستمرة',en:'Continuous updates',fa:'به‌روزرسانی‌های مستمر'},['dev'],'high'],
+   ['C7',{ar:'قياس فعالية كل قناة تسويقية (CAC/تحويل)',en:'Measure each marketing channel (CAC/conversion)',fa:'سنجش اثربخشی هر کانال بازاریابی (CAC/تبدیل)'},{ar:'تقرير أداء القنوات',en:'Channel performance report',fa:'گزارش عملکرد کانال‌ها'},['mk'],'high'],
+   ['C8',{ar:'توثيق أول قصص نجاح للتجار',en:'Document first merchant success stories',fa:'مستندسازی اولین داستان‌های موفقیت تجار'},{ar:'قصص موثّقة',en:'Documented stories',fa:'داستان‌های مستند'},['mk','cs'],'norm'],
+  ]},
+
+ {id:'sD',
+  title:{ar:'(د) المرحلة الثالثة — النمو والتعادل',en:'(D) Phase 3 — Growth & Break-even',fa:'(د) مرحله سوم — رشد و نقطه سربه‌سر'},
+  goal:{ar:'الوصول إلى ~١٦٧ تاجراً نشطاً وبلوغ نقطة التعادل.',en:'Reach ~167 active merchants and hit break-even.',fa:'دستیابی به ~۱۶۷ تاجر فعال و رسیدن به نقطه سربه‌سر.'},
+  rows:[
+   ['D1',{ar:'تكثيف الحملات الرقمية المدفوعة',en:'Intensify paid digital campaigns',fa:'تشدید کمپین‌های دیجیتال پولی'},{ar:'نمو شهري في التسجيل',en:'Monthly registration growth',fa:'رشد ماهانه ثبت‌نام'},['mk'],'high'],
+   ['D2',{ar:'نشر قصص نجاح التجار',en:'Publish merchant success stories',fa:'انتشار داستان‌های موفقیت تجار'},{ar:'نصف شهري',en:'Bi-weekly',fa:'دوهفته‌ای'},['mk'],'norm'],
+   ['D3',{ar:'المشاركة في معرض نمو مستدام (ديسمبر ٢٠٢٦)',en:'Participate in "Sustainable Growth" expo (Dec 2026)',fa:'مشارکت در نمایشگاه رشد پایدار (دسامبر ۲۰۲۶)'},{ar:'جناح + عروض + شراكات',en:'Booth + offers + partnerships',fa:'غرفه + پیشنهادها + مشارکت‌ها'},['adm','cs','mk'],'high'],
+   ['D4',{ar:'المشاركة في معرض كومكس (فبراير ٢٠٢٧)',en:'Participate in COMEX expo (Feb 2027)',fa:'مشارکت در نمایشگاه کامکس (فوریه ۲۰۲۷)'},{ar:'جناح + شراكات + وعي',en:'Booth + partnerships + awareness',fa:'غرفه + مشارکت‌ها + آگاهی'},['adm','cs','mk'],'high'],
+   ['D5',{ar:'توقيع عقود تبادل بيانات مع الشحن/الدفع',en:'Sign data-exchange contracts with shipping/payment',fa:'امضای قراردادهای تبادل داده با حمل‌ونقل/پرداخت'},{ar:'قواعد بيانات تجار',en:'Merchant databases',fa:'پایگاه‌های داده تجار'},['adm'],'high'],
+   ['D6',{ar:'إطلاق التسويق بالعمولة وأكواد المدربين',en:'Launch affiliate marketing & trainer codes',fa:'راه‌اندازی بازاریابی پورسانتی و کدهای مربیان'},{ar:'شبكة مسوّقين',en:'Affiliate network',fa:'شبکه بازاریابان'},['mk'],'high'],
+   ['D7',{ar:'تجهيز وتفعيل قسم سوق المؤثرين',en:'Build & activate the influencer marketplace',fa:'ساخت و فعال‌سازی بازار اینفلوئنسرها'},{ar:'مؤجل بلا تاريخ — يُحدّد ربع مستهدف',en:'Deferred with no date — set a target quarter',fa:'به تعویق افتاده بدون تاریخ — یک فصل هدف تعیین شود'},['dev','adm'],'high'],
+   ['D8',{ar:'خطة توظيف مرتبطة بالنمو (دعم إضافي عند ٨٠–١٠٠ تاجر)',en:'Growth-linked hiring plan (extra support at 80–100 merchants)',fa:'برنامه استخدام مرتبط با رشد (پشتیبانی بیشتر در ۸۰–۱۰۰ تاجر)'},{ar:'تعيين عند بلوغ العتبة',en:'Hire when threshold is reached',fa:'استخدام هنگام رسیدن به آستانه'},['adm'],'norm'],
+  ]},
+];
+
+// ===== steps / explanation per task =====
+const STEPS = {
+ '0.1':{ar:['جهّز شعار متجرلينك وبيانات الشركة (السجل التجاري ١٣٩٢٠٨٧)','قدّم طلب تسجيل علامة تجارية لدى وزارة التجارة والصناعة وترويج الاستثمار','ادفع الرسوم وتابع الفحص حتى صدور الشهادة','احفظ الشهادة في ملف الأصول القانونية'],en:['Prepare the MatjarLink logo and company data (CR 1392087)','Submit a trademark application to the Ministry of Commerce, Industry & Investment Promotion','Pay the fees and follow up the examination until the certificate is issued','Keep the certificate in the legal assets file'],fa:['لوگوی متجرلینک و اطلاعات شرکت (ثبت تجاری ۱۳۹۲۰۸۷) را آماده کنید','درخواست ثبت علامت تجاری را به وزارت تجارت ارائه دهید','هزینه‌ها را پرداخت و روند بررسی را تا صدور گواهی پیگیری کنید','گواهی را در پرونده دارایی‌های حقوقی نگهداری کنید']},
+ '0.2':{ar:['استخدم قالب عقد مروى كأساس وعدّل المسمى لكل مطور','حدّد الراتب وساعات العمل وفترة التجربة لكل عقد','أرفق الوصف الوظيفي والسياسات الداخلية كملحق','وقّع نسختين لكل مطور واحفظ نسخة بملف الموظف'],en:["Use Marwa's contract template as a base and adjust the title per developer",'Set salary, working hours and probation for each contract','Attach the job description and internal policies as an annex','Sign two copies per developer and file one'],fa:['از قالب قرارداد مروی به‌عنوان مبنا استفاده و عنوان هر برنامه‌نویس را تنظیم کنید','حقوق، ساعات کاری و دوره آزمایشی هر قرارداد را تعیین کنید','شرح شغل و سیاست‌های داخلی را به‌عنوان پیوست ضمیمه کنید','دو نسخه برای هر برنامه‌نویس امضا و یک نسخه بایگانی کنید']},
+ '0.3':{ar:['أضف بند نقل الملكية الفكرية: كل كود/تصميم ملك للشركة','أضف بند سرية يسري بعد انتهاء العقد','اربط الاتفاقية بعقد العمل كملحق إلزامي','وقّعها مع كل مطور ومتعاون تقني'],en:['Add an IP-assignment clause: all code/designs belong to the company','Add a confidentiality clause valid after the contract ends','Attach the agreement to the employment contract as a mandatory annex','Sign with every developer and technical contractor'],fa:['بند انتقال مالکیت فکری اضافه کنید: همه کد/طرح‌ها متعلق به شرکت','بند محرمانگی معتبر پس از پایان قرارداد اضافه کنید','توافق‌نامه را به‌عنوان پیوست الزامی به قرارداد کار متصل کنید','با هر برنامه‌نویس و پیمانکار فنی امضا کنید']},
+ '0.4':{ar:['حدّد التزامات الطرفين والباقة والسعر ومدة الاشتراك','أضف بنود التجديد والإلغاء والاسترجاع','اربطها بالشروط والأحكام وسياسة الخصوصية','اجعل القبول إلكترونياً عند التسجيل'],en:["Define both parties' obligations, plan, price and subscription term",'Add renewal, cancellation and refund clauses','Link it to the T&C and privacy policy','Make acceptance electronic at sign-up'],fa:['تعهدات طرفین، بسته، قیمت و مدت اشتراک را تعیین کنید','بندهای تمدید، لغو و بازگشت را اضافه کنید','آن را به شرایط و ضوابط و سیاست حریم خصوصی متصل کنید','پذیرش را هنگام ثبت‌نام الکترونیکی کنید']},
+ '0.5':{ar:['حدّد نسبة التوفّر المستهدفة (مثلاً 99%)','حدّد أزمنة الاستجابة حسب خطورة العطل','حدّد آلية التعويض عند الإخلال','انشرها كمرجع للتجار'],en:['Set the target uptime (e.g. 99%)','Define response times by issue severity','Define the compensation mechanism on breach','Publish it as a merchant reference'],fa:['درصد در دسترس بودن هدف را تعیین کنید (مثلاً ۹۹٪)','زمان‌های پاسخ را بر اساس شدت مشکل تعریف کنید','سازوکار جبران در صورت نقض را تعیین کنید','آن را به‌عنوان مرجع تجار منتشر کنید']},
+ '0.6':{ar:['حدّد حالات الاسترجاع والمدة المسموحة','وضّح آلية إلغاء الاشتراك واسترداد المتبقّي','نسّقها مع بوابة الدفع','انشرها كصفحة على الموقع'],en:['Define refund cases and the allowed window','Clarify subscription cancellation and prorated refunds','Coordinate with the payment gateway','Publish it as a website page'],fa:['موارد بازگشت و بازه مجاز را تعیین کنید','سازوکار لغو اشتراک و بازپرداخت باقی‌مانده را روشن کنید','با درگاه پرداخت هماهنگ کنید','آن را به‌عنوان صفحه سایت منتشر کنید']},
+ '0.7':{ar:['حدّد البيانات المتبادلة مع كل شريك شحن/دفع','أضف بنود حماية بيانات التاجر والعميل','احصل على مراجعة قانونية قبل التوقيع','وثّق كل اتفاقية في ملف الشركاء'],en:['Define data exchanged with each shipping/payment partner','Add merchant & customer data-protection clauses','Get a legal review before signing','Document each agreement in the partners file'],fa:['داده‌های مبادله‌شده با هر شریک حمل‌ونقل/پرداخت را تعیین کنید','بندهای حفاظت از داده تاجر و مشتری را اضافه کنید','پیش از امضا بررسی حقوقی بگیرید','هر توافق‌نامه را در پرونده شرکا مستند کنید']},
+ '0.8':{ar:['تحقق من بلوغ حد التسجيل الإلزامي للضريبة','سجّل الشركة في جهاز الضرائب','فعّل احتساب VAT تلقائياً في المنصة','احفظ شهادة التسجيل الضريبي'],en:['Check whether the mandatory VAT threshold is reached','Register the company with the Tax Authority','Enable automatic VAT calculation in the platform','Keep the tax registration certificate'],fa:['بررسی کنید آیا به آستانه اجباری ثبت مالیات رسیده‌اید','شرکت را در سازمان مالیاتی ثبت کنید','محاسبه خودکار VAT را در پلتفرم فعال کنید','گواهی ثبت مالیاتی را نگهداری کنید']},
+ '0.9':{ar:['ارسم الأقسام: إدارة، تطوير، خدمة عملاء، تسويق','حدّد المسؤول والتسلسل الإداري لكل قسم','اعتمده من الإدارة وشاركه مع الفريق'],en:['Map departments: management, development, CS, marketing','Define the owner and reporting line for each','Approve it and share with the team'],fa:['بخش‌ها را ترسیم کنید: مدیریت، توسعه، خدمات مشتری، بازاریابی','مسئول و سلسله‌مراتب هر بخش را تعیین کنید','آن را تصویب و با تیم به اشتراک بگذارید']},
+ '0.10':{ar:['افتح حساباً تجارياً باسم الشركة بالسجل التجاري','اربط بوابة دفع (ثواني/أموال) لتحصيل الاشتراكات','اختبر عملية دفع تجريبية كاملة'],en:['Open a business account in the company name with the CR','Connect a payment gateway (Thawani/Amwal) for subscriptions','Run a full test payment'],fa:['حساب تجاری به نام شرکت با ثبت تجاری افتتاح کنید','درگاه پرداخت (ثوانی/اموال) برای اشتراک‌ها متصل کنید','یک پرداخت آزمایشی کامل انجام دهید']},
+ '0.11':{ar:['احصر الأجهزة والخوادم والحسابات','سجّل لكل عهدة المسؤول وتاريخ التسليم','حدّث السجل عند أي تغيير'],en:['Inventory devices, servers and accounts','Record the holder and handover date for each item','Update the register on any change'],fa:['دستگاه‌ها، سرورها و حساب‌ها را فهرست کنید','برای هر مورد، تحویل‌گیرنده و تاریخ تحویل را ثبت کنید','در هر تغییر، ثبت را به‌روزرسانی کنید']},
+ '0.12':{ar:['فعّل بريداً بنطاق matjarlink.om لكل موظف','جهّز توقيعاً رسمياً وترويسة موحّدة','عمّمها للاستخدام في المراسلات الرسمية'],en:['Set up matjarlink.om email for each employee','Prepare an official signature and unified letterhead','Roll out for official correspondence'],fa:['برای هر کارمند ایمیل با دامنه matjarlink.om فعال کنید','امضای رسمی و سربرگ یکپارچه آماده کنید','برای مکاتبات رسمی ابلاغ کنید']},
+ '0.13':{ar:['اطلب عروضاً من شركات تأمين','اختر تغطية أساسية مطابقة لقانون العمل','فعّل البوليصة للموظفين'],en:['Request quotes from insurers','Choose basic coverage compliant with labor law','Activate the policy for employees'],fa:['از شرکت‌های بیمه استعلام بگیرید','پوشش پایه مطابق قانون کار انتخاب کنید','بیمه‌نامه را برای کارکنان فعال کنید']},
+ '0.14':{ar:['أنشئ ملف/نظام محاسبة لتسجيل الفواتير والمصروفات والإيرادات','أصدر فواتير الاشتراكات للتجار شهرياً','سجّل كل المصروفات (رواتب، إيجار، تشغيل، تسويق)','أعدّ تقريراً مالياً شهرياً للإدارة'],en:['Create an accounting file/system for invoices, expenses and revenue','Issue monthly subscription invoices to merchants','Record all expenses (salaries, rent, operations, marketing)','Produce a monthly financial report for management'],fa:['یک فایل/سیستم حسابداری برای فاکتورها، هزینه‌ها و درآمد ایجاد کنید','فاکتورهای اشتراک ماهانه تجار را صادر کنید','همه هزینه‌ها (حقوق، اجاره، عملیات، بازاریابی) را ثبت کنید','گزارش مالی ماهانه برای مدیریت تهیه کنید']},
+ '0.15':{ar:['أعدّ مسيّر رواتب شهري بأسماء الموظفين ومبالغهم','جهّز قسيمة راتب لكل موظف','حوّل الرواتب بنكياً ووثّق الإثباتات','احفظ السجل ضمن ملف المحاسبة'],en:['Prepare a monthly payroll sheet with employees and amounts','Generate a pay slip for each employee','Transfer salaries via bank and keep the proofs','Keep the record within the accounting file'],fa:['یک لیست حقوق ماهانه با نام کارکنان و مبالغ تهیه کنید','برای هر کارمند فیش حقوقی صادر کنید','حقوق را بانکی واریز و مستندات را نگهداری کنید','سابقه را در فایل حسابداری نگه دارید']},
+ '0.16':{ar:['أنشئ ملفاً لكل موظف (عقد، إقرار، مستندات هوية/إقامة)','أضف الوصف الوظيفي وتقييمات الأداء والإجازات','حدّثه عند أي تغيير وظيفي','احفظه بسرية ضمن أرشيف الموارد البشرية'],en:['Create a file per employee (contract, acknowledgment, ID/residency docs)','Add the job description, performance reviews and leaves','Update it on any job change','Keep it confidential in the HR archive'],fa:['برای هر کارمند یک پرونده بسازید (قرارداد، اقرار، مدارک هویت/اقامت)','شرح شغل، ارزیابی عملکرد و مرخصی‌ها را اضافه کنید','در هر تغییر شغلی به‌روزرسانی کنید','به‌صورت محرمانه در بایگانی منابع انسانی نگه دارید']},
+
+ 'A1.1':{ar:['أعدّ قائمة بكل الأقسام والوظائف الحرجة','نفّذ سيناريوهات اختبار شاملة (تسجيل، طلب، دفع)','سجّل الأخطاء وأصلحها حتى لا تبقى أخطاء حرجة'],en:['List all modules and critical functions','Run end-to-end scenarios (signup, order, payment)','Log bugs and fix until no critical bugs remain'],fa:['فهرست همه بخش‌ها و عملکردهای حیاتی را تهیه کنید','سناریوهای کامل (ثبت‌نام، سفارش، پرداخت) را اجرا کنید','خطاها را ثبت و تا حذف خطای بحرانی رفع کنید']},
+ 'A1.2':{ar:['حدّد مواصفات الخادم والأجهزة المطلوبة (إحسان)','جهّز غرفة الخادم بالتبريد والكهرباء والشبكة','وثّق الإعداد في البند ٤.٢'],en:['Define server/hardware specs (Ehsan)','Set up the server room: cooling, power, network','Document the setup in item 4.2'],fa:['مشخصات سرور/سخت‌افزار را تعیین کنید (احسان)','اتاق سرور را با خنک‌کننده، برق و شبکه آماده کنید','راه‌اندازی را در بند ۴.۲ مستند کنید']},
+ 'A1.3':{ar:['افصل بيئة الإنتاج عن التطوير','فعّل نسخاً احتياطياً يومياً تلقائياً','ركّب شهادة SSL/TLS واختبر التشفير'],en:['Separate production from development','Enable automatic daily backups','Install SSL/TLS and verify encryption'],fa:['محیط تولید را از توسعه جدا کنید','پشتیبان‌گیری روزانه خودکار فعال کنید','SSL/TLS نصب و رمزگذاری را بررسی کنید']},
+ 'A1.4':{ar:['اطلب من مستخدم مبتدئ تجربة الـ١٠ خطوات','سجّل نقاط الالتباس والوقت لكل خطوة','بسّط الخطوات المعقّدة بناءً على الملاحظات'],en:['Have a beginner go through the 10 steps','Record confusion points and time per step','Simplify complex steps based on feedback'],fa:['از یک کاربر مبتدی بخواهید ۱۰ مرحله را طی کند','نقاط ابهام و زمان هر مرحله را ثبت کنید','مراحل پیچیده را بر اساس بازخورد ساده کنید']},
+ 'A1.5':{ar:['اختبر كل تكامل (ثواني، بنك مسقط، نول، دليلي) في بيئة الاختبار','تأكد من نجاح الدفع والشحن فعلياً','وثّق حالة كل تكامل ومشاكله'],en:['Test each integration (Thawani, Bank Muscat, Nool, Dalilee) in staging','Confirm payment and shipping actually work','Document each integration status and issues'],fa:['هر یکپارچه‌سازی (ثوانی، بانک مسقط، نول، دلیلی) را در محیط آزمایش تست کنید','از کارکرد واقعی پرداخت و حمل‌ونقل مطمئن شوید','وضعیت و مشکلات هر یکپارچه‌سازی را مستند کنید']},
+ 'A1.6':{ar:['فعّل عدّاد تجربة ٣٠ يوماً عند التسجيل','أضف فترة سماح ٣–٦ أشهر للمسجّلين مبكراً','اختبر التحوّل التلقائي للاشتراك المدفوع'],en:['Enable a 30-day trial counter at signup','Add a 3–6 month grace period for early adopters','Test automatic conversion to paid subscription'],fa:['شمارنده آزمایش ۳۰ روزه را هنگام ثبت‌نام فعال کنید','دوره مهلت ۳–۶ ماهه برای ثبت‌نام‌کنندگان زودهنگام اضافه کنید','تبدیل خودکار به اشتراک پولی را آزمایش کنید']},
+ 'A1.7':{ar:['حوّل ملفات الخصوصية والشروط إلى صفحات ويب','أضف روابطها في تذييل الموقع','تأكد من ظهورها بالعربي والإنجليزي'],en:['Convert privacy & T&C files into web pages','Add their links in the site footer','Ensure they show in Arabic and English'],fa:['فایل‌های حریم خصوصی و شرایط را به صفحات وب تبدیل کنید','لینک‌ها را در پاورقی سایت اضافه کنید','از نمایش به عربی و انگلیسی مطمئن شوید']},
+ 'A1.8':{ar:['أنشئ حساباً تجريبياً ببيانات نموذجية','جهّزه ليعمل دون إنترنت قوي في المعارض','درّب الفريق على عرضه'],en:['Create a demo account with sample data','Make it work without strong internet at expos','Train the team to present it'],fa:['یک حساب نمایشی با داده‌های نمونه بسازید','طوری آماده کنید که در نمایشگاه بدون اینترنت قوی کار کند','تیم را برای ارائه آن آموزش دهید']},
+ 'A1.9':{ar:['اطلب ملف الدعم بعد البيع من إحسان','وثّق قنوات الدعم وأوقاته','اربطه بدليل تدريب خدمة العملاء'],en:['Get the after-sales support file from Ehsan','Document support channels and hours','Link it to the CS training guide'],fa:['فایل پشتیبانی پس از فروش را از احسان بگیرید','کانال‌ها و ساعات پشتیبانی را مستند کنید','آن را به راهنمای آموزش خدمات مشتری متصل کنید']},
+
+ 'A2.1':{ar:['استخدم عقد الفريلانسر الجاهز كأساس','اتفق على عدد المنشورات والتقارير الشهرية','اعتمد خطة محتوى أول شهر'],en:['Use the ready freelancer contract as a base','Agree on monthly posts and reports','Approve the first month content plan'],fa:['از قرارداد فریلنسر آماده به‌عنوان مبنا استفاده کنید','تعداد پست‌ها و گزارش‌های ماهانه را توافق کنید','برنامه محتوای ماه اول را تصویب کنید']},
+ 'A2.2':{ar:['اجمع التجار من إنستغرام والمعارف والزيارات','صنّفهم حسب القطاع والأولوية','أدخلهم في جدول/CRM مع بيانات التواصل'],en:['Gather merchants from Instagram, contacts and visits','Segment by sector and priority','Enter into a sheet/CRM with contact details'],fa:['تجار را از اینستاگرام، آشنایان و بازدیدها جمع کنید','بر اساس بخش و اولویت دسته‌بندی کنید','در جدول/CRM با اطلاعات تماس وارد کنید']},
+ 'A2.3':{ar:['حدّد المزايا: بناء متجر مجاني، فترة سماح، خصم ٥٠%','اكتبها في عرض رسمي معتمد','حدّد شروط الأهلية ومدة العرض'],en:['Define perks: free store build, grace period, 50% discount','Write them into an approved formal offer','Set eligibility and offer duration'],fa:['مزایا را تعیین کنید: ساخت رایگان فروشگاه، مهلت، تخفیف ۵۰٪','آن‌ها را در یک پیشنهاد رسمی تأییدشده بنویسید','شرایط واجدبودن و مدت پیشنهاد را تعیین کنید']},
+ 'A2.4':{ar:['راجع أسعار المنافسين (سلة/زد)','ثبّت أسعار الباقات الثلاث نهائياً','اعتمدها من الإدارة قبل النشر'],en:['Review competitor pricing (Salla/Zid)','Finalize the three plan prices','Get management approval before publishing'],fa:['قیمت رقبا (سلة/زد) را بررسی کنید','قیمت سه بسته را نهایی کنید','پیش از انتشار تأیید مدیریت بگیرید']},
+ 'A2.5':{ar:['أكمل قائمة شركات الشحن/الدفع/المساندة','تواصل لطلب شروط الربط والعمولات','وقّع اتفاقيات مبدئية مع الأنسب'],en:['Complete the shipping/payment/support companies list','Reach out for integration terms and commissions','Sign preliminary agreements with the best fit'],fa:['فهرست شرکت‌های حمل‌ونقل/پرداخت/پشتیبان را کامل کنید','برای شرایط اتصال و کارمزد تماس بگیرید','با مناسب‌ترین‌ها توافق اولیه امضا کنید']},
+ 'A2.6':{ar:['احسب المصاريف الشهرية (٩١٨ + التسويق)','قدّر الإيراد الشهري حتى التعادل','احسب رأس المال المطلوب لتغطية العجز','حدّد مصدر التمويل'],en:['Compute monthly costs (918 + marketing)','Estimate monthly revenue until break-even','Compute the capital needed to cover the gap','Identify the funding source'],fa:['هزینه‌های ماهانه (۹۱۸ + بازاریابی) را محاسبه کنید','درآمد ماهانه تا نقطه سربه‌سر را برآورد کنید','سرمایه لازم برای پوشش کسری را محاسبه کنید','منبع تأمین مالی را مشخص کنید']},
+ 'A2.7':{ar:['تواصل مع منظّمي نمو مستدام وكومكس','احجز الجناح وأكّد التكلفة والمساحة','أضف المواعيد لجدول الفريق'],en:['Contact the Sustainable Growth & COMEX organizers','Book the booth and confirm cost and space','Add the dates to the team calendar'],fa:['با برگزارکنندگان رشد پایدار و کامکس تماس بگیرید','غرفه را رزرو و هزینه و فضا را تأیید کنید','تاریخ‌ها را به تقویم تیم اضافه کنید']},
+
+ 'A3.1':{ar:['جهّز كتالوجاً وعرضاً سريعاً للزيارة','زر المحلات وسجّل بيانات المهتمين','تابعهم لتأكيد التسجيل المسبق (≥٥٠)'],en:['Prepare a catalog and quick pitch for visits',"Visit shops and record interested merchants' data",'Follow up to confirm pre-registration (≥50)'],fa:['کاتالوگ و معرفی کوتاه برای بازدید آماده کنید','از مغازه‌ها بازدید و اطلاعات علاقه‌مندان را ثبت کنید','برای تأیید ثبت‌نام اولیه (≥۵۰) پیگیری کنید']},
+ 'A3.2':{ar:['فعّل أداة وصلة لإرسال واتساب جماعي','جهّز رسائل تعريفية احترافية','نظّم القوائم حسب الفئة'],en:['Activate Wasla for bulk WhatsApp','Prepare professional intro messages','Organize lists by segment'],fa:['ابزار وصلة را برای ارسال گروهی واتساپ فعال کنید','پیام‌های معرفی حرفه‌ای آماده کنید','فهرست‌ها را بر اساس بخش سازماندهی کنید']},
+ 'A3.3':{ar:['ادرس كل أقسام النظام عملياً','جرّب إنشاء متجر كامل بنفسك','اجتز تقييماً داخلياً قبل دعم التجار'],en:['Study all system modules hands-on','Build a complete store yourself','Pass an internal assessment before supporting merchants'],fa:['همه بخش‌های سیستم را عملی یاد بگیرید','یک فروشگاه کامل خودتان بسازید','پیش از پشتیبانی تجار، ارزیابی داخلی را بگذرانید']},
+ 'A3.4':{ar:['فعّل نظام التذاكر داخل المنصة','اربط قنوات التواصل (واتساب/بريد)','ابدأ توثيق كل تفاعل مع التاجر'],en:['Enable the in-platform ticketing system','Connect channels (WhatsApp/email)','Start documenting every merchant interaction'],fa:['سیستم تیکت داخل پلتفرم را فعال کنید','کانال‌ها (واتساپ/ایمیل) را متصل کنید','مستندسازی هر تعامل با تاجر را آغاز کنید']},
+ 'A3.5':{ar:['حدّد قنوات الاستقبال وأوقات العمل','حدّد أزمنة الاستجابة ومستويات التصعيد','اكتبها في دليل واضح للفريق'],en:['Define intake channels and working hours','Set response times and escalation levels','Write them in a clear team guide'],fa:['کانال‌های دریافت و ساعات کاری را تعیین کنید','زمان‌های پاسخ و سطوح ارجاع را مشخص کنید','آن‌ها را در راهنمای روشن تیم بنویسید']},
+ 'A4.1':{ar:['حدّد الحقول المطلوبة لكل نوع بيانات (منتجات/تصنيفات/علامات/عملاء)','جهّز قوالب Excel/CSV بصيغة يقبلها النظام','أضف صف مثال وتعليمات تعبئة في كل قالب','اختبر استيراد قالب تجريبي للتأكد من توافقه'],en:['Define required fields per data type (products/categories/brands/customers)','Prepare Excel/CSV templates in a format the system accepts','Add an example row and fill instructions in each template','Test-import a sample template to confirm compatibility'],fa:['فیلدهای لازم برای هر نوع داده (محصولات/دسته‌ها/برندها/مشتریان) را تعیین کنید','قالب‌های Excel/CSV را با فرمت قابل‌قبول سیستم آماده کنید','یک ردیف نمونه و دستور تکمیل در هر قالب اضافه کنید','یک قالب نمونه را آزمایشی وارد کنید تا سازگاری تأیید شود']},
+ 'A4.2':{ar:['راجع البيانات المُدخلة مسبقاً (≈٤٩٩٠ علامة وتصنيفات)','صحّح الأخطاء واحذف المكرر وحدّث الناقص','وحّد التسميات والتصنيفات','اعتمد النسخة المحدّثة كمرجع'],en:['Review the preloaded data (~4990 brands and categories)','Fix errors, remove duplicates and fill gaps','Standardize naming and categories','Approve the updated version as the reference'],fa:['داده‌های از پیش واردشده (~۴۹۹۰ برند و دسته) را بررسی کنید','خطاها را اصلاح، موارد تکراری را حذف و کمبودها را تکمیل کنید','نام‌گذاری و دسته‌بندی‌ها را یکپارچه کنید','نسخه به‌روزشده را به‌عنوان مرجع تأیید کنید']},
+ 'A4.3':{ar:['انقل البيانات المراجَعة إلى قوالب الإدخال الجاهزة','تأكد من مطابقة الأعمدة لصيغة النظام','راجع عينة قبل الاستيراد الكامل','استورد البيانات وتحقق من ظهورها صحيحة'],en:['Move the reviewed data into the ready import templates','Ensure columns match the system format','Check a sample before the full import','Import the data and verify it shows correctly'],fa:['داده‌های بازبینی‌شده را به قالب‌های آماده ورود منتقل کنید','از تطابق ستون‌ها با فرمت سیستم مطمئن شوید','پیش از ورود کامل، یک نمونه را بررسی کنید','داده‌ها را وارد و از نمایش صحیح آن‌ها مطمئن شوید']},
+
+ 'B1':{ar:['اجمع المحتوى: نبذة، مميزات، باقات، طريقة اشتراك','صمّمه بهوية متجرلينك (ألوان/خطوط)','صدّره PDF جاهزاً للطباعة والمشاركة'],en:['Gather content: intro, features, plans, how to subscribe','Design with the MatjarLink identity (colors/fonts)','Export as a print-ready PDF'],fa:['محتوا را جمع کنید: معرفی، ویژگی‌ها، بسته‌ها، نحوه اشتراک','با هویت متجرلینک (رنگ/فونت) طراحی کنید','به‌صورت PDF آماده چاپ خروجی بگیرید']},
+ 'B2':{ar:['أنشئ جدول مقارنة الباقات الثلاث','أبرز مزايا التسجيل المبكر','صمّمه مختصراً وواضحاً'],en:['Create a comparison table of the three plans','Highlight early-adopter benefits','Design it concise and clear'],fa:['جدول مقایسه سه بسته را بسازید','مزایای ثبت‌نام زودهنگام را برجسته کنید','مختصر و روشن طراحی کنید']},
+ 'B3':{ar:['أعدّ شرائح: المشكلة، الحل، المميزات، الأسعار','أضف لقطات من المنصة','درّب المقدّم على العرض'],en:['Prepare slides: problem, solution, features, pricing','Add platform screenshots','Train the presenter'],fa:['اسلایدها را آماده کنید: مشکل، راه‌حل، ویژگی‌ها، قیمت','تصاویر پلتفرم را اضافه کنید','ارائه‌دهنده را آموزش دهید']},
+ 'B4':{ar:['صمّم رول-أب وبانرات بهوية الشركة','أرسلها للطباعة قبل المعرض','جهّز مواد توزيع للجناح'],en:['Design roll-ups and banners with the brand identity','Send to print before the expo','Prepare booth handouts'],fa:['رول‌آپ و بنر با هویت برند طراحی کنید','پیش از نمایشگاه برای چاپ بفرستید','مواد توزیع غرفه را آماده کنید']},
+ 'B5':{ar:['راجع التصميم الجاهز في مجلد Design','حدّث البيانات والأرقام','اطبع كمية للفريق'],en:['Review the ready design in the Design folder','Update details and numbers','Print a batch for the team'],fa:['طراحی آماده در پوشه Design را بررسی کنید','اطلاعات و شماره‌ها را به‌روزرسانی کنید','تعدادی برای تیم چاپ کنید']},
+
+ 'B6':{ar:['صوّر كل خطوة من معالج الـ١٠ خطوات','اكتب شرحاً موجزاً وأهمية كل خطوة','جمّعها في ملف PDF مصوّر'],en:['Screenshot each of the 10 wizard steps','Write a brief explanation and why each matters','Compile into an illustrated PDF'],fa:['از هر یک از ۱۰ مرحله راهنما تصویر بگیرید','توضیح کوتاه و اهمیت هر مرحله را بنویسید','در یک PDF مصوّر گردآوری کنید']},
+ 'B7':{ar:['اكتب سيناريو لكل فيديو قصير','سجّل الشاشة مع شرح صوتي','انشرها على يوتيوب وداخل المنصة'],en:['Write a script for each short video','Record the screen with voice-over','Publish on YouTube and in-platform'],fa:['برای هر ویدیوی کوتاه فیلم‌نامه بنویسید','صفحه را با روایت صوتی ضبط کنید','در یوتیوب و داخل پلتفرم منتشر کنید']},
+ 'B8':{ar:['اشرح التصفح والإضافة للسلة والشراء','أضف خطوات تتبّع الطلب','اجعله بسيطاً لعميل المتجر'],en:['Explain browsing, adding to cart and checkout','Add order-tracking steps','Keep it simple for the store customer'],fa:['مرور، افزودن به سبد و خرید را توضیح دهید','مراحل پیگیری سفارش را اضافه کنید','برای مشتری فروشگاه ساده نگه دارید']},
+ 'B9':{ar:['أنشئ صفحة بداية سريعة برابط واحد','أدرج أهم ٥ خطوات للبدء','اربطها برسائل الترحيب'],en:['Create a quick-start page with a single link','List the top 5 steps to begin','Link it to welcome messages'],fa:['یک صفحه شروع سریع با یک لینک بسازید','۵ مرحله اصلی شروع را فهرست کنید','آن را به پیام‌های خوش‌آمد متصل کنید']},
+ 'B10':{ar:['اجمع أكثر أسئلة التجار تكراراً','اكتب إجابات واضحة ومختصرة','انشرها كصفحة قابلة للبحث'],en:['Collect the most frequent merchant questions','Write clear, concise answers','Publish as a searchable page'],fa:['پرتکرارترین پرسش‌های تجار را جمع کنید','پاسخ‌های روشن و مختصر بنویسید','به‌صورت صفحه قابل‌جستجو منتشر کنید']},
+ 'B11':{ar:['حدّد الرسائل الرئيسية للمواد البصرية','صمّم موشن جرافيك وبوسترات إرشادية','استخدمها في القنوات والورش'],en:['Define key messages for the visuals','Design motion graphics and posters','Use them in channels and workshops'],fa:['پیام‌های کلیدی مواد بصری را تعیین کنید','موشن‌گرافیک و پوستر طراحی کنید','در کانال‌ها و کارگاه‌ها استفاده کنید']},
+ 'B12':{ar:['ابنِ المنهج على قسم ٧.٣','غطِّ النظام، الدعم، تدريب التجار','أضف اختباراً داخلياً للموظف'],en:['Base the curriculum on section 7.3','Cover system, support, merchant training','Add an internal staff test'],fa:['برنامه آموزش را بر اساس بخش ۷.۳ بسازید','سیستم، پشتیبانی و آموزش تجار را پوشش دهید','یک آزمون داخلی کارمند اضافه کنید']},
+
+ 'B13':{ar:['انشر الخصوصية والشروط (عربي/إنجليزي)','أضف روابطها في التذييل','تأكد من سهولة الوصول'],en:['Publish privacy & T&C (Arabic/English)','Add links in the footer','Ensure easy access'],fa:['حریم خصوصی و شرایط (عربی/انگلیسی) را منتشر کنید','لینک‌ها را در پاورقی اضافه کنید','از دسترسی آسان مطمئن شوید']},
+ 'B14':{ar:['حوّل سياسة الاسترجاع وSLA لصفحات','اربطها بصفحة الباقات','راجع الصياغة قانونياً'],en:['Turn the refund policy & SLA into pages','Link them to the plans page','Legally review the wording'],fa:['سیاست بازگشت و SLA را به صفحه تبدیل کنید','به صفحه بسته‌ها متصل کنید','متن را حقوقی بررسی کنید']},
+ 'B15':{ar:['اكتب نبذة الشركة والرؤية','أضف بيانات التواصل الرسمية','انشرها كصفحة'],en:['Write the company intro and vision','Add official contact info','Publish as a page'],fa:['معرفی و چشم‌انداز شرکت را بنویسید','اطلاعات تماس رسمی را اضافه کنید','به‌صورت صفحه منتشر کنید']},
+ 'B16':{ar:['اعرض الباقات الثلاث بشكل تفاعلي','أضف زر اشتراك لكل باقة','اربطها ببوابة الدفع'],en:['Display the three plans interactively','Add a subscribe button per plan','Link to the payment gateway'],fa:['سه بسته را به‌صورت تعاملی نمایش دهید','برای هر بسته دکمه اشتراک اضافه کنید','به درگاه پرداخت متصل کنید']},
+
+ 'C1':{ar:['تواصل مع المهتمين عبر وصلة/مكالمات','اعرض مزايا التسجيل المبكر','حوّلهم إلى حسابات مسجّلة'],en:['Reach interested merchants via Wasla/calls','Pitch early-adopter perks','Convert them into registered accounts'],fa:['با علاقه‌مندان از طریق وصلة/تماس ارتباط بگیرید','مزایای ثبت‌نام زودهنگام را ارائه دهید','آن‌ها را به حساب ثبت‌شده تبدیل کنید']},
+ 'C2':{ar:['اجمع منتجات وبيانات كل تاجر','أنشئ متجره واضبط الإعدادات','أدخل المنتجات والصور'],en:["Collect each merchant's products and data",'Create their store and configure settings','Enter products and images'],fa:['محصولات و داده‌های هر تاجر را جمع کنید','فروشگاه او را بسازید و تنظیمات را انجام دهید','محصولات و تصاویر را وارد کنید']},
+ 'C3':{ar:['خصّص متابعاً لكل تاجر جديد','تابع حتى أول عملية بيع','حل أي عائق فوراً'],en:['Assign a follow-up owner per new merchant','Follow until the first sale','Resolve any blocker immediately'],fa:['برای هر تاجر جدید یک پیگیر تعیین کنید','تا اولین فروش پیگیری کنید','هر مانع را فوراً حل کنید']},
+ 'C4':{ar:['صوّر ميزة/استخداماً يومياً','حرّر مقطعاً قصيراً','انشره على القنوات'],en:['Film a feature/use daily','Edit a short clip','Publish on the channels'],fa:['روزانه یک ویژگی/کاربرد را فیلم کنید','یک کلیپ کوتاه ویرایش کنید','در کانال‌ها منتشر کنید']},
+ 'C5':{ar:['اجمع ملاحظات التجار أسبوعياً','صنّفها حسب الأولوية','حوّلها لقائمة تحسينات للتطوير'],en:['Collect merchant feedback weekly','Prioritize it','Turn it into a dev improvements list'],fa:['بازخورد تجار را هفتگی جمع کنید','اولویت‌بندی کنید','به فهرست بهبود برای توسعه تبدیل کنید']},
+ 'C6':{ar:['عالج الأخطاء حسب الأولوية','اختبر قبل النشر','أطلق تحديثات دورية'],en:['Fix bugs by priority','Test before release','Ship regular updates'],fa:['خطاها را بر اساس اولویت رفع کنید','پیش از انتشار آزمایش کنید','به‌روزرسانی‌های منظم منتشر کنید']},
+ 'C7':{ar:['تتبّع تكلفة الاكتساب لكل قناة','قِس معدل التحويل','وجّه الميزانية للأعلى فعالية'],en:['Track CAC per channel','Measure the conversion rate','Shift budget to the best channels'],fa:['هزینه جذب هر کانال را پیگیری کنید','نرخ تبدیل را اندازه بگیرید','بودجه را به کانال‌های بهتر منتقل کنید']},
+ 'C8':{ar:['اختر تجاراً حققوا نتائج','وثّق قصتهم بالأرقام والصور','انشرها كمحتوى تسويقي'],en:['Pick merchants who achieved results','Document their story with numbers and photos','Publish as marketing content'],fa:['تجاری که نتیجه گرفته‌اند را انتخاب کنید','داستان آن‌ها را با اعداد و تصاویر مستند کنید','به‌عنوان محتوای بازاریابی منتشر کنید']},
+
+ 'D1':{ar:['حدّد الجمهور المستهدف بدقة','أطلق حملات على إنستغرام/جوجل','راقب الأداء وحسّن أسبوعياً'],en:['Define the target audience precisely','Run Instagram/Google campaigns','Monitor and optimize weekly'],fa:['مخاطب هدف را دقیق تعیین کنید','کمپین‌های اینستاگرام/گوگل اجرا کنید','هفتگی پایش و بهینه کنید']},
+ 'D2':{ar:['انشر قصة نجاح كل أسبوعين','نوّع القطاعات المعروضة','استخدمها في الإعلانات'],en:['Publish a success story bi-weekly','Vary the featured sectors','Use them in ads'],fa:['هر دو هفته یک داستان موفقیت منتشر کنید','بخش‌های نمایش‌داده‌شده را متنوع کنید','در تبلیغات استفاده کنید']},
+ 'D3':{ar:['جهّز الجناح والمواد الترويجية','أعدّ عرض حضور خاصاً بالمعرض','اجمع بيانات الزوار للمتابعة'],en:['Prepare the booth and promo materials','Set a special expo-attendee offer','Collect visitor data for follow-up'],fa:['غرفه و مواد تبلیغاتی را آماده کنید','یک پیشنهاد ویژه بازدیدکنندگان نمایشگاه تنظیم کنید','اطلاعات بازدیدکنندگان را برای پیگیری جمع کنید']},
+ 'D4':{ar:['احجز جناحاً مميزاً','استهدف شراكات حكومية وتقنية','نظّم لقاءات مع شركاء محتملين'],en:['Book a prominent booth','Target government and tech partnerships','Schedule meetings with potential partners'],fa:['یک غرفه شاخص رزرو کنید','مشارکت‌های دولتی و فناوری را هدف بگیرید','جلساتی با شرکای بالقوه تنظیم کنید']},
+ 'D5':{ar:['تفاوض مع شركاء الشحن/الدفع','وقّع عقود تبادل البيانات','فعّل الوصول لقواعد بيانات التجار'],en:['Negotiate with shipping/payment partners','Sign data-exchange contracts','Enable access to merchant databases'],fa:['با شرکای حمل‌ونقل/پرداخت مذاکره کنید','قراردادهای تبادل داده را امضا کنید','دسترسی به پایگاه‌های داده تجار را فعال کنید']},
+ 'D6':{ar:['صمّم نظام عمولة وأكواد خاصة','جنّد مدربين ومسوّقين','تابع المبيعات عبر الأكواد'],en:['Design a commission system and special codes','Recruit trainers and affiliates','Track sales via codes'],fa:['سیستم پورسانت و کدهای ویژه طراحی کنید','مربیان و بازاریابان جذب کنید','فروش را از طریق کدها پیگیری کنید']},
+ 'D7':{ar:['حدّد ربعاً مستهدفاً للإطلاق','أكمل تطوير قسم المؤثرين','اربطه بنظام العمولة 12%'],en:['Set a target quarter for launch','Finish the influencer module','Connect it to the 12% commission system'],fa:['یک فصل هدف برای راه‌اندازی تعیین کنید','توسعه بخش اینفلوئنسر را تکمیل کنید','به سیستم پورسانت ۱۲٪ متصل کنید']},
+ 'D8':{ar:['راقب عدد التجار النشطين','عند ٨٠–١٠٠ تاجر وظّف دعماً إضافياً','حدّث الهيكل التنظيمي'],en:['Monitor the active-merchant count','At 80–100 merchants, hire extra support','Update the org chart'],fa:['تعداد تجار فعال را پایش کنید','در ۸۰–۱۰۰ تاجر، پشتیبانی بیشتر استخدام کنید','نمودار سازمانی را به‌روزرسانی کنید']},
+};
+
+// ===== state & rendering =====
+const KEY='matjarlink_plan_v1';      // done state
+const LKEY='matjarlink_lang';        // language
+const AKEY='matjarlink_assign';      // {id: person}
+const EKEY='matjarlink_edits';       // {id: {task,desc,depts,pri}}  (overrides for seed tasks)
+const CKEY='matjarlink_custom';      // [ {id,secId,task,desc,depts,pri} ]  custom tasks
+const DKEY='matjarlink_deleted';     // {id:1}
+const OKEY='matjarlink_order';       // {secId: [id,id,...]}  custom ordering
+let state   = JSON.parse(LS.getItem(KEY)||'{}');
+let assign  = JSON.parse(LS.getItem(AKEY)||'{}');
+let edits   = JSON.parse(LS.getItem(EKEY)||'{}');
+let custom  = JSON.parse(LS.getItem(CKEY)||'[]');
+let deleted = JSON.parse(LS.getItem(DKEY)||'{}');
+let order   = JSON.parse(LS.getItem(OKEY)||'{}');
+const PRANK = {crit:0, high:1, norm:2};   // critical first
+const TKEY='matjarlink_dates', GKEY='matjarlink_log', MEKEY='matjarlink_me';
+let dates = JSON.parse(LS.getItem(TKEY)||'{}');   // {id:{start,due}}
+let log   = JSON.parse(LS.getItem(GKEY)||'[]');   // activity log
+let me    = LS.getItem(MEKEY)||'';                // current user (actor)
+let curView = 'plan';
+let fileIndex = {};   // taskId -> [file records] (from IndexedDB)
+let lang = LS.getItem(LKEY) || 'ar';
+let curFilter = 'all';      // department
+let curPerson = '';         // assignee ('' = all)
+let editingId = null;       // null = add mode
+const $ = id => document.getElementById(id);
+// cloud config
+const CURLKEY='matjarlink_cloud_url', CTOKKEY='matjarlink_cloud_token', FKEY='matjarlink_cloudfiles';
+let CLOUD_URL=LS.getItem(CURLKEY)||'', CLOUD_TOKEN=LS.getItem(CTOKKEY)||'';
+// Web-app mode: when served from Google Apps Script, the server injects window.MATJARLINK_WEBAPP
+// with its own URL + secret, so the board auto-connects with zero setup on any device.
+const WEBAPP = (typeof window!=='undefined' && window.MATJARLINK_WEBAPP && window.MATJARLINK_WEBAPP.url) ? window.MATJARLINK_WEBAPP : null;
+if(WEBAPP){ CLOUD_URL=WEBAPP.url; CLOUD_TOKEN=WEBAPP.token||''; }
+let cloudFiles=JSON.parse(LS.getItem(FKEY)||'[]');   // file metadata when cloud is on
+const cloudOn=()=>!!CLOUD_URL;
+// ===== SQLite (sql.js) storage =====
+let SQL=null, DB=null, dbFileHandle=null, dbPersistTimer=null, SERVER_MODE=false;
+const BUCKETS=[KEY,AKEY,EKEY,CKEY,DKEY,OKEY,TKEY,GKEY,MEKEY,LKEY];
+const save0=(k,v)=>{ LS.setItem(k,JSON.stringify(v)); if(DB) dbSet(k,v); };  // localStorage + SQLite mirror
+const save=(k,v)=>{ save0(k,v); scheduleCloudPush(); };
+function dbSet(k,v){ if(!DB) return; try{ DB.run("INSERT INTO kv(k,v) VALUES(?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v",[k,JSON.stringify(v)]); }catch(e){} scheduleDbPersist(); }
+function scheduleDbPersist(){ if(!DB) return; if(!dbFileHandle && !SERVER_MODE) return; clearTimeout(dbPersistTimer); dbPersistTimer=setTimeout(persistDbNow,1200); }
+
+// effective rows of a section: [{id,task,desc,depts,pri,custom}]
+// pick current-language value from a string or {ar,en,fa} object (back-compatible)
+function L(v){ if(v==null) return ''; if(typeof v==='string') return v; return v[lang]||v.ar||v.en||v.fa||''; }
+function Lsteps(v){ if(!v) return []; if(Array.isArray(v)) return v; return v[lang]||v.ar||v.en||v.fa||[]; }
+function sectionRows(sec){
+  const out=[];
+  sec.rows.forEach(r=>{
+    const id=r[0]; if(deleted[id]) return;
+    const e=edits[id];
+    out.push({ id,
+      task: e&&e.task!=null ? L(e.task) : r[1][lang],
+      desc: e&&e.desc!=null ? L(e.desc) : r[2][lang],
+      depts: e&&e.depts ? e.depts : r[3],
+      pri:  e&&e.pri ? e.pri : r[4],
+      steps: e&&e.steps ? Lsteps(e.steps) : ((STEPS[id]&&STEPS[id][lang])||[]),
+      custom:false });
+  });
+  custom.filter(c=>c.secId===sec.id && !deleted[c.id]).forEach(c=>{
+    out.push({ id:c.id, task:L(c.task), desc:L(c.desc), depts:c.depts||[], pri:c.pri||'norm', steps:Lsteps(c.steps), custom:true });
+  });
+  return out;
+}
+// apply custom order if set, otherwise sort by priority (critical first)
+function orderedRows(sec){
+  const base=sectionRows(sec);
+  const byId={}; base.forEach(r=>byId[r.id]=r);
+  const stored=order[sec.id];
+  let ids;
+  if(stored && stored.length){
+    ids=stored.filter(id=>byId[id]);                       // keep saved order, drop deleted
+    const extra=base.filter(r=>ids.indexOf(r.id)<0)
+                    .sort((a,b)=>PRANK[a.pri]-PRANK[b.pri]).map(r=>r.id); // new tasks by priority
+    ids=ids.concat(extra);
+  } else {
+    ids=base.slice().sort((a,b)=>PRANK[a.pri]-PRANK[b.pri]).map(r=>r.id);
+  }
+  return ids.map(id=>byId[id]);
+}
+function reorder(secId,id,val){
+  const sec=SECTIONS.find(s=>s.id===secId); if(!sec) return;
+  let ids=orderedRows(sec).map(r=>r.id);
+  let pos=parseInt(val,10); if(isNaN(pos)){ renderContent(); applyFilter(); return; }
+  pos=Math.max(1,Math.min(ids.length,pos));
+  ids=ids.filter(x=>x!==id);
+  ids.splice(pos-1,0,id);
+  order[secId]=ids; save(OKEY,order);
+  renderContent(); recalc(); applyFilter();
+}
+
+function renderContent(){
+  const t = UI[lang];
+  const content = $('content'); content.innerHTML='';
+  SECTIONS.forEach(sec=>{
+    const s=document.createElement('section');
+    s.className='block'; s.dataset.id=sec.id;
+    const rows=orderedRows(sec).map((r,i)=>{
+      const checked=state[r.id]?'checked':'';
+      const deptHtml=r.depts.map(d=>`<span class="dept ${DEPT_CLASS[d]}">${t[DEPT_UI[d]]}</span>`).join('');
+      const whoOpts=`<option value="">${t.unassigned}</option>`+PEOPLE.map(p=>
+        `<option value="${p.k}" ${assign[r.id]===p.k?'selected':''}>${p[lang]}</option>`).join('');
+      const hasSteps=r.steps&&r.steps.length;
+      const sBtn=hasSteps?`<button class="sbtn" title="${t.stepsTitle}" onclick="toggleSteps(event,'${r.id}')">▾</button> `:'';
+      const ac=(fileIndex[r.id]||[]).length;
+      const clip=`<span class="clip" title="${t.mAttach}" onclick="event.stopPropagation();openAtt('${r.id}')">📎${ac?' '+ac:''}</span>`;
+      const stepRow=hasSteps?`<tr class="steprow" id="sr-${r.id}" style="display:none"><td></td><td colspan="7">
+        <div class="stepbox"><b>${t.stepsTitle}</b><ol>${r.steps.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}</ol></div></td></tr>`:'';
+      return `<tr data-id="${r.id}" data-dept="${r.depts.join(' ')}" data-person="${assign[r.id]||''}" class="${state[r.id]?'done':''}">
+        <td class="chk"><input type="checkbox" ${checked} onchange="toggle('${r.id}',this)"></td>
+        <td class="seqcell"><input class="seq" type="number" min="1" value="${i+1}" title="${r.id}" onclick="event.stopPropagation()" onchange="reorder('${sec.id}','${r.id}',this.value)"></td>
+        <td><div class="task">${sBtn}${escapeHtml(r.task)}${clip}</div><div class="desc">${escapeHtml(r.desc)}</div></td>
+        <td class="hide-m">${deptHtml}</td>
+        <td class="who"><select onchange="setAssign('${r.id}',this.value)">${whoOpts}</select></td>
+        <td><span class="badge ${PRI_CLASS[r.pri]}">${t[PRI_UI[r.pri]]}</span></td>
+        <td class="datecell">${dueCell(r.id)}</td>
+        <td class="act"><button class="ebtn" onclick="openEdit('${r.id}')">✎</button></td>
+      </tr>${stepRow}`;
+    }).join('');
+    s.innerHTML=`
+      <div class="sec-head ${sec.crit?'crit':''}" onclick="this.parentNode.classList.toggle('collapsed')">
+        <span class="chev">▼</span>
+        <h2>${sec.title[lang]}<span class="goal">${sec.goal[lang]}</span></h2>
+        <span class="mini" id="mini-${sec.id}"></span>
+      </div>
+      <div class="sec-body">
+        <table>
+          <thead><tr><th></th><th>${t.thCode}</th><th>${t.thTask}</th><th class="hide-m">${t.thDept}</th><th>${t.thWho}</th><th>${t.thPri}</th><th>${t.thDate}</th><th></th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+    content.appendChild(s);
+  });
+}
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function buildPersonFilter(){
+  const t=UI[lang];
+  $('personFilter').innerHTML =
+    `<button class="btn ${curPerson===''?'active':''}" data-p="">${t.whoAll}</button>`+
+    PEOPLE.map(p=>`<button class="btn ${curPerson===p.k?'active':''}" data-p="${p.k}">${p[lang]}</button>`).join('');
+}
+
+function applyLang(){
+  const t = UI[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = t.dir;
+  document.title = t.docTitle;
+  $('h1').textContent=t.h1; $('subtitle').textContent=t.subtitle;
+  $('crLabel').textContent=t.crLabel; $('phaseLabel').textContent=t.phaseLabel; $('phaseVal').textContent=t.phaseVal;
+  $('versionLabel').textContent=t.versionLabel; $('versionVal').textContent=t.versionVal;
+  $('overallLabel').textContent=t.overall;
+  $('pgPre').textContent=t.pgPre; $('pgMid').textContent=t.pgMid; $('pgPost').textContent=t.pgPost;
+  $('resetBtn').textContent=t.reset;
+  $('st-total').textContent=t.stTotal; $('st-crit').textContent=t.stCrit; $('st-high').textContent=t.stHigh;
+  $('st-norm').textContent=t.stNorm; $('st-done').textContent=t.stDone;
+  $('deptFlbl').textContent=t.deptFlbl; $('personFlbl').textContent=t.personFlbl;
+  const fb=$('deptFilter').children;
+  fb[0].textContent=t.fAll; fb[1].textContent=t.fDev; fb[2].textContent=t.fAdm; fb[3].textContent=t.fCs; fb[4].textContent=t.fMk;
+  $('addBtn').textContent=t.addBtn; $('printBtn').textContent=t.print;
+  $('footer').textContent=t.footer;
+  // tabs + current user + activity/files toolbars
+  $('tabPlan').textContent=t.tabPlan; $('tabLog').textContent=t.tabLog; $('tabFiles').textContent=t.tabFiles;
+  $('meLabel').textContent=t.meLabel;
+  $('meSel').innerHTML=`<option value="">${t.someone}</option>`+PEOPLE.map(p=>`<option value="${p.k}">${p[lang]}</option>`).join('');
+  $('meSel').value=me;
+  $('logActor').innerHTML=`<option value="">${t.logAll}</option>`+PEOPLE.map(p=>`<option value="${p.k}">${p[lang]}</option>`).join('');
+  $('logSearch').placeholder=t.logSearchPH; $('fileSearch').placeholder=t.fileSearchPH; $('logClearBtn').textContent=t.logClear;
+  document.querySelectorAll('#langsw button').forEach(b=>b.classList.toggle('active',b.dataset.l===lang));
+  buildPersonFilter();
+  renderContent();
+  recalc();
+  applyFilter();
+  if(curView==='activity') renderLog();
+  if(curView==='files') renderFiles();
+  setCloudState();
+  // database overlay + button
+  $('dbT').textContent=t.dbTitle; $('dbHint').textContent=t.dbHint;
+  $('dbOpen').textContent=t.dbOpenBtn; $('dbNew').textContent=t.dbNewBtn; $('dbSkip').textContent=t.dbSkipBtn;
+  if(typeof setDbState==='function') setDbState();
+}
+
+function toggle(id,el){
+  if(el.checked) state[id]=1; else delete state[id];
+  save(KEY,state);
+  el.closest('tr').classList.toggle('done',el.checked);
+  logEvent(el.checked?'done':'undone', id);
+  recalc();
+}
+function setAssign(id,val){
+  const prev=assign[id]||'';
+  if(val) assign[id]=val; else delete assign[id];
+  save(AKEY,assign);
+  const tr=document.querySelector(`tr[data-id="${id}"]`); if(tr) tr.dataset.person=val||'';
+  if(val!==prev) logEvent(val?'assign':'unassign', id, val||'');
+  applyFilter();
+}
+function recalc(){
+  let total=0,done=0,crit=0,high=0,norm=0;
+  SECTIONS.forEach(sec=>{
+    let st=0,sd=0;
+    sectionRows(sec).forEach(r=>{
+      total++; st++;
+      if(r.pri==='crit')crit++; else if(r.pri==='high')high++; else norm++;
+      if(state[r.id]){done++; sd++}
+    });
+    const m=$('mini-'+sec.id); if(m) m.textContent=`${sd}/${st}`;
+  });
+  $('totalCount').textContent=total; $('doneCount').textContent=done;
+  $('s-total').textContent=total; $('s-crit').textContent=crit; $('s-high').textContent=high;
+  $('s-norm').textContent=norm; $('s-done').textContent=done;
+  const pct=total?Math.round(done/total*100):0;
+  $('pct').textContent=pct+'%'; $('fill').style.width=pct+'%';
+}
+function toggleSteps(e,id){
+  e.stopPropagation();
+  const sr=$('sr-'+id); if(!sr) return;
+  const open = sr.style.display==='none';
+  sr.style.display = open ? 'table-row' : 'none';
+  e.currentTarget.classList.toggle('open',open);
+  e.currentTarget.textContent = open ? '▴' : '▾';
+}
+function applyFilter(){
+  document.querySelectorAll('#deptFilter .btn').forEach(b=>b.classList.toggle('active',b.dataset.f===curFilter));
+  document.querySelectorAll('#personFilter .btn').forEach(b=>b.classList.toggle('active',b.dataset.p===curPerson));
+  // collapse any open step rows + reset their toggles
+  document.querySelectorAll('tr.steprow').forEach(sr=>sr.style.display='none');
+  document.querySelectorAll('.sbtn.open').forEach(b=>{b.classList.remove('open');b.textContent='▾';});
+  document.querySelectorAll('tbody tr:not(.steprow)').forEach(tr=>{
+    const okDept = curFilter==='all'||tr.dataset.dept.split(' ').includes(curFilter);
+    const okPerson = curPerson===''||tr.dataset.person===curPerson;
+    tr.style.display = (okDept&&okPerson)?'':'none';
+  });
+  document.querySelectorAll('section.block').forEach(s=>{
+    const any=[...s.querySelectorAll('tbody tr:not(.steprow)')].some(tr=>tr.style.display!=='none');
+    s.style.display=any?'':'none';
+  });
+}
+
+// ===== add / edit modal =====
+function fillSelectors(){
+  const t=UI[lang];
+  $('m-sec').innerHTML=SECTIONS.map(s=>`<option value="${s.id}">${s.title[lang]}</option>`).join('');
+  $('m-pri').innerHTML=PRI_ORDER.map(p=>`<option value="${p}">${t[PRI_UI[p]]}</option>`).join('');
+  $('m-who').innerHTML=`<option value="">${t.unassigned}</option>`+PEOPLE.map(p=>`<option value="${p.k}">${p[lang]}</option>`).join('');
+  $('m-depts').innerHTML=DEPT_ORDER.map(d=>`<label><input type="checkbox" value="${d}"> ${t[DEPT_UI[d]]}</label>`).join('');
+  $('lbl-sec').textContent=t.mSec; $('lbl-task').textContent=t.mTask; $('lbl-desc').textContent=t.mDesc;
+  $('lbl-steps').textContent=t.mSteps; $('lbl-dept').textContent=t.mDept; $('lbl-pri').textContent=t.mPri; $('lbl-who').textContent=t.mWho;
+  $('lbl-start').textContent=t.mStart; $('lbl-due').textContent=t.mDue; $('lbl-attach').textContent=t.mAttach;
+  $('m-save').textContent=t.save; $('m-cancel').textContent=t.cancel; $('m-del').textContent=t.del;
+}
+function openAdd(){
+  editingId=null; fillSelectors();
+  $('mTitle').textContent=UI[lang].addTitle;
+  $('m-sec').disabled=false; $('m-sec').value=SECTIONS[0].id;
+  $('m-task').value=''; $('m-desc').value=''; $('m-steps').value=''; $('m-pri').value='norm'; $('m-who').value='';
+  $('m-start').value=''; $('m-due').value='';
+  $('m-depts').querySelectorAll('input').forEach(c=>c.checked=false);
+  $('m-attach-wrap').style.display='none';   // attachments only after task exists
+  $('m-del').style.display='none';
+  $('modalBg').classList.add('open');
+}
+function openEdit(id){
+  editingId=id; fillSelectors();
+  $('mTitle').textContent=UI[lang].editTitle;
+  let secId, view;
+  const cust=custom.find(c=>c.id===id);
+  if(cust){ secId=cust.secId; view={task:L(cust.task),desc:L(cust.desc),depts:cust.depts||[],pri:cust.pri||'norm',steps:Lsteps(cust.steps)}; $('m-sec').disabled=false; }
+  else{
+    const sec=SECTIONS.find(s=>s.rows.some(r=>r[0]===id));
+    const r=sec.rows.find(r=>r[0]===id); const e=edits[id]||{};
+    secId=sec.id;
+    view={ task: e.task!=null?L(e.task):r[1][lang], desc: e.desc!=null?L(e.desc):r[2][lang],
+           depts: e.depts||r[3], pri: e.pri||r[4],
+           steps: e.steps?Lsteps(e.steps):((STEPS[id]&&STEPS[id][lang])||[]) };
+    $('m-sec').disabled=true; // seed tasks stay in their section
+  }
+  $('m-sec').value=secId;
+  $('m-task').value=view.task; $('m-desc').value=view.desc; $('m-steps').value=(view.steps||[]).join('\n'); $('m-pri').value=view.pri; $('m-who').value=assign[id]||'';
+  $('m-depts').querySelectorAll('input').forEach(c=>c.checked=view.depts.includes(c.value));
+  const d=dates[id]||{}; $('m-start').value=d.start||''; $('m-due').value=d.due||'';
+  $('m-attach-wrap').style.display=''; renderAttachList(id);
+  $('m-del').style.display='';
+  $('modalBg').classList.add('open');
+}
+function closeModal(){ $('modalBg').classList.remove('open'); }
+// translate one text from source lang to target lang via the cloud (Google Apps Script LanguageApp)
+async function cloudTranslate(text, source, target){
+  if(!text) return '';
+  try{ const r=await fetch(CLOUD_URL+'?action=translate&token='+encodeURIComponent(CLOUD_TOKEN)+'&source='+source+'&target='+target+'&text='+encodeURIComponent(text));
+    const j=await r.json(); return (j.ok&&j.text)?j.text:text; }catch(e){ return text; }
+}
+// build {ar,en,fa} objects for task/desc/steps; current lang = typed text, others auto-translated (cloud)
+async function buildTranslations(task,desc,steps){
+  const langs=['ar','en','fa'], tObj={}, dObj={}, sObj={};
+  langs.forEach(l=>{ tObj[l]=task; dObj[l]=desc; sObj[l]=steps.slice(); });
+  if(cloudOn()){
+    const targets=langs.filter(l=>l!==lang);
+    await Promise.all(targets.map(async tg=>{
+      tObj[tg]=await cloudTranslate(task,lang,tg);
+      dObj[tg]=await cloudTranslate(desc,lang,tg);
+      sObj[tg]=await Promise.all(steps.map(s=>cloudTranslate(s,lang,tg)));
+    }));
+  }
+  return {task:tObj, desc:dObj, steps:sObj};
+}
+async function saveModal(){
+  const task=$('m-task').value.trim();
+  if(!task){ alert(UI[lang].needTask); return; }
+  const desc=$('m-desc').value.trim();
+  const pri=$('m-pri').value;
+  const depts=[...$('m-depts').querySelectorAll('input:checked')].map(c=>c.value);
+  const steps=$('m-steps').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  const who=$('m-who').value;
+  const secId=$('m-sec').value;
+  const start=$('m-start').value, due=$('m-due').value;
+  // auto-translate to all languages (shows a brief state on the Save button)
+  const sv=$('m-save'); const svTxt=sv.textContent; sv.disabled=true; sv.textContent='⏳';
+  const ml=await buildTranslations(task,desc,steps);
+  sv.disabled=false; sv.textContent=svTxt;
+  if(editingId==null){
+    const id='x'+Date.now().toString(36);
+    custom.push({id,secId,task:ml.task,desc:ml.desc,depts,pri,steps:ml.steps}); save(CKEY,custom);
+    if(who){assign[id]=who; save(AKEY,assign);}
+    if(start||due){ dates[id]={start,due}; save(TKEY,dates); }
+    logEvent('create', id);
+  } else {
+    const cust=custom.find(c=>c.id===editingId);
+    if(cust){ Object.assign(cust,{secId,task:ml.task,desc:ml.desc,depts,pri,steps:ml.steps}); save(CKEY,custom); }
+    else { edits[editingId]={task:ml.task,desc:ml.desc,depts,pri,steps:ml.steps}; save(EKEY,edits); }
+    if(who) assign[editingId]=who; else delete assign[editingId];
+    save(AKEY,assign);
+    const prevD=dates[editingId]||{};
+    if(start||due){ dates[editingId]={start,due}; } else { delete dates[editingId]; }
+    save(TKEY,dates);
+    logEvent('edit', editingId);
+    if((prevD.start||'')!==start || (prevD.due||'')!==due) logEvent('date', editingId);
+  }
+  closeModal(); renderContent(); recalc(); applyFilter();
+}
+function deleteTask(){
+  if(!editingId) return;
+  if(!confirm(UI[lang].delConfirm)) return;
+  logEvent('delete', editingId);
+  const cust=custom.find(c=>c.id===editingId);
+  if(cust){ custom=custom.filter(c=>c.id!==editingId); save(CKEY,custom); }
+  else { deleted[editingId]=1; save(DKEY,deleted); }
+  delete state[editingId]; delete assign[editingId]; delete edits[editingId]; delete dates[editingId];
+  save(KEY,state); save(AKEY,assign); save(EKEY,edits); save(TKEY,dates);
+  // remove attachments of this task from the active store
+  (fileIndex[editingId]||[]).forEach(f=>removeAttachment(f.key));
+  refreshFiles().then(()=>{ renderContent(); applyFilter(); });
+  closeModal(); renderContent(); recalc(); applyFilter();
+}
+
+// ===== helpers: info, dates, formatting =====
+function taskInfo(id){
+  const c=custom.find(x=>x.id===id);
+  if(c){ const s=SECTIONS.find(s=>s.id===c.secId); return {title:c.task||id, sec:s?s.title[lang]:''}; }
+  for(const s of SECTIONS){ const r=s.rows.find(r=>r[0]===id); if(r){ const e=edits[id]; return {title:(e&&e.task!=null)?e.task:r[1][lang], sec:s.title[lang]}; } }
+  return {title:id, sec:''};
+}
+function todayStr(){ const d=new Date(); return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10); }
+function fmtDate(d){ if(!d) return ''; const loc=lang==='fa'?'fa-IR':(lang==='en'?'en-GB':'ar'); try{return new Date(d).toLocaleDateString(loc,{year:'numeric',month:'short',day:'numeric'});}catch(e){return d;} }
+function fmtTime(ts){ const loc=lang==='fa'?'fa-IR':(lang==='en'?'en-GB':'ar'); try{return new Date(ts).toLocaleString(loc,{dateStyle:'medium',timeStyle:'short'});}catch(e){return ''+ts;} }
+function fmtSize(b){ b=b||0; if(b<1024)return b+' B'; if(b<1048576)return (b/1024).toFixed(1)+' KB'; return (b/1048576).toFixed(1)+' MB'; }
+function fileIcon(type,name){ const n=(name||'').toLowerCase(); if((type||'').startsWith('image'))return '🖼️'; if(n.endsWith('.pdf')||type==='application/pdf')return '📕'; if(/\.(xls|xlsx|csv)$/.test(n))return '📊'; if(/\.(doc|docx)$/.test(n))return '📘'; if(/\.(ppt|pptx)$/.test(n))return '📙'; if(/\.(zip|rar|7z)$/.test(n))return '🗜️'; return '📄'; }
+function dueCell(id){
+  const d=dates[id]; if(!d) return '';
+  if(!d.due) return d.start?`<span class="due">${fmtDate(d.start)} →</span>`:'';
+  let cls='due';
+  if(!state[id]){ const today=todayStr();
+    if(d.due<today) cls='due over';
+    else { const diff=(new Date(d.due)-new Date(today))/86400000; cls = diff<=3 ? 'due soon' : 'due ok'; }
+  }
+  const tip=d.start?fmtDate(d.start)+' → ':'';
+  return `<span class="${cls}" title="${tip}${fmtDate(d.due)}">${fmtDate(d.due)}</span>`;
+}
+// ===== activity log =====
+function logEvent(type,id,detail){
+  const info=taskInfo(id);
+  log.unshift({t:Date.now(), actor:me, type, id, title:info.title, sec:info.sec, detail:detail||''});
+  if(log.length>1000) log.length=1000;
+  save(GKEY,log);
+  if(curView==='activity') renderLog();
+}
+function renderLog(){
+  const t=UI[lang], q=($('logSearch').value||'').toLowerCase(), actor=$('logActor').value, box=$('logList');
+  let items=log.slice();
+  if(actor) items=items.filter(e=>e.actor===actor);
+  if(q) items=items.filter(e=>(e.title||'').toLowerCase().includes(q)||(t['ev_'+e.type]||'').toLowerCase().includes(q)||(e.sec||'').toLowerCase().includes(q));
+  if(!items.length){ box.innerHTML=`<div class="empty">${t.logEmpty}</div>`; return; }
+  const icon={assign:'👤',unassign:'👤',done:'✅',undone:'↩️',create:'➕',edit:'✏️',delete:'🗑️',date:'📅',attach:'📎',attachdel:'📎'};
+  box.innerHTML=items.map(e=>{
+    const who=e.actor?personLabel(e.actor):t.someone;
+    const extra=(e.type==='assign'&&e.detail)?' <b>'+escapeHtml(personLabel(e.detail))+'</b>':'';
+    return `<div class="logitem"><div class="ic">${icon[e.type]||'•'}</div><div class="tx">
+      <b>${escapeHtml(who)}</b> ${t['ev_'+e.type]||e.type}${extra} «${escapeHtml(e.title||'')}»
+      <div class="meta"><span class="tag">${escapeHtml(e.sec||'')}</span> · ${fmtTime(e.t)}</div></div></div>`;
+  }).join('');
+}
+// ===== files: SQLite (primary) → cloud → IndexedDB (fallback) =====
+let idb=null;
+function openIdb(){ return new Promise(res=>{ let r; try{r=indexedDB.open('matjarlink_files',1);}catch(e){return res(null);}
+  r.onupgradeneeded=e=>{const db=e.target.result; if(!db.objectStoreNames.contains('files')) db.createObjectStore('files',{keyPath:'key'});};
+  r.onsuccess=e=>{idb=e.target.result;res(idb);}; r.onerror=()=>res(null); }); }
+function idbAll(){ return new Promise(res=>{ if(!idb)return res([]); const rq=idb.transaction('files','readonly').objectStore('files').getAll(); rq.onsuccess=()=>res(rq.result||[]); rq.onerror=()=>res([]); }); }
+function idbPut(rec){ return new Promise(res=>{ if(!idb)return res(); const tx=idb.transaction('files','readwrite'); tx.objectStore('files').put(rec); tx.oncomplete=()=>res(); tx.onerror=()=>res(); }); }
+function idbDel(key){ return new Promise(res=>{ if(!idb)return res(); const tx=idb.transaction('files','readwrite'); tx.objectStore('files').delete(key); tx.oncomplete=()=>res(); tx.onerror=()=>res(); }); }
+// SQLite files-table ops (BLOB storage inside the .sqlite file)
+function dbFilePut(rec,bytes){ DB.run("INSERT OR REPLACE INTO files(key,taskId,name,type,size,time,actor,data) VALUES(?,?,?,?,?,?,?,?)",[rec.key,rec.taskId,rec.name,rec.type,rec.size,rec.time,rec.actor,bytes]); scheduleDbPersist(); }
+function dbFileAll(){ const r=DB.exec("SELECT key,taskId,name,type,size,time,actor FROM files"); if(!r.length)return []; return r[0].values.map(v=>({key:v[0],taskId:v[1],name:v[2],type:v[3],size:v[4],time:v[5],actor:v[6]})); }
+function dbFileGet(key){ const r=DB.exec("SELECT data,name,type FROM files WHERE key=?",[key]); if(!r.length)return null; const v=r[0].values[0]; return {data:v[0],name:v[1],type:v[2]}; }
+function dbFileDel(key){ DB.run("DELETE FROM files WHERE key=?",[key]); scheduleDbPersist(); }
+async function refreshFiles(){
+  fileIndex={};
+  let list;
+  if(DB) list=dbFileAll();
+  else if(cloudOn()) list=cloudFiles;
+  else list=await idbAll();
+  list.forEach(f=>{(fileIndex[f.taskId]=fileIndex[f.taskId]||[]).push(f);});
+}
+function fileToB64(file){ return new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(fr.result.split(',')[1]);fr.onerror=rej;fr.readAsDataURL(file);}); }
+function findFileRec(key){ let rec=null; Object.keys(fileIndex).forEach(t=>fileIndex[t].forEach(f=>{if(f.key===key)rec=f;})); return rec; }
+async function storeAttachment(taskId,f){
+  if(DB){
+    const buf=new Uint8Array(await f.arrayBuffer());
+    const key='f'+Date.now()+'_'+Math.random().toString(36).slice(2,8);
+    dbFilePut({key,taskId,name:f.name,type:f.type,size:f.size,time:Date.now(),actor:me}, buf);
+  } else if(cloudOn()){
+    const b64=await fileToB64(f);
+    await fetch(CLOUD_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'upload',token:CLOUD_TOKEN,taskId,actor:me,name:f.name,type:f.type,dataB64:b64})});
+  } else {
+    const key='f'+Date.now()+'_'+Math.random().toString(36).slice(2,8);
+    await idbPut({key,taskId,name:f.name,type:f.type,size:f.size,time:Date.now(),actor:me,blob:f});
+  }
+  logEvent('attach',taskId,f.name);
+}
+async function pullFilesOnly(){
+  if(!cloudOn()) return;
+  try{ const r=await fetch(CLOUD_URL+'?action=load&token='+encodeURIComponent(CLOUD_TOKEN)+'&t='+Date.now());
+    const j=await r.json(); if(j.ok&&j.doc&&Array.isArray(j.doc.files)){ cloudFiles=j.doc.files; save0(FKEY,cloudFiles); } }catch(e){}
+}
+async function removeAttachment(key){
+  if(DB){ dbFileDel(key); return; }
+  const rec=findFileRec(key);
+  if(rec&&rec.cloud){ cloudFiles=cloudFiles.filter(f=>f.key!==key); save(FKEY,cloudFiles);
+    try{ await fetch(CLOUD_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'deleteFile',token:CLOUD_TOKEN,driveId:rec.driveId})}); }catch(e){} }
+  else { await idbDel(key); }
+}
+async function addFiles(input){
+  if(!editingId||!input.files.length) return;
+  for(const f of input.files){ try{ await storeAttachment(editingId,f); }catch(e){ alert(UI[lang].msgErr); } }
+  input.value=''; if(cloudOn()) await pullFilesOnly(); await refreshFiles(); renderAttachList(editingId); renderContent(); applyFilter();
+}
+function renderAttachList(id){
+  const box=$('m-attach-list'), t=UI[lang], list=fileIndex[id]||[];
+  box.innerHTML=list.map(f=>`<div class="att"><span>${fileIcon(f.type,f.name)}</span><span class="an">${escapeHtml(f.name)} <span style="color:var(--muted)">(${fmtSize(f.size)})</span></span><a class="dl" title="${t.dl}" onclick="dlFile('${f.key}')" style="cursor:pointer;text-decoration:none;margin-inline-end:4px">⬇</a><button title="${t.del}" onclick="delAttach('${f.key}','${id}')">🗑️</button></div>`).join('');
+}
+async function delAttach(key,id){ await removeAttachment(key); logEvent('attachdel',id); await refreshFiles(); renderAttachList(id); renderContent(); applyFilter(); }
+// per-row attachments popup
+let attTaskId=null;
+function openAtt(id){ attTaskId=id; const t=UI[lang], info=taskInfo(id);
+  $('attTitle').textContent='📎 '+info.title; $('att-lbl').textContent=t.mAttach; $('att-close').textContent=t.cancel;
+  renderAttBox(); $('attBg').classList.add('open'); }
+function closeAtt(){ $('attBg').classList.remove('open'); attTaskId=null; }
+function renderAttBox(){ const t=UI[lang], list=fileIndex[attTaskId]||[], box=$('att-list');
+  box.innerHTML = list.length ? list.map(f=>`<div class="att"><span>${fileIcon(f.type,f.name)}</span><span class="an">${escapeHtml(f.name)} <span style="color:var(--muted)">(${fmtSize(f.size)})</span></span><a class="dl" title="${t.dl}" onclick="dlFile('${f.key}')" style="cursor:pointer;text-decoration:none;margin-inline-end:4px">⬇</a><button title="${t.del}" onclick="delAttFromBox('${f.key}')">🗑️</button></div>`).join('') : `<div class="empty" style="padding:16px">${t.filesEmpty}</div>`;
+}
+async function addAttBox(input){ if(!attTaskId||!input.files.length) return;
+  for(const f of input.files){ try{ await storeAttachment(attTaskId,f); }catch(e){ alert(UI[lang].msgErr); } }
+  input.value=''; if(cloudOn()) await pullFilesOnly(); await refreshFiles(); renderAttBox(); renderContent(); applyFilter(); if(curView==='files') renderFiles();
+}
+async function delAttFromBox(key){ const id=attTaskId; await removeAttachment(key); logEvent('attachdel',id); await refreshFiles(); renderAttBox(); renderContent(); applyFilter(); if(curView==='files') renderFiles(); }
+async function dlFile(key){
+  if(DB){ const r=dbFileGet(key); if(!r)return; const blob=new Blob([r.data],{type:r.type||'application/octet-stream'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),5000); return; }
+  const rec=findFileRec(key);
+  if(rec&&rec.cloud&&rec.url){ window.open(rec.url,'_blank'); return; }
+  const all=await idbAll(); const f=all.find(x=>x.key===key); if(!f)return; const url=URL.createObjectURL(f.blob); const a=document.createElement('a'); a.href=url; a.download=f.name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),5000); }
+async function delFileArchive(key,tid){ if(!confirm(UI[lang].delConfirm))return; await removeAttachment(key); logEvent('attachdel',tid); await refreshFiles(); renderFiles(); renderContent(); applyFilter(); }
+// ===== cloud sync (Google Apps Script) =====
+let pushTimer=null;
+function setCloudState(s){ const t=UI[lang], el=$('cloudState'); if(el) el.textContent = s || (cloudOn()?t.stConnected:t.stOffline); }
+function scheduleCloudPush(){ if(!cloudOn())return; clearTimeout(pushTimer); pushTimer=setTimeout(cloudPush,1200); }
+async function cloudPush(){ if(!cloudOn())return; const t=UI[lang];
+  const doc={state,assign,edits,custom,deleted,order,dates,log,files:cloudFiles,_t:Date.now()};
+  try{ setCloudState(t.stSaving);
+    await fetch(CLOUD_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'save',token:CLOUD_TOKEN,doc})});
+    setCloudState(t.stConnected);
+  }catch(e){ setCloudState(t.stError); }
+}
+async function cloudLoad(){ if(!cloudOn())return false; const t=UI[lang];
+  try{ setCloudState(t.stLoading);
+    const r=await fetch(CLOUD_URL+'?action=load&token='+encodeURIComponent(CLOUD_TOKEN)+'&t='+Date.now());
+    const j=await r.json(); if(!j.ok) throw new Error('load');
+    const d=j.doc||{};
+    if(d.state)state=d.state; if(d.assign)assign=d.assign; if(d.edits)edits=d.edits;
+    if(d.custom)custom=d.custom; if(d.deleted)deleted=d.deleted; if(d.order)order=d.order;
+    if(d.dates)dates=d.dates; if(d.log)log=d.log; if(d.files)cloudFiles=d.files;
+    save0(KEY,state);save0(AKEY,assign);save0(EKEY,edits);save0(CKEY,custom);save0(DKEY,deleted);
+    save0(OKEY,order);save0(TKEY,dates);save0(GKEY,log);save0(FKEY,cloudFiles);
+    setCloudState(t.stConnected); return true;
+  }catch(e){ setCloudState(t.stError); return false; }
+}
+function openCloud(){ const t=UI[lang];
+  $('cloudTitle').textContent=t.cloudTitle; $('cloudHint').textContent=t.cloudHint;
+  $('lbl-curl').textContent=t.lblCurl; $('lbl-ctoken').textContent=t.lblCtoken;
+  $('c-save').textContent=t.cSave; $('c-cancel').textContent=t.cCancel; $('c-pull').textContent=t.cPull; $('c-push').textContent=t.cPush; $('c-disc').textContent=t.cDisc;
+  $('c-url').value=CLOUD_URL; $('c-token').value=CLOUD_TOKEN; $('cloudMsg').textContent='';
+  $('cloudBg').classList.add('open');
+}
+function closeCloud(){ $('cloudBg').classList.remove('open'); }
+function cloudMsg(m,color){ const el=$('cloudMsg'); el.style.color=color||'var(--green)'; el.textContent=m; }
+async function cloudConnect(){ const t=UI[lang];
+  const url=$('c-url').value.trim(), tok=$('c-token').value.trim();
+  if(!url||!tok){ cloudMsg(t.msgNeedUrl,'var(--red)'); return; }
+  CLOUD_URL=url; CLOUD_TOKEN=tok; LS.setItem(CURLKEY,url); LS.setItem(CTOKKEY,tok);
+  const ok=await cloudLoad();
+  if(ok){ cloudMsg(t.msgConnected); await refreshFiles(); renderContent(); recalc(); applyFilter(); }
+  else cloudMsg(t.msgErr,'var(--red)');
+  setCloudState();
+}
+async function cloudPullNow(){ const t=UI[lang]; const ok=await cloudLoad();
+  if(ok){ cloudMsg(t.msgPull); await refreshFiles(); renderContent(); recalc(); applyFilter(); if(curView==='activity')renderLog(); if(curView==='files')renderFiles(); }
+  else cloudMsg(t.msgErr,'var(--red)'); }
+async function cloudPushNow(){ const t=UI[lang]; await cloudPush(); cloudMsg(t.msgPush); }
+function cloudDisconnect(){ const t=UI[lang]; CLOUD_URL=''; CLOUD_TOKEN=''; LS.removeItem(CURLKEY); LS.removeItem(CTOKKEY);
+  cloudMsg(t.msgDisc,'var(--muted)'); setCloudState(); refreshFiles().then(()=>{renderContent();applyFilter();if(curView==='files')renderFiles();}); }
+function renderFiles(){
+  const t=UI[lang], q=($('fileSearch').value||'').toLowerCase(), box=$('filesList');
+  let all=[]; Object.keys(fileIndex).forEach(tid=>fileIndex[tid].forEach(f=>all.push(f)));
+  if(q) all=all.filter(f=>(f.name||'').toLowerCase().includes(q)||(taskInfo(f.taskId).title||'').toLowerCase().includes(q));
+  const totalSize=all.reduce((s,f)=>s+(f.size||0),0);
+  $('filesTotal').textContent = all.length+' '+t.totalFiles+' · '+fmtSize(totalSize);
+  if(!all.length){ box.innerHTML=`<div class="empty">${t.filesEmpty}</div>`; return; }
+  const groups={};
+  all.forEach(f=>{ const info=taskInfo(f.taskId); const sk=info.sec||'—';
+    groups[sk]=groups[sk]||{};
+    (groups[sk][f.taskId]=groups[sk][f.taskId]||{title:info.title,files:[]}).files.push(f); });
+  let html='';
+  Object.keys(groups).forEach(sk=>{
+    html+=`<div class="fgroup"><h3>${escapeHtml(sk)}</h3>`;
+    Object.keys(groups[sk]).forEach(tid=>{ const g=groups[sk][tid];
+      g.files.forEach(f=>{
+        html+=`<div class="fitem"><span class="fic">${fileIcon(f.type,f.name)}</span>
+          <span class="fn">${escapeHtml(f.name)}<div class="fmeta">${escapeHtml(g.title)} · ${fmtSize(f.size)} · ${fmtTime(f.time)}${f.actor?' · '+escapeHtml(personLabel(f.actor)):''}</div></span>
+          <a class="dl" onclick="dlFile('${f.key}')">⬇ ${t.dl}</a>
+          <button class="fdel" onclick="delFileArchive('${f.key}','${f.taskId}')">${t.del}</button></div>`;
+      });
+    });
+    html+='</div>';
+  });
+  box.innerHTML=html;
+}
+// ===== view switching =====
+function switchView(v){
+  curView=v;
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
+  $('view-plan').classList.toggle('active',v==='plan');
+  $('view-activity').classList.toggle('active',v==='activity');
+  $('view-files').classList.toggle('active',v==='files');
+  if(v==='activity') renderLog();
+  if(v==='files') renderFiles();
+}
+
+// ===== events =====
+$('langsw').addEventListener('click',e=>{ if(!e.target.dataset.l)return;
+  lang=e.target.dataset.l; LS.setItem(LKEY,lang); applyLang(); });
+$('deptFilter').addEventListener('click',e=>{ if(e.target.dataset.f==null)return;
+  curFilter=e.target.dataset.f; applyFilter(); });
+$('personFilter').addEventListener('click',e=>{ if(e.target.dataset.p==null)return;
+  curPerson=e.target.dataset.p; applyFilter(); });
+$('resetBtn').addEventListener('click',()=>{
+  if(!confirm(UI[lang].resetConfirm)) return;
+  state={}; LS.removeItem(KEY);
+  document.querySelectorAll('input[type=checkbox]').forEach(c=>{c.checked=false;c.closest('tr')&&c.closest('tr').classList.remove('done')});
+  recalc();
+});
+$('addBtn').addEventListener('click',openAdd);
+$('m-save').addEventListener('click',saveModal);
+$('m-cancel').addEventListener('click',closeModal);
+$('m-del').addEventListener('click',deleteTask);
+$('modalBg').addEventListener('click',e=>{ if(e.target.id==='modalBg') closeModal(); });
+$('tabs').addEventListener('click',e=>{ if(e.target.dataset.v) switchView(e.target.dataset.v); });
+$('meSel').addEventListener('change',e=>{ me=e.target.value; LS.setItem(MEKEY,me); });
+$('m-file').addEventListener('change',e=>addFiles(e.target));
+$('att-file').addEventListener('change',e=>addAttBox(e.target));
+$('att-close').addEventListener('click',closeAtt);
+$('attBg').addEventListener('click',e=>{ if(e.target.id==='attBg') closeAtt(); });
+$('c-save').addEventListener('click',cloudConnect);
+$('c-cancel').addEventListener('click',closeCloud);
+$('c-pull').addEventListener('click',cloudPullNow);
+$('c-push').addEventListener('click',cloudPushNow);
+$('c-disc').addEventListener('click',cloudDisconnect);
+$('cloudBg').addEventListener('click',e=>{ if(e.target.id==='cloudBg') closeCloud(); });
+$('logClearBtn').addEventListener('click',()=>{ if(!confirm(UI[lang].logClearConfirm))return; log=[]; save(GKEY,log); renderLog(); });
+
+// ===== SQLite database: open / create / persist =====
+async function ensureSQL(){ if(!SQL){ if(typeof initSqlJs!=='function') throw new Error('sql.js not loaded (lib/ missing?)'); SQL=await initSqlJs(); } }
+function dbEnsureSchema(){ DB.run("CREATE TABLE IF NOT EXISTS kv(k TEXT PRIMARY KEY, v TEXT)"); DB.run("CREATE TABLE IF NOT EXISTS files(key TEXT PRIMARY KEY, taskId TEXT, name TEXT, type TEXT, size INTEGER, time INTEGER, actor TEXT, data BLOB)"); }
+function dbGetRaw(k){ try{ const r=DB.exec("SELECT v FROM kv WHERE k=?",[k]); return r.length? r[0].values[0][0] : null; }catch(e){ return null; } }
+function loadFromDB(){
+  const g=(k,def)=>{ const raw=dbGetRaw(k); if(raw==null) return def; try{ return JSON.parse(raw); }catch(e){ return def; } };
+  state=g(KEY,{}); assign=g(AKEY,{}); edits=g(EKEY,{}); custom=g(CKEY,[]); deleted=g(DKEY,{});
+  order=g(OKEY,{}); dates=g(TKEY,{}); log=g(GKEY,[]);
+  const m=g(MEKEY,null); if(m!=null) me=m;
+  const lg=g(LKEY,null); if(lg!=null) lang=lg;
+}
+function migrateLocalToDB(){ [[KEY,state],[AKEY,assign],[EKEY,edits],[CKEY,custom],[DKEY,deleted],[OKEY,order],[TKEY,dates],[GKEY,log],[MEKEY,me],[LKEY,lang]].forEach(a=>dbSet(a[0],a[1])); }
+async function migrateIdbFilesToDB(){ try{ await openIdb(); const all=await idbAll(); for(const f of all){ if(f.blob){ const buf=new Uint8Array(await f.blob.arrayBuffer()); dbFilePut({key:f.key,taskId:f.taskId,name:f.name,type:f.type,size:f.size,time:f.time,actor:f.actor}, buf); } } }catch(e){} }
+async function persistDbNow(){ if(!DB) return; let data; try{ data=DB.export(); }catch(e){ return; }
+  try{
+    if(SERVER_MODE){ await fetch('/api/db',{method:'POST',headers:{'Content-Type':'application/octet-stream'},body:data}); setDbState(); return; }
+    if(dbFileHandle && dbFileHandle.createWritable){ const w=await dbFileHandle.createWritable(); await w.write(data); await w.close(); }
+    else { downloadDbFile(data); }
+    setDbState();
+  }catch(e){ setDbState('err'); }
+}
+async function detectServer(){ try{ const r=await fetch('/api/ping',{cache:'no-store'}); if(r.ok){ const j=await r.json(); return !!j.ok; } }catch(e){} return false; }
+async function serverLoadDb(){ try{ const r=await fetch('/api/db',{cache:'no-store'}); if(r.status===204) return null; const buf=new Uint8Array(await r.arrayBuffer()); return buf.length? buf : null; }catch(e){ return null; } }
+function downloadDbFile(data){ const blob=new Blob([data],{type:'application/octet-stream'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='matjarlink.sqlite'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),5000); }
+function setDbState(){ const el=$('dbState'); if(!el) return; const t=UI[lang]; el.textContent = SERVER_MODE ? t.dbAuto : (!DB ? t.dbOff : (dbFileHandle? t.dbSaved : t.dbMem)); }
+function pickFileInput(){ return new Promise(res=>{ const inp=document.createElement('input'); inp.type='file'; inp.accept='.sqlite,.db,.sqlite3'; inp.onchange=async()=>{ const f=inp.files[0]; if(!f)return res(null); res(new Uint8Array(await f.arrayBuffer())); }; inp.click(); }); }
+async function openExistingDb(){
+  $('dbErr').textContent='';
+  try{
+    await ensureSQL();
+    let buf=null;
+    if(window.showOpenFilePicker){ let h=null; try{ [h]=await window.showOpenFilePicker({types:[{description:'SQLite',accept:{'application/x-sqlite3':['.sqlite','.db','.sqlite3']}}]}); }catch(e){ if(e&&e.name==='AbortError') return; }
+      if(h){ dbFileHandle=h; const file=await h.getFile(); buf=new Uint8Array(await file.arrayBuffer()); } }
+    if(!buf){ dbFileHandle=null; buf=await pickFileInput(); }
+    if(!buf) return;
+    DB=new SQL.Database(buf); dbEnsureSchema(); loadFromDB();
+    await finishDbStart();
+  }catch(e){ $('dbErr').textContent=UI[lang].dbFail+': '+e.message; }
+}
+async function createNewDb(){
+  $('dbErr').textContent='';
+  try{
+    await ensureSQL();
+    DB=new SQL.Database(); dbEnsureSchema();
+    migrateLocalToDB(); await migrateIdbFilesToDB();
+    if(window.showSaveFilePicker){ try{ dbFileHandle=await window.showSaveFilePicker({suggestedName:'matjarlink.sqlite',types:[{description:'SQLite',accept:{'application/x-sqlite3':['.sqlite']}}]}); await persistDbNow(); }catch(e){ if(e&&e.name!=='AbortError') throw e; dbFileHandle=null; downloadDbFile(DB.export()); } }
+    else { dbFileHandle=null; downloadDbFile(DB.export()); }
+    await finishDbStart();
+  }catch(e){ $('dbErr').textContent=UI[lang].dbFail+': '+e.message; }
+}
+async function finishDbStart(){ $('dbOverlay').style.display='none'; await refreshFiles(); applyLang(); recalc(); if(curView==='activity') renderLog(); if(curView==='files') renderFiles(); setDbState(); }
+function skipDb(){ $('dbOverlay').style.display='none'; setDbState(); }
+
+$('dbOpen').addEventListener('click',openExistingDb);
+$('dbNew').addEventListener('click',createNewDb);
+$('dbSkip').addEventListener('click',skipDb);
+$('dbBtn').addEventListener('click',()=>{ if(DB) persistDbNow(); else $('dbOverlay').style.display='flex'; });
+
+applyLang();
+(async ()=>{
+  await openIdb();
+  if(WEBAPP){
+    // hosted on Apps Script: data lives in Drive, shared by everyone — no DB picker, no local server
+    $('dbOverlay').style.display='none';
+    $('dbBtn').style.display='none';
+    await cloudLoad();
+    await refreshFiles();
+    renderContent(); recalc(); applyFilter();
+    if(curView==='files') renderFiles();
+    setCloudState(); setDbState();
+    return;
+  }
+  SERVER_MODE = await detectServer();
+  if(SERVER_MODE){
+    // auto mode: load DB from the local server, or create+seed it, then auto-save on every change
+    try{
+      await ensureSQL();
+      const buf = await serverLoadDb();
+      if(buf){ DB=new SQL.Database(buf); dbEnsureSchema(); loadFromDB(); }
+      else { DB=new SQL.Database(); dbEnsureSchema(); migrateLocalToDB(); await migrateIdbFilesToDB(); await persistDbNow(); }
+    }catch(e){ SERVER_MODE=false; }
+    $('dbOverlay').style.display='none';
+  } else if(cloudOn()){
+    await cloudLoad();
+  }
+  await refreshFiles();
+  renderContent(); recalc(); applyFilter();
+  if(curView==='files') renderFiles();
+  setCloudState(); setDbState();
+})();
+</script>
+</body>
+</html>
