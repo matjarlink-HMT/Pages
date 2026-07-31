@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الأهداف والعادات — HMT OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site" id="siteHeader"></header>
+<div class="wrap" id="lifeRoot">
+
+  <div class="tabs" style="margin-top:18px">
+    <button class="active" data-tab="lGoals">🎯 الأهداف</button>
+    <button data-tab="lHabits">🔁 العادات</button>
+    <button data-tab="lReview">🪞 المراجعة الأسبوعية</button>
+    <button data-tab="lAdvisor">🧠 المستشار العام</button>
+  </div>
+
+  <!-- ============ الأهداف ============ -->
+  <div class="tabpane show" id="lGoals">
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ic">➕</span> هدف جديد</h3>
+        <label class="f">الهدف</label><input class="f" id="gTitle" placeholder="مثال: إنهاء دين البنك، حفظ جزء، توسيع متجرلينك…">
+        <div class="grid g2" style="gap:8px">
+          <div><label class="f">المجال</label>
+            <select class="f" id="gArea">
+              <option>صحة</option><option>مال</option><option>متجرلينك</option>
+              <option>عائلة</option><option>تطوير ذاتي</option><option>أخرى</option>
+            </select></div>
+          <div><label class="f">الموعد المستهدف</label><input type="date" class="f" id="gDeadline"></div>
+        </div>
+        <label class="f">لماذا هذا الهدف مهم؟ (يقرأه المستشار)</label><input class="f" id="gWhy">
+        <button class="btn" id="addGoal" style="margin-top:10px">💾 إضافة الهدف</button>
+      </div>
+      <div class="card">
+        <h3><span class="ic">💡</span> كيف تكتب هدفًا صحيحًا</h3>
+        <ul class="small" style="margin:0;padding-inline-start:18px">
+          <li><b>رقم وموعد:</b> "خصر 88 سم بحلول 24 أكتوبر" وليس "أنحف".</li>
+          <li><b>3–5 أهداف كحد أقصى</b> في نفس الوقت — أكثر من ذلك يعني لا شيء.</li>
+          <li>حدّث التقدم يدويًا بالمنزلق، والمستشار العام سيحاسبك عليه في المراجعة.</li>
+        </ul>
+      </div>
+    </div>
+    <h2 class="sec">📋 أهدافك النشطة</h2>
+    <div id="goalsList" class="grid g2"></div>
+  </div>
+
+  <!-- ============ العادات ============ -->
+  <div class="tabpane" id="lHabits">
+    <div class="card">
+      <h3><span class="ic">➕</span> عادة جديدة</h3>
+      <div class="mut small">عادات خارج الخطة الصحية (المكملات والتمارين لها تتبعها الخاص في قسم الصحة) — مثل: قراءة 15 دقيقة، وقت مخصص للأطفال، شاشة أقل من 5 ساعات، لا أكل بعد 20:00…</div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+        <input class="f" id="hName" placeholder="اسم العادة…" style="flex:1;min-width:200px">
+        <button class="btn" id="addHabit">➕ إضافة</button>
+      </div>
+    </div>
+    <h2 class="sec">📅 شبكة آخر 14 يوم</h2>
+    <div class="card"><div id="habitsGrid"></div></div>
+  </div>
+
+  <!-- ============ المراجعة الأسبوعية ============ -->
+  <div class="tabpane" id="lReview">
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ic">🪞</span> مراجعة الأسبوع (كل جمعة بعد التقرير الصحي)</h3>
+        <label class="f">التاريخ</label><input type="date" class="f" id="rDate">
+        <label class="f">أبرز إنجاز هذا الأسبوع</label><input class="f" id="rWin">
+        <label class="f">أكبر عقبة أو فشل</label><input class="f" id="rFail">
+        <div class="grid g3" style="gap:8px">
+          <div><label class="f">التزام الصحة /10</label><input type="number" min="1" max="10" class="f" id="rHealth"></div>
+          <div><label class="f">انضباط المال /10</label><input type="number" min="1" max="10" class="f" id="rMoney"></div>
+          <div><label class="f">تقدم متجرلينك /10</label><input type="number" min="1" max="10" class="f" id="rBiz"></div>
+        </div>
+        <label class="f">درس الأسبوع (جملة واحدة)</label><input class="f" id="rLesson">
+        <label class="f">أهم 3 أولويات للأسبوع القادم</label><textarea class="f" id="rNext" rows="3" placeholder="1) …&#10;2) …&#10;3) …"></textarea>
+        <button class="btn" id="saveReview" style="margin-top:10px">💾 حفظ المراجعة</button>
+        <div class="alert info small" style="margin-top:10px">بعد الحفظ افتح <b>المستشار العام</b> واكتب "راجع أسبوعي" — سيقرأ مراجعتك وكل سجلاتك ويعطيك تقييمًا صريحًا وأولويات مصححة.</div>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🗂</span> مراجعات سابقة</h3>
+        <div id="reviewsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ المستشار العام ============ -->
+  <div class="tabpane" id="lAdvisor">
+    <div class="alert info small">🧠 هذا المستشار الوحيد الذي يرى <b>كل شيء</b>: صحتك ومالك ومتجرلينك وأهدافك ومراجعاتك — استخدمه للقرارات الكبيرة والمقايضات بين المجالات.</div>
+    <div id="generalAdvisor"></div>
+  </div>
+
+</div>
+<footer class="site">HMT OS — منصة إبراهيم الشخصية</footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/advisor.js"></script>
+<script>
+(() => {
+  HMT.renderHeader("life.html");
+  HMT.initTabs("#lifeRoot");
+  const today = HMT.todayKey();
+
+  /* ========== الأهداف ========== */
+  const renderGoals = () => {
+    const goals = HMT.get("life_goals", []);
+    const areaColors = { "صحة": "b-green", "مال": "b-amber", "متجرلينك": "b-purple", "عائلة": "b-blue", "تطوير ذاتي": "b-blue", "أخرى": "b-gray" };
+    document.getElementById("goalsList").innerHTML = goals.length ? goals.map((g, i) => {
+      const days = g.deadline ? Math.ceil((new Date(g.deadline) - Date.now()) / 86400000) : null;
+      return `<div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:start;gap:8px">
+          <b>${HMT.esc(g.title)}</b>
+          <span class="badge ${areaColors[g.area] || "b-gray"}">${g.area}</span>
+        </div>
+        ${g.why ? `<div class="mut small">لماذا: ${HMT.esc(g.why)}</div>` : ""}
+        <div style="display:flex;align-items:center;gap:10px;margin-top:10px">
+          <input type="range" min="0" max="100" value="${g.progress || 0}" data-gprog="${i}" style="flex:1;accent-color:var(--maroon)">
+          <b style="min-width:44px;color:var(--maroon)">${g.progress || 0}%</b>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px">
+          <span class="small mut">${g.deadline ? (days >= 0 ? `باقي ${days} يوم` : `⏰ متأخر ${-days} يوم`) : "بدون موعد"}</span>
+          <span>
+            ${(g.progress || 0) >= 100 ? `<span class="badge b-green">✅ منجز</span>` : ""}
+            <button class="btn sm danger" data-delgoal="${i}">✕</button>
+          </span>
+        </div>
+      </div>`;
+    }).join("") : `<div class="card mut">لا أهداف بعد — أضف 3 إلى 5 أهداف واضحة.</div>`;
+
+    document.querySelectorAll("[data-gprog]").forEach(r => r.addEventListener("change", () => {
+      const gs = HMT.get("life_goals", []);
+      gs[+r.dataset.gprog].progress = +r.value;
+      HMT.set("life_goals", gs);
+      renderGoals();
+    }));
+    document.querySelectorAll("[data-delgoal]").forEach(b => b.addEventListener("click", () => {
+      if (!confirm("حذف هذا الهدف؟")) return;
+      const gs = HMT.get("life_goals", []);
+      gs.splice(+b.dataset.delgoal, 1);
+      HMT.set("life_goals", gs);
+      renderGoals();
+    }));
+  };
+  document.getElementById("addGoal").addEventListener("click", () => {
+    const title = document.getElementById("gTitle").value.trim();
+    if (!title) return HMT.toast("اكتب الهدف أولًا");
+    const gs = HMT.get("life_goals", []);
+    if (gs.filter(g => (g.progress || 0) < 100).length >= 5 && !confirm("عندك 5 أهداف نشطة بالفعل — الأفضل إنجاز أحدها قبل الإضافة. متأكد؟")) return;
+    gs.push({
+      title,
+      area: document.getElementById("gArea").value,
+      deadline: document.getElementById("gDeadline").value || null,
+      why: document.getElementById("gWhy").value,
+      progress: 0,
+      created: today,
+    });
+    HMT.set("life_goals", gs);
+    ["gTitle","gDeadline","gWhy"].forEach(id => document.getElementById(id).value = "");
+    renderGoals();
+    HMT.toast("✅ تمت إضافة الهدف");
+  });
+  renderGoals();
+
+  /* ========== العادات ========== */
+  const renderHabits = () => {
+    const habits = HMT.get("habits", []);
+    const hist = HMT.get("habit_history", {});
+    if (!habits.length) {
+      document.getElementById("habitsGrid").innerHTML = `<div class="mut small">لا عادات بعد — أضف أول عادة.</div>`;
+      return;
+    }
+    const days = [];
+    for (let i = 13; i >= 0; i--) {
+      const d = new Date(); d.setDate(d.getDate() - i);
+      days.push(d.toISOString().slice(0, 10));
+    }
+    let html = `<div class="tblwrap"><table class="t"><tr><th>العادة</th>` +
+      days.map(d => `<th style="text-align:center;padding:8px 4px">${+d.slice(8)}</th>`).join("") +
+      `<th>سلسلة 🔥</th><th></th></tr>`;
+    habits.forEach((h, hi) => {
+      // حساب السلسلة الحالية (من اليوم للخلف)
+      let streak = 0;
+      for (let i = days.length - 1; i >= 0; i--) {
+        if (hist[days[i]]?.[h.id]) streak++;
+        else if (days[i] !== today) break;
+        else break;
+      }
+      // إذا اليوم لم يُسجل بعد، احسب من الأمس
+      if (!hist[today]?.[h.id]) {
+        streak = 0;
+        for (let i = days.length - 2; i >= 0; i--) {
+          if (hist[days[i]]?.[h.id]) streak++;
+          else break;
+        }
+      }
+      html += `<tr><td style="white-space:nowrap"><b>${HMT.esc(h.name)}</b></td>` +
+        days.map(d => {
+          const done = hist[d]?.[h.id];
+          return `<td style="text-align:center;padding:4px 2px">
+            <span data-hab="${h.id}" data-hday="${d}" style="display:inline-block;width:24px;height:24px;border-radius:6px;cursor:pointer;
+              background:${done ? "var(--green)" : "#efe8f1"};color:#fff;line-height:24px;font-size:12px">${done ? "✓" : ""}</span></td>`;
+        }).join("") +
+        `<td style="text-align:center"><b>${streak}</b></td>
+         <td><button class="btn sm danger" data-delhab="${hi}">✕</button></td></tr>`;
+    });
+    document.getElementById("habitsGrid").innerHTML = html + `</table></div>
+      <div class="mut small" style="margin-top:8px">اضغط أي مربع لتسجيل/إلغاء اليوم. السلسلة = أيام متتالية حتى الآن.</div>`;
+
+    document.querySelectorAll("[data-hab]").forEach(cell => cell.addEventListener("click", () => {
+      const hh = HMT.get("habit_history", {});
+      const d = cell.dataset.hday;
+      hh[d] = hh[d] || {};
+      hh[d][cell.dataset.hab] = !hh[d][cell.dataset.hab];
+      HMT.set("habit_history", hh);
+      renderHabits();
+    }));
+    document.querySelectorAll("[data-delhab]").forEach(b => b.addEventListener("click", () => {
+      if (!confirm("حذف هذه العادة وسجلها؟")) return;
+      const hs = HMT.get("habits", []);
+      hs.splice(+b.dataset.delhab, 1);
+      HMT.set("habits", hs);
+      renderHabits();
+    }));
+  };
+  document.getElementById("addHabit").addEventListener("click", () => {
+    const name = document.getElementById("hName").value.trim();
+    if (!name) return;
+    const hs = HMT.get("habits", []);
+    hs.push({ id: "h" + Date.now(), name });
+    HMT.set("habits", hs);
+    document.getElementById("hName").value = "";
+    renderHabits();
+    HMT.toast("✅ تمت إضافة العادة");
+  });
+  renderHabits();
+
+  /* ========== المراجعة الأسبوعية ========== */
+  document.getElementById("rDate").value = today;
+  const renderReviews = () => {
+    const revs = HMT.get("weekly_reviews", []);
+    document.getElementById("reviewsList").innerHTML = revs.length ? revs.slice().reverse().map(r => `
+      <details class="excard">
+        <summary>▸ ${HMT.fmtDate(r.date)} <span class="meta">صحة ${r.health ?? "—"} · مال ${r.money ?? "—"} · متجر ${r.biz ?? "—"}</span></summary>
+        <div class="body small">
+          <b>🏆 الإنجاز:</b> ${HMT.esc(r.win || "—")}<br>
+          <b>🧱 العقبة:</b> ${HMT.esc(r.fail || "—")}<br>
+          <b>📖 الدرس:</b> ${HMT.esc(r.lesson || "—")}<br>
+          <b>⏭ أولويات الأسبوع التالي:</b><br><span style="white-space:pre-wrap">${HMT.esc(r.next || "—")}</span>
+        </div>
+      </details>`).join("") : `<div class="mut small">لا مراجعات بعد — أول مراجعة يوم الجمعة القادم.</div>`;
+  };
+  document.getElementById("saveReview").addEventListener("click", () => {
+    const r = {
+      date: document.getElementById("rDate").value,
+      win: document.getElementById("rWin").value,
+      fail: document.getElementById("rFail").value,
+      health: +document.getElementById("rHealth").value || null,
+      money: +document.getElementById("rMoney").value || null,
+      biz: +document.getElementById("rBiz").value || null,
+      lesson: document.getElementById("rLesson").value,
+      next: document.getElementById("rNext").value,
+    };
+    if (!r.date || (!r.win && !r.fail && !r.lesson)) return HMT.toast("املأ المراجعة أولًا");
+    const revs = HMT.get("weekly_reviews", []).filter(x => x.date !== r.date);
+    revs.push(r);
+    revs.sort((a, b) => a.date.localeCompare(b.date));
+    HMT.set("weekly_reviews", revs);
+    renderReviews();
+    HMT.toast("✅ تم حفظ المراجعة — اعرضها على المستشار العام");
+  });
+  renderReviews();
+
+  /* ========== المستشار العام ========== */
+  Advisor.mount("generalAdvisor", "general", {
+    icon: "🧭",
+    name: "المستشار العام — مجلس المستشارين",
+    desc: "يرى صحتك ومالك ومتجرلينك وأهدافك معًا — للقرارات الكبيرة والمقايضات",
+    welcome: "أهلًا إبراهيم. أنا المستشار العام — أرى الصورة الكاملة: صحتك، مالك، متجرلينك، أهدافك، ومراجعاتك. استخدمني عندما يتقاطع قراران: وقت، مال، طاقة. أو اكتب \"راجع أسبوعي\" يوم الجمعة وسأحاسبك بالأرقام.",
+  });
+})();
+</script>
+</body>
+</html>
