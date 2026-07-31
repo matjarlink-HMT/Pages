@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الإعدادات — HMT OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site" id="siteHeader"></header>
+<div class="wrap">
+
+  <h2 class="sec" style="margin-top:20px">🤖 تفعيل المستشارين الأذكياء</h2>
+  <div class="card">
+    <p class="small">المستشارون يعملون بنموذج <b>Claude Opus</b> مباشرة من متصفحك. مفتاحك يُحفظ في جهازك فقط ولا يمر على أي خادم وسيط.</p>
+    <ol class="small">
+      <li>ادخل <a href="https://platform.claude.com/" target="_blank" rel="noopener">platform.claude.com</a> وأنشئ حسابًا (أو سجل دخول).</li>
+      <li>من قسم <b>API Keys</b> أنشئ مفتاحًا جديدًا وانسخه (يبدأ بـ sk-ant-).</li>
+      <li>الصقه هنا واحفظ.</li>
+    </ol>
+    <label class="f">مفتاح Claude API</label>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <input type="password" class="f" id="apiKey" placeholder="sk-ant-..." style="flex:1;min-width:220px;direction:ltr;text-align:left">
+      <button class="btn" id="saveKey">💾 حفظ</button>
+      <button class="btn o" id="testKey">🔌 اختبار الاتصال</button>
+    </div>
+    <div id="keyStatus" style="margin-top:10px"></div>
+  </div>
+
+  <h2 class="sec">💾 النسخ الاحتياطي</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3><span class="ic">📤</span> تصدير كل البيانات</h3>
+      <p class="small">ينزّل ملف JSON فيه كل بياناتك: السجلات الصحية، المالية، متجرلينك، والمحادثات. اعمل نسخة أسبوعيًا (يوم الجمعة مع التقرير).</p>
+      <button class="btn" id="exportBtn">⬇ تنزيل نسخة احتياطية</button>
+    </div>
+    <div class="card">
+      <h3><span class="ic">📥</span> استعادة نسخة</h3>
+      <p class="small">اختر ملف نسخة احتياطية سابقة لاستعادة البيانات (تدمج فوق الموجود).</p>
+      <input type="file" accept=".json" id="importFile" class="f">
+      <button class="btn o" id="importBtn" style="margin-top:8px">⬆ استعادة</button>
+    </div>
+  </div>
+
+  <h2 class="sec">ℹ️ عن المنصة</h2>
+  <div class="card">
+    <p class="small">
+      <b>HMT OS</b> — منصتك الشخصية لإدارة الصحة والمال ومتجرلينك.<br>
+      • البيانات تُحفظ في متصفح هذا الجهاز (localStorage). إذا استخدمت جهازًا آخر، انقل نسخة احتياطية.<br>
+      • المستشارون الثلاثة يقرؤون بياناتك الحية من المنصة في كل محادثة.<br>
+      • الملف الصحي الأساسي (تحاليل، خطة، تمارين) مدمج في المنصة من تقرير 31/07/2026.
+    </p>
+    <hr class="soft">
+    <button class="btn danger" id="resetBtn">🗑 مسح كل البيانات نهائيًا</button>
+  </div>
+
+</div>
+<footer class="site">HMT OS — منصة إبراهيم الشخصية</footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script>
+(() => {
+  HMT.renderHeader("settings.html");
+  const keyInput = document.getElementById("apiKey");
+  const status = document.getElementById("keyStatus");
+  const existing = HMT.get("api_key", "");
+  if (existing) {
+    keyInput.value = existing;
+    status.innerHTML = `<div class="alert ok small">✅ يوجد مفتاح محفوظ — المستشارون مفعّلون.</div>`;
+  }
+
+  document.getElementById("saveKey").addEventListener("click", () => {
+    const k = keyInput.value.trim();
+    if (!k) { HMT.del("api_key"); status.innerHTML = `<div class="alert warn small">تم حذف المفتاح.</div>`; return; }
+    if (!k.startsWith("sk-ant-")) { status.innerHTML = `<div class="alert danger small">المفتاح لا يبدو صحيحًا — يجب أن يبدأ بـ sk-ant-</div>`; return; }
+    HMT.set("api_key", k);
+    status.innerHTML = `<div class="alert ok small">✅ تم الحفظ. جرّب "اختبار الاتصال" للتأكد.</div>`;
+  });
+
+  document.getElementById("testKey").addEventListener("click", async () => {
+    const k = keyInput.value.trim() || HMT.get("api_key", "");
+    if (!k) { status.innerHTML = `<div class="alert danger small">أدخل المفتاح أولًا.</div>`; return; }
+    status.innerHTML = `<div class="alert info small">⏳ جاري الاختبار…</div>`;
+    try {
+      const r = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-api-key": k,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true",
+        },
+        body: JSON.stringify({ model: "claude-opus-5", max_tokens: 16, messages: [{ role: "user", content: "قل: يعمل" }] }),
+      });
+      if (r.ok) {
+        HMT.set("api_key", k);
+        status.innerHTML = `<div class="alert ok small">✅ الاتصال ناجح — المستشارون جاهزون!</div>`;
+      } else {
+        const e = await r.json().catch(() => ({}));
+        status.innerHTML = `<div class="alert danger small">❌ فشل: ${HMT.esc(e?.error?.message || "خطأ " + r.status)}</div>`;
+      }
+    } catch (e) {
+      status.innerHTML = `<div class="alert danger small">❌ خطأ شبكة: ${HMT.esc(e.message)}</div>`;
+    }
+  });
+
+  document.getElementById("exportBtn").addEventListener("click", () => {
+    const blob = new Blob([HMT.exportAll()], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `hmt-os-backup-${HMT.todayKey()}.json`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    HMT.toast("✅ تم تنزيل النسخة الاحتياطية");
+  });
+
+  document.getElementById("importBtn").addEventListener("click", () => {
+    const file = document.getElementById("importFile").files[0];
+    if (!file) return HMT.toast("اختر ملفًا أولًا");
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        HMT.importAll(reader.result);
+        HMT.toast("✅ تمت الاستعادة بنجاح");
+        setTimeout(() => location.reload(), 800);
+      } catch (e) { HMT.toast("❌ ملف غير صالح: " + e.message); }
+    };
+    reader.readAsText(file);
+  });
+
+  document.getElementById("resetBtn").addEventListener("click", () => {
+    if (!confirm("⚠️ سيتم مسح كل بياناتك نهائيًا (السجلات، المالية، المحادثات، المفتاح). هل أنت متأكد؟")) return;
+    if (!confirm("تأكيد أخير: هل عندك نسخة احتياطية؟ المسح لا يمكن التراجع عنه.")) return;
+    HMT.allKeys().forEach(k => HMT.del(k));
+    HMT.toast("تم مسح كل البيانات");
+    setTimeout(() => location.reload(), 800);
+  });
+})();
+</script>
+</body>
+</html>

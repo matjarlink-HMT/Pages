@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المالية — HMT OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site" id="siteHeader"></header>
+<div class="wrap" id="finRoot">
+
+  <div class="tabs" style="margin-top:18px">
+    <button class="active" data-tab="fOverview">📊 نظرة عامة</button>
+    <button data-tab="fBudget">💵 الميزانية</button>
+    <button data-tab="fDebts">📉 الديون وخطة السداد</button>
+    <button data-tab="fData">📝 البيانات الأساسية</button>
+    <button data-tab="fAdvisor">🧠 المستشار المالي</button>
+  </div>
+
+  <!-- ============ نظرة عامة ============ -->
+  <div class="tabpane show" id="fOverview">
+    <div id="finEmpty"></div>
+    <div class="grid g4" id="finStats"></div>
+    <h2 class="sec">📉 الديون</h2>
+    <div class="card"><div class="tblwrap"><table class="t" id="ovDebtsTable"></table></div></div>
+    <h2 class="sec">💡 التوزيع الشهري</h2>
+    <div class="grid g2">
+      <div class="card"><h3><span class="ic">📤</span> الالتزامات الثابتة</h3><div id="ovFixed"></div></div>
+      <div class="card"><h3><span class="ic">🧮</span> الحساب الشهري</h3><div id="ovCalc"></div></div>
+    </div>
+  </div>
+
+  <!-- ============ الميزانية ============ -->
+  <div class="tabpane" id="fBudget">
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ic">➕</span> تسجيل مصروف</h3>
+        <label class="f">التاريخ</label><input type="date" class="f" id="expDate">
+        <label class="f">الفئة</label>
+        <select class="f" id="expCat">
+          <option>أكل وبقالة</option><option>مطاعم وقهوة</option><option>وقود ومواصلات</option>
+          <option>أطفال وعائلة</option><option>فواتير</option><option>صحة</option>
+          <option>متجرلينك (مصروف عمل)</option><option>ترفيه</option><option>أخرى</option>
+        </select>
+        <label class="f">المبلغ (ر.ع)</label><input type="number" step="0.001" class="f" id="expAmt">
+        <label class="f">ملاحظة</label><input class="f" id="expNote">
+        <button class="btn" id="addExp" style="margin-top:10px">💾 تسجيل</button>
+      </div>
+      <div class="card">
+        <h3><span class="ic">📅</span> ملخص الشهر الحالي</h3>
+        <div id="monthSummary"></div>
+      </div>
+    </div>
+    <h2 class="sec">🧾 مصاريف الشهر</h2>
+    <div class="card"><div class="tblwrap"><table class="t" id="expTable"></table></div></div>
+  </div>
+
+  <!-- ============ الديون ============ -->
+  <div class="tabpane" id="fDebts">
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ic">➕</span> إضافة / تعديل دين</h3>
+        <label class="f">الجهة (بنك/شخص/شركة)</label><input class="f" id="dName">
+        <label class="f">المبلغ المتبقي (ر.ع)</label><input type="number" step="0.001" class="f" id="dBalance">
+        <label class="f">القسط الشهري (ر.ع)</label><input type="number" step="0.001" class="f" id="dPayment">
+        <label class="f">معدل الفائدة السنوي % (0 إذا بدون)</label><input type="number" step="0.1" class="f" id="dRate">
+        <label class="f">يوم الاستحقاق بالشهر</label><input type="number" min="1" max="31" class="f" id="dDue">
+        <button class="btn" id="addDebt" style="margin-top:10px">💾 حفظ الدين</button>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span> خطة السداد</h3>
+        <div class="mut small">اختر الاستراتيجية وأدخل المبلغ الإضافي المتاح شهريًا فوق الأقساط:</div>
+        <label class="f">مبلغ إضافي شهري (ر.ع)</label><input type="number" step="1" class="f" id="extraPay" value="0">
+        <div class="tabs" style="margin:10px 0 0">
+          <button class="active" data-strategy="avalanche">Avalanche (الفائدة الأعلى أولًا)</button>
+          <button data-strategy="snowball">Snowball (الأصغر أولًا)</button>
+        </div>
+        <div id="payoffPlan" style="margin-top:10px"></div>
+      </div>
+    </div>
+    <h2 class="sec">📋 كل الديون</h2>
+    <div class="card"><div class="tblwrap"><table class="t" id="debtsTable"></table></div></div>
+    <div class="card" style="margin-top:14px">
+      <h3><span class="ic">✅</span> تسجيل دفعة</h3>
+      <div style="display:flex;gap:10px;align-items:end;flex-wrap:wrap">
+        <div style="min-width:180px"><label class="f">الدين</label><select class="f" id="payDebtSel"></select></div>
+        <div><label class="f">المبلغ (ر.ع)</label><input type="number" step="0.001" class="f" id="payAmt" style="width:140px"></div>
+        <button class="btn" id="payDebt">💾 تسجيل الدفعة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ البيانات الأساسية ============ -->
+  <div class="tabpane" id="fData">
+    <div class="card">
+      <h3><span class="ic">📝</span> بياناتك المالية الأساسية</h3>
+      <div class="mut small">هذه البيانات يقرأها المستشار المالي مباشرة — كلما كانت أدق كانت خطته أقوى.</div>
+      <div class="grid g2" style="gap:10px;margin-top:8px">
+        <div><label class="f">صافي الراتب الشهري (ر.ع)</label><input type="number" step="0.001" class="f" id="fSalary"></div>
+        <div><label class="f">متوسط دخل متجرلينك الشهري (ر.ع)</label><input type="number" step="0.001" class="f" id="fBizIncome"></div>
+        <div><label class="f">دخل آخر (ر.ع)</label><input type="number" step="0.001" class="f" id="fOtherIncome"></div>
+        <div><label class="f">المدخرات الحالية (ر.ع)</label><input type="number" step="0.001" class="f" id="fSavings"></div>
+      </div>
+      <h3 style="margin-top:16px"><span class="ic">📤</span> الالتزامات الثابتة الشهرية</h3>
+      <div id="fixedList"></div>
+      <div style="display:flex;gap:8px;align-items:end;flex-wrap:wrap;margin-top:6px">
+        <div style="flex:1;min-width:150px"><label class="f">البند</label><input class="f" id="fixName" placeholder="كهرباء، إنترنت، بنزين…"></div>
+        <div><label class="f">المبلغ</label><input type="number" step="0.001" class="f" id="fixAmt" style="width:120px"></div>
+        <button class="btn sm o" id="addFixed">➕ إضافة</button>
+      </div>
+      <button class="btn" id="saveFinBase" style="margin-top:14px">💾 حفظ البيانات الأساسية</button>
+    </div>
+  </div>
+
+  <!-- ============ المستشار ============ -->
+  <div class="tabpane" id="fAdvisor">
+    <div class="alert info small">💡 عندك وقت فاضي؟ اكتب له: <b>"ابدأ المقابلة المالية"</b> وسيسألك سؤالًا سؤالًا عن كل ما يحتاجه لبناء خطتك.</div>
+    <div id="financeAdvisor"></div>
+  </div>
+
+</div>
+<footer class="site">HMT OS — منصة إبراهيم الشخصية</footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/advisor.js"></script>
+<script src="assets/js/finance.js"></script>
+</body>
+</html>

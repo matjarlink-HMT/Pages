@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الصحة — HMT OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site" id="siteHeader"></header>
+<div class="wrap" id="healthRoot">
+
+  <div class="tabs" style="margin-top:18px">
+    <button class="active" data-tab="tOverview">📋 التقرير الصحي</button>
+    <button data-tab="tDay">🗓 المخطط اليومي</button>
+    <button data-tab="tWorkout">🏋️ التمارين</button>
+    <button data-tab="tSupp">💊 المكملات</button>
+    <button data-tab="tTrack">📈 المتابعة</button>
+    <button data-tab="tAdvisor">🧠 المستشار الصحي</button>
+  </div>
+
+  <!-- ============ التقرير الصحي ============ -->
+  <div class="tabpane show" id="tOverview">
+    <div class="grid g4" id="ovStats"></div>
+
+    <h2 class="sec">🎯 أهداف الـ12 أسبوعًا <span class="mut small" id="goalDeadline"></span></h2>
+    <div class="grid g2" id="ovGoals"></div>
+
+    <h2 class="sec">🧪 التحاليل (30/10/2025)</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ic">🫀</span> الدهون — النقطة الحرجة</h3>
+        <div class="tblwrap"><table class="t" id="lipidsTable"></table></div>
+        <div class="alert warn small" id="metabolicNote"></div>
+      </div>
+      <div class="card">
+        <h3><span class="ic">✅</span> باقي التحاليل</h3>
+        <div id="otherLabs"></div>
+        <hr class="soft">
+        <div class="small"><b>إيكو القلب:</b> <span id="echoNote"></span></div>
+        <div class="alert info small" id="missingLabs"></div>
+      </div>
+    </div>
+
+    <h2 class="sec">📊 تقييمات الوضع الحالي (من 10)</h2>
+    <div class="card" id="ratingsCard"></div>
+
+    <div class="alert danger" id="safetyRule"></div>
+  </div>
+
+  <!-- ============ المخطط اليومي ============ -->
+  <div class="tabpane" id="tDay">
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ic">✅</span> قائمة اليوم — <span id="dayTitle"></span></h3>
+        <div class="mut small" id="dayHint"></div>
+        <div id="dayChecklist" style="margin-top:8px"></div>
+        <hr class="soft">
+        <div class="small"><b>نسبة الالتزام اليوم:</b> <span id="dayPct">0%</span></div>
+        <div class="pbar" style="margin-top:6px"><i id="dayPbar" style="width:0%"></i></div>
+      </div>
+      <div>
+        <div class="card">
+          <h3><span class="ic">🍽</span> وجبات اليوم (1,850 سعرة)</h3>
+          <div class="tblwrap"><table class="t" id="mealsTable"></table></div>
+          <div class="small" style="margin-top:8px" id="macros"></div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <h3><span class="ic">📌</span> قواعد ثابتة</h3>
+          <ul class="small" id="nutriRules" style="margin:0;padding-inline-start:18px"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3><span class="ic">🔥</span> أولوية أول أسبوعين</h3>
+      <div>قيلولة ≤ 60 دقيقة · آخر كافيين 16:00 · عشاء ≤ 20:00 — هذه الثلاثة قبل أي شيء آخر.</div>
+    </div>
+  </div>
+
+  <!-- ============ التمارين ============ -->
+  <div class="tabpane" id="tWorkout">
+    <div class="alert info" id="workoutToday"></div>
+    <div class="tabs">
+      <button class="active" data-wplan="A">تمرين A</button>
+      <button data-wplan="B">تمرين B</button>
+      <button data-wplan="home">بديل البيت</button>
+      <button data-wplan="corrective">تصحيحي الأبهر</button>
+    </div>
+    <div id="planView"></div>
+
+    <h2 class="sec">📝 تسجيل جلسة اليوم</h2>
+    <div class="card">
+      <div style="display:flex;gap:10px;align-items:end;flex-wrap:wrap">
+        <div><label class="f">الخطة</label>
+          <select class="f" id="logPlan" style="width:130px"><option value="A">A</option><option value="B">B</option><option value="home">بيت</option></select>
+        </div>
+        <button class="btn" id="startSession">▶ بدء التسجيل</button>
+      </div>
+      <div id="sessionForm" style="margin-top:12px"></div>
+    </div>
+
+    <h2 class="sec">📚 سجل الجلسات</h2>
+    <div class="card"><div class="tblwrap"><table class="t" id="sessionsTable"></table></div></div>
+
+    <div class="card" style="margin-top:14px">
+      <h3><span class="ic">📈</span> قاعدة التدرج</h3>
+      <div class="small" id="progressionRule"></div>
+    </div>
+  </div>
+
+  <!-- ============ المكملات ============ -->
+  <div class="tabpane" id="tSupp">
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ic">💊</span> مكملات اليوم — <span id="suppDate"></span></h3>
+        <div id="suppChecklist"></div>
+      </div>
+      <div>
+        <div class="card">
+          <h3><span class="ic">📅</span> الجدول الكامل</h3>
+          <div class="tblwrap"><table class="t" id="suppTable"></table></div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <h3><span class="ic">🚫</span> موقوفة — لا إعادة شراء</h3>
+          <div class="small" id="stoppedSupp"></div>
+        </div>
+      </div>
+    </div>
+    <h2 class="sec">📈 الالتزام آخر 14 يوم</h2>
+    <div class="card"><div id="suppStreak"></div></div>
+  </div>
+
+  <!-- ============ المتابعة ============ -->
+  <div class="tabpane" id="tTrack">
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ic">📝</span> التقرير الأسبوعي (كل جمعة صباحًا صائمًا)</h3>
+        <div class="mut small" id="nextReportHint"></div>
+        <label class="f">التاريخ</label><input type="date" class="f" id="wDate">
+        <div class="grid g2" style="gap:8px">
+          <div><label class="f">الوزن (كجم)</label><input type="number" step="0.1" class="f" id="wWeight"></div>
+          <div><label class="f">الخصر عند السرة (سم)</label><input type="number" step="0.5" class="f" id="wWaist"></div>
+          <div><label class="f">متوسط الخطوات/يوم</label><input type="number" class="f" id="wSteps"></div>
+          <div><label class="f">جلسات التمرين المنجزة</label><input type="number" min="0" max="7" class="f" id="wSessions"></div>
+          <div><label class="f">الطاقة /10</label><input type="number" min="1" max="10" class="f" id="wEnergy"></div>
+          <div><label class="f">النوم /10</label><input type="number" min="1" max="10" class="f" id="wSleep"></div>
+          <div><label class="f">التزام الأكل /10</label><input type="number" min="1" max="10" class="f" id="wDiet"></div>
+        </div>
+        <label class="f">ملاحظات</label><textarea class="f" id="wNotes" rows="2"></textarea>
+        <button class="btn" id="saveWeekly" style="margin-top:10px">💾 حفظ التقرير</button>
+      </div>
+      <div class="card">
+        <h3><span class="ic">📏</span> القياسات الشهرية</h3>
+        <label class="f">التاريخ</label><input type="date" class="f" id="mDate">
+        <div class="grid g2" style="gap:8px">
+          <div><label class="f">الرقبة</label><input type="number" step="0.5" class="f" id="mNeck"></div>
+          <div><label class="f">الصدر</label><input type="number" step="0.5" class="f" id="mChest"></div>
+          <div><label class="f">الذراع</label><input type="number" step="0.5" class="f" id="mArm"></div>
+          <div><label class="f">الورك</label><input type="number" step="0.5" class="f" id="mHip"></div>
+          <div><label class="f">الفخذ</label><input type="number" step="0.5" class="f" id="mThigh"></div>
+        </div>
+        <button class="btn" id="saveMonthly" style="margin-top:10px">💾 حفظ القياسات</button>
+        <div class="alert info small" style="margin-top:10px">ثبات الوزن والخصر أسبوعين مع التزام كامل → −150 سعرة أو +10 دقائق مشي.</div>
+      </div>
+    </div>
+
+    <h2 class="sec">📉 الوزن والخصر عبر الأسابيع</h2>
+    <div class="card"><div class="chart" id="weightChart"></div></div>
+
+    <h2 class="sec">🗂 كل التقارير الأسبوعية</h2>
+    <div class="card"><div class="tblwrap"><table class="t" id="weeklyTable"></table></div></div>
+  </div>
+
+  <!-- ============ المستشار ============ -->
+  <div class="tabpane" id="tAdvisor">
+    <div id="healthAdvisor" style="margin-top:6px"></div>
+  </div>
+
+</div>
+<footer class="site">HMT OS — منصة إبراهيم الشخصية</footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/advisor.js"></script>
+<script src="assets/js/health.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>متجرلينك — HMT OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site" id="siteHeader"></header>
+<div class="wrap" id="bizRoot">
+
+  <div class="tabs" style="margin-top:18px">
+    <button class="active" data-tab="bOverview">📊 نظرة عامة</button>
+    <button data-tab="bKpi">📈 المؤشرات</button>
+    <button data-tab="bIdeas">💡 أفكار وملاحظات</button>
+    <button data-tab="bAdvisor">🧠 مستشار الأعمال</button>
+  </div>
+
+  <!-- ============ نظرة عامة ============ -->
+  <div class="tabpane show" id="bOverview">
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ic">🗺</span> خطة التنفيذ</h3>
+        <p class="small">خطة متجرلينك التفصيلية بمهامها موجودة في تطبيق المهام الخاص بالمشروع.</p>
+        <a class="btn orange" href="HMT_Tasks.html">🚀 فتح خطة التنفيذ (HMT Tasks)</a>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🧾</span> بيانات المشروع الأساسية</h3>
+        <div class="mut small">يقرأها مستشار الأعمال — حدّثها كلما تغيرت.</div>
+        <label class="f">وصف المشروع / المنتج</label><textarea class="f" id="bizDesc" rows="2"></textarea>
+        <div class="grid g2" style="gap:8px">
+          <div><label class="f">متوسط المبيعات الشهرية (ر.ع)</label><input type="number" step="0.001" class="f" id="bizSales"></div>
+          <div><label class="f">هامش الربح التقريبي %</label><input type="number" class="f" id="bizMargin"></div>
+        </div>
+        <label class="f">قنوات التسويق الحالية</label><input class="f" id="bizChannels" placeholder="انستغرام، واتساب…">
+        <label class="f">أكبر عائق حالي</label><input class="f" id="bizBlocker">
+        <button class="btn" id="saveBiz" style="margin-top:10px">💾 حفظ</button>
+      </div>
+    </div>
+    <div class="grid g4" style="margin-top:14px" id="bizStats"></div>
+  </div>
+
+  <!-- ============ المؤشرات ============ -->
+  <div class="tabpane" id="bKpi">
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="ic">➕</span> تسجيل مؤشرات أسبوعية</h3>
+        <label class="f">التاريخ</label><input type="date" class="f" id="kDate">
+        <div class="grid g2" style="gap:8px">
+          <div><label class="f">المبيعات (ر.ع)</label><input type="number" step="0.001" class="f" id="kSales"></div>
+          <div><label class="f">عدد الطلبات</label><input type="number" class="f" id="kOrders"></div>
+          <div><label class="f">زوار/متابعون جدد</label><input type="number" class="f" id="kVisits"></div>
+          <div><label class="f">مصاريف تسويق (ر.ع)</label><input type="number" step="0.001" class="f" id="kAds"></div>
+        </div>
+        <label class="f">ملاحظات</label><input class="f" id="kNotes">
+        <button class="btn" id="saveKpi" style="margin-top:10px">💾 حفظ</button>
+      </div>
+      <div class="card">
+        <h3><span class="ic">📉</span> المبيعات عبر الوقت</h3>
+        <div class="chart" id="kpiChart"></div>
+      </div>
+    </div>
+    <h2 class="sec">🗂 كل السجلات</h2>
+    <div class="card"><div class="tblwrap"><table class="t" id="kpiTable"></table></div></div>
+  </div>
+
+  <!-- ============ الأفكار ============ -->
+  <div class="tabpane" id="bIdeas">
+    <div class="card">
+      <h3><span class="ic">💡</span> أفكار وملاحظات المشروع</h3>
+      <div style="display:flex;gap:8px">
+        <input class="f" id="ideaText" placeholder="فكرة، ملاحظة، مهمة سريعة…" style="flex:1">
+        <button class="btn" id="addIdea">➕</button>
+      </div>
+      <div id="ideasList" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <!-- ============ المستشار ============ -->
+  <div class="tabpane" id="bAdvisor">
+    <div id="bizAdvisor"></div>
+  </div>
+
+</div>
+<footer class="site">HMT OS — منصة إبراهيم الشخصية</footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/advisor.js"></script>
+<script>
+(() => {
+  HMT.renderHeader("matjarlink.html");
+  HMT.initTabs("#bizRoot");
+  const OMR = (n) => (Math.round(n * 1000) / 1000).toLocaleString("en", { maximumFractionDigits: 3 }) + " ر.ع";
+  const getB = () => HMT.get("matjarlink", { info: {}, kpis: [], ideas: [] });
+  const setB = (b) => HMT.set("matjarlink", b);
+
+  /* بيانات المشروع */
+  const b0 = getB();
+  document.getElementById("bizDesc").value = b0.info?.desc || "";
+  document.getElementById("bizSales").value = b0.info?.sales ?? "";
+  document.getElementById("bizMargin").value = b0.info?.margin ?? "";
+  document.getElementById("bizChannels").value = b0.info?.channels || "";
+  document.getElementById("bizBlocker").value = b0.info?.blocker || "";
+  document.getElementById("saveBiz").addEventListener("click", () => {
+    const b = getB();
+    b.info = {
+      desc: document.getElementById("bizDesc").value,
+      sales: +document.getElementById("bizSales").value || null,
+      margin: +document.getElementById("bizMargin").value || null,
+      channels: document.getElementById("bizChannels").value,
+      blocker: document.getElementById("bizBlocker").value,
+    };
+    setB(b); renderStats(); HMT.toast("✅ تم الحفظ");
+  });
+
+  const renderStats = () => {
+    const b = getB();
+    const last = b.kpis.slice(-1)[0];
+    const totalSales = b.kpis.reduce((s, k) => s + (k.sales || 0), 0);
+    document.getElementById("bizStats").innerHTML = `
+      <div class="stat"><div class="lbl">آخر مبيعات مسجلة</div><div class="val">${last ? OMR(last.sales || 0) : "—"}</div><div class="sub">${last ? last.date : "لا سجلات"}</div></div>
+      <div class="stat"><div class="lbl">إجمالي المبيعات المسجلة</div><div class="val">${OMR(totalSales)}</div></div>
+      <div class="stat"><div class="lbl">عدد السجلات</div><div class="val">${b.kpis.length}</div></div>
+      <div class="stat"><div class="lbl">أفكار مفتوحة</div><div class="val">${b.ideas.filter(i => !i.done).length}</div></div>`;
+  };
+
+  /* KPIs */
+  document.getElementById("kDate").value = HMT.todayKey();
+  document.getElementById("saveKpi").addEventListener("click", () => {
+    const k = {
+      date: document.getElementById("kDate").value,
+      sales: +document.getElementById("kSales").value || 0,
+      orders: +document.getElementById("kOrders").value || 0,
+      visits: +document.getElementById("kVisits").value || 0,
+      ads: +document.getElementById("kAds").value || 0,
+      notes: document.getElementById("kNotes").value,
+    };
+    if (!k.date) return HMT.toast("أدخل التاريخ");
+    const b = getB();
+    b.kpis = b.kpis.filter(x => x.date !== k.date);
+    b.kpis.push(k);
+    b.kpis.sort((a, c) => a.date.localeCompare(c.date));
+    setB(b); renderKpis(); renderStats(); HMT.toast("✅ تم الحفظ");
+  });
+  const renderKpis = () => {
+    const b = getB();
+    HMT.lineChart(document.getElementById("kpiChart"), [
+      { label: "المبيعات (ر.ع)", color: "#8E1B5B", points: b.kpis.map(k => ({ x: k.date.slice(5), y: k.sales })) },
+    ]);
+    document.getElementById("kpiTable").innerHTML =
+      `<tr><th>التاريخ</th><th>المبيعات</th><th>الطلبات</th><th>زوار جدد</th><th>تسويق</th><th>ملاحظات</th></tr>` +
+      (b.kpis.length ? b.kpis.slice().reverse().map(k =>
+        `<tr><td>${k.date}</td><td><b>${OMR(k.sales)}</b></td><td>${k.orders}</td><td>${k.visits}</td><td>${OMR(k.ads)}</td><td class="small">${HMT.esc(k.notes || "")}</td></tr>`).join("")
+      : `<tr><td colspan="6" class="mut">لا سجلات بعد.</td></tr>`);
+  };
+
+  /* الأفكار */
+  const renderIdeas = () => {
+    const b = getB();
+    document.getElementById("ideasList").innerHTML = b.ideas.length ? b.ideas.map((i, idx) =>
+      `<label class="chk ${i.done ? "done" : ""}">
+        <input type="checkbox" data-idea="${idx}" ${i.done ? "checked" : ""}>
+        <span class="txt">${HMT.esc(i.text)} <span class="mut small">(${i.date})</span></span>
+        <button class="btn sm danger" data-delidea="${idx}" style="margin-inline-start:auto">✕</button>
+      </label>`).join("") : `<div class="mut small">لا أفكار مسجلة بعد.</div>`;
+    document.querySelectorAll("[data-idea]").forEach(cb => cb.addEventListener("change", () => {
+      const b2 = getB(); b2.ideas[+cb.dataset.idea].done = cb.checked; setB(b2); renderIdeas(); renderStats();
+    }));
+    document.querySelectorAll("[data-delidea]").forEach(btn => btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const b2 = getB(); b2.ideas.splice(+btn.dataset.delidea, 1); setB(b2); renderIdeas(); renderStats();
+    }));
+  };
+  document.getElementById("addIdea").addEventListener("click", () => {
+    const t = document.getElementById("ideaText").value.trim();
+    if (!t) return;
+    const b = getB(); b.ideas.push({ text: t, date: HMT.todayKey(), done: false }); setB(b);
+    document.getElementById("ideaText").value = "";
+    renderIdeas(); renderStats();
+  });
+
+  renderStats(); renderKpis(); renderIdeas();
+
+  Advisor.mount("bizAdvisor", "business", {
+    icon: "🛒",
+    name: "مستشار الأعمال — متجرلينك",
+    desc: "نمو التجارة الإلكترونية بقرارات مبنية على أرقام — يحترم قيد وقتك المحدود",
+    welcome: "أهلًا إبراهيم. أنا مستشار متجرلينك. قبل أي توصية تسويقية أحتاج أرقامك — سجّلها في تبويب البيانات والمؤشرات أو أخبرني بها الآن. ما أكبر تحدٍ يواجه المشروع هذا الشهر؟",
+  });
+})();
+</script>
+</body>
+</html>
