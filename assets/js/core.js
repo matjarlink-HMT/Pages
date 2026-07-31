@@ -54,6 +54,7 @@ const HMT = (() => {
     { href: "health.html", label: "❤️ الصحة" },
     { href: "finance.html", label: "💰 المالية" },
     { href: "matjarlink.html", label: "🛒 متجرلينك" },
+    { href: "life.html", label: "🎯 الأهداف والعادات" },
     { href: "settings.html", label: "⚙️ الإعدادات" },
   ];
   const renderHeader = (active) => {
