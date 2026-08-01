@@ -72,23 +72,32 @@
   const today = HMT.todayKey();
   const isTraining = HMT.isTrainingDay();
   const cycle = HMT.cycleInfo();
-  document.getElementById("dayTitle").textContent = HMT.fmtDate(new Date()) + " — " + cycle.label;
+  const dow = new Date().getDay();
+  const isWeekend = dow === 5 || dow === 6; // جمعة وسبت
+  const offDay = isWeekend || cycle.vacation; // يوم بدون دوام
+  const planStarted = today >= S.goals12w.start;
+
+  const dayBadge = cycle.vacation ? cycle.label : (isWeekend ? "🌴 عطلة نهاية الأسبوع" : cycle.label);
+  document.getElementById("dayTitle").textContent = HMT.fmtDate(new Date()) + " — " + dayBadge;
   document.getElementById("dayHint").textContent =
-    (cycle.vacation ? "أسبوع إجازة: أنت في بيت صحار — استيقاظ ≤07:30، ونفس هيكل اليوم. " : "") +
+    (!planStarted ? "⏳ الخطة تنطلق رسميًا الأحد 2/8 — اعتبر اليوم تمهيديًا للتعود. " : "") +
+    (cycle.vacation
+      ? "أسبوع إجازة: أنت في بيت صحار — لا دوام، استيقاظ ≤07:30. "
+      : isWeekend ? "عطلة نهاية الأسبوع: لا دوام اليوم — استيقاظ ≤07:30. " : "") +
     (isTraining
       ? (cycle.vacation
         ? "🏋️ اليوم يوم تمرين — بديل البيت أو جيم صحار (17:00)."
         : "🏋️ اليوم يوم تمرين مقاومة في جيم المصنعة (17:00–18:00).")
       : "اليوم بدون مقاومة — المشي والتصحيحي أساسيان.");
 
-  // تكييف جدول اليوم مع أسبوع الإجازة
+  // تكييف جدول اليوم: أيام الإجازة وعطلة نهاية الأسبوع بدون دوام واستيقاظ مرن
   const dayItems = S.daySchedule
-    .filter(i => (isTraining || i.key !== "gym") && (!cycle.vacation || i.key !== "work"))
+    .filter(i => (isTraining || i.key !== "gym") && (!offDay || i.key !== "work"))
     .map(i => {
-      if (!cycle.vacation) return i;
-      if (i.key === "wake") return { ...i, time: "07:30", txt: "استيقاظ ≤07:30 + ماء + ضوء (فرق ≤ ساعة عن الدوام)" };
+      if (!offDay) return i;
+      if (i.key === "wake") return { ...i, time: "07:30", txt: "استيقاظ ≤07:30 + ماء + ضوء (فرق ≤ ساعة عن أيام الدوام)" };
       if (i.key === "breakfast") return { ...i, time: "07:45" };
-      if (i.key === "gym") return { ...i, txt: "تمرين — بديل البيت أو جيم صحار" };
+      if (i.key === "gym" && cycle.vacation) return { ...i, txt: "تمرين — بديل البيت أو جيم صحار" };
       return i;
     });
   const dayStateKey = `day_${today}`;
