@@ -86,7 +86,11 @@ const HMT = (() => {
           <h1>منصة إبراهيم — HMT OS</h1>
           <div class="sub">محرك القرارات: صحة · مال · متجرلينك</div>
         </div>
-        <div class="head-side">${today}<br><b style="color:var(--orange)">${cycleInfo().label}</b></div>
+        <div class="head-side">${today}<br><b style="color:var(--orange)">${(() => {
+          const c = cycleInfo();
+          const dw = new Date().getDay();
+          return (dw === 5 || dw === 6) && !c.vacation ? c.label + " · 🌴 عطلة" : c.label;
+        })()}</b></div>
       </div>
       <nav class="main">
         ${NAV.map(n => `<a href="${n.href}" class="${n.href === active ? "active" : ""}">${n.label}</a>`).join("")}
