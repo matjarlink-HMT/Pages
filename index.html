@@ -69,6 +69,7 @@
 
   const today = HMT.todayKey();
   const isTraining = HMT.isTrainingDay();
+  const cycle = HMT.cycleInfo();
   const lw = HMT.get("weekly_logs", []).slice(-1)[0] || null;
   const curW = lw?.weight ?? S.measurements.weight;
   const curWaist = lw?.waist ?? S.measurements.waist;
@@ -76,14 +77,18 @@
   /* إحصائيات */
   const fin = HMT.get("finance", {});
   const debtsTotal = (fin.debts || []).reduce((s, d) => s + d.balance, 0);
-  const startD = new Date(S.goals12w.start), endD = new Date(S.goals12w.deadline);
+  const startD = new Date(S.goals12w.start + "T00:00:00"), endD = new Date(S.goals12w.deadline + "T23:59:59");
   const progress = Math.max(0, Math.min(100, Math.round((Date.now() - startD) / (endD - startD) * 100)));
-  const weekNum = Math.max(0, Math.min(12, Math.ceil((Date.now() - startD) / (7 * 86400000))));
+  const daysSinceStart = Math.floor((Date.now() - startD) / 86400000);
+  const weekNum = daysSinceStart < 0 ? 0 : Math.min(12, Math.floor(daysSinceStart / 7) + 1);
+  const weekCell = weekNum === 0
+    ? `<div class="val" style="font-size:17px">تبدأ الأحد 2/8</div><div class="sub">باقي ${-daysSinceStart} يوم على انطلاق الخطة</div>`
+    : `<div class="val">${weekNum} / 12</div><div class="sub">${progress}% من المدة</div>`;
 
   document.getElementById("dashStats").innerHTML = `
     <div class="stat"><div class="lbl">الوزن</div><div class="val">${curW} كجم</div><div class="sub">الهدف: ~72 كجم</div></div>
     <div class="stat"><div class="lbl">الخصر</div><div class="val">${curWaist} سم</div><div class="sub">الهدف: ≤88 سم</div></div>
-    <div class="stat"><div class="lbl">أسبوع الخطة</div><div class="val">${weekNum} / 12</div><div class="sub">${progress}% من المدة</div></div>
+    <div class="stat"><div class="lbl">أسبوع الخطة — ${cycle.label}</div>${weekCell}</div>
     <div class="stat ${debtsTotal > 0 ? "bad" : "good"}"><div class="lbl">إجمالي الديون</div><div class="val">${debtsTotal ? debtsTotal.toLocaleString("en") + " ر.ع" : "—"}</div><div class="sub">${(fin.debts || []).length ? (fin.debts || []).length + " دين" : "لم تُسجل بعد"}</div></div>`;
 
   /* مهام اليوم المختصرة */
@@ -124,9 +129,15 @@
   }).join("");
 
   /* المواعيد */
-  const nextFriday = () => { const d = new Date(); const diff = (5 - d.getDay() + 7) % 7; d.setDate(d.getDate() + diff); return d; };
+  const nextReportDate = () => {
+    const d = new Date();
+    const diff = (5 - d.getDay() + 7) % 7;
+    d.setDate(d.getDate() + diff);
+    const first = new Date("2026-08-07T12:00:00");
+    return d < first ? first : d;
+  };
   const upcoming = [
-    { d: nextFriday(), txt: "📝 التقرير الأسبوعي (وزن + خصر صباحًا صائمًا)" },
+    { d: nextReportDate(), txt: "📝 التقرير الأسبوعي (وزن + خصر صباحًا صائمًا)" },
     { d: new Date("2026-10-10"), txt: "🧪 إعادة التحاليل (أسبوع 10): دهون، D، B12، فيريتين، TSH، HbA1c + ضغط" },
     { d: new Date(S.goals12w.deadline), txt: "🏁 نهاية المرحلة الأولى — تقييم شامل" },
   ].sort((a, b) => a.d - b.d);
