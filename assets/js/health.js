@@ -71,12 +71,26 @@
   /* ========== 2) المخطط اليومي ========== */
   const today = HMT.todayKey();
   const isTraining = HMT.isTrainingDay();
-  document.getElementById("dayTitle").textContent = HMT.fmtDate(new Date());
-  document.getElementById("dayHint").textContent = isTraining
-    ? "🏋️ اليوم يوم تمرين مقاومة (17:00–18:00) — الخطة بالتبويب المجاور."
-    : "اليوم بدون مقاومة — المشي والتصحيحي أساسيان.";
+  const cycle = HMT.cycleInfo();
+  document.getElementById("dayTitle").textContent = HMT.fmtDate(new Date()) + " — " + cycle.label;
+  document.getElementById("dayHint").textContent =
+    (cycle.vacation ? "أسبوع إجازة: أنت في بيت صحار — استيقاظ ≤07:30، ونفس هيكل اليوم. " : "") +
+    (isTraining
+      ? (cycle.vacation
+        ? "🏋️ اليوم يوم تمرين — بديل البيت أو جيم صحار (17:00)."
+        : "🏋️ اليوم يوم تمرين مقاومة في جيم المصنعة (17:00–18:00).")
+      : "اليوم بدون مقاومة — المشي والتصحيحي أساسيان.");
 
-  const dayItems = S.daySchedule.filter(i => isTraining || i.key !== "gym");
+  // تكييف جدول اليوم مع أسبوع الإجازة
+  const dayItems = S.daySchedule
+    .filter(i => (isTraining || i.key !== "gym") && (!cycle.vacation || i.key !== "work"))
+    .map(i => {
+      if (!cycle.vacation) return i;
+      if (i.key === "wake") return { ...i, time: "07:30", txt: "استيقاظ ≤07:30 + ماء + ضوء (فرق ≤ ساعة عن الدوام)" };
+      if (i.key === "breakfast") return { ...i, time: "07:45" };
+      if (i.key === "gym") return { ...i, txt: "تمرين — بديل البيت أو جيم صحار" };
+      return i;
+    });
   const dayStateKey = `day_${today}`;
   const renderDay = () => {
     const state = HMT.get(dayStateKey, {});
@@ -106,9 +120,10 @@
   document.getElementById("nutriRules").innerHTML = S.nutrition.rules.map(r => `<li>${r}</li>`).join("");
 
   /* ========== 3) التمارين ========== */
-  document.getElementById("workoutToday").innerHTML = isTraining
+  document.getElementById("workoutToday").innerHTML = (isTraining
     ? `🏋️ <b>اليوم يوم تمرين!</b> الموعد 17:00–18:00. بدّل بين A وB (آخر خطة سجلتها: ${lastPlanUsed() || "لم تبدأ بعد — ابدأ بـ A"}).`
-    : `اليوم راحة من المقاومة. أيام التمرين: <b>الاثنين والخميس</b> 17:00. لا تنسَ المشي والتصحيحي.`;
+    : `اليوم راحة من المقاومة. أيام التمرين: <b>الاثنين والخميس</b> 17:00. لا تنسَ المشي والتصحيحي.`)
+    + (cycle.vacation ? ` <br>🏖️ <b>أسبوع إجازة:</b> أنت في صحار — استخدم بديل البيت (تبويبه هنا) أو جيم صحار بنفس خطة A/B.` : "");
 
   function lastPlanUsed() {
     const logs = HMT.get("workout_logs", []);
@@ -263,15 +278,16 @@
   wDateEl.value = today;
   document.getElementById("mDate").value = today;
 
-  // موعد التقرير القادم (الجمعة)
-  const nextFriday = () => {
+  // موعد التقرير القادم (الجمعة) — أول تقرير معتمد 7/8/2026
+  const nextReportDate = () => {
     const d = new Date();
     const diff = (5 - d.getDay() + 7) % 7;
-    d.setDate(d.getDate() + (diff === 0 ? 0 : diff));
-    return d;
+    d.setDate(d.getDate() + diff);
+    const first = new Date("2026-08-07T12:00:00");
+    return d < first ? first : d;
   };
   document.getElementById("nextReportHint").textContent =
-    `التقرير القادم: ${HMT.fmtDate(nextFriday())} — أول تقرير معتمد: الجمعة 7/8/2026`;
+    `التقرير القادم: ${HMT.fmtDate(nextReportDate())} — أول تقرير معتمد: الجمعة 7/8/2026`;
 
   document.getElementById("saveWeekly").addEventListener("click", () => {
     const entry = {

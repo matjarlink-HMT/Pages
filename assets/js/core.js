@@ -32,7 +32,25 @@ const HMT = (() => {
     return `${DAYS[dt.getDay()]} ${dt.getDate()}/${dt.getMonth() + 1}/${dt.getFullYear()}`;
   };
   const isTrainingDay = (d = new Date()) => (window.HMT_SEED?.workouts.trainingDays || [1,4]).includes(d.getDay());
-  const isWorkDay = (d = new Date()) => d.getDay() >= 0 && d.getDay() <= 4;
+
+  /* دورة الدوام: أسبوع إجازة + 3 أسابيع دوام (المرساة أحد 2/8/2026 = إجازة) */
+  const cycleInfo = (d = new Date()) => {
+    const wc = window.HMT_SEED?.workCycle;
+    if (!wc) return { vacation: false, label: "" };
+    const day = new Date(d); day.setHours(12, 0, 0, 0);
+    const weekStart = new Date(day); weekStart.setDate(day.getDate() - day.getDay()); // الأحد
+    const anchor = new Date(wc.anchor + "T12:00:00");
+    const anchorStart = new Date(anchor); anchorStart.setDate(anchor.getDate() - anchor.getDay());
+    const wk = Math.round((weekStart - anchorStart) / (7 * 86400000));
+    const idx = ((wk % 4) + 4) % 4;
+    const vacation = idx === 0;
+    return {
+      vacation, idx,
+      label: vacation ? "🏖️ أسبوع إجازة" : `🏢 أسبوع دوام (${idx} من 3)`,
+      nextVacationWeeks: vacation ? 0 : 4 - idx,
+    };
+  };
+  const isWorkDay = (d = new Date()) => d.getDay() >= 0 && d.getDay() <= 4 && !cycleInfo(d).vacation;
   const daysBetween = (a, b) => Math.round((new Date(b) - new Date(a)) / 86400000);
 
   /* ---------- Toast ---------- */
@@ -68,7 +86,7 @@ const HMT = (() => {
           <h1>منصة إبراهيم — HMT OS</h1>
           <div class="sub">محرك القرارات: صحة · مال · متجرلينك</div>
         </div>
-        <div class="head-side">${today}</div>
+        <div class="head-side">${today}<br><b style="color:var(--orange)">${cycleInfo().label}</b></div>
       </div>
       <nav class="main">
         ${NAV.map(n => `<a href="${n.href}" class="${n.href === active ? "active" : ""}">${n.label}</a>`).join("")}
@@ -130,5 +148,5 @@ const HMT = (() => {
       series.map(s => `<span><span style="color:${s.color}">●</span> ${esc(s.label)}</span>`).join("") + `</div>`;
   };
 
-  return { get, set, del, allKeys, exportAll, importAll, todayKey, fmtDate, isTrainingDay, isWorkDay, daysBetween, toast, esc, renderHeader, initTabs, lineChart, DAYS };
+  return { get, set, del, allKeys, exportAll, importAll, todayKey, fmtDate, isTrainingDay, isWorkDay, cycleInfo, daysBetween, toast, esc, renderHeader, initTabs, lineChart, DAYS };
 })();
