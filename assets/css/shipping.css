@@ -1,0 +1,215 @@
+/* ============ وحدة الشحن — امتداد لنظام تصميم HMT OS ============ */
+/* لا تعيد تعريف الهوية — تبني فوق متغيرات style.css فقط */
+
+/* ---------- شريط المسار (Breadcrumb) ---------- */
+.crumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-top:16px}
+.crumb a{font-weight:700}
+.crumb .sep{opacity:.5}
+
+/* ---------- ترويسة الوحدة ---------- */
+.modhead{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin:10px 0 4px}
+.modhead .ttl{font-size:22px;font-weight:800;color:var(--maroon);margin:0}
+.modhead .sub{font-size:13px;color:var(--muted)}
+.modhead .actions{margin-inline-start:auto;display:flex;gap:8px;flex-wrap:wrap}
+
+/* ---------- شريط الفترة ---------- */
+.rangebar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}
+.rangebar .lbl{font-size:12.5px;font-weight:700;color:var(--muted)}
+
+/* ---------- رقائق الفلترة ---------- */
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:5px 13px;font-family:inherit;
+  font-weight:700;font-size:12.5px;color:var(--muted);cursor:pointer;transition:.15s;white-space:nowrap}
+.chip:hover{border-color:var(--maroon);color:var(--maroon)}
+.chip.on{background:var(--maroon);border-color:var(--maroon);color:#fff}
+.chip .n{opacity:.7;font-size:11.5px;margin-inline-start:4px}
+
+/* ---------- بطاقات "تحتاج انتباهك" ---------- */
+.attn{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:6px}
+.attn button{text-align:start;font-family:inherit;cursor:pointer;border:1px solid #f3c3ca;background:var(--red-bg);
+  border-radius:var(--radius);padding:13px 15px;transition:.15s;display:block;width:100%}
+.attn button:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(210,59,78,.15)}
+.attn .n{font-size:26px;font-weight:800;color:var(--red);line-height:1.2}
+.attn .t{font-size:12.5px;font-weight:700;color:var(--ink)}
+.attn .h{font-size:11.5px;color:var(--muted)}
+.attn button.warn{background:var(--amber-bg);border-color:#f0d9a8}
+.attn button.warn .n{color:var(--amber)}
+
+/* ---------- اتجاه المؤشر ---------- */
+.trend{font-size:12px;font-weight:800}
+.trend.up{color:var(--green)} .trend.down{color:var(--red)} .trend.flat{color:var(--muted)}
+
+/* ---------- أعمدة أفقية ---------- */
+.bars{display:flex;flex-direction:column;gap:9px;padding:4px 0}
+.bars .row{display:grid;grid-template-columns:100px 1fr auto;align-items:center;gap:10px;font-size:13px}
+.bars .track{height:11px;background:#f2ecf4;border-radius:6px;overflow:hidden}
+.bars .track>i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--maroon),var(--orange));
+  transition:width .5s ease}
+.bars .v{font-weight:800;color:var(--maroon);font-size:12.5px;min-width:34px;text-align:start}
+
+/* ---------- توزيع حلقي ---------- */
+.donutwrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center}
+.donut{width:150px;height:150px;flex:0 0 auto}
+.dlegend{display:flex;flex-direction:column;gap:6px;font-size:12.5px}
+.dlegend span.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-inline-end:7px}
+
+/* ---------- جدول الشحنات ---------- */
+table.t th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+table.t th.sortable:hover{background:#e9dff0}
+table.t th .ar{font-size:10px;opacity:.6}
+table.t tr.clickable{cursor:pointer}
+table.t td.num{font-variant-numeric:tabular-nums;direction:ltr;text-align:start}
+.copyable{cursor:pointer;border-bottom:1px dashed var(--line)}
+.copyable:hover{color:var(--maroon);border-color:var(--maroon)}
+.rowsel{width:16px;height:16px;accent-color:var(--maroon);cursor:pointer}
+.carriercell{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.clogo{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;
+  font-size:13px;flex:0 0 auto;color:#fff;font-weight:800}
+
+/* ---------- شريط الإجراءات الجماعية ---------- */
+.bulkbar{position:sticky;bottom:14px;z-index:20;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--ink);color:#fff;border-radius:12px;padding:10px 16px;box-shadow:0 8px 26px rgba(0,0,0,.25);margin-top:12px}
+.bulkbar .btn{background:#fff;color:var(--ink)}
+.bulkbar .btn:hover{background:#eee}
+.bulkbar .cnt{font-weight:800}
+
+/* ---------- اللوحة الجانبية ---------- */
+.scrim{position:fixed;inset:0;background:rgba(43,32,48,.45);opacity:0;pointer-events:none;transition:.2s;z-index:60}
+.scrim.on{opacity:1;pointer-events:auto}
+/* الجانب: inset-inline-start يعني اليمين في RTL واليسار في LTR — والانزلاق للخارج يتبع الاتجاه */
+.drawer{position:fixed;inset-block:0;inset-inline-start:0;width:min(560px,100%);background:var(--bg);z-index:61;
+  transform:translateX(-102%);transition:transform .25s ease,visibility .25s;overflow-y:auto;
+  box-shadow:0 0 40px rgba(0,0,0,.2);visibility:hidden;pointer-events:none}
+[dir="rtl"] .drawer{transform:translateX(102%)}
+.drawer.on{transform:translateX(0);visibility:visible;pointer-events:auto}
+.drawer .dhead{position:sticky;top:0;background:linear-gradient(135deg,var(--maroon),var(--maroon-d));color:#fff;
+  padding:16px 18px;display:flex;align-items:center;gap:10px;z-index:2}
+.drawer .dhead h3{margin:0;font-size:17px;font-weight:800;color:#fff}
+.drawer .dhead .x{margin-inline-start:auto;background:rgba(255,255,255,.18);border:0;color:#fff;border-radius:9px;
+  width:32px;height:32px;font-size:17px;cursor:pointer;font-family:inherit}
+.drawer .dbody{padding:16px 18px 40px;display:flex;flex-direction:column;gap:12px}
+
+/* ---------- نافذة منبثقة ---------- */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:70;padding:16px}
+.modal.on{display:flex}
+.modal .box{background:var(--card);border-radius:16px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);animation:fadein .2s}
+.modal .box .mh{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.modal .box .mh h3{margin:0;font-size:16px;color:var(--maroon);font-weight:800}
+.modal .box .mh .x{margin-inline-start:auto;background:#f2ecf4;border:0;border-radius:9px;width:30px;height:30px;
+  cursor:pointer;font-size:16px;font-family:inherit;color:var(--muted)}
+.modal .box .mb{padding:16px 18px}
+.modal .box .mf{padding:12px 18px;border-top:1px solid var(--line);display:flex;gap:8px;justify-content:flex-end}
+
+/* ---------- مراحل الشحنة ---------- */
+.stages{display:flex;align-items:center;gap:0;margin:6px 0 14px;overflow-x:auto;padding-bottom:4px}
+.stages .s{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:78px;flex:1;position:relative}
+.stages .s .dot{width:26px;height:26px;border-radius:50%;background:#f0e8f2;color:var(--muted);display:flex;
+  align-items:center;justify-content:center;font-size:13px;font-weight:800;border:2px solid #f0e8f2;z-index:1}
+.stages .s .cap{font-size:11px;color:var(--muted);text-align:center;font-weight:700}
+.stages .s::before{content:"";position:absolute;top:13px;inset-inline-start:-50%;width:100%;height:2px;background:#f0e8f2}
+.stages .s:first-child::before{display:none}
+.stages .s.done .dot{background:var(--green);border-color:var(--green);color:#fff}
+.stages .s.done .cap{color:var(--green)}
+.stages .s.done::before{background:var(--green)}
+.stages .s.now .dot{background:var(--maroon);border-color:var(--maroon);color:#fff;box-shadow:0 0 0 4px rgba(142,27,91,.15)}
+.stages .s.now .cap{color:var(--maroon)}
+.stages .s.now::before{background:var(--green)}
+.stages .s.bad .dot{background:var(--red);border-color:var(--red);color:#fff}
+.stages .s.bad .cap{color:var(--red)}
+
+/* ---------- السجل الزمني ---------- */
+.tline{position:relative;padding-inline-start:22px;margin:4px 0}
+.tline::before{content:"";position:absolute;inset-block:6px;inset-inline-start:6px;width:2px;background:var(--line)}
+.tline .ev{position:relative;padding:0 0 15px}
+.tline .ev::before{content:"";position:absolute;inset-inline-start:-20px;top:5px;width:11px;height:11px;border-radius:50%;
+  background:#fff;border:2.5px solid var(--maroon)}
+.tline .ev.ok::before{border-color:var(--green)}
+.tline .ev.bad::before{border-color:var(--red)}
+.tline .ev .h{font-weight:800;font-size:13.5px}
+.tline .ev .m{font-size:12px;color:var(--muted)}
+.tline .ev .src{font-size:10.5px;background:#f2ecf4;color:var(--muted);border-radius:5px;padding:1px 6px;font-weight:700}
+
+/* ---------- خطوات المعالج ---------- */
+.wsteps{display:flex;gap:8px;margin:8px 0 18px;flex-wrap:wrap}
+.wsteps .w{flex:1;min-width:150px;border:1.5px solid var(--line);border-radius:12px;padding:9px 13px;background:#fff}
+.wsteps .w .n{font-size:11.5px;font-weight:800;color:var(--muted)}
+.wsteps .w .t{font-size:13.5px;font-weight:800;color:var(--ink)}
+.wsteps .w.on{border-color:var(--maroon);background:var(--purple-bg)}
+.wsteps .w.on .n,.wsteps .w.on .t{color:var(--maroon)}
+.wsteps .w.ok{border-color:var(--green)}
+.wsteps .w.ok .n{color:var(--green)}
+
+/* ---------- بطاقة عرض السعر ---------- */
+.rate{border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;background:#fff;transition:.15s;cursor:pointer;
+  display:flex;flex-direction:column;gap:7px}
+.rate:hover{border-color:var(--maroon);box-shadow:0 4px 16px rgba(142,27,91,.1)}
+.rate.on{border-color:var(--maroon);background:var(--purple-bg);box-shadow:0 4px 16px rgba(142,27,91,.14)}
+.rate .top{display:flex;align-items:center;gap:9px}
+.rate .top .nm{font-weight:800;font-size:14px}
+.rate .top .best{margin-inline-start:auto;background:var(--amber-bg);color:var(--amber);font-size:11px;font-weight:800;
+  border-radius:20px;padding:2px 10px;white-space:nowrap}
+.rate .price{font-size:20px;font-weight:800;color:var(--maroon);font-variant-numeric:tabular-nums}
+.rate .eta{font-size:12.5px;color:var(--muted);font-weight:700}
+.rate .perf{font-size:11.5px;color:var(--muted)}
+.rate .feat{display:flex;gap:5px;flex-wrap:wrap}
+.rate .feat span{font-size:11px;background:var(--green-bg);color:var(--green);border-radius:6px;padding:1px 7px;font-weight:700}
+.rate.off{opacity:.6;cursor:not-allowed;background:#faf8fb}
+.rate.off:hover{border-color:var(--line);box-shadow:none}
+.skel{height:96px;border-radius:14px;background:linear-gradient(90deg,#f4eef6 25%,#ece2ee 50%,#f4eef6 75%);
+  background-size:200% 100%;animation:sh 1.1s infinite}
+@keyframes sh{from{background-position:200% 0}to{background-position:-200% 0}}
+
+/* ---------- بطاقة شركة الشحن ---------- */
+.ccard{border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:14px 16px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:9px}
+.ccard .ch{display:flex;align-items:center;gap:10px}
+.ccard .ch .nm{font-weight:800;font-size:15px}
+.ccard .ch .st{margin-inline-start:auto;font-size:12px;font-weight:800;white-space:nowrap}
+.ccard .st.ok{color:var(--green)} .ccard .st.no{color:var(--red)} .ccard .st.na{color:var(--muted)}
+.ccard .meta{font-size:12.5px;color:var(--muted)}
+.ccard .row{display:flex;gap:7px;flex-wrap:wrap;margin-top:2px}
+.ccard.dim{opacity:.62}
+.ccard .deftag{background:var(--purple-bg);color:var(--maroon);font-size:11px;font-weight:800;border-radius:20px;padding:2px 9px}
+
+/* ---------- مفتاح تبديل ---------- */
+.sw{position:relative;display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:700}
+.sw input{position:absolute;opacity:0;width:0;height:0}
+.sw .tr{width:38px;height:21px;background:#ded3e2;border-radius:20px;transition:.2s;flex:0 0 auto;position:relative}
+.sw .tr::after{content:"";position:absolute;top:2.5px;inset-inline-start:2.5px;width:16px;height:16px;background:#fff;
+  border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.sw input:checked + .tr{background:var(--green)}
+.sw input:checked + .tr::after{transform:translateX(-17px)}
+[dir="ltr"] .sw input:checked + .tr::after{transform:translateX(17px)}
+
+/* ---------- شبكة تفاصيل ---------- */
+.dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13.5px;align-items:baseline}
+.dl dt{color:var(--muted);font-size:12.5px;font-weight:700;margin:0}
+.dl dd{margin:0;font-weight:600}
+
+/* ---------- شريط النموذج التجريبي ---------- */
+.protobar{background:var(--blue-bg);border:1px solid #c4d7f5;border-radius:12px;padding:10px 15px;font-size:12.5px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.protobar b{color:var(--blue)}
+.protobar .btn{margin-inline-start:auto}
+
+/* ---------- الطباعة ---------- */
+@media print{
+  header.site,footer.site,.tabs,.crumb,.protobar,.rangebar,.chips,.bulkbar,.btn,.modhead .actions{display:none!important}
+  .card{box-shadow:none;border-color:#ddd;break-inside:avoid}
+  .drawer{position:static;transform:none;width:100%;box-shadow:none}
+  .scrim{display:none}
+  body{background:#fff}
+}
+
+/* ---------- الشاشات الصغيرة ---------- */
+@media (max-width:720px){
+  .modhead .actions{width:100%}
+  .stages .s{min-width:64px}
+  .bars .row{grid-template-columns:78px 1fr auto;font-size:12px}
+  table.t.cards thead{display:none}
+  table.t.cards tr{display:block;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;padding:8px 10px;background:#fff}
+  table.t.cards td{display:flex;justify-content:space-between;gap:10px;border:0;padding:4px 0}
+  table.t.cards td::before{content:attr(data-l);color:var(--muted);font-size:12px;font-weight:700}
+  table.t.cards td:first-child{display:none}
+}
