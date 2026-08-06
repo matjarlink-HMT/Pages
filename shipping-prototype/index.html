@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="نموذج تفاعلي لوحدة إدارة الشحن — لوحة تحكم، تتبع الشحنات، مقارنة أسعار شركات الشحن، وتقارير.">
+<title>وحدة إدارة الشحن — نموذج</title>
+<link rel="stylesheet" href="assets/app.css?v=1">
+</head>
+<body>
+
+<header class="appbar">
+  <div class="appbar__in">
+    <span class="mark" aria-hidden="true">🚚</span>
+    <div>
+      <div class="appbar__title">وحدة إدارة الشحن</div>
+      <div class="appbar__sub">نموذج مستقل — يُدمج لاحقاً في منصة متجرلينك</div>
+    </div>
+    <div class="appbar__side">
+      <button class="themebtn" id="themeBtn" type="button">☾</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="shipRoot">
+
+  <div class="protobar">
+    <span>🧪 <b>نموذج تجريبي</b> — الشاشات حقيقية والبيانات مولّدة داخل متصفحك ولا تُرسل إلى أي خادم.</span>
+    <button class="btn sm" id="resetBtn" type="button">↺ إعادة توليد البيانات</button>
+  </div>
+
+  <div class="pagehead">
+    <div>
+      <h1>مركز الشحن</h1>
+      <p>إنشاء الشحنات، مقارنة أسعار شركات الشحن، تتبّع كل شحنة، والتقارير — من مكان واحد.</p>
+    </div>
+    <div class="actions">
+      <button class="btn primary" type="button" onclick="document.querySelector('[data-tab=tabCreate]').click()">➕ إنشاء شحنة</button>
+      <button class="btn" id="printBtn" type="button">🖨 طباعة</button>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="active" data-tab="tabDashboard" aria-selected="true">لوحة التحكم</button>
+    <button data-tab="tabShipments" aria-selected="false">الشحنات</button>
+    <button data-tab="tabCreate" aria-selected="false">إنشاء شحنة</button>
+    <button data-tab="tabCarriers" aria-selected="false">شركات الشحن</button>
+    <button data-tab="tabReports" aria-selected="false">التقارير</button>
+  </div>
+
+  <!-- ============ لوحة التحكم ============ -->
+  <section class="tabpane show" id="tabDashboard">
+    <div class="rangebar">
+      <span class="lbl">الفترة:</span>
+      <div class="chips">
+        <button class="chip" data-range="7" type="button">آخر ٧ أيام</button>
+        <button class="chip on" data-range="30" type="button">آخر ٣٠ يوماً</button>
+        <button class="chip" data-range="90" type="button">آخر ٩٠ يوماً</button>
+      </div>
+    </div>
+
+    <div class="attn" id="dashAttn"></div>
+
+    <h2 class="sec">مؤشرات التشغيل</h2>
+    <div class="grid g4" id="dashOps"></div>
+
+    <h2 class="sec">المال والأداء</h2>
+    <div class="grid g4" id="dashFin"></div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card"><h3><span class="ic">📈</span> حجم الشحنات عبر الوقت</h3><div class="chart" id="chartVolume"></div></div>
+      <div class="card"><h3><span class="ic">💸</span> تكلفة الشحن عبر الوقت</h3><div class="chart" id="chartCost"></div></div>
+      <div class="card"><h3><span class="ic">🏙</span> أكثر الولايات شحناً</h3><div id="chartCities"></div></div>
+      <div class="card"><h3><span class="ic">🥧</span> توزيع الشحنات على الشركات</h3><div id="chartCarriers"></div></div>
+    </div>
+  </section>
+
+  <!-- ============ الشحنات ============ -->
+  <section class="tabpane" id="tabShipments">
+    <div class="card" style="margin-top:14px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <input class="f" id="shipSearch" type="search" style="flex:1;min-width:240px"
+               placeholder="🔍 بحث برقم الطلب أو التتبع أو اسم العميل أو الهاتف…  (اضغط / للتركيز)"
+               aria-label="بحث في الشحنات">
+        <select class="f" id="fStatus" style="width:auto" aria-label="تصفية بالحالة"></select>
+        <select class="f" id="fCarrier" style="width:auto" aria-label="تصفية بشركة الشحن"></select>
+        <select class="f" id="fGovF" style="width:auto" aria-label="تصفية بالمحافظة"></select>
+        <button class="btn sm" id="exportBtn" type="button">⬇️ تصدير CSV</button>
+      </div>
+      <div class="chips" style="margin-top:10px" id="shipChips"></div>
+    </div>
+
+    <p class="mut small" style="margin:10px 2px" id="shipCount"></p>
+    <div class="card" style="padding:8px 10px"><div class="tblwrap"><table class="t cards" id="shipTable"></table></div></div>
+    <div style="text-align:center;margin-top:12px" id="moreWrap"></div>
+    <div class="bulkbar" id="bulkBar" style="display:none"></div>
+  </section>
+
+  <!-- ============ إنشاء شحنة ============ -->
+  <section class="tabpane" id="tabCreate">
+    <div class="wsteps" id="wSteps"></div>
+
+    <!-- الخطوة ١ -->
+    <div class="wpane">
+      <p class="alert info small">عند الدمج مع متجرلينك تُعبّأ هذه الحقول تلقائياً من الطلب — لا يُدخل الموظف البيانات مرتين.</p>
+      <div class="grid g2">
+        <div class="card">
+          <h3><span class="ic">👤</span> بيانات المستلم</h3>
+          <label class="f" for="fOrder">رقم الطلب (اختياري — للربط بطلب قائم)</label>
+          <input class="f" id="fOrder" placeholder="ORD-48231">
+          <div class="grid g2" style="gap:8px">
+            <div><label class="f" for="fName">الاسم *</label><input class="f" id="fName" placeholder="سالم بن ناصر"></div>
+            <div><label class="f" for="fPhone">الهاتف *</label><input class="f" id="fPhone" placeholder="+96899123456" dir="ltr"></div>
+            <div><label class="f" for="fGov">المحافظة</label><select class="f" id="fGov"></select></div>
+            <div><label class="f" for="fWilayat">الولاية</label><select class="f" id="fWilayat"></select></div>
+          </div>
+          <label class="f" for="fStreet">العنوان</label><input class="f" id="fStreet" placeholder="شارع 3011 — منزل 24">
+          <label class="f" for="fLandmark">معلم بارز</label><input class="f" id="fLandmark" placeholder="خلف مسجد النور">
+        </div>
+
+        <div class="card">
+          <h3><span class="ic">📦</span> بيانات الطرد</h3>
+          <div class="grid g2" style="gap:8px">
+            <div><label class="f" for="fWeight">الوزن الفعلي (كجم) *</label><input type="number" step="0.1" class="f" id="fWeight" value="2"></div>
+            <div><label class="f" for="fPieces">عدد القطع</label><input type="number" class="f" id="fPieces" value="1" min="1"></div>
+          </div>
+          <label class="f">الأبعاد (سم) — الطول × العرض × الارتفاع</label>
+          <div style="display:flex;gap:6px">
+            <input type="number" class="f" id="fLen" placeholder="طول" aria-label="الطول بالسنتيمتر">
+            <input type="number" class="f" id="fWid" placeholder="عرض" aria-label="العرض بالسنتيمتر">
+            <input type="number" class="f" id="fHei" placeholder="ارتفاع" aria-label="الارتفاع بالسنتيمتر">
+          </div>
+          <p class="alert info small" id="volHint" style="margin:8px 0"></p>
+          <label class="f" for="fValue">قيمة الطرد (ر.ع)</label><input type="number" step="0.001" class="f" id="fValue" value="25">
+          <label class="sw" style="margin:12px 0">
+            <input type="checkbox" id="fCod" checked><span class="tr"></span>
+            <span>الدفع عند الاستلام (COD)</span>
+          </label>
+          <label class="f" for="fNotes">ملاحظات للمندوب</label><input class="f" id="fNotes" placeholder="الاتصال قبل التوصيل بساعة">
+        </div>
+      </div>
+      <div style="margin-top:14px"><button class="btn primary" id="toStep2" type="button">التالي — مقارنة الأسعار ←</button></div>
+    </div>
+
+    <!-- الخطوة ٢ -->
+    <div class="wpane" style="display:none">
+      <p class="alert info small">تُجلب الأسعار من كل شركة على حدة وتظهر فور وصولها — لا انتظار لأبطأ شركة. الترتيب بالتقييم المركّب لا بالسعر وحده.</p>
+      <div class="grid g2" id="quotes"></div>
+      <div style="margin-top:14px;display:flex;gap:8px">
+        <button class="btn" id="backTo1" type="button">→ رجوع</button>
+        <button class="btn primary" id="toStep3" type="button" disabled>التالي — التأكيد ←</button>
+      </div>
+    </div>
+
+    <!-- الخطوة ٣ -->
+    <div class="wpane" style="display:none">
+      <div id="confirmBox"></div>
+      <div style="margin-top:14px;display:flex;gap:8px">
+        <button class="btn" id="backTo2" type="button">→ رجوع</button>
+        <button class="btn primary" id="confirmBtn" type="button">✅ تأكيد وإنشاء بوليصة الشحن</button>
+      </div>
+      <p class="mut small" style="margin-top:8px">يُقفل الزر فور الضغط، وإعادة الإرسال بنفس البيانات تُرجع الشحنة نفسها — حماية من ازدواج البوالص والرسوم.</p>
+    </div>
+
+    <div id="wDone" style="display:none"></div>
+  </section>
+
+  <!-- ============ شركات الشحن ============ -->
+  <section class="tabpane" id="tabCarriers">
+    <p class="alert info small" style="margin-top:14px">
+      الشركات ذات الـ API تُدار بمفاتيح، وشركات التوصيل بلا API تُدار بتسعيرة ومناطق — وكلاهما يظهر في المقارنة والتقارير بنفس الطريقة.
+      إضافة شركة جديدة في النظام الحقيقي = ملف Driver واحد بلا تعديل على النواة.
+    </p>
+    <div class="grid g2" id="carrierGrid" style="margin-top:14px"></div>
+  </section>
+
+  <!-- ============ التقارير ============ -->
+  <section class="tabpane" id="tabReports">
+    <div class="rangebar">
+      <span class="lbl">الفترة:</span>
+      <div class="chips">
+        <button class="chip" data-range="7" type="button">آخر ٧ أيام</button>
+        <button class="chip on" data-range="30" type="button">آخر ٣٠ يوماً</button>
+        <button class="chip" data-range="90" type="button">آخر ٩٠ يوماً</button>
+      </div>
+    </div>
+    <div class="grid g3" id="repSummary"></div>
+
+    <h2 class="sec">مقارنة أداء شركات الشحن</h2>
+    <div class="card">
+      <div class="tblwrap"><table class="t" id="repCarriers"></table></div>
+      <p class="mut small" style="margin:8px 0 0">التقييم المركّب = نسبة النجاح ٤٠٪ + الالتزام بالموعد ٤٠٪ + سرعة التوصيل ٢٠٪ — معيار معلن لا رقم سحري.</p>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card"><h3><span class="ic">🏙</span> أكثر الولايات شحناً</h3><div id="repCities"></div></div>
+      <div class="card"><h3><span class="ic">💸</span> تكلفة الشحن حسب الشهر</h3><div id="repCost"></div></div>
+    </div>
+
+    <h2 class="sec">أكثر العملاء شحناً</h2>
+    <div class="card"><div class="tblwrap"><table class="t" id="repCustomers"></table></div></div>
+  </section>
+
+</main>
+
+<!-- ============ لوحة تفاصيل الشحنة ============ -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="تفاصيل الشحنة">
+  <div class="dhead">
+    <span aria-hidden="true">📦</span>
+    <h3 id="drawerTitle">تفاصيل الشحنة</h3>
+    <button class="x" id="drawerClose" type="button" aria-label="إغلاق">✕</button>
+  </div>
+  <div class="dbody" id="drawerBody"></div>
+</aside>
+
+<footer class="app">
+  وحدة إدارة الشحن — نموذج مستقل للتجربة والاعتماد قبل الدمج في منصة متجرلينك
+</footer>
+
+<script src="assets/ui.js?v=1"></script>
+<script src="assets/data.js?v=1"></script>
+<script src="assets/app.js?v=1"></script>
+<script>
+  UI.initTabs("#shipRoot");
+  SHIP.init();
+  /* ألوان الرسوم تُقرأ من رموز التصميم وقت الرسم، فتُعاد عند تبديل الوضع. */
+  UI.initTheme("#themeBtn", () => SHIP.refresh());
+</script>
+</body>
+</html>

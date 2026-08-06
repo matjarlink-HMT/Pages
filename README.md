@@ -9,6 +9,9 @@
 - **متجرلينك** (`matjarlink.html`) — مؤشرات المشروع، الأفكار، رابط خطة التنفيذ (`HMT_Tasks.html`)، ومستشار الأعمال.
 - **الإعدادات** (`settings.html`) — مفتاح Claude API، تصدير/استعادة نسخة احتياطية.
 
+## مشروع منفصل داخل المستودع
+- **وحدة إدارة الشحن** (`shipping-prototype/`) — نموذج مستقل تماماً عن HMT OS، بهويته وملفاته الخاصة، لوحدة الشحن التي ستُدمج لاحقاً في منصة متجرلينك. التصميم الهندسي في [`docs/shipping-module/`](docs/shipping-module/README.md) والتنفيذ بمكدس متجرلينك (Laravel + MySQL) في [`matjarlink-shipping/`](matjarlink-shipping/README.md).
+
 ## المستشارون الأذكياء
 ثلاثة مستشارين يعملون بنموذج Claude Opus مباشرة من المتصفح، كل واحد يقرأ البيانات الحية المسجلة في المنصة. التفعيل يتطلب مفتاح API من [platform.claude.com](https://platform.claude.com/) يُدخل مرة واحدة في الإعدادات (يُحفظ في جهازك فقط).
 
