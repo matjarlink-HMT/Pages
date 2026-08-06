@@ -1,6 +1,8 @@
-/* ============ وحدة الشحن — النموذج التفاعلي ============
-   يعرض شاشات الوحدة كما ستكون داخل متجرلينك، ببيانات تجريبية في المتصفح.
-   المرجع الهندسي الكامل: docs/shipping-module/ */
+/* ============================================================================
+   وحدة إدارة الشحن — منطق النموذج
+   نموذج مستقل ببيانات تجريبية في المتصفح، يُدمج لاحقاً في منصة متجرلينك.
+   المرجع الهندسي الكامل: ../docs/shipping-module/
+   ============================================================================ */
 
 const SHIP = (() => {
   const S = SHIPDATA, ST = S.STATUS;
@@ -8,7 +10,7 @@ const SHIP = (() => {
   /* ================= أدوات ================= */
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const esc = HMT.esc;
+  const esc = UI.esc;
   const OMR = (n) => (Math.round((n || 0) * 1000) / 1000).toFixed(3) + " ر.ع";
   const num = (n) => (n || 0).toLocaleString("en");
   const pct = (n) => (Math.round(n * 10) / 10).toFixed(1) + "٪";
@@ -29,18 +31,18 @@ const SHIP = (() => {
   const days = (a, b) => (new Date(b) - new Date(a)) / 86400000;
 
   /* ================= الحالة ================= */
-  const KEY = "shipping";
+  const KEY = "state";
   let db = null, view = null;
 
   const load = () => {
-    db = HMT.get(KEY, null);
+    db = UI.get(KEY, null);
     if (!db || !db.shipments?.length) reset(true);
   };
-  const save = () => HMT.set(KEY, db);
+  const save = () => UI.set(KEY, db);
   const reset = (silent) => {
     db = { shipments: S.generate(), accounts: S.defaultAccounts(), seededAt: new Date().toISOString() };
     save();
-    if (!silent) { HMT.toast("↺ أُعيدت البيانات التجريبية"); renderAll(); }
+    if (!silent) { UI.toast("↺ أُعيدت البيانات التجريبية"); renderAll(); }
   };
   const acc = (code) => db.accounts.find(a => a.code === code);
 
@@ -140,10 +142,10 @@ const SHIP = (() => {
     const keys = Object.keys(buckets).sort();
     const step = range <= 7 ? 1 : range <= 30 ? 2 : 6;   // ~١٥ نقطة مهما كانت الفترة
     const pts = keys.filter((_, i) => i % step === 0);
-    HMT.lineChart($("#chartVolume"), [
+    UI.lineChart($("#chartVolume"), [
       { label: "عدد الشحنات", color: "#8E1B5B", points: pts.map(k => ({ x: k.slice(5), y: buckets[k].n })) },
     ]);
-    HMT.lineChart($("#chartCost"), [
+    UI.lineChart($("#chartCost"), [
       { label: "تكلفة الشحن (ر.ع)", color: "#F2A03D", points: pts.map(k => ({ x: k.slice(5), y: Math.round(buckets[k].c * 100) / 100 })) },
     ]);
 
@@ -181,7 +183,7 @@ const SHIP = (() => {
   const filtered = () => {
     let l = db.shipments.slice();
     if (F.quick === "attention") l = l.filter(s => s.isDelayed || s.isStale || ST[s.status].attention);
-    if (F.quick === "today") l = l.filter(s => dOnly(s.createdAt) === HMT.todayKey());
+    if (F.quick === "today") l = l.filter(s => dOnly(s.createdAt) === UI.todayKey());
     if (F.quick === "delayed") l = l.filter(s => s.isDelayed);
     if (F.quick === "stale") l = l.filter(s => s.isStale);
     if (F.quick === "cod") l = l.filter(s => s.isCod);
@@ -211,7 +213,7 @@ const SHIP = (() => {
     const counts = {
       all: db.shipments.length,
       attention: db.shipments.filter(s => s.isDelayed || s.isStale || ST[s.status].attention).length,
-      today: db.shipments.filter(s => dOnly(s.createdAt) === HMT.todayKey()).length,
+      today: db.shipments.filter(s => dOnly(s.createdAt) === UI.todayKey()).length,
       open: db.shipments.filter(s => !ST[s.status].terminal).length,
       delayed: db.shipments.filter(s => s.isDelayed).length,
       cod: db.shipments.filter(s => s.isCod).length,
@@ -453,7 +455,7 @@ const SHIP = (() => {
     W.step = 4; renderWizard();
     $("#wDone").style.display = "block";
     renderDashboard(); renderShipments();
-    HMT.toast("✅ تم إنشاء الشحنة");
+    UI.toast("✅ تم إنشاء الشحنة");
   };
 
   /* ================= شركات الشحن ================= */
@@ -538,9 +540,9 @@ const SHIP = (() => {
     const csv = "﻿" + [head, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
     const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
     const a = document.createElement("a");
-    a.href = url; a.download = `shipments-${HMT.todayKey()}.csv`; a.click();
+    a.href = url; a.download = `shipments-${UI.todayKey()}.csv`; a.click();
     URL.revokeObjectURL(url);
-    HMT.toast(`⬇️ صُدّرت ${list.length} شحنة`);
+    UI.toast(`⬇️ صُدّرت ${list.length} شحنة`);
   };
 
   /* ================= الربط ================= */
@@ -559,7 +561,7 @@ const SHIP = (() => {
       const t = e.target;
 
       const copy = t.closest("[data-copy]");
-      if (copy) { navigator.clipboard?.writeText(copy.dataset.copy); HMT.toast("📋 نُسخ: " + copy.dataset.copy); return; }
+      if (copy) { navigator.clipboard?.writeText(copy.dataset.copy); UI.toast("📋 نُسخ: " + copy.dataset.copy); return; }
 
       const attn = t.closest("[data-attn]");
       if (attn) { goShipments(attn.dataset.attn); return; }
@@ -582,8 +584,8 @@ const SHIP = (() => {
         const list = db.shipments.filter(s => sel.has(s.id));
         const k = bulk.dataset.bulk;
         if (k === "export") exportCsv(list);
-        else if (k === "labels") HMT.toast(`🖨 دُمجت ${list.length} بوليصة في ملف PDF واحد (محاكاة)`);
-        else if (k === "pickup") HMT.toast(`📮 جُدول استلام لـ ${list.length} شحنة (محاكاة)`);
+        else if (k === "labels") UI.toast(`🖨 دُمجت ${list.length} بوليصة في ملف PDF واحد (محاكاة)`);
+        else if (k === "pickup") UI.toast(`📮 جُدول استلام لـ ${list.length} شحنة (محاكاة)`);
         else { sel.clear(); renderShipments(); }
         return;
       }
@@ -599,26 +601,26 @@ const SHIP = (() => {
           a.error = ok ? "" : "بيانات الاعتماد مرفوضة (401) — يلزم تحديث المفتاح";
           a.checkedAt = new Date().toISOString();
           save(); renderCarriers();
-          HMT.toast(ok ? "✅ الاتصال ناجح" : "❌ فشل الاتصال — راجع المفتاح");
+          UI.toast(ok ? "✅ الاتصال ناجح" : "❌ فشل الاتصال — راجع المفتاح");
         }, 900);
         return;
       }
 
       const def = t.closest("[data-def]");
-      if (def) { db.accounts.forEach(a => a.isDefault = a.code === def.dataset.def); save(); renderCarriers(); HMT.toast("⭐ حُدّدت الشركة الافتراضية"); return; }
+      if (def) { db.accounts.forEach(a => a.isDefault = a.code === def.dataset.def); save(); renderCarriers(); UI.toast("⭐ حُدّدت الشركة الافتراضية"); return; }
 
       const act = t.closest("[data-act]");
       if (act) {
         const k = act.dataset.act;
-        if (k === "sync") HMT.toast("🔄 طُلب تحديث فوري من شركة الشحن (محاكاة)");
+        if (k === "sync") UI.toast("🔄 طُلب تحديث فوري من شركة الشحن (محاكاة)");
         if (k === "label") window.print();
-        if (k === "notify") HMT.toast("📤 أُرسل رابط التتبع للعميل عبر واتساب (محاكاة)");
+        if (k === "notify") UI.toast("📤 أُرسل رابط التتبع للعميل عبر واتساب (محاكاة)");
         if (k === "cancel") {
           const s = db.shipments.find(x => x.id === act.dataset.id);
           if (s && confirm(`إلغاء الشحنة ${s.ref}؟ سيُطلب الإلغاء من شركة الشحن أيضاً.`)) {
             s.status = "cancelled"; s.isDelayed = false; s.isStale = false; s.updatedAt = new Date().toISOString();
             s.events.push({ status: "cancelled", text: "أُلغيت الشحنة بواسطة المستخدم", location: "متجرلينك", at: s.updatedAt, source: "manual" });
-            save(); openShipment(s.id); renderAll(); HMT.toast("✕ أُلغيت الشحنة");
+            save(); openShipment(s.id); renderAll(); UI.toast("✕ أُلغيت الشحنة");
           }
         }
         if (k === "manual") {
@@ -628,7 +630,7 @@ const SHIP = (() => {
             const at = new Date().toISOString();
             s.events.push({ status: s.status, text: txt, location: "—", at, source: "manual" });
             s.updatedAt = at; s.isStale = false;
-            save(); openShipment(s.id); renderShipments(); HMT.toast("✅ سُجّل الحدث");
+            save(); openShipment(s.id); renderShipments(); UI.toast("✅ سُجّل الحدث");
           }
         }
         return;
@@ -683,8 +685,8 @@ const SHIP = (() => {
         isCod: $("#fCod").checked, notes: $("#fNotes").value.trim(), orderNo: $("#fOrder").value.trim(),
         bill: volumetric(),
       };
-      if (!d.name || !d.phone) return HMT.toast("أدخل اسم المستلم ورقم هاتفه");
-      if (!d.weight) return HMT.toast("أدخل وزن الطرد");
+      if (!d.name || !d.phone) return UI.toast("أدخل اسم المستلم ورقم هاتفه");
+      if (!d.weight) return UI.toast("أدخل وزن الطرد");
       W.data = d; W.picked = null; W.step = 2; renderWizard(); renderQuotes();
     });
     $("#backTo1").addEventListener("click", () => { W.step = 1; renderWizard(); });
@@ -697,7 +699,7 @@ const SHIP = (() => {
       $("#toStep3").disabled = false;
     });
     $("#toStep3").addEventListener("click", () => {
-      if (W.picked == null) return HMT.toast("اختر شركة الشحن أولاً");
+      if (W.picked == null) return UI.toast("اختر شركة الشحن أولاً");
       const q = W.quotes[W.picked], d = W.data;
       $("#confirmBox").innerHTML = `
         <div class="grid g2">
@@ -736,5 +738,5 @@ const SHIP = (() => {
     bind(); renderAll();
   };
 
-  return { init, reset };
+  return { init, reset, refresh: renderAll };
 })();
