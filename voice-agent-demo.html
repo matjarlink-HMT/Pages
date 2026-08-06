@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الوكيل الصوتي — متجرلينك</title>
+<meta name="description" content="وكيل صوتي بالذكاء الاصطناعي يرد على مكالمات متجرك ٢٤ ساعة، يجاوب على أسئلة عملائك ويتابع طلباتهم — من متجرلينك.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --maroon:#8E1B5B; --maroon-d:#6f1247; --orange:#F2A03D;
+  --ink:#2b2030; --muted:#7a6c80; --line:#ece2ee; --bg:#faf6fb; --card:#fff;
+  --green:#1f9d6b; --green-bg:#e6f6ef; --red:#d23b4e; --red-bg:#fdeaec;
+  --amber:#c9821a; --amber-bg:#fdf2e0; --blue:#2f6bd6; --blue-bg:#eaf1fd;
+  --radius:14px; --shadow:0 2px 10px rgba(142,27,91,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Tajawal","Segoe UI",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15.5px}
+a{color:var(--maroon);text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+h1,h2,h3{margin:0 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.small{font-size:13.5px}
+.mut{color:var(--muted)}
+.btn{display:inline-block;background:var(--maroon);color:#fff;border:0;padding:12px 22px;border-radius:11px;
+  font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;transition:.15s}
+.btn:hover{background:var(--maroon-d)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.orange{background:var(--orange);color:#4a2c00}
+.btn.orange:hover{filter:brightness(.95)}
+.btn.ghost{background:transparent;color:var(--maroon);border:2px solid var(--maroon)}
+.btn.ghost:hover{background:var(--maroon);color:#fff}
+.btn.sm{padding:7px 14px;font-size:13.5px;border-radius:9px}
+
+/* ---- شريط النموذج التجريبي ---- */
+.protobar{background:#2b2030;color:#fff;text-align:center;padding:9px 16px;font-size:13px}
+.protobar b{color:var(--orange)}
+
+/* ---- Hero ---- */
+.hero{background:linear-gradient(135deg,var(--maroon),var(--maroon-d));color:#fff;padding:52px 0 60px}
+.hero .brand{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.hero .brand .mark{width:46px;height:46px;background:#fff;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:25px}
+.hero .brand b{font-size:19px}
+.hero h1{font-size:clamp(27px,5vw,42px);line-height:1.35;max-width:19ch}
+.hero p.lead{font-size:17px;opacity:.92;max-width:52ch;margin:14px 0 26px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero .btn.ghost{color:#fff;border-color:rgba(255,255,255,.6)}
+.hero .btn.ghost:hover{background:#fff;color:var(--maroon)}
+.heroStats{display:flex;gap:28px;flex-wrap:wrap;margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.2)}
+.heroStats div b{display:block;font-size:26px;font-weight:800;line-height:1.2}
+.heroStats div span{font-size:13px;opacity:.82}
+
+section{padding:52px 0}
+section.alt{background:#fff;border-block:1px solid var(--line)}
+.sechead{text-align:center;max-width:60ch;margin:0 auto 30px}
+.sechead h2{font-size:clamp(21px,3.6vw,29px)}
+.sechead p{color:var(--muted);margin:0}
+
+.pain{border-inline-start:4px solid var(--red);padding-inline-start:16px}
+.pain b{display:block;font-size:17px}
+.step{position:relative;padding-top:6px}
+.step .n{width:36px;height:36px;border-radius:50%;background:var(--maroon);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-weight:800;margin-bottom:10px}
+
+/* ---- المحاكاة ---- */
+.demo{display:grid;grid-template-columns:minmax(280px,1fr) minmax(300px,1.25fr);gap:16px;align-items:start}
+@media(max-width:800px){.demo{grid-template-columns:1fr}}
+.phone{background:#1d1526;border-radius:26px;padding:16px;color:#fff;box-shadow:0 14px 40px rgba(29,21,38,.3)}
+.phone .top{display:flex;align-items:center;gap:11px;padding:6px 4px 14px;border-bottom:1px solid rgba(255,255,255,.13)}
+.phone .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--maroon),var(--orange));
+  display:flex;align-items:center;justify-content:center;font-size:20px}
+.phone .top b{font-size:15px;display:block}
+.phone .top span{font-size:12px;opacity:.62}
+.phone .timer{margin-inline-start:auto;font-size:12.5px;opacity:.72;font-variant-numeric:tabular-nums}
+.log{min-height:280px;max-height:340px;overflow-y:auto;padding:14px 2px;display:flex;flex-direction:column;gap:10px}
+.bub{max-width:86%;padding:9px 13px;border-radius:14px;font-size:14px;line-height:1.65;animation:pop .28s ease}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.bub.agent{background:rgba(255,255,255,.13);border-start-start-radius:4px}
+.bub.caller{background:var(--orange);color:#3d2400;margin-inline-start:auto;border-start-end-radius:4px;font-weight:500}
+.bub .who{display:block;font-size:11px;opacity:.65;margin-bottom:2px}
+.bub.sys{background:transparent;border:1px dashed rgba(255,255,255,.28);color:rgba(255,255,255,.7);
+  font-size:12.5px;max-width:100%;text-align:center;padding:6px 10px}
+.wave{display:flex;gap:3px;align-items:flex-end;height:15px}
+.wave i{width:3px;background:currentColor;border-radius:2px;animation:w .9s infinite ease-in-out}
+.wave i:nth-child(2){animation-delay:.15s}.wave i:nth-child(3){animation-delay:.3s}
+.wave i:nth-child(4){animation-delay:.45s}.wave i:nth-child(5){animation-delay:.6s}
+@keyframes w{0%,100%{height:4px}50%{height:15px}}
+.scen{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.scen button{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:7px 15px;
+  font-family:inherit;font-size:13.5px;font-weight:700;color:var(--ink);cursor:pointer;transition:.15s}
+.scen button:hover{border-color:var(--maroon);color:var(--maroon)}
+.scen button.on{background:var(--maroon);border-color:var(--maroon);color:#fff}
+
+.panel h4{margin:0 0 4px;font-size:14px;color:var(--muted);font-weight:700}
+.switch{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--green-bg);border-radius:11px;font-weight:700;font-size:14px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(31,157,107,.18)}
+.fld{width:100%;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;
+  font-size:14px;background:#fff;color:var(--ink);margin-top:4px}
+.fld:focus{outline:0;border-color:var(--maroon)}
+label.lb{display:block;font-size:13px;font-weight:700;margin-top:11px}
+.callrow{display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.callrow:last-child{border-bottom:0}
+.callrow .t{color:var(--muted);font-size:12.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tag{font-size:11.5px;font-weight:800;padding:2px 9px;border-radius:20px;white-space:nowrap;margin-inline-start:auto}
+.tag.ok{background:var(--green-bg);color:var(--green)}
+.tag.tr{background:var(--amber-bg);color:var(--amber)}
+
+/* ---- الباقات ---- */
+.plan{display:flex;flex-direction:column;position:relative}
+.plan.best{border:2px solid var(--maroon);box-shadow:0 8px 26px rgba(142,27,91,.14)}
+.plan .flag{position:absolute;top:-12px;inset-inline-start:50%;transform:translateX(50%);background:var(--maroon);
+  color:#fff;font-size:12px;font-weight:800;padding:3px 15px;border-radius:20px}
+.plan .price{font-size:33px;font-weight:800;color:var(--maroon);line-height:1.2;margin:6px 0}
+.plan .price small{font-size:14px;font-weight:500;color:var(--muted)}
+.plan ul{list-style:none;padding:0;margin:12px 0 18px;font-size:14px}
+.plan ul li{padding:5px 0;padding-inline-start:24px;position:relative}
+.plan ul li::before{content:"✓";position:absolute;inset-inline-start:0;color:var(--green);font-weight:800}
+.plan .btn{margin-top:auto;text-align:center}
+
+/* ---- FAQ ---- */
+details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 17px;margin-bottom:9px}
+details[open]{border-color:var(--maroon)}
+summary{cursor:pointer;font-weight:700;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";float:left;color:var(--maroon);font-weight:800}
+details[open] summary::after{content:"－"}
+details p{margin:10px 0 0;color:var(--muted);font-size:14.5px}
+
+/* ---- النموذج ---- */
+.err{color:var(--red);font-size:12.5px;margin-top:3px;display:none}
+.fld.bad{border-color:var(--red);background:var(--red-bg)}
+.fld.bad+.err{display:block}
+.note{background:var(--blue-bg);border:1px solid #cfe0fa;border-radius:11px;padding:12px 15px;font-size:13.5px}
+.ok-box{background:var(--green-bg);border:1px solid #b9e4cf;border-radius:12px;padding:22px;text-align:center}
+.ok-box .big{font-size:40px;line-height:1}
+footer{background:#2b2030;color:rgba(255,255,255,.72);padding:26px 0;font-size:13.5px;text-align:center}
+footer a{color:var(--orange)}
+.adminwrap{display:none}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th,table.t td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:right}
+table.t th{background:#f7f1f8;font-weight:800;font-size:12.5px}
+.tblwrap{overflow-x:auto}
+</style>
+</head>
+<body>
+
+<div class="protobar">
+  🧪 <b>نموذج تجريبي</b> — المكالمات في هذه الصفحة <b>محاكاة توضيحية</b> وليست مكالمات حقيقية. الخدمة قيد التجهيز، والتسجيل هنا لحجز أولوية التجربة.
+</div>
+
+<!-- ======================= Hero ======================= -->
+<div class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">🛒</div>
+      <div><b>متجرلينك</b><div class="small" style="opacity:.8;margin-top:-4px">منصة المتاجر الإلكترونية</div></div>
+    </div>
+    <h1>وكيل صوتي يرد على عملاء متجرك — حتى وأنت نايم</h1>
+    <p class="lead">
+      يرد على المكالمة من أول رنة، يعرف طلبات متجرك ومخزونك وأسعارك، يجاوب باللهجة الخليجية،
+      ويحوّل لك الحالات اللي تحتاجك أنت فقط.
+    </p>
+    <div class="cta">
+      <a class="btn orange" href="#demo">▶ جرّب المحاكاة الآن</a>
+      <a class="btn ghost" href="#signup">سجّل اهتمامك</a>
+    </div>
+    <div class="heroStats">
+      <div><b>٢٤/٧</b><span>يرد بدون إجازة ولا استراحة</span></div>
+      <div><b>&lt; ٢ ثانية</b><span>زمن الرد على المتصل</span></div>
+      <div><b>٠ إعداد</b><span>يقرأ بيانات متجرك تلقائياً</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= المشكلة ======================= -->
+<section>
+  <div class="wrap">
+    <div class="sechead">
+      <h2>كل مكالمة تفوتك = طلب راح لغيرك</h2>
+      <p>التاجر الصغير ما يقدر يرد ويجهّز الطلبات ويسوّق في نفس الوقت. والزبون ما ينتظر.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card pain">
+        <b>مكالمات تضيع</b>
+        <p class="small mut" style="margin:4px 0 0">أنت تجهّز الطلبات أو في السوق أو نايم — والجوال يرن. المتصل ما يعاود، يروح للمتجر اللي رد عليه.</p>
+      </div>
+      <div class="card pain">
+        <b>نفس السؤال ١٠ مرات</b>
+        <p class="small mut" style="margin:4px 0 0">«وين طلبي؟» «كم التوصيل؟» «متوفر مقاس L؟» — أسئلة متكررة تاكل ساعات من يومك بدون ما تزيد مبيعاتك.</p>
+      </div>
+      <div class="card pain">
+        <b>موظف يكلّف كثير</b>
+        <p class="small mut" style="margin:4px 0 0">موظف خدمة عملاء براتب ونهاية خدمة وإجازات — عبء ثقيل على متجر لسا في بداياته.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= كيف يشتغل ======================= -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sechead">
+      <h2>ثلاث خطوات — وينشغل عنك التلفون</h2>
+      <p>ما فيه برمجة ولا تدريب ولا ربط يدوي. الوكيل مبني داخل متجرلينك ويقرأ بياناتك مباشرة.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card step">
+        <div class="n">١</div>
+        <b>فعّل الخدمة</b>
+        <p class="small mut" style="margin:4px 0 0">زر واحد من لوحة متجرك. اختر صوت الوكيل، ساعات العمل، ورقمك للتحويل عند الحاجة.</p>
+      </div>
+      <div class="card step">
+        <div class="n">٢</div>
+        <b>يقرأ متجرك تلقائياً</b>
+        <p class="small mut" style="margin:4px 0 0">المنتجات، الأسعار، المخزون، حالة الطلبات، أسعار التوصيل، وسياسة الاسترجاع — كلها موجودة عندنا أصلاً.</p>
+      </div>
+      <div class="card step">
+        <div class="n">٣</div>
+        <b>يرد ويسجّل لك</b>
+        <p class="small mut" style="margin:4px 0 0">كل مكالمة يوصلك ملخّصها، والحالات الصعبة يحوّلها لك مباشرة مع خلفية كاملة عن المتصل.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= المحاكاة ======================= -->
+<section id="demo">
+  <div class="wrap">
+    <div class="sechead">
+      <h2>جرّبه بنفسك</h2>
+      <p>اختر موقفاً من مواقف عملائك اليومية وشوف كيف يتصرف الوكيل — ووش يشوف التاجر في لوحته.</p>
+    </div>
+
+    <div class="scen" id="scen"></div>
+
+    <div class="demo">
+      <!-- الهاتف -->
+      <div class="phone">
+        <div class="top">
+          <div class="av">🔊</div>
+          <div>
+            <b id="phTitle">متجر ندى للعطور</b>
+            <span id="phState">جاهز — اختر موقفاً وابدأ</span>
+          </div>
+          <div class="timer" id="phTimer">٠٠:٠٠</div>
+        </div>
+        <div class="log" id="log">
+          <div class="bub sys">اضغط «ابدأ المكالمة» لتشغيل المحاكاة</div>
+        </div>
+        <div style="display:flex;gap:8px;padding-top:10px;border-top:1px solid rgba(255,255,255,.13)">
+          <button class="btn orange sm" id="playBtn" style="flex:1">📞 ابدأ المكالمة</button>
+          <button class="btn ghost sm" id="resetBtn" style="color:#fff;border-color:rgba(255,255,255,.45)">↺</button>
+        </div>
+      </div>
+
+      <!-- لوحة التاجر -->
+      <div class="card panel">
+        <h3 style="font-size:17px">🖥 لوحة التاجر</h3>
+        <p class="small mut" style="margin:0 0 12px">هذا اللي تشوفه أنت داخل متجرلينك.</p>
+
+        <div class="switch"><span class="dot"></span> الوكيل الصوتي مُفعّل</div>
+
+        <div class="grid g2" style="gap:10px">
+          <div>
+            <label class="lb">صوت الوكيل</label>
+            <select class="fld" id="cfgVoice">
+              <option>خليجي — أنثى (هدى)</option>
+              <option>خليجي — ذكر (سالم)</option>
+              <option>عربي فصيح — أنثى</option>
+            </select>
+          </div>
+          <div>
+            <label class="lb">ساعات الرد</label>
+            <select class="fld" id="cfgHours">
+              <option>٢٤ ساعة / ٧ أيام</option>
+              <option>خارج الدوام فقط</option>
+              <option>عند انشغال التاجر فقط</option>
+            </select>
+          </div>
+        </div>
+        <label class="lb">رقم التحويل للبشري</label>
+        <input class="fld" id="cfgTransfer" value="9x xxx xxx" dir="ltr" style="text-align:right">
+
+        <label class="lb" style="margin-top:16px">📋 سجل المكالمات اليوم</label>
+        <div id="callLog"></div>
+
+        <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px">
+          <div class="card" style="padding:11px;text-align:center;box-shadow:none">
+            <div class="small mut">مكالمات</div><b style="font-size:20px" id="mCalls">٠</b>
+          </div>
+          <div class="card" style="padding:11px;text-align:center;box-shadow:none">
+            <div class="small mut">حُلّت آلياً</div><b style="font-size:20px;color:var(--green)" id="mSolved">٠</b>
+          </div>
+          <div class="card" style="padding:11px;text-align:center;box-shadow:none">
+            <div class="small mut">دقائق</div><b style="font-size:20px" id="mMins">٠٫٠</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= الباقات ======================= -->
+<section class="alt" id="plans">
+  <div class="wrap">
+    <div class="sechead">
+      <h2>الباقات</h2>
+      <p>إضافة على باقة متجرك الحالية — بدون عقد سنوي، وتقدر توقفها أي وقت.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card plan">
+        <h3>تجربة</h3>
+        <div class="price">مجاناً</div>
+        <div class="small mut">لأول شهر</div>
+        <ul>
+          <li>٣٠ دقيقة مكالمات</li>
+          <li>كل مزايا باقة «رد»</li>
+          <li>إعداد كامل من فريقنا</li>
+          <li>بدون بطاقة ولا التزام</li>
+        </ul>
+        <a class="btn ghost" href="#signup">ابدأ التجربة</a>
+      </div>
+      <div class="card plan best">
+        <div class="flag">الأكثر طلباً</div>
+        <h3>رد</h3>
+        <div class="price">١٩ <small>ر.ع / شهر</small></div>
+        <div class="small mut">١٠٠ دقيقة شهرياً</div>
+        <ul>
+          <li>رد على المكالمات ٢٤/٧</li>
+          <li>حالة الطلب والشحن</li>
+          <li>أسعار المنتجات وتوفّرها</li>
+          <li>تحويل للبشري عند الحاجة</li>
+          <li>ملخّص كل مكالمة على واتساب</li>
+        </ul>
+        <a class="btn" href="#signup">سجّل اهتمامك</a>
+      </div>
+      <div class="card plan">
+        <h3>رد بلس</h3>
+        <div class="price">٤٥ <small>ر.ع / شهر</small></div>
+        <div class="small mut">٣٠٠ دقيقة شهرياً</div>
+        <ul>
+          <li>كل مزايا باقة «رد»</li>
+          <li>مكالمات صادرة لتأكيد الطلبات</li>
+          <li>متابعة السلات المتروكة</li>
+          <li>تقارير أسئلة العملاء الشهرية</li>
+          <li>أولوية في الدعم</li>
+        </ul>
+        <a class="btn ghost" href="#signup">سجّل اهتمامك</a>
+      </div>
+    </div>
+    <p class="small mut" style="text-align:center;margin-top:18px">
+      الدقيقة الإضافية بعد استهلاك الباقة: ٠٫١٥٠ ر.ع · الأسعار شاملة ولا توجد رسوم إعداد.
+    </p>
+  </div>
+</section>
+
+<!-- ======================= الأسئلة ======================= -->
+<section>
+  <div class="wrap" style="max-width:760px">
+    <div class="sechead"><h2>أسئلة يسألها التجار</h2></div>
+    <details><summary>هل الوكيل يفهم اللهجة العُمانية؟</summary>
+      <p>هذا أول شي نختبره قبل ما نطلق الخدمة لأي تاجر. ولو ما فهم المتصل مرتين متتاليتين، يحوّل المكالمة لك تلقائياً بدل ما يحرج الزبون.</p></details>
+    <details><summary>هل يعرف يكذب أو يعطي سعر غلط؟</summary>
+      <p>لا. الأسعار والمخزون وحالة الطلب يقرأها من قاعدة بيانات متجرك لحظياً — ما يعتمد على تخمين. وأي سؤال خارج نطاقه يقول «أحوّلك لصاحب المتجر» بدل ما يجاوب من عنده.</p></details>
+    <details><summary>وش يصير لو الزبون طلب يتكلم مع بني آدم؟</summary>
+      <p>يحوّل المكالمة فوراً لرقمك المسجّل، ويوصلك ملخّص المحادثة قبل ما ترد — فتعرف القصة من أول ثانية.</p></details>
+    <details><summary>هل المكالمات تُسجَّل؟ ووش يصير ببيانات زباني؟</summary>
+      <p>يُخبَر المتصل بالتسجيل في بداية المكالمة. البيانات تخصك أنت وحدك، ما تُشارك مع أي تاجر ثاني، وتقدر تطلب حذفها أو تصديرها في أي وقت.</p></details>
+    <details><summary>ولو تجاوزت الدقائق؟</summary>
+      <p>يوصلك تنبيه عند استهلاك ٨٠٪ من باقتك. بعد الحد، الدقيقة الإضافية بـ٠٫١٥٠ ر.ع — وتقدر تحدد سقفاً شهرياً يوقف الخدمة عنده بدل المفاجآت.</p></details>
+    <details><summary>لازم أكون مشترك في متجرلينك؟</summary>
+      <p>الخدمة مصمّمة لتجار متجرلينك لأنها تقرأ بيانات متجرك مباشرة. لو ما زلت خارج المنصة، سجّل اهتمامك وبنرتب لك الاثنين مع بعض.</p></details>
+  </div>
+</section>
+
+<!-- ======================= نموذج التسجيل ======================= -->
+<section class="alt" id="signup">
+  <div class="wrap" style="max-width:760px">
+    <div class="sechead">
+      <h2>سجّل اهتمامك</h2>
+      <p>عبّي النموذج وبنتواصل معك خلال يومي عمل لترتيب التجربة المجانية. ما راح نطلب منك أي دفع الآن.</p>
+    </div>
+
+    <div class="card" id="formCard">
+      <form id="leadForm" novalidate>
+        <div class="grid g2" style="gap:12px">
+          <div>
+            <label class="lb">اسمك <span style="color:var(--red)">*</span></label>
+            <input class="fld" id="fName" placeholder="مثال: إبراهيم">
+            <div class="err">اكتب اسمك من فضلك</div>
+          </div>
+          <div>
+            <label class="lb">اسم المتجر <span style="color:var(--red)">*</span></label>
+            <input class="fld" id="fStore" placeholder="مثال: متجر ندى للعطور">
+            <div class="err">اكتب اسم متجرك</div>
+          </div>
+          <div>
+            <label class="lb">رقم الواتساب <span style="color:var(--red)">*</span></label>
+            <input class="fld" id="fPhone" inputmode="tel" placeholder="9xxxxxxx" dir="ltr" style="text-align:right">
+            <div class="err">رقم عُماني من ٨ أرقام يبدأ بـ٧ أو ٩ (أو أضف مفتاح دولتك)</div>
+          </div>
+          <div>
+            <label class="lb">مجال المتجر</label>
+            <select class="fld" id="fSector">
+              <option>عطور وبخور</option><option>ملابس وأزياء</option><option>مستحضرات تجميل</option>
+              <option>إلكترونيات</option><option>مطاعم وحلويات</option><option>مستلزمات منزل</option>
+              <option>هدايا ومناسبات</option><option>أخرى</option>
+            </select>
+          </div>
+          <div>
+            <label class="lb">كم مكالمة تفوّتك يومياً؟</label>
+            <select class="fld" id="fMissed">
+              <option>أقل من ٣</option><option selected>٣ – ٥</option><option>٦ – ١٠</option><option>أكثر من ١٠</option>
+            </select>
+          </div>
+          <div>
+            <label class="lb">كم طلب شهرياً تقريباً؟</label>
+            <select class="fld" id="fOrders">
+              <option>أقل من ٥٠</option><option selected>٥٠ – ٢٠٠</option><option>٢٠٠ – ٥٠٠</option><option>أكثر من ٥٠٠</option>
+            </select>
+          </div>
+          <div>
+            <label class="lb">الباقة اللي تهمك</label>
+            <select class="fld" id="fPlan">
+              <option>تجربة مجانية أول</option><option>رد — ١٩ ر.ع</option>
+              <option>رد بلس — ٤٥ ر.ع</option><option>ما زلت أستكشف</option>
+            </select>
+          </div>
+          <div>
+            <label class="lb">هل متجرك على متجرلينك؟</label>
+            <select class="fld" id="fMember">
+              <option>نعم</option><option>لا — على منصة ثانية</option><option>لا — ما عندي متجر إلكتروني بعد</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="lb">أكثر ٣ أسئلة يكررها عملاؤك</label>
+        <textarea class="fld" id="fQs" rows="3" placeholder="مثال: وين طلبي؟ · كم التوصيل لصلالة؟ · متوفر مقاس L؟"></textarea>
+        <div class="small mut" style="margin-top:4px">هذي الأسئلة نستخدمها لتجهيز وكيلك قبل أول مكالمة.</div>
+
+        <label style="display:flex;gap:9px;align-items:flex-start;margin-top:16px;font-size:14px;cursor:pointer">
+          <input type="checkbox" id="fConsent" style="margin-top:7px">
+          <span>أوافق على تواصل فريق متجرلينك معي بخصوص هذه الخدمة.</span>
+        </label>
+        <div class="err" id="consentErr">لازم توافق على التواصل حتى نقدر نرد عليك</div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+          <button type="submit" class="btn" style="flex:1;min-width:200px">✅ سجّل اهتمامي</button>
+          <button type="button" class="btn ghost" id="waBtn">💬 أرسله عبر واتساب</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="ok-box" id="okCard" style="display:none">
+      <div class="big">🎉</div>
+      <h3 style="margin:10px 0 6px">وصلنا طلبك</h3>
+      <p class="mut" style="margin:0 0 16px" id="okMsg"></p>
+      <button class="btn ghost sm" id="againBtn">تسجيل متجر آخر</button>
+    </div>
+
+    <div class="note" style="margin-top:16px">
+      <b>ملاحظة تقنية:</b> هذه الصفحة نموذج تجريبي بدون خادم — التسجيلات تُحفظ في متصفح هذا الجهاز فقط.
+      زر واتساب يرسل البيانات مباشرة لفريق متجرلينك، وهو الطريقة المضمونة لوصول طلبك.
+    </div>
+
+    <!-- لوحة إدارة التسجيلات: افتح الصفحة بإضافة ?admin=1 -->
+    <div class="adminwrap" id="adminWrap">
+      <div class="card" style="margin-top:22px">
+        <h3 style="font-size:17px">🔐 التسجيلات المحفوظة <span class="small mut" id="adminCount"></span></h3>
+        <div class="tblwrap"><table class="t" id="adminTable"></table></div>
+        <div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap">
+          <button class="btn sm" id="csvBtn">⬇ تصدير CSV</button>
+          <button class="btn ghost sm" id="clearBtn">🗑 مسح الكل</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>متجرلينك</b> — منصة المتاجر الإلكترونية · سلطنة عُمان<br>
+    <span class="small">نموذج تجريبي لخدمة الوكيل الصوتي · <a href="voice-agent.html">الدراسة التنفيذية الداخلية</a></span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  /* ============ إعدادات — عدّلها قبل مشاركة الرابط ============ */
+  const CONFIG = {
+    whatsapp: "",              // رقم استقبال الطلبات بصيغة دولية بدون + مثل "96890000000"
+    storeName: "متجر ندى للعطور",
+  };
+
+  const AR = (n) => String(n).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+
+  /* ==================== المحاكاة ==================== */
+  const SCENARIOS = [
+    {
+      key: "order", label: "📦 وين طلبي؟", secs: 48, outcome: "ok", topic: "استعلام عن طلب",
+      lines: [
+        ["a", `أهلاً وسهلاً بـ${CONFIG.storeName}، معك المساعد الآلي. كيف أقدر أخدمك؟`],
+        ["c", "أبغى أعرف وين وصل طلبي"],
+        ["a", "أكيد. عطني رقم الطلب أو رقم جوالك المسجّل."],
+        ["c", "تسعة خمسة خمسة خمسة أربعة أربعة ثلاثة ثلاثة"],
+        ["s", "🔎 يقرأ الطلبات من متجرلينك…"],
+        ["a", "طلبك رقم ١٢٣٤ خرج للتوصيل اليوم الساعة ٩ الصبح مع أسياد إكسبرس، ومتوقع يوصلك قبل المغرب. تبيني أرسل لك رابط التتبّع على الواتساب؟"],
+        ["c", "إي أرسله"],
+        ["a", "تم الإرسال. شي ثاني أقدر أساعدك فيه؟"],
+        ["c", "لا شكراً"],
+        ["s", "✅ حُلّت آلياً — بدون تدخل التاجر"],
+      ],
+    },
+    {
+      key: "price", label: "🏷 كم سعره ومتوفر؟", secs: 62, outcome: "ok", topic: "سعر وتوفّر منتج",
+      lines: [
+        ["a", `أهلاً وسهلاً بـ${CONFIG.storeName}، كيف أقدر أخدمك؟`],
+        ["c", "عندكم عطر عود ملكي؟ وكم سعره؟"],
+        ["s", "🔎 يقرأ الكتالوج والمخزون…"],
+        ["a", "إي متوفر. عود ملكي ١٠٠ مل بـ٢٤ ريال، وباقي منه ٧ قطع بالمخزون."],
+        ["c", "وكم التوصيل لصلالة؟"],
+        ["a", "التوصيل لصلالة ٣ ريال، ويوصلك خلال يومين لثلاثة أيام عمل."],
+        ["c", "زين، سجّل لي وحدة"],
+        ["s", "🛒 أنشأ سلة وأرسل رابط الدفع على الواتساب"],
+        ["a", "تمام، أرسلت لك رابط الدفع على واتساب. أول ما تدفع يجهز طلبك على طول."],
+        ["s", "✅ حُلّت آلياً — أضاف طلباً"],
+      ],
+    },
+    {
+      key: "complaint", label: "😠 شكوى", secs: 27, outcome: "tr", topic: "شكوى — منتج تالف",
+      lines: [
+        ["a", `أهلاً وسهلاً بـ${CONFIG.storeName}، كيف أقدر أخدمك؟`],
+        ["c", "وصلني منتج مكسور وأبغى أرجّعه!"],
+        ["a", "أعتذر منك على هالشي، وهذا مو المفروض يصير. عطني رقم الطلب لو تكرمت."],
+        ["c", "١١٩٨"],
+        ["s", "📝 سجّل شكوى على الطلب ١١٩٨ وأرفق سجل المكالمة"],
+        ["a", "سجّلت شكواك، وبحوّلك لصاحب المتجر مباشرة عشان يحل لك الموضوع. لحظة من فضلك."],
+        ["s", "↗ حُوّلت للتاجر — مع ملخّص المكالمة قبل الرد"],
+      ],
+    },
+    {
+      key: "night", label: "🌙 مكالمة ١١:٤٠ ليلاً", secs: 34, outcome: "ok", topic: "استفسار خارج الدوام",
+      lines: [
+        ["s", "⏰ ١١:٤٠ مساءً — التاجر نايم، الوكيل يرد"],
+        ["a", `أهلاً وسهلاً بـ${CONFIG.storeName}، كيف أقدر أخدمك؟`],
+        ["c", "لسا فاتحين؟"],
+        ["a", "المتجر يستقبل الطلبات ٢٤ ساعة عبر الموقع، والتجهيز والتوصيل يبدأ من ٩ الصبح. تبيني أساعدك تسوّي طلبك الحين؟"],
+        ["c", "إي أبغى بخور مسك"],
+        ["s", "🔎 يقرأ الكتالوج…"],
+        ["a", "عندنا بخور مسك أبيض بـ٨ ريال ومسك ملكي بـ١٤ ريال. أي وحدة تناسبك؟"],
+        ["c", "الملكي"],
+        ["s", "🛒 أنشأ سلة وأرسل رابط الدفع"],
+        ["s", "✅ حُلّت آلياً — طلب كان بيضيع لو ما فيه وكيل"],
+      ],
+    },
+  ];
+
+  let cur = SCENARIOS[0], playing = false, timers = [], calls = [], secs = 0, tick = null;
+
+  /* --- أزرار المواقف --- */
+  $("scen").innerHTML = SCENARIOS.map((s, i) =>
+    `<button data-s="${i}" class="${i === 0 ? "on" : ""}">${s.label}</button>`).join("");
+  $("scen").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-s]");
+    if (!b || playing) return;
+    document.querySelectorAll("#scen button").forEach(x => x.classList.remove("on"));
+    b.classList.add("on");
+    cur = SCENARIOS[+b.dataset.s];
+    resetCall();
+  });
+
+  const fmtTimer = (s) => AR(String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"));
+  const clearTimers = () => { timers.forEach(clearTimeout); timers = []; clearInterval(tick); tick = null; };
+
+  const resetCall = () => {
+    clearTimers(); playing = false; secs = 0;
+    $("log").innerHTML = `<div class="bub sys">اضغط «ابدأ المكالمة» لتشغيل المحاكاة</div>`;
+    $("phState").textContent = "جاهز — اختر موقفاً وابدأ";
+    $("phTimer").textContent = "٠٠:٠٠";
+    $("playBtn").disabled = false;
+    $("playBtn").textContent = "📞 ابدأ المكالمة";
+  };
+
+  const addBubble = (kind, text) => {
+    const log = $("log");
+    const el = document.createElement("div");
+    if (kind === "s") { el.className = "bub sys"; el.textContent = text; }
+    else {
+      el.className = "bub " + (kind === "a" ? "agent" : "caller");
+      el.innerHTML = `<span class="who">${kind === "a" ? "الوكيل الصوتي" : "المتصل"}</span>${esc(text)}`;
+    }
+    log.appendChild(el);
+    log.scrollTop = log.scrollHeight;
+  };
+
+  const addTyping = (kind) => {
+    const log = $("log");
+    const el = document.createElement("div");
+    el.className = "bub " + (kind === "a" ? "agent" : "caller");
+    el.id = "typing";
+    el.innerHTML = `<span class="wave"><i></i><i></i><i></i><i></i><i></i></span>`;
+    log.appendChild(el);
+    log.scrollTop = log.scrollHeight;
+  };
+  const dropTyping = () => document.getElementById("typing")?.remove();
+
+  const play = () => {
+    if (playing) return;
+    playing = true; secs = 0;
+    $("log").innerHTML = "";
+    $("playBtn").disabled = true;
+    $("playBtn").textContent = "⏺ جارية…";
+    $("phState").textContent = "مكالمة واردة — الوكيل يرد";
+    tick = setInterval(() => { secs++; $("phTimer").textContent = fmtTimer(secs); }, 1000);
+
+    let t = 350;
+    cur.lines.forEach(([kind, text]) => {
+      const think = kind === "s" ? 420 : Math.min(1500, 380 + text.length * 16);
+      if (kind !== "s") {
+        timers.push(setTimeout(() => addTyping(kind), t));
+        t += think;
+        timers.push(setTimeout(() => { dropTyping(); addBubble(kind, text); }, t));
+      } else {
+        t += think;
+        timers.push(setTimeout(() => addBubble(kind, text), t));
+      }
+      t += 420;
+    });
+
+    timers.push(setTimeout(() => {
+      clearInterval(tick); tick = null;
+      playing = false;
+      $("playBtn").disabled = false;
+      $("playBtn").textContent = "↻ شغّلها مرة ثانية";
+      $("phState").textContent = "انتهت المكالمة";
+      logCall(cur);
+    }, t + 300));
+  };
+
+  /* --- سجل مكالمات لوحة التاجر --- */
+  const START = 9 * 60 + 12;
+  const renderLog = () => {
+    $("callLog").innerHTML = calls.length
+      ? calls.slice().reverse().map(c => `
+        <div class="callrow">
+          <span class="t">${c.time}</span>
+          <span>${esc(c.topic)}</span>
+          <span class="tag ${c.outcome}">${c.outcome === "ok" ? "✔ حُلّت آلياً" : "↗ حُوّلت لك"}</span>
+        </div>`).join("")
+      : `<div class="small mut" style="padding:10px 0">لا مكالمات بعد — شغّل المحاكاة على اليسار.</div>`;
+
+    const mins = calls.reduce((s, c) => s + c.secs, 0) / 60;
+    $("mCalls").textContent = AR(calls.length);
+    $("mSolved").textContent = AR(calls.filter(c => c.outcome === "ok").length);
+    $("mMins").textContent = AR(mins.toFixed(1)).replace(".", "٫");
+  };
+
+  const logCall = (s) => {
+    const m = START + calls.length * 47;
+    calls.push({
+      time: AR(String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0")),
+      topic: s.topic, outcome: s.outcome, secs: s.secs,
+    });
+    renderLog();
+  };
+
+  $("playBtn").addEventListener("click", play);
+  $("resetBtn").addEventListener("click", () => { resetCall(); calls = []; renderLog(); });
+  renderLog();
+
+  /* ==================== النموذج ==================== */
+  const KEY = "matjarlink_va_leads";
+  const readLeads = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
+  const writeLeads = (a) => localStorage.setItem(KEY, JSON.stringify(a));
+
+  const FIELDS = [
+    ["fName", "الاسم"], ["fStore", "المتجر"], ["fPhone", "الواتساب"], ["fSector", "المجال"],
+    ["fMissed", "مكالمات فائتة"], ["fOrders", "الطلبات"], ["fPlan", "الباقة"],
+    ["fMember", "على متجرلينك"], ["fQs", "أسئلة العملاء"],
+  ];
+
+  const normPhone = (v) => String(v).replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[^\d+]/g, "");
+  const validPhone = (v) => {
+    const p = normPhone(v);
+    if (/^\+?968\d{8}$/.test(p)) return true;      // عُمان بمفتاح الدولة
+    if (/^[79]\d{7}$/.test(p)) return true;         // عُمان محلي
+    return /^\+\d{9,15}$/.test(p);                  // أي رقم دولي كامل
+  };
+
+  const validate = () => {
+    let ok = true;
+    [["fName", v => v.trim().length >= 2], ["fStore", v => v.trim().length >= 2], ["fPhone", validPhone]]
+      .forEach(([id, fn]) => {
+        const el = $(id), good = fn(el.value);
+        el.classList.toggle("bad", !good);
+        if (!good) ok = false;
+      });
+    const consent = $("fConsent").checked;
+    $("consentErr").style.display = consent ? "none" : "block";
+    if (!consent) ok = false;
+    if (!ok) document.querySelector(".fld.bad")?.focus();
+    return ok;
+  };
+
+  const collect = () => {
+    const o = { date: new Date().toISOString().slice(0, 16).replace("T", " ") };
+    FIELDS.forEach(([id, label]) => o[label] = $(id).value.trim());
+    o["الواتساب"] = normPhone(o["الواتساب"]);
+    return o;
+  };
+
+  const waText = (o) => encodeURIComponent(
+    "طلب تجربة الوكيل الصوتي — متجرلينك\n" +
+    FIELDS.map(([, l]) => `${l}: ${o[l] || "—"}`).join("\n")
+  );
+
+  const showThanks = (msg) => {
+    $("okMsg").textContent = msg;
+    $("formCard").style.display = "none";
+    $("okCard").style.display = "block";
+    $("okCard").scrollIntoView({ block: "center" });
+  };
+
+  $("leadForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+    const o = collect();
+    writeLeads(readLeads().concat(o));
+    renderAdmin();
+    showThanks(`شكراً ${o["الاسم"]} — بنتواصل معك على ${o["الواتساب"]} خلال يومي عمل لترتيب تجربة متجر «${o["المتجر"]}».`);
+  });
+
+  $("waBtn").addEventListener("click", () => {
+    if (!validate()) return;
+    const o = collect();
+    writeLeads(readLeads().concat(o));
+    renderAdmin();
+    if (!CONFIG.whatsapp) {
+      showThanks("انحفظ طلبك على هذا الجهاز. رقم واتساب الاستقبال غير مضبوط في هذا النموذج التجريبي بعد.");
+      return;
+    }
+    window.open(`https://wa.me/${CONFIG.whatsapp}?text=${waText(o)}`, "_blank", "noopener");
+    showThanks("فتحنا لك واتساب — أرسل الرسالة وبنرد عليك خلال يومي عمل.");
+  });
+
+  $("againBtn").addEventListener("click", () => {
+    $("leadForm").reset();
+    document.querySelectorAll(".fld.bad").forEach(el => el.classList.remove("bad"));
+    $("consentErr").style.display = "none";
+    $("okCard").style.display = "none";
+    $("formCard").style.display = "block";
+    $("formCard").scrollIntoView({ block: "center" });
+  });
+
+  /* ==================== لوحة التسجيلات (?admin=1) ==================== */
+  const isAdmin = new URLSearchParams(location.search).get("admin") === "1";
+  const renderAdmin = () => {
+    if (!isAdmin) return;
+    const rows = readLeads();
+    $("adminCount").textContent = `(${AR(rows.length)})`;
+    const cols = ["date", ...FIELDS.map(([, l]) => l)];
+    $("adminTable").innerHTML =
+      `<tr><th>التاريخ</th>${FIELDS.map(([, l]) => `<th>${l}</th>`).join("")}</tr>` +
+      (rows.length
+        ? rows.slice().reverse().map(r => `<tr>${cols.map(c => `<td>${esc(r[c] || "")}</td>`).join("")}</tr>`).join("")
+        : `<tr><td colspan="${cols.length}" class="mut">لا تسجيلات بعد.</td></tr>`);
+  };
+
+  if (isAdmin) {
+    $("adminWrap").style.display = "block";
+    renderAdmin();
+    $("csvBtn").addEventListener("click", () => {
+      const rows = readLeads();
+      if (!rows.length) return;
+      const cols = ["date", ...FIELDS.map(([, l]) => l)];
+      const q = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+      const csv = "﻿" + [cols.map(q).join(","), ...rows.map(r => cols.map(c => q(r[c])).join(","))].join("\n");
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+      a.download = "matjarlink-voice-agent-leads.csv";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+    $("clearBtn").addEventListener("click", () => {
+      if (confirm("مسح كل التسجيلات المحفوظة على هذا الجهاز؟")) { writeLeads([]); renderAdmin(); }
+    });
+  }
+})();
+</script>
+</body>
+</html>
