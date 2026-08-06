@@ -49,3 +49,9 @@ the design system; `textdump.py` backs the content-parity check.
 - Slides 41 and 63 held nothing but an empty embedded sub-presentation — a blank pink
   placeholder frame with no text. That empty frame was dropped and the slides now open
   their modules.
+
+## PDF
+
+`Instrument_Flight_Procedures_Complete.pdf` — 88 pages, 16:9. Exported with slide 59
+included even though it is hidden in the `.pptx`, so the handout carries the full
+course content.
