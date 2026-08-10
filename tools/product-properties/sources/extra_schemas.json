@@ -1,0 +1,9766 @@
+{
+ "per_bucket": 14,
+ "sampled": {
+  "mobile_phone|SMRTPHN": 13,
+  "tablet|iPad OS": 14,
+  "tablet|ANDROID": 13,
+  "laptop|CLAMSHELL": 13,
+  "laptop|2IN1": 15,
+  "laptop|UNKNOWN": 4,
+  "laptop|GAMING": 4,
+  "laptop|MACBOOK": 14,
+  "television|QLED": 4,
+  "television|OLED": 2,
+  "television|NEO QLED": 1,
+  "television|LED": 1,
+  "television|MiniLED": 5,
+  "television|RGB LED": 1,
+  "fridge|LARGE": 7,
+  "fridge|SMALL": 1,
+  "fridge|SIDE BY SIDE REFRIGERATOR": 2,
+  "fridge|MEDIUM": 2,
+  "fridge|COMPACT": 1,
+  "washer|AUTO FE": 2,
+  "washer|TWIN TUB WASHER": 2,
+  "washer|WASHER&DRYER": 5,
+  "washer|AUTO FL": 4,
+  "ac|MINI SPLIT AIR CONDITIONER": 10,
+  "ac|WINDOW AIR CONDITIONER": 3,
+  "smartwatch|SMART WATCH": 11,
+  "headphones|HEADPHONE": 7,
+  "headphones|UNKNOWN": 4,
+  "headphones|EARPHONE": 6,
+  "headphones|TWS": 18,
+  "speaker|SPEAKER": 14,
+  "vacuum|UNKNOWN": 1,
+  "vacuum|VACUUM CLEANER": 13,
+  "powerbank|UNKNOWN": 2,
+  "powerbank|POWER BANK": 7
+ },
+ "schemas": {
+  "mobile_phone": {
+   "SMRTPHN": {
+    "Operating System": {
+     "unit": null,
+     "values": [
+      "iOS",
+      "Android",
+      "Android 14; HyperOS",
+      "Android 12",
+      "Android 15",
+      "ColorOS 15",
+      "Android 14",
+      "IOS 18",
+      "Android 13",
+      "Xiaomi Hyper OS 2"
+     ],
+     "n": 13
+    },
+    "Memory Card Slot": {
+     "unit": null,
+     "values": [
+      "No",
+      "MicroSD (Up to 1TB)",
+      "Yes",
+      "up to 2TB",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "8 GB",
+      "4GB",
+      "6GB",
+      "12 GB",
+      "8GB",
+      "16GB"
+     ],
+     "n": 13
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Black",
+      "Shadow Black",
+      "Blue",
+      "Phantom White",
+      "Titanium Silverblue",
+      "Mist White",
+      "Gold",
+      "Awesome Navy",
+      "Shadow Grey",
+      "Desert Titanium",
+      "Sand",
+      "White",
+      "Cobalt Violet"
+     ],
+     "n": 13
+    },
+    "Network": {
+     "unit": null,
+     "values": [
+      "5G",
+      "4G"
+     ],
+     "n": 13
+    },
+    "Screen Size (inch)": {
+     "unit": null,
+     "values": [
+      "6.1 INCH",
+      "6.78 INCH",
+      "6.8 INCH",
+      "6.9 Inch",
+      "6.67 Inch",
+      "6.6 inch",
+      "6.3 INCH",
+      "6.52 INCH"
+     ],
+     "n": 13
+    },
+    "Rear Camera": {
+     "unit": null,
+     "values": [
+      "48MP",
+      "8MP",
+      "50MP",
+      "108MP+10MP+12MP+10MP",
+      "200MP+50MP+50MP+10MP",
+      "50MP + 2MP",
+      "8MP + 2MP",
+      "50MP + 8MP + 5MP",
+      "50 MP + 200 MP + 50 MP",
+      "13MP + 2MP",
+      "50MP + 12MP +10MP"
+     ],
+     "n": 13
+    },
+    "Memory (internal)": {
+     "unit": null,
+     "values": [
+      "512GB",
+      "128GB",
+      "128 GB",
+      "256GB",
+      "256 GB",
+      "512 GB",
+      "8GB"
+     ],
+     "n": 13
+    },
+    "Compatibility": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "0.75 cm",
+      "16.67 cm",
+      "17.2 cm",
+      "Not Applicable",
+      "16.28 cm",
+      "16.57 cm",
+      "16.05 cm",
+      "0.82 cm",
+      "16.27 CM",
+      "0.86 cm",
+      "16cm",
+      "14.69 cm"
+     ],
+     "n": 13
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "0.18 Kg",
+      "211g",
+      "Not Applicable",
+      "0.21 kg",
+      "0.19 Kg",
+      "0.22 Kg",
+      "0.16 Kg"
+     ],
+     "n": 13
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China",
+      "Assorted",
+      "Hong Kong"
+     ],
+     "n": 13
+    },
+    "Processor Core": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Octa Core",
+      "MediaTek G81 Ultra",
+      "Snapdragon",
+      "Snapdragon 8 Gen 3",
+      "Octa-Core (8-Core)",
+      "1.8GHz",
+      "Exynos 1380",
+      "A18 Pro Bionic",
+      "Octa Core 1.6 GHz",
+      "Snapdragon 8 Elite Gen 5",
+      "Exynos 2600"
+     ],
+     "n": 13
+    },
+    "Battery Size (mAH)": {
+     "unit": null,
+     "values": [
+      "3279mAh",
+      "5200mAh",
+      "5160mAh",
+      "5000mAh",
+      "6000mAh",
+      "5850 mAh",
+      "3274mAh",
+      "5050mAh",
+      "4300mAh"
+     ],
+     "n": 13
+    },
+    "Front Camera Resolution": {
+     "unit": null,
+     "values": [
+      "12MP",
+      "8MP",
+      "13MP",
+      "40 MP",
+      "5MP",
+      "50MP"
+     ],
+     "n": 13
+    },
+    "Waterproof (Y/N)": {
+     "unit": null,
+     "values": [
+      "No",
+      "IP53",
+      "Yes",
+      "IP52"
+     ],
+     "n": 13
+    },
+    "Finger Print (Y/N)": {
+     "unit": null,
+     "values": [
+      "Yes, Touch ID",
+      ".",
+      "Yes",
+      "No",
+      "Yes; Rear Mounted"
+     ],
+     "n": 13
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "IPHONE 16E",
+      "Smart",
+      "REDMI",
+      "S Series",
+      "S",
+      "OPPO A SERIES",
+      "A",
+      "MAGIC",
+      "IPHONE 16",
+      "C Series",
+      "XIAOMI 17 SERIES"
+     ],
+     "n": 13
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "6.8 cm",
+      "0.77 cm",
+      "8.2 cm",
+      "Not Applicable",
+      "7.76 cm",
+      "6.7",
+      "0.72 cm",
+      "7.8CM",
+      "7.71 cm",
+      "0.76 cm",
+      "7cm",
+      "7.05 cm"
+     ],
+     "n": 13
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "13.9 cm",
+      "7.8 cm",
+      "17.2 cm",
+      "Not Applicable",
+      "0.82 cm",
+      "7.62",
+      "7.52",
+      "16.2 cm",
+      ".88 CM",
+      "1.65 cm",
+      "5.5cm",
+      "0.72 cm"
+     ],
+     "n": 13
+    },
+    "Processor Speed": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "2.2 Ghz",
+      "Octa Core 2.3 Ghz",
+      "2.99 GHz",
+      "4.47GHz;3.5GHz",
+      "4x 2.0GHz + 4x 1.8GHz",
+      "1.8GHz + 1.6GHz",
+      "2.4 GHz",
+      "2×Prime 4.3GHz+6×Performance 3.5GHz",
+      "1.60GHz",
+      "2x 4.6GHz, 6x 3.62GHz",
+      "3.8GHz,3.26GHz,2.76GHz"
+     ],
+     "n": 13
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 8
+    },
+    "Screen Type": {
+     "unit": null,
+     "values": [
+      "LPS",
+      "FHD",
+      "HD+",
+      "Dynamic AMOLED 2X",
+      "QHD+ Dynamic AMOLED 2X",
+      "Capacitive",
+      "IPS LCD",
+      "Super AMOLED",
+      "OLED",
+      "Super Retina XDR Display",
+      "1.5K Real RGB Xiaomi Shield Glass"
+     ],
+     "n": 13
+    },
+    "Face ID": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 13
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "APPLE",
+      "INFINIX",
+      "REDMI",
+      "SAMSUNG",
+      "OPPO",
+      "Honor",
+      "Nokia",
+      "XIAOMI"
+     ],
+     "n": 13
+    },
+    "Screen Resolution": {
+     "unit": null,
+     "values": [
+      "1080 x 2460",
+      "1024 × 600",
+      "720 × 1640",
+      "1440 × 3080",
+      "3120 x 1440",
+      "1080 x 720",
+      "1600 × 720",
+      "1080 x 2340",
+      "2800 × 1280",
+      "Not Applicable",
+      "720 × 1600",
+      "1200 x 2608",
+      "1080 x 2340 (FHD+)"
+     ],
+     "n": 13
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "NFC": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "Flexible Screen": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "SIM Type": {
+     "unit": null,
+     "values": [
+      "Nano SIM",
+      "Dual SIM Nano",
+      "2 Nano SIM slots + 1 Micro SD",
+      "Nano SIM; eSIM",
+      "Dual Sim",
+      "Dual SIM Nano + eSIM",
+      "Nano-SIM (4FF),Embedded-SIM"
+     ],
+     "n": 13
+    },
+    "Charger Compatibility": {
+     "unit": null,
+     "values": [
+      "Lightning",
+      "TYPE C",
+      "USB Type-C",
+      "USB-C"
+     ],
+     "n": 13
+    },
+    "Wireless Charging": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "Sharing Power": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "Device Type": {
+     "unit": null,
+     "values": [
+      "iPhone 16e",
+      "INFINIX SMART 20 4G",
+      "Mobile",
+      "GALAXY S22 ULTRA",
+      "Galaxy S25 Ultra",
+      "SAMSUNG GALAXY S25 ULTRA",
+      "OPPO A5 4G",
+      "INFINIX SMART 10 4G",
+      "GALAXY A35",
+      "SAMSUNG GALAXY A35 5G",
+      "Magic 7 Pro",
+      "HONOR MAGIC 7 PRO 5G",
+      "iPhone 16 Pro",
+      "Smartphone",
+      "XIAOMI 17 ULTRA 5G",
+      "SAMSUNG GALAXY S26 5G"
+     ],
+     "n": 13
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 6
+    },
+    "Dual SIM Card": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Processor": {
+     "unit": null,
+     "values": [
+      "Snapdragon® 8 Elite for Galaxy"
+     ],
+     "n": 1
+    },
+    "See Through Lid": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    }
+   }
+  },
+  "tablet": {
+   "iPad OS": {
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "Yes, v5.3",
+      "Yes; V5.0"
+     ],
+     "n": 7
+    },
+    "Operating System": {
+     "unit": null,
+     "values": [
+      "iPadOS 17.4",
+      "iPadOS 16",
+      "iPadOS 26",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Memory Card Slot": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "16GB",
+      "4GB",
+      "12 GB",
+      "8GB"
+     ],
+     "n": 14
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Silver",
+      "Yellow",
+      "Starlight",
+      "Blue",
+      "Space Grey",
+      "Purple"
+     ],
+     "n": 14
+    },
+    "Network": {
+     "unit": null,
+     "values": [
+      "5G",
+      "Wi-Fi"
+     ],
+     "n": 14
+    },
+    "Screen Size (inch)": {
+     "unit": null,
+     "values": [
+      "11 INCH",
+      "10.9 INCH",
+      "8.3 INCH",
+      "11.0 inch",
+      "13 inch"
+     ],
+     "n": 14
+    },
+    "Rear Camera": {
+     "unit": null,
+     "values": [
+      "12MP"
+     ],
+     "n": 14
+    },
+    "Memory (internal)": {
+     "unit": null,
+     "values": [
+      "1TB",
+      "64GB",
+      "128GB",
+      "256GB",
+      "512 GB",
+      "2TB",
+      "256 GB"
+     ],
+     "n": 14
+    },
+    "Graphics Card": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "0.7 cm",
+      "20.9 cm",
+      "26.2 cm",
+      "0.59 cm",
+      "18.8 cm"
+     ],
+     "n": 14
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "0.48 Kg",
+      "0.608 KG",
+      "0.2 kg",
+      "0.47 Kg",
+      "0.85 Kg"
+     ],
+     "n": 14
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "Assorted",
+      "China"
+     ],
+     "n": 14
+    },
+    "Processor Core": {
+     "unit": null,
+     "values": [
+      "Apple M4",
+      "Hexa-Core",
+      "A17 Pro",
+      "M4 Chip",
+      "Octa-core",
+      "Apple M2",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Battery Size (mAH)": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "8827mAh",
+      "5078 mAh",
+      "7600mAh",
+      "7538 mAh",
+      "7606 mAh"
+     ],
+     "n": 14
+    },
+    "Front Camera Resolution": {
+     "unit": null,
+     "values": [
+      "12MP"
+     ],
+     "n": 14
+    },
+    "Waterproof (Y/N)": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 14
+    },
+    "Finger Print (Y/N)": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 14
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "IPAD PRO 2024",
+      "IPAD GEN",
+      "IPAD MINI 7 GEN",
+      "iPad Air M4 2026",
+      "Ipad Pro",
+      "iPad Air M3 2025",
+      "IPAD AIR 6 GEN",
+      "IPAD PRO 2025"
+     ],
+     "n": 14
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "17.95 cm",
+      "14.70 CM",
+      "19 cm",
+      "17.85 cm",
+      "26.2cm"
+     ],
+     "n": 14
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "24.86 cm",
+      "5 CM",
+      "5.1 cm",
+      "24.76 cm"
+     ],
+     "n": 14
+    },
+    "Processor Speed": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "M4 Chip"
+     ],
+     "n": 14
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 6
+    },
+    "Screen Type": {
+     "unit": null,
+     "values": [
+      "IPS",
+      "Liquid Retina IPS LCD; 500 nits",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Device Type": {
+     "unit": null,
+     "values": [
+      "Ipad Pro 2024 11 Wf Cl",
+      "IPAD 10th GEN",
+      "IPAD MINI 7 GEN",
+      "IPAD AIR 2026 11 WF",
+      "IPAD PRO 2022 Wi-Fi  11.0 inch",
+      "iPad Air M3 11 WF",
+      "IPAD AIR 6 GEN 11 WF",
+      "IPAD PRO 2025 11 5G",
+      "IPAD PRO 2024 11 WF",
+      "Ipad Air 6 Gen 11 Wf Cl",
+      "iPad Air M3 13 WF"
+     ],
+     "n": 14
+    },
+    "Face ID": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No"
+     ],
+     "n": 4
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "APPLE"
+     ],
+     "n": 14
+    },
+    "Screen Resolution": {
+     "unit": null,
+     "values": [
+      "1668 × 2420",
+      "2360 x 1640",
+      "2388 x 1668",
+      "1640 × 2360",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "NFC": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 3
+    },
+    "Flexible Screen": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 3
+    },
+    "SIM Type": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Charger Compatibility": {
+     "unit": null,
+     "values": [
+      "USB-C",
+      "USB Type-C",
+      "TYPE C"
+     ],
+     "n": 14
+    },
+    "Wireless Charging": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No"
+     ],
+     "n": 4
+    },
+    "Sharing Power": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 3
+    },
+    "Call Features": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 5
+    }
+   },
+   "ANDROID": {
+    "Google Play Store": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 13
+    },
+    "Operating System": {
+     "unit": null,
+     "values": [
+      "HarmonyOS",
+      "MagicOS 9.0",
+      "Android 13",
+      "Android",
+      "Not Applicable",
+      "HarmonyOS 2"
+     ],
+     "n": 13
+    },
+    "Memory Card Slot": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Yes; Up to 1TB",
+      "MicroSDXC"
+     ],
+     "n": 13
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "12 GB",
+      "8GB",
+      "6GB",
+      "4GB"
+     ],
+     "n": 13
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Space Gray",
+      "Gray",
+      "Light Pink",
+      "Space Grey",
+      "Silver",
+      "Green",
+      "Matte grey",
+      "White"
+     ],
+     "n": 13
+    },
+    "Network": {
+     "unit": null,
+     "values": [
+      "Wi-Fi",
+      "5G",
+      "4G"
+     ],
+     "n": 13
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 6
+    },
+    "Screen Size (inch)": {
+     "unit": null,
+     "values": [
+      "11.5 INCH",
+      "12.1 inch",
+      "10.9 INCH",
+      "8.7 Inch",
+      "10.1 INCH",
+      "12.4 Inch",
+      "7 inch",
+      "11 INCH",
+      "10.95 INCH"
+     ],
+     "n": 13
+    },
+    "Rear Camera": {
+     "unit": null,
+     "values": [
+      "13MP + 8MP",
+      "8MP",
+      "5MP",
+      "13MP",
+      "8MP + 8MP",
+      "5",
+      "13MP + 2MP"
+     ],
+     "n": 13
+    },
+    "Memory (internal)": {
+     "unit": null,
+     "values": [
+      "256GB",
+      "256 GB",
+      "128GB",
+      "128 GB"
+     ],
+     "n": 13
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 6
+    },
+    "Graphics Card": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable",
+      "Mali-G68 MP5",
+      "Yes",
+      "Immortalis G925",
+      "MediaTek Dimensity 8350 Elite"
+     ],
+     "n": 13
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "26 cm",
+      "27.6 CM",
+      "0.65 CM",
+      "21.1 cm",
+      "Not Applicable",
+      "15.95 cm",
+      "18.5 cm",
+      "0.5 cm",
+      "25.38 cm",
+      "25.9 cm"
+     ],
+     "n": 13
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "0.51 Kg",
+      "0.52 kg",
+      "0.36 kg",
+      "0.49 Kg",
+      "0.44 kg",
+      "0.63 kg",
+      "0.45 Kg",
+      "0.48 Kg",
+      "0.47 Kg"
+     ],
+     "n": 13
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China",
+      "Assorted"
+     ],
+     "n": 13
+    },
+    "Processor Core": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Octa-Core (8-Core)",
+      "Exynos 1380",
+      "Octa-core",
+      "Quad-core",
+      "1 x Cortex-A715 3.35GHz + 3 x Cortex-A715 3.20GHz"
+     ],
+     "n": 13
+    },
+    "Battery Size (mAH)": {
+     "unit": null,
+     "values": [
+      "8800mAh",
+      "10100mAh",
+      "8000mAh",
+      "7020mAh",
+      "7250 mAH",
+      "7000mAh",
+      "10090 mAh",
+      "4000mAh",
+      "8400mAh"
+     ],
+     "n": 13
+    },
+    "Front Camera Resolution": {
+     "unit": null,
+     "values": [
+      "8MP",
+      "12MP",
+      "5MP",
+      "2"
+     ],
+     "n": 13
+    },
+    "Waterproof (Y/N)": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 13
+    },
+    "Finger Print (Y/N)": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 13
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "Matepad",
+      "N",
+      "S Series",
+      "Tab S",
+      "X",
+      "Megapad",
+      "Kidstab",
+      "V"
+     ],
+     "n": 13
+    },
+    "Device Type": {
+     "unit": null,
+     "values": [
+      "HUAWEI MATEPAD 11.5S 2026",
+      "Pad 10",
+      "HONOR PAD 10 12.1 INCH",
+      "Not Applicable",
+      "Galaxy Tab S9 FE",
+      "Pad X7",
+      "Honor Pad X7 WIFI",
+      "Pad X9",
+      "HONOR PAD X9 11.5 WIFI",
+      "Megapad 10",
+      "Tecno Megapad 10",
+      "SAMSUNG GALAXY TAB S9 FE",
+      "OTEETO TAB 76 KIDS",
+      "Galaxy Tab S11",
+      "SAMSUNG GALAXY TAB S11",
+      "Pad V9",
+      "HONOR PAD V9"
+     ],
+     "n": 12
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "17cm",
+      "17.95 cm",
+      "25.43 CM",
+      "12.47 cm",
+      "Not Applicable",
+      "0.74 cm",
+      "28.54 CM",
+      "1 cm",
+      "25.38 cm",
+      "16.53 cm",
+      "17.6 cm"
+     ],
+     "n": 13
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "26.00 cm",
+      "0.61 CM",
+      "16.58 cm",
+      "0.79 Cm",
+      "0.69 cm",
+      "24 cm",
+      "18.54 cm",
+      "10.5CM",
+      "16.53 cm",
+      "0.73 cm"
+     ],
+     "n": 13
+    },
+    "Processor Speed": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "1×Cortex-A715 2.63GHz+3×Cortex-A715 2.4GHz+4×Corte",
+      "2.4 GHz; 2 GHz",
+      "4*Cortex-A73@2.4GHz + 4*Cortex-A53@1.9GHz",
+      "2x2.0 GHz Cortex-A75 & 6x1.8 GHz Cortex-A55",
+      "2.0 Ghz",
+      "3.73GHz, 3.3GHz,2.4GHz",
+      "2 x Cortex-A77 Based @ 2.84GHz + 2 x  Cortex-A77 Based @ 2.4GHz + 4 x Cortex-A55 Based @ 1.8GHz",
+      "1 x Cortex-A715 3.35GHz + 3 x Cortex-A715 3.20GHz"
+     ],
+     "n": 13
+    },
+    "Screen Type": {
+     "unit": null,
+     "values": [
+      "LCD",
+      "TFT LCD（IPS）",
+      "TFT",
+      "Not Applicable",
+      "HD+",
+      "IPS LCD",
+      "Dynamic AMOLED 2X"
+     ],
+     "n": 13
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "Huawei",
+      "Honor",
+      "SAMSUNG",
+      "Tecno",
+      "OTEETO"
+     ],
+     "n": 13
+    },
+    "Screen Resolution": {
+     "unit": null,
+     "values": [
+      "2800 × 1840",
+      "2560 × 1600",
+      "2304 x 1440",
+      "1340 x 800",
+      "2000 × 1200",
+      "1280 × 800",
+      "2560 x 1600",
+      "1024 × 600"
+     ],
+     "n": 13
+    },
+    "SIM Type": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "Nano SIM; eSIM",
+      "Nano SIM"
+     ],
+     "n": 13
+    },
+    "Charger Compatibility": {
+     "unit": null,
+     "values": [
+      "TYPE C",
+      "USB Type-C"
+     ],
+     "n": 13
+    },
+    "Call Features": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "Yes"
+     ],
+     "n": 13
+    },
+    "Comp Agreement": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    }
+   }
+  },
+  "laptop": {
+   "CLAMSHELL": {
+    "Wi-Fi 6/AX": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "Wi-Fi 7",
+      "Wifi 7",
+      "WiFi 6",
+      "Wi-Fi 6E"
+     ],
+     "n": 13
+    },
+    "Graphics Controller Brand": {
+     "unit": null,
+     "values": [
+      "AMD",
+      "Qualcomm",
+      "Intel",
+      "Intel UHD Graphics",
+      "AMD Radeon Integrated Graphics",
+      "NVIDIA",
+      "Integrated"
+     ],
+     "n": 13
+    },
+    "Hard Drive Capacity": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 13
+    },
+    "Solid State Drive Capacity": {
+     "unit": null,
+     "values": [
+      "512GB SSD",
+      "1TB SSD",
+      "NOT APPLICABLE"
+     ],
+     "n": 13
+    },
+    "Hard Drive RPM": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "Unknown"
+     ],
+     "n": 13
+    },
+    "Headphone Port": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "1 headphone/microphone combo",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "Intel Optane Memory Capacity": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable",
+      "16GB"
+     ],
+     "n": 13
+    },
+    "Keyboard Backlight": {
+     "unit": null,
+     "values": [
+      "NO",
+      "YES",
+      "Not Applicable",
+      "Non-backlit, Arabic"
+     ],
+     "n": 13
+    },
+    "Processor Maximum Turbo boost Speed": {
+     "unit": null,
+     "values": [
+      "4.30GHz",
+      "Up to 4.00GHz",
+      "5.4GHz",
+      "Not Applicable",
+      "4.9GHz",
+      "Up to 5.10GHz",
+      "Up to 4.50GHz",
+      "Up To 5.1GHz",
+      "4.5GHz",
+      "Up to 4.80GHz",
+      "4.80GHz",
+      "Up to 4.40GHz"
+     ],
+     "n": 13
+    },
+    "Memory Card Reader": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "Yes"
+     ],
+     "n": 13
+    },
+    "MS Office Pre-loaded": {
+     "unit": null,
+     "values": [
+      "1 Month",
+      "Yes",
+      "Not Applicable",
+      "Office Trial",
+      "1 Year",
+      "No"
+     ],
+     "n": 13
+    },
+    "Numeric Pad": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "Processor Generation": {
+     "unit": null,
+     "values": [
+      "AMD Ryzen",
+      "No",
+      "15th Generation",
+      "Not Applicable",
+      "13th Generation",
+      "Intel Core Ultra",
+      "Ultra Generation",
+      "7th Generation",
+      "Intel Core 7"
+     ],
+     "n": 13
+    },
+    "Processor Manufacturer": {
+     "unit": null,
+     "values": [
+      "AMD",
+      "Qualcomm",
+      "Intel",
+      "No"
+     ],
+     "n": 13
+    },
+    "Processor Model": {
+     "unit": null,
+     "values": [
+      "Ryzen 5-7520U",
+      "X2P-64-100",
+      "Core Ultra 9",
+      "Not Applicable",
+      "Core i7",
+      "7-255H",
+      "125H",
+      "Core Ultra 7",
+      "AMD Ryzen 7-250",
+      "Ryzen 7-5825U",
+      "350",
+      "5-225U",
+      "Ultra 5-322"
+     ],
+     "n": 13
+    },
+    "USB-C": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "3x",
+      "2x",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "Device Differentiator": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "14 FHD 1920*1080 60Hz",
+      "Bluelight Shield"
+     ],
+     "n": 11
+    },
+    "Cache Memory": {
+     "unit": null,
+     "values": [
+      "4MB",
+      "34MB",
+      "24MB",
+      "Not Applicable",
+      "12 MB",
+      "16MB",
+      "6MB",
+      "12MB",
+      "12M"
+     ],
+     "n": 13
+    },
+    "Screen Refresh Rate": {
+     "unit": null,
+     "values": [
+      "60Hz",
+      "No",
+      "120Hz",
+      "Not Applicable",
+      "65Hz"
+     ],
+     "n": 13
+    },
+    "Graphics Controller Model": {
+     "unit": null,
+     "values": [
+      "Integrated"
+     ],
+     "n": 13
+    },
+    "VR Support": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "YES",
+      "Yes; v5.4",
+      "Yes (BT5.2)",
+      "5.1",
+      "Yes; V5.1",
+      "5"
+     ],
+     "n": 13
+    },
+    "HDMI": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "Not Applicable",
+      "1"
+     ],
+     "n": 13
+    },
+    "Ethernet Port": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "Touchscreen": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 13
+    },
+    "Operating System": {
+     "unit": null,
+     "values": [
+      "Win11Home",
+      "Windows 11",
+      "DOS"
+     ],
+     "n": 13
+    },
+    "Wireless LAN": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 13
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "8GB",
+      "16GB",
+      "32GB"
+     ],
+     "n": 13
+    },
+    "Optical Drive": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 13
+    },
+    "Processor Type": {
+     "unit": null,
+     "values": [
+      "AMD Ryzen 5",
+      "Qualcomm Snapdragon X2 Plus",
+      "Intel Core Ultra 9",
+      "Qualcomm Snapdragon X Plus",
+      "Intel Core i7",
+      "Intel Core Ultra 7",
+      "Intel Core i5",
+      "AMD Ryzen 7",
+      "Intel Core 7",
+      "Intel Core Ultra 5"
+     ],
+     "n": 13
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Silver",
+      "Dune",
+      "Ponder Blue",
+      "Metallic",
+      "Lunar Grey",
+      "Emerald Green",
+      "Mystic Silver",
+      "Grey",
+      "Luna Grey"
+     ],
+     "n": 13
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "15 inch",
+      "13.8 Inch",
+      "14\"",
+      "13 Inch",
+      "14 inch",
+      "14.6 inch",
+      "14.2 inch",
+      "15.6 inch",
+      "16 inch"
+     ],
+     "n": 13
+    },
+    "Number of USB Inputs": {
+     "unit": null,
+     "values": [
+      "2",
+      "4",
+      "3",
+      "2x USB-A; 2x USB-C",
+      "1 USB-C3.1; 2 USB-A3.1",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "36 cm",
+      "30.1 cm",
+      "-",
+      "11.2 CM",
+      "5 cm",
+      "22.36 cm",
+      "24.87 cm",
+      "21.7 cm",
+      "23.8 cm",
+      "31.4 cm",
+      "Not Applicable",
+      "31.5"
+     ],
+     "n": 13
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "1.59 kg",
+      "1.35 kg",
+      "1.28 Kg",
+      "1.24kg",
+      "1 to 2 kg",
+      "1.03 Kg",
+      "1.31 Kg",
+      "2KG",
+      "1.4 kg",
+      "1.49 Kg",
+      "1.39Kg",
+      "Not Applicable",
+      "1.90 Kg"
+     ],
+     "n": 13
+    },
+    "Total Storage (Capacity)": {
+     "unit": null,
+     "values": [
+      "512GB",
+      "1TB"
+     ],
+     "n": 13
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 13
+    },
+    "Processor Core": {
+     "unit": null,
+     "values": [
+      "4 Core",
+      "Deca-Core (10-Core)",
+      "16 Cores",
+      "8 Core",
+      "10 Core",
+      "14 Core",
+      "8 core",
+      "6 Core",
+      "12 core"
+     ],
+     "n": 13
+    },
+    "Premium products": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Yes",
+      "No"
+     ],
+     "n": 13
+    },
+    "Creators and Gamers Products": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable",
+      "Yes"
+     ],
+     "n": 13
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 12
+    },
+    "Front Camera Resolution": {
+     "unit": null,
+     "values": [
+      "720p",
+      "FHD 1080p",
+      "1080p FHD",
+      "HD 720p",
+      "HD",
+      "Not Applicable",
+      "FHD",
+      "5MP",
+      "1080p HD",
+      "FHD IR"
+     ],
+     "n": 13
+    },
+    "Finger Print (Y/N)": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable",
+      "Yes"
+     ],
+     "n": 13
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "Essential",
+      "Surface Laptop",
+      "Zenbook",
+      "IdeaPad 3",
+      "MagicBook",
+      "MATEBOOK D14",
+      "Yoga Pro 7",
+      "MSI Modern",
+      "Aspire Lite",
+      "IDEAPAD SLIM 3",
+      "OmniBook"
+     ],
+     "n": 13
+    },
+    "Graphics Memory (Integrated/Dedicated)": {
+     "unit": null,
+     "values": [
+      "Integrated"
+     ],
+     "n": 13
+    },
+    "Graphics Memory Capacity": {
+     "unit": null,
+     "values": [
+      "8GB",
+      "Shared",
+      "Not Applicable",
+      "No",
+      "16GB"
+     ],
+     "n": 13
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "CLAMSHELL",
+      "Laptop"
+     ],
+     "n": 13
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "23 cm",
+      "22 cm",
+      "-",
+      "8.4 cm",
+      "28 cm",
+      "31.6 cm",
+      "35.7 cm",
+      "32.3cm",
+      "22.2 cm",
+      "Not Applicable",
+      "22.6 cm"
+     ],
+     "n": 13
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "2.9 cm",
+      "1.75 cm",
+      "-",
+      "11.2 cm",
+      "20 CM",
+      "1.15 CM",
+      "1.70 cm",
+      "1.99 cm",
+      "1.8",
+      "1.69 cm",
+      "Not Applicable"
+     ],
+     "n": 13
+    },
+    "Processor Speed": {
+     "unit": null,
+     "values": [
+      "Up To 4.30GHz",
+      "No",
+      "2.9 GHz",
+      "Not Applicable",
+      "1.8GHz",
+      "Up to 5.10GHz",
+      "Up To 4.50GHz",
+      "1.5GHz",
+      "5.1 GHz",
+      "4.50GHz",
+      "Up To 4.80GHz",
+      "4.40GHz"
+     ],
+     "n": 13
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 13
+    },
+    "Screen Type": {
+     "unit": null,
+     "values": [
+      "FHD",
+      "PixelSense Flow",
+      "OLED 3.5K",
+      "WUXGA IPS",
+      "Touch Screen",
+      "OLED",
+      "3K OLED",
+      "IPS",
+      "WUXGA"
+     ],
+     "n": 13
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "HP",
+      "MICROSOFT",
+      "ASUS",
+      "LENOVO",
+      "Honor",
+      "Huawei",
+      "MSI",
+      "ACER"
+     ],
+     "n": 13
+    },
+    "Screen Resolution": {
+     "unit": null,
+     "values": [
+      "1920 × 1080",
+      "2304 X 1536",
+      "2880 x 1800",
+      "1920 × 1280",
+      "1920 × 1200",
+      "3120 x 2080",
+      "2880 x 1920",
+      "3000 X 1872"
+     ],
+     "n": 13
+    },
+    "RAM Type": {
+     "unit": null,
+     "values": [
+      "DDR5",
+      "LPDDR5X",
+      "DDR4",
+      "DDR4-"
+     ],
+     "n": 13
+    }
+   },
+   "2IN1": {
+    "Wi-Fi 6/AX": {
+     "unit": null,
+     "values": [
+      "Wi-Fi 7",
+      "WiFi 6",
+      "Not Applicable",
+      "No",
+      "Yes",
+      "Wifi 7"
+     ],
+     "n": 15
+    },
+    "Graphics Controller Brand": {
+     "unit": null,
+     "values": [
+      "Intel",
+      "NVIDIA",
+      "Qualcomm",
+      "Arc 140V"
+     ],
+     "n": 15
+    },
+    "Hard Drive Capacity": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "1TB SSD",
+      "512GB SSD"
+     ],
+     "n": 15
+    },
+    "Solid State Drive Capacity": {
+     "unit": null,
+     "values": [
+      "1TB SSD",
+      "512GB SSD",
+      "1TB",
+      "256GB SSD",
+      "Not Applicable"
+     ],
+     "n": 15
+    },
+    "Hard Drive RPM": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 15
+    },
+    "Headphone Port": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 15
+    },
+    "Intel Optane Memory Capacity": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 15
+    },
+    "Keyboard Backlight": {
+     "unit": null,
+     "values": [
+      "YES",
+      "NO",
+      "Backlit, Arabic",
+      "Not Applicable"
+     ],
+     "n": 15
+    },
+    "Processor Maximum Turbo boost Speed": {
+     "unit": null,
+     "values": [
+      "Up to 4.80GHz",
+      "4.90GHz",
+      "Up to 4.70GHz",
+      "Up to 4.0GHz",
+      "Up to 3.40GHz",
+      "Not Applicable",
+      "Up to 4.50GHz",
+      "Up to 4.90GHz",
+      "Up to 4.20GHz",
+      "Up to 4.40GHz"
+     ],
+     "n": 15
+    },
+    "Memory Card Reader": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "Yes"
+     ],
+     "n": 15
+    },
+    "MS Office Pre-loaded": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "1 Month",
+      "Office Trial",
+      "No"
+     ],
+     "n": 15
+    },
+    "Numeric Pad": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 15
+    },
+    "Processor Generation": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Intel Core Ultra",
+      "Intel core ultra 7",
+      "No",
+      "13th Generation",
+      "14th Generation",
+      "Intel Ultra 7-256V"
+     ],
+     "n": 15
+    },
+    "Processor Manufacturer": {
+     "unit": null,
+     "values": [
+      "Intel",
+      "Qualcomm",
+      "No"
+     ],
+     "n": 15
+    },
+    "Processor Model": {
+     "unit": null,
+     "values": [
+      "256V",
+      "Ultra 5-226V",
+      "i5-5350U",
+      "M10",
+      "X1P-64-100",
+      "Not Applicable",
+      "13620H",
+      "Core i5-1155G7",
+      "Ultra 5-322",
+      "Core Ultra 7"
+     ],
+     "n": 15
+    },
+    "USB-C": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 15
+    },
+    "Device Differentiator": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "Bluelight Shield"
+     ],
+     "n": 12
+    },
+    "Cache Memory": {
+     "unit": null,
+     "values": [
+      "12MB",
+      "12 MB",
+      "12M",
+      "No",
+      "42MB",
+      "Not Applicable",
+      "34MB",
+      "8MB",
+      "24MB",
+      "10MB"
+     ],
+     "n": 15
+    },
+    "Screen Refresh Rate": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "60Hz",
+      "120Hz"
+     ],
+     "n": 15
+    },
+    "Graphics Controller Model": {
+     "unit": null,
+     "values": [
+      "Integrated"
+     ],
+     "n": 15
+    },
+    "VR Support": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Yes",
+      "No"
+     ],
+     "n": 15
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "Yes; v5.4",
+      "Yes",
+      "YES",
+      "Yes, v5.3",
+      "Yes, v5.4",
+      "Yes; v5.2",
+      "Not Applicable"
+     ],
+     "n": 15
+    },
+    "HDMI": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "Yes"
+     ],
+     "n": 15
+    },
+    "Ethernet Port": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "Yes"
+     ],
+     "n": 15
+    },
+    "Touchscreen": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Yes"
+     ],
+     "n": 15
+    },
+    "Operating System": {
+     "unit": null,
+     "values": [
+      "Win11Home",
+      "Windows 11"
+     ],
+     "n": 15
+    },
+    "Wireless LAN": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 15
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "16GB"
+     ],
+     "n": 15
+    },
+    "Optical Drive": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 15
+    },
+    "Processor Type": {
+     "unit": null,
+     "values": [
+      "Intel Core Ultra 7",
+      "Intel Core Ultra 5",
+      "Qualcomm Snapdragon M10",
+      "Qualcomm Snapdragon X Plus",
+      "Intel Core i7"
+     ],
+     "n": 15
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Gray",
+      "Silver",
+      "Luna Grey",
+      "Platinum",
+      "Sapphire",
+      "Dune",
+      "Black"
+     ],
+     "n": 15
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "14 inch",
+      "14 INCH",
+      "13 Inch",
+      "12 INCH",
+      "16 inch"
+     ],
+     "n": 15
+    },
+    "Number of USB Inputs": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "4",
+      "2",
+      "3",
+      "1 USB-C3.1; 2 USB-A3.1"
+     ],
+     "n": 15
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "31.77 cm",
+      "11.6 cm",
+      "28.7 cm",
+      "31.5",
+      "31.3 cm",
+      "22.01 cm",
+      "22.85 cm"
+     ],
+     "n": 15
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "1.59 kg",
+      "2.75 Kg",
+      "0.89 Kg",
+      "1.90 Kg",
+      "1.6 KG",
+      "1.40 kg",
+      "1.68 Kg"
+     ],
+     "n": 15
+    },
+    "Total Storage (Capacity)": {
+     "unit": null,
+     "values": [
+      "1TB",
+      "512GB",
+      "256GB"
+     ],
+     "n": 15
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 15
+    },
+    "Processor Core": {
+     "unit": null,
+     "values": [
+      "Octa-Core (8-Core)",
+      "8 Core",
+      "10 Core",
+      "Deca-Core (10-Core)",
+      "Hexa-Core (6-Core)"
+     ],
+     "n": 15
+    },
+    "Premium products": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "Yes"
+     ],
+     "n": 14
+    },
+    "Creators and Gamers Products": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 11
+    },
+    "Front Camera Resolution": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "5MP",
+      "12MP",
+      "10MP",
+      "FHD IR",
+      "FHD",
+      "Yes",
+      "5MP IR Camera"
+     ],
+     "n": 15
+    },
+    "Finger Print (Y/N)": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "Yes"
+     ],
+     "n": 15
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "OmniBook",
+      "Yoga AIO 7",
+      "Surface Pro",
+      "Surface Pro 11",
+      "YOGA 7",
+      "IdeaPad 5",
+      "Aspire 14"
+     ],
+     "n": 15
+    },
+    "Graphics Memory (Integrated/Dedicated)": {
+     "unit": null,
+     "values": [
+      "Integrated"
+     ],
+     "n": 15
+    },
+    "Graphics Memory Capacity": {
+     "unit": null,
+     "values": [
+      "Shared",
+      "No",
+      "16GB",
+      "Not Applicable"
+     ],
+     "n": 15
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "CLAMSHELL",
+      "Convertible",
+      "2In1"
+     ],
+     "n": 15
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "122.8 cm",
+      "8.5 cm",
+      "20.8 cm",
+      "22.6 cm",
+      "22.7 cm",
+      "31 cm",
+      "31.74 cm"
+     ],
+     "n": 15
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No",
+      "1.69 cm",
+      "4.27 cm",
+      "0.93 cm",
+      "1.75 cm",
+      "1.8 cm",
+      "1.55 cm"
+     ],
+     "n": 15
+    },
+    "Processor Speed": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "4.90 GHZ",
+      "1.7 GHz",
+      "Up To 4.0GHz",
+      "4.50GHz",
+      "Up To 4.20GHz",
+      "No",
+      "Up To 4.80GHz"
+     ],
+     "n": 15
+    },
+    "Screen Type": {
+     "unit": null,
+     "values": [
+      "2.8K",
+      "OLED",
+      "WUXGA",
+      "PixelSense LCD",
+      "PixelSense Flow",
+      "IPS",
+      "2K"
+     ],
+     "n": 15
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "HP",
+      "LENOVO",
+      "MICROSOFT",
+      "ACER"
+     ],
+     "n": 15
+    },
+    "Screen Resolution": {
+     "unit": null,
+     "values": [
+      "2880 x 1800",
+      "1920 × 1200",
+      "2880 x 1920",
+      "2196 x 1464",
+      "1920 × 1080"
+     ],
+     "n": 15
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 12
+    },
+    "RAM Type": {
+     "unit": null,
+     "values": [
+      "DDR5",
+      "LPDDR5X",
+      "No"
+     ],
+     "n": 15
+    },
+    "TOPs": {
+     "unit": null,
+     "values": [
+      "45 TOPS",
+      "No"
+     ],
+     "n": 4
+    },
+    "AI": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No"
+     ],
+     "n": 4
+    },
+    "NPU Processor": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 4
+    }
+   },
+   "UNKNOWN": {
+    "Operating System": {
+     "unit": null,
+     "values": [
+      "Windows",
+      "DOS"
+     ],
+     "n": 4
+    },
+    "Screen Size": {
+     "unit": "INCH",
+     "values": [
+      "14",
+      "15.6"
+     ],
+     "n": 4
+    },
+    "Display Resolution": {
+     "unit": null,
+     "values": [
+      "1920x1080 (Full HD)"
+     ],
+     "n": 4
+    },
+    "Processor Type": {
+     "unit": null,
+     "values": [
+      "Ultra 5",
+      "AMD Ryzen 7",
+      "Intel Core i7",
+      "Intel Core i5"
+     ],
+     "n": 4
+    },
+    "RAM SIZE": {
+     "unit": "GB",
+     "values": [
+      "8",
+      "16"
+     ],
+     "n": 4
+    },
+    "Total Storage (Capacity)": {
+     "unit": "GB",
+     "values": [
+      "256",
+      "512"
+     ],
+     "n": 4
+    },
+    "Primary Use Case": {
+     "unit": null,
+     "values": [
+      "Business",
+      "Personal/Home",
+      "Gaming",
+      "Programming / Development",
+      "Content Creation",
+      "Education / School"
+     ],
+     "n": 4
+    },
+    "Refresh Rate": {
+     "unit": "HZ",
+     "values": [
+      "144"
+     ],
+     "n": 1
+    }
+   },
+   "GAMING": {
+    "Wi-Fi 6/AX": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "WiFi 6",
+      "Wi-Fi 7"
+     ],
+     "n": 4
+    },
+    "Graphics Controller Brand": {
+     "unit": null,
+     "values": [
+      "RTX 5050",
+      "NVIDIA GeForce RTX 3050",
+      "NVIDIA GeForce RTX 4050",
+      "NVIDIA GeForce RTX 5060"
+     ],
+     "n": 4
+    },
+    "Hard Drive Capacity": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Solid State Drive Capacity": {
+     "unit": null,
+     "values": [
+      "NO",
+      "512GB SSD",
+      "1TB SSD"
+     ],
+     "n": 4
+    },
+    "Hard Drive RPM": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Headphone Port": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "1 headphone/microphone combo"
+     ],
+     "n": 4
+    },
+    "Intel Optane Memory Capacity": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 4
+    },
+    "Keyboard Backlight": {
+     "unit": null,
+     "values": [
+      "NO",
+      "YES",
+      "4-zone RGB Backlit"
+     ],
+     "n": 4
+    },
+    "Processor Maximum Turbo boost Speed": {
+     "unit": null,
+     "values": [
+      "No",
+      "up to 4.60 GHz",
+      "Up to 4.75GHz",
+      "Up To 5.8GHz"
+     ],
+     "n": 4
+    },
+    "Memory Card Reader": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 4
+    },
+    "MS Office Pre-loaded": {
+     "unit": null,
+     "values": [
+      "No",
+      "1 Month",
+      "Office Trial",
+      "Trial"
+     ],
+     "n": 4
+    },
+    "Numeric Pad": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Processor Generation": {
+     "unit": null,
+     "values": [
+      "No",
+      "13th Generation",
+      "AMD Ryzen"
+     ],
+     "n": 4
+    },
+    "Processor Manufacturer": {
+     "unit": null,
+     "values": [
+      "No",
+      "Intel",
+      "AMD"
+     ],
+     "n": 4
+    },
+    "Processor Model": {
+     "unit": null,
+     "values": [
+      "No",
+      "Core i5-13450HX",
+      "7735HS",
+      "14900HX"
+     ],
+     "n": 4
+    },
+    "USB-C": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "3x"
+     ],
+     "n": 4
+    },
+    "Cache Memory": {
+     "unit": null,
+     "values": [
+      "No",
+      "20MB",
+      "16MB",
+      "36MB"
+     ],
+     "n": 4
+    },
+    "Screen Refresh Rate": {
+     "unit": null,
+     "values": [
+      "No",
+      "144Hz",
+      "240HZ"
+     ],
+     "n": 4
+    },
+    "Graphics Controller Model": {
+     "unit": null,
+     "values": [
+      "RTX 5050",
+      "RTX 3050",
+      "RTX 4050",
+      "RTX 5060"
+     ],
+     "n": 4
+    },
+    "VR Support": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable",
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "Yes (BT5.2)",
+      "YES",
+      "Yes; v5.4"
+     ],
+     "n": 4
+    },
+    "HDMI": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Ethernet Port": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "RJ-11"
+     ],
+     "n": 4
+    },
+    "Touchscreen": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 4
+    },
+    "Operating System": {
+     "unit": null,
+     "values": [
+      "Win11Home"
+     ],
+     "n": 4
+    },
+    "Wireless LAN": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "16GB",
+      "24GB"
+     ],
+     "n": 4
+    },
+    "Optical Drive": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Processor Type": {
+     "unit": null,
+     "values": [
+      "Intel Core i7",
+      "Intel Core i5",
+      "AMD Ryzen 7",
+      "Intel Core i9"
+     ],
+     "n": 4
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Luna Grey",
+      "Silver",
+      "Grey"
+     ],
+     "n": 4
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "15 inch",
+      "15.6 inch",
+      "16 inch"
+     ],
+     "n": 4
+    },
+    "Number of USB Inputs": {
+     "unit": null,
+     "values": [
+      "4",
+      "2",
+      "3"
+     ],
+     "n": 4
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "31.5",
+      "35 CM",
+      "25.4 cm",
+      "3 CM"
+     ],
+     "n": 4
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "1.90 Kg",
+      "2.29 Kg",
+      "1.92 kg",
+      "2.65 kg"
+     ],
+     "n": 4
+    },
+    "Total Storage (Capacity)": {
+     "unit": null,
+     "values": [
+      "512GB",
+      "1TB"
+     ],
+     "n": 4
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 4
+    },
+    "Processor Core": {
+     "unit": null,
+     "values": [
+      "No",
+      "10 Core",
+      "8 Core",
+      "24 Cores"
+     ],
+     "n": 4
+    },
+    "Front Camera Resolution": {
+     "unit": null,
+     "values": [
+      "No",
+      "720p HD",
+      "5MP",
+      "FHD 1080p"
+     ],
+     "n": 4
+    },
+    "Finger Print (Y/N)": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 4
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "LOQ",
+      "VICTUS",
+      "Rog Strix G16"
+     ],
+     "n": 4
+    },
+    "Graphics Memory (Integrated/Dedicated)": {
+     "unit": null,
+     "values": [
+      "Dedicated"
+     ],
+     "n": 4
+    },
+    "Graphics Memory Capacity": {
+     "unit": null,
+     "values": [
+      "8GB",
+      "6GB",
+      "8GB GDDR7"
+     ],
+     "n": 4
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "GAMING",
+      "Gaming Laptop"
+     ],
+     "n": 4
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "22.6 cm",
+      "25.7 cm",
+      "3.6 cm",
+      "4.8 cm"
+     ],
+     "n": 4
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "1.75 cm",
+      "3.60 cm",
+      "35.5CM",
+      "4.3 cm"
+     ],
+     "n": 4
+    },
+    "Processor Speed": {
+     "unit": null,
+     "values": [
+      "No",
+      "Up To 4.60GHz",
+      "4.70GHz",
+      "5.8 GHz"
+     ],
+     "n": 4
+    },
+    "Screen Type": {
+     "unit": null,
+     "values": [
+      "FHD",
+      "2.5K"
+     ],
+     "n": 4
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "LENOVO",
+      "HP",
+      "ASUS"
+     ],
+     "n": 4
+    },
+    "Screen Resolution": {
+     "unit": null,
+     "values": [
+      "No",
+      "1920 × 1080",
+      "2560 x 1600"
+     ],
+     "n": 4
+    },
+    "RAM Type": {
+     "unit": null,
+     "values": [
+      "No",
+      "DDR5"
+     ],
+     "n": 4
+    },
+    "Device Differentiator": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 3
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 3
+    }
+   },
+   "MACBOOK": {
+    "Wi-Fi 6/AX": {
+     "unit": null,
+     "values": [
+      "Wi-Fi 7",
+      "Wi-Fi 6E"
+     ],
+     "n": 14
+    },
+    "Graphics Controller Brand": {
+     "unit": null,
+     "values": [
+      "Apple"
+     ],
+     "n": 14
+    },
+    "Hard Drive Capacity": {
+     "unit": null,
+     "values": [
+      "1TB SSD",
+      "512GB SSD",
+      "Not Applicable",
+      "256GB SSD",
+      "2TB SSD"
+     ],
+     "n": 14
+    },
+    "Solid State Drive Capacity": {
+     "unit": null,
+     "values": [
+      "1TB SSD",
+      "512GB SSD",
+      "256GB SSD",
+      "2TB SSD"
+     ],
+     "n": 14
+    },
+    "Hard Drive RPM": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Headphone Port": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No"
+     ],
+     "n": 14
+    },
+    "Intel Optane Memory Capacity": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Keyboard Backlight": {
+     "unit": null,
+     "values": [
+      "NO",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Processor Maximum Turbo boost Speed": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Memory Card Reader": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes, SDXC",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "MS Office Pre-loaded": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Numeric Pad": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Processor Generation": {
+     "unit": null,
+     "values": [
+      "5th Generation",
+      "Not Applicable",
+      "No"
+     ],
+     "n": 14
+    },
+    "Processor Manufacturer": {
+     "unit": null,
+     "values": [
+      "Apple"
+     ],
+     "n": 14
+    },
+    "Processor Model": {
+     "unit": null,
+     "values": [
+      "M5",
+      "Neo",
+      "M4 Pro",
+      "M4",
+      "M5 Pro"
+     ],
+     "n": 14
+    },
+    "USB-C": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 14
+    },
+    "Device Differentiator": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Cache Memory": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Screen Refresh Rate": {
+     "unit": null,
+     "values": [
+      "60Hz",
+      "Not Applicable",
+      "No"
+     ],
+     "n": 14
+    },
+    "Graphics Controller Model": {
+     "unit": null,
+     "values": [
+      "10-Core GPU",
+      "5-Core GPU",
+      "20-Core GPU",
+      "8-Core GPU",
+      "16-Core GPU"
+     ],
+     "n": 14
+    },
+    "VR Support": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "BT6",
+      "Yes, V5.3",
+      "Yes, v5.3"
+     ],
+     "n": 14
+    },
+    "HDMI": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Ethernet Port": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Touchscreen": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Operating System": {
+     "unit": null,
+     "values": [
+      "macOS",
+      "Mac OS"
+     ],
+     "n": 14
+    },
+    "Wireless LAN": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 14
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "16GB",
+      "8GB",
+      "48GB",
+      "24GB"
+     ],
+     "n": 14
+    },
+    "Optical Drive": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Processor Type": {
+     "unit": null,
+     "values": [
+      "Apple M5",
+      "Apple A18 Pro",
+      "Apple M4",
+      "Apple M5 Pro"
+     ],
+     "n": 14
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Midnight",
+      "Silver",
+      "Indigo",
+      "Space Black",
+      "Sky Blue",
+      "Starlight"
+     ],
+     "n": 14
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "13 Inch",
+      "15 inch",
+      "16.2 inch",
+      "14 inch",
+      "16 inch"
+     ],
+     "n": 14
+    },
+    "Number of USB Inputs": {
+     "unit": null,
+     "values": [
+      "2x Thunderbolt 3",
+      "2x USB-C",
+      "3x Thunderbolt 5",
+      "3x ThunderBolt 4"
+     ],
+     "n": 14
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "33.5 cm",
+      "38.45 CM",
+      "32.06 cm",
+      "24.81 cm",
+      "38.4CM",
+      "22.12 cm",
+      "39.9 CM",
+      "36 cm"
+     ],
+     "n": 14
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "1.67 kg",
+      "2.66 kg",
+      "1.87 kg",
+      "2.14 kg",
+      "2.60 kg",
+      "1.55 Kg",
+      "3.48 kg",
+      "2.65 kg"
+     ],
+     "n": 14
+    },
+    "Total Storage (Capacity)": {
+     "unit": null,
+     "values": [
+      "1TB",
+      "512GB",
+      "256GB",
+      "2TB"
+     ],
+     "n": 14
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 14
+    },
+    "Processor Core": {
+     "unit": null,
+     "values": [
+      "10 Core",
+      "Deca-Core (6-Core)",
+      "Tetradeca-Core (14-Core)",
+      "Deca-Core (10-Core)",
+      "Deca-Core (20-Core)",
+      "Deca-Core (15-Core)"
+     ],
+     "n": 14
+    },
+    "Premium products": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Creators and Gamers Products": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Front Camera Resolution": {
+     "unit": null,
+     "values": [
+      "FHD 1080p",
+      "1080p HD"
+     ],
+     "n": 14
+    },
+    "Finger Print (Y/N)": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Yes, Touch ID"
+     ],
+     "n": 14
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "MacBook Air 13",
+      "MacBook Air 15",
+      "MacBook Neo",
+      "MacBook Pro 16",
+      "MacBook Pro 14"
+     ],
+     "n": 14
+    },
+    "Graphics Memory (Integrated/Dedicated)": {
+     "unit": null,
+     "values": [
+      "Integrated"
+     ],
+     "n": 14
+    },
+    "Graphics Memory Capacity": {
+     "unit": null,
+     "values": [
+      "Shared"
+     ],
+     "n": 14
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "CLAMSHELL"
+     ],
+     "n": 14
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "6.90 cm",
+      "7.12 cm",
+      "5.61 cm",
+      "35.57 cm",
+      "31.26 cm",
+      "7.40 cm",
+      "8 cm"
+     ],
+     "n": 14
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "24.50 cm",
+      "28.01 cm",
+      "22.78 cm",
+      "1.68 cm",
+      "28.1 cm",
+      "1.55 cm",
+      "29 cm",
+      "26.40 cm"
+     ],
+     "n": 14
+    },
+    "Processor Speed": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 14
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 14
+    },
+    "Screen Type": {
+     "unit": null,
+     "values": [
+      "Liquid Retina",
+      "Liquid Retina XDR"
+     ],
+     "n": 14
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "APPLE"
+     ],
+     "n": 14
+    },
+    "Screen Resolution": {
+     "unit": null,
+     "values": [
+      "2560 x 1664",
+      "2408 x 1506",
+      "3456 × 2234",
+      "2880 x 1864",
+      "3024 × 1964"
+     ],
+     "n": 14
+    },
+    "RAM Type": {
+     "unit": null,
+     "values": [
+      "Unified Memory",
+      "LPDDR5X",
+      "Not Applicable"
+     ],
+     "n": 14
+    }
+   }
+  },
+  "television": {
+   "QLED": {
+    "Response Time": {
+     "unit": null,
+     "values": [
+      "No",
+      "60Hz",
+      "50Hz"
+     ],
+     "n": 4
+    },
+    "Voice Assistant Built-in": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Virtual Assistant Supported": {
+     "unit": null,
+     "values": [
+      "No",
+      "Bixby"
+     ],
+     "n": 4
+    },
+    "Number of Digital Audio Optical Output": {
+     "unit": null,
+     "values": [
+      "1",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Smart Platform": {
+     "unit": null,
+     "values": [
+      "Google Tv",
+      "Tizen"
+     ],
+     "n": 4
+    },
+    "Sound System": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Remote Control Type": {
+     "unit": null,
+     "values": [
+      "yes",
+      "TM2360E",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Ethernet Port": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Wireless LAN": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Speaker Type": {
+     "unit": null,
+     "values": [
+      "Integrated Speaker Boxes (Bottom Side)",
+      "Not Applicable",
+      "2.0 Ch"
+     ],
+     "n": 4
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "3GB",
+      "2GB",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Black"
+     ],
+     "n": 4
+    },
+    "Memory (internal)": {
+     "unit": null,
+     "values": [
+      "32GB",
+      "16GB",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Resolution (MP)": {
+     "unit": null,
+     "values": [
+      "3840 × 2160"
+     ],
+     "n": 4
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "55\"",
+      "75\""
+     ],
+     "n": 4
+    },
+    "Number of USB Inputs": {
+     "unit": null,
+     "values": [
+      "1",
+      "2"
+     ],
+     "n": 4
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "122.6cm",
+      "166.7cm",
+      "123.9cm",
+      "19.9cm"
+     ],
+     "n": 4
+    },
+    "Panel Type": {
+     "unit": null,
+     "values": [
+      "QLED",
+      "4K"
+     ],
+     "n": 4
+    },
+    "Motion Flow": {
+     "unit": null,
+     "values": [
+      "144Hz",
+      "60 Hz",
+      "50Hz"
+     ],
+     "n": 4
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "11.3 Kg",
+      "18.2 kg",
+      "19.2 Kg",
+      "14.7 Kg"
+     ],
+     "n": 4
+    },
+    "Speaker Output": {
+     "unit": null,
+     "values": [
+      "2*15",
+      "15W",
+      "20W"
+     ],
+     "n": 4
+    },
+    "HD type": {
+     "unit": null,
+     "values": [
+      "4K UHD",
+      "4K HDR"
+     ],
+     "n": 4
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China",
+      "Egypt"
+     ],
+     "n": 4
+    },
+    "Number of HDMI Inputs": {
+     "unit": null,
+     "values": [
+      "3"
+     ],
+     "n": 4
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "P8",
+      "T6",
+      "Q8",
+      "Q6"
+     ],
+     "n": 4
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Smart QLED TV",
+      "4K-Smart- HDR"
+     ],
+     "n": 4
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "122.5 cm",
+      "166.7 cm",
+      "137 cm",
+      "157.8 cm"
+     ],
+     "n": 4
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "70.86 cm",
+      "7.43 CM",
+      "82 cm",
+      "81"
+     ],
+     "n": 4
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "6.9 CM",
+      "95.5 cm",
+      "14.2 CM",
+      "12.7cm"
+     ],
+     "n": 4
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "TCL",
+      "SAMSUNG"
+     ],
+     "n": 4
+    },
+    "Year Model": {
+     "unit": null,
+     "values": [
+      "2025"
+     ],
+     "n": 1
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    }
+   },
+   "OLED": {
+    "Response Time": {
+     "unit": null,
+     "values": [
+      "0.03ms"
+     ],
+     "n": 2
+    },
+    "Voice Assistant Built-in": {
+     "unit": null,
+     "values": [
+      "LG Arabic AI"
+     ],
+     "n": 2
+    },
+    "Virtual Assistant Supported": {
+     "unit": null,
+     "values": [
+      "Alexa/Google Assistant/AirPlay/AI ThinQ"
+     ],
+     "n": 2
+    },
+    "Number of Digital Audio Optical Output": {
+     "unit": null,
+     "values": [
+      "No",
+      "1"
+     ],
+     "n": 2
+    },
+    "Smart Platform": {
+     "unit": null,
+     "values": [
+      "webOS"
+     ],
+     "n": 2
+    },
+    "Sound System": {
+     "unit": null,
+     "values": [
+      "AI Sound Pro"
+     ],
+     "n": 2
+    },
+    "Remote Control Type": {
+     "unit": null,
+     "values": [
+      "Magic remote"
+     ],
+     "n": 2
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "Yes, V5.3"
+     ],
+     "n": 2
+    },
+    "Ethernet Port": {
+     "unit": null,
+     "values": [
+      "1"
+     ],
+     "n": 2
+    },
+    "Wireless LAN": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Speaker Type": {
+     "unit": null,
+     "values": [
+      "2.2 CH",
+      "2.0 Ch"
+     ],
+     "n": 2
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Black"
+     ],
+     "n": 2
+    },
+    "Memory (internal)": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Resolution (MP)": {
+     "unit": null,
+     "values": [
+      "3840 x 2160",
+      "3840 × 2160"
+     ],
+     "n": 2
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "65\""
+     ],
+     "n": 2
+    },
+    "Number of USB Inputs": {
+     "unit": null,
+     "values": [
+      "2"
+     ],
+     "n": 2
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "23 cm",
+      "21.80 cm"
+     ],
+     "n": 2
+    },
+    "Panel Type": {
+     "unit": null,
+     "values": [
+      "OLED"
+     ],
+     "n": 2
+    },
+    "Motion Flow": {
+     "unit": null,
+     "values": [
+      "165Hz",
+      "144Hz"
+     ],
+     "n": 2
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "18.4 Kg",
+      "17.35 Kg"
+     ],
+     "n": 2
+    },
+    "Speaker Output": {
+     "unit": null,
+     "values": [
+      "40W",
+      "20W"
+     ],
+     "n": 2
+    },
+    "HD type": {
+     "unit": null,
+     "values": [
+      "4K SMART"
+     ],
+     "n": 2
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "Indonesia",
+      "Egypt"
+     ],
+     "n": 2
+    },
+    "Number of HDMI Inputs": {
+     "unit": null,
+     "values": [
+      "4"
+     ],
+     "n": 2
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "C Series",
+      "B Series"
+     ],
+     "n": 2
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "OLED TV",
+      "Smart OLED TV"
+     ],
+     "n": 2
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "171.1 cm",
+      "144.9cm"
+     ],
+     "n": 2
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "103.5 CM",
+      "90 cm"
+     ],
+     "n": 2
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "26.7cm",
+      "21.9 cm"
+     ],
+     "n": 2
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "LG"
+     ],
+     "n": 2
+    }
+   },
+   "NEO QLED": {
+    "Response Time": {
+     "unit": null,
+     "values": [
+      "144Hz"
+     ],
+     "n": 1
+    },
+    "Voice Assistant Built-in": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Virtual Assistant Supported": {
+     "unit": null,
+     "values": [
+      "Bixby"
+     ],
+     "n": 1
+    },
+    "Number of Digital Audio Optical Output": {
+     "unit": null,
+     "values": [
+      "1"
+     ],
+     "n": 1
+    },
+    "Smart Platform": {
+     "unit": null,
+     "values": [
+      "Tizen"
+     ],
+     "n": 1
+    },
+    "Sound System": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Remote Control Type": {
+     "unit": null,
+     "values": [
+      "Smart Remote"
+     ],
+     "n": 1
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Ethernet Port": {
+     "unit": null,
+     "values": [
+      "1"
+     ],
+     "n": 1
+    },
+    "Wireless LAN": {
+     "unit": null,
+     "values": [
+      "WiFi Direct"
+     ],
+     "n": 1
+    },
+    "Speaker Type": {
+     "unit": null,
+     "values": [
+      "4.2.2Ch"
+     ],
+     "n": 1
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Carbon Silver"
+     ],
+     "n": 1
+    },
+    "Memory (internal)": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Resolution (MP)": {
+     "unit": null,
+     "values": [
+      "3840 × 2160"
+     ],
+     "n": 1
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "65\""
+     ],
+     "n": 1
+    },
+    "Number of USB Inputs": {
+     "unit": null,
+     "values": [
+      "2"
+     ],
+     "n": 1
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "27.5 cm"
+     ],
+     "n": 1
+    },
+    "Panel Type": {
+     "unit": null,
+     "values": [
+      "QLED"
+     ],
+     "n": 1
+    },
+    "Motion Flow": {
+     "unit": null,
+     "values": [
+      "144Hz"
+     ],
+     "n": 1
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "27.5 Kg"
+     ],
+     "n": 1
+    },
+    "Speaker Output": {
+     "unit": null,
+     "values": [
+      "60W"
+     ],
+     "n": 1
+    },
+    "HD type": {
+     "unit": null,
+     "values": [
+      "4K SMART"
+     ],
+     "n": 1
+    },
+    "Year Model": {
+     "unit": null,
+     "values": [
+      "2024"
+     ],
+     "n": 1
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "Vietnam"
+     ],
+     "n": 1
+    },
+    "Number of HDMI Inputs": {
+     "unit": null,
+     "values": [
+      "4"
+     ],
+     "n": 1
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "QN90"
+     ],
+     "n": 1
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "QLED"
+     ],
+     "n": 1
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "144.63 cm"
+     ],
+     "n": 1
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "82.87 cm"
+     ],
+     "n": 1
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "2.69 cm"
+     ],
+     "n": 1
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "SAMSUNG"
+     ],
+     "n": 1
+    }
+   },
+   "LED": {
+    "Response Time": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Voice Assistant Built-in": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Virtual Assistant Supported": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Number of Digital Audio Optical Output": {
+     "unit": null,
+     "values": [
+      "1"
+     ],
+     "n": 1
+    },
+    "Smart Platform": {
+     "unit": null,
+     "values": [
+      "Tizen"
+     ],
+     "n": 1
+    },
+    "Sound System": {
+     "unit": null,
+     "values": [
+      "Dolby"
+     ],
+     "n": 1
+    },
+    "Remote Control Type": {
+     "unit": null,
+     "values": [
+      "Smart Remote"
+     ],
+     "n": 1
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Ethernet Port": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Wireless LAN": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Speaker Type": {
+     "unit": null,
+     "values": [
+      "2.0 Ch"
+     ],
+     "n": 1
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Black"
+     ],
+     "n": 1
+    },
+    "Memory (internal)": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Resolution (MP)": {
+     "unit": null,
+     "values": [
+      "UHD 3;840 x 2;160 pixels"
+     ],
+     "n": 1
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "55\""
+     ],
+     "n": 1
+    },
+    "Number of USB Inputs": {
+     "unit": null,
+     "values": [
+      "1"
+     ],
+     "n": 1
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Panel Type": {
+     "unit": null,
+     "values": [
+      "4K Smart LED"
+     ],
+     "n": 1
+    },
+    "Motion Flow": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "9.9 kg"
+     ],
+     "n": 1
+    },
+    "Speaker Output": {
+     "unit": null,
+     "values": [
+      "20W"
+     ],
+     "n": 1
+    },
+    "HD type": {
+     "unit": null,
+     "values": [
+      "4K"
+     ],
+     "n": 1
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "Egypt"
+     ],
+     "n": 1
+    },
+    "Number of HDMI Inputs": {
+     "unit": null,
+     "values": [
+      "3"
+     ],
+     "n": 1
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "UHD TV"
+     ],
+     "n": 1
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "123.41 cm"
+     ],
+     "n": 1
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "71.08 cm"
+     ],
+     "n": 1
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "6.03 cm"
+     ],
+     "n": 1
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "SAMSUNG"
+     ],
+     "n": 1
+    }
+   },
+   "MiniLED": {
+    "Response Time": {
+     "unit": null,
+     "values": [
+      "No",
+      "0.03ms",
+      "60Hz"
+     ],
+     "n": 5
+    },
+    "Voice Assistant Built-in": {
+     "unit": null,
+     "values": [
+      "Google",
+      "Yes",
+      "LG Arabic AI"
+     ],
+     "n": 5
+    },
+    "Virtual Assistant Supported": {
+     "unit": null,
+     "values": [
+      "Google Home",
+      "No",
+      "Alexa/Google Assistant/AirPlay/AI ThinQ",
+      "Alexa/Google Assistant/AI ThinQ"
+     ],
+     "n": 5
+    },
+    "Number of Digital Audio Optical Output": {
+     "unit": null,
+     "values": [
+      "No",
+      "1"
+     ],
+     "n": 5
+    },
+    "Smart Platform": {
+     "unit": null,
+     "values": [
+      "Google Tv",
+      "webOS"
+     ],
+     "n": 5
+    },
+    "Sound System": {
+     "unit": null,
+     "values": [
+      "ONKYO Audio System",
+      "Bang & Olufsen",
+      "AI Sound Pro ; Dolby Digital",
+      "AI Sound Pro"
+     ],
+     "n": 5
+    },
+    "Remote Control Type": {
+     "unit": null,
+     "values": [
+      "yes",
+      "Magic remote"
+     ],
+     "n": 5
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "Yes, V5.3"
+     ],
+     "n": 5
+    },
+    "Ethernet Port": {
+     "unit": null,
+     "values": [
+      "1",
+      "Yes"
+     ],
+     "n": 5
+    },
+    "Wireless LAN": {
+     "unit": null,
+     "values": [
+      "Bluetooth + Gateway (Wi-Fi)",
+      "Yes"
+     ],
+     "n": 5
+    },
+    "Speaker Type": {
+     "unit": null,
+     "values": [
+      "2.1 Ch",
+      "Integrated Speaker Boxes (Bottom Side)",
+      "2.0 Ch"
+     ],
+     "n": 5
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "3GB",
+      "No"
+     ],
+     "n": 5
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Black"
+     ],
+     "n": 5
+    },
+    "Memory (internal)": {
+     "unit": null,
+     "values": [
+      "64GB",
+      "Yes",
+      "No"
+     ],
+     "n": 5
+    },
+    "Resolution (MP)": {
+     "unit": null,
+     "values": [
+      "4k",
+      "3840 × 2160",
+      "3840 x 2160"
+     ],
+     "n": 5
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "65\"",
+      "75\"",
+      "85\"",
+      "86\""
+     ],
+     "n": 5
+    },
+    "Number of USB Inputs": {
+     "unit": null,
+     "values": [
+      "1",
+      "2"
+     ],
+     "n": 5
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "83 cm",
+      "166.78 cm",
+      "46",
+      "144.4",
+      "35.9 cm"
+     ],
+     "n": 5
+    },
+    "Panel Type": {
+     "unit": null,
+     "values": [
+      "MiniLED",
+      "4K"
+     ],
+     "n": 5
+    },
+    "Motion Flow": {
+     "unit": null,
+     "values": [
+      "144Hz",
+      "60 Hz"
+     ],
+     "n": 5
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "17.3 KG",
+      "26.6 Kg",
+      "36 g",
+      "19.9 KG",
+      "51 Kg"
+     ],
+     "n": 5
+    },
+    "Speaker Output": {
+     "unit": null,
+     "values": [
+      "2*10W+20W",
+      "10W",
+      "20W"
+     ],
+     "n": 5
+    },
+    "HD type": {
+     "unit": null,
+     "values": [
+      "4K HDR",
+      "4K UHD",
+      "4K SMART"
+     ],
+     "n": 5
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China",
+      "Egypt"
+     ],
+     "n": 5
+    },
+    "Number of HDMI Inputs": {
+     "unit": null,
+     "values": [
+      "4x With 2x ARC Support",
+      "3"
+     ],
+     "n": 5
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 3
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "C6",
+      "C7",
+      "QNED9",
+      "QNED7"
+     ],
+     "n": 5
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "MiniLED TV",
+      "Smart MiniLED TV",
+      "Smart QNED TV",
+      "QNED TV"
+     ],
+     "n": 5
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "56",
+      "166.5 cm",
+      "189.1 cm",
+      "144.1 cm",
+      "192.7 cm"
+     ],
+     "n": 5
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "83.22 cm",
+      "96.02 cm",
+      "114.7 cm",
+      "110.4 Cm"
+     ],
+     "n": 5
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "144.5 cm",
+      "5.6cm",
+      "46 cm",
+      "5.59 cm"
+     ],
+     "n": 5
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 3
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "TCL",
+      "LG"
+     ],
+     "n": 5
+    }
+   },
+   "RGB LED": {
+    "Response Time": {
+     "unit": null,
+     "values": [
+      "0.03ms"
+     ],
+     "n": 1
+    },
+    "Voice Assistant Built-in": {
+     "unit": null,
+     "values": [
+      "LG Arabic AI"
+     ],
+     "n": 1
+    },
+    "Virtual Assistant Supported": {
+     "unit": null,
+     "values": [
+      "Alexa/Google Assistant/AirPlay/AI ThinQ"
+     ],
+     "n": 1
+    },
+    "Number of Digital Audio Optical Output": {
+     "unit": null,
+     "values": [
+      "1"
+     ],
+     "n": 1
+    },
+    "Smart Platform": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Sound System": {
+     "unit": null,
+     "values": [
+      "20W"
+     ],
+     "n": 1
+    },
+    "Remote Control Type": {
+     "unit": null,
+     "values": [
+      "Magic remote"
+     ],
+     "n": 1
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "Yes, V5.3"
+     ],
+     "n": 1
+    },
+    "Ethernet Port": {
+     "unit": null,
+     "values": [
+      "1"
+     ],
+     "n": 1
+    },
+    "Wireless LAN": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Speaker Type": {
+     "unit": null,
+     "values": [
+      "2.0 Ch"
+     ],
+     "n": 1
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Black"
+     ],
+     "n": 1
+    },
+    "Memory (internal)": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Resolution (MP)": {
+     "unit": null,
+     "values": [
+      "3840 x 2160"
+     ],
+     "n": 1
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "86\""
+     ],
+     "n": 1
+    },
+    "Number of USB Inputs": {
+     "unit": null,
+     "values": [
+      "1"
+     ],
+     "n": 1
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "37"
+     ],
+     "n": 1
+    },
+    "Panel Type": {
+     "unit": null,
+     "values": [
+      "4K"
+     ],
+     "n": 1
+    },
+    "Motion Flow": {
+     "unit": null,
+     "values": [
+      "144Hz"
+     ],
+     "n": 1
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "60 Kg"
+     ],
+     "n": 1
+    },
+    "Speaker Output": {
+     "unit": null,
+     "values": [
+      "20W"
+     ],
+     "n": 1
+    },
+    "Size": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "HD type": {
+     "unit": null,
+     "values": [
+      "4K SMART"
+     ],
+     "n": 1
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "Indonesia"
+     ],
+     "n": 1
+    },
+    "Number of HDMI Inputs": {
+     "unit": null,
+     "values": [
+      "3"
+     ],
+     "n": 1
+    },
+    "Colors": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "M85"
+     ],
+     "n": 1
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "4K"
+     ],
+     "n": 1
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "193cm"
+     ],
+     "n": 1
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "119.7 cm"
+     ],
+     "n": 1
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "37 cm"
+     ],
+     "n": 1
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "LG"
+     ],
+     "n": 1
+    }
+   }
+  },
+  "fridge": {
+   "LARGE": {
+    "Energy Efficiency Class": {
+     "unit": null,
+     "values": [
+      "C",
+      "B",
+      "D"
+     ],
+     "n": 7
+    },
+    "Water Dispenser": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 7
+    },
+    "Child Lock": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 7
+    },
+    "Touchscreen": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No"
+     ],
+     "n": 7
+    },
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220V",
+      "220-240 V 60HZ",
+      "220-240V 50/60 Hz",
+      "220V-50/60Hz"
+     ],
+     "n": 7
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "White",
+      "Silver",
+      "Inox"
+     ],
+     "n": 7
+    },
+    "Fast Freeze": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 7
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "73 KG",
+      "108 KG",
+      "88 Kg",
+      "70 Kg",
+      "78 KG",
+      "98 Kg",
+      "95 KG"
+     ],
+     "n": 7
+    },
+    "Defrost(No/Manual)": {
+     "unit": null,
+     "values": [
+      "Auto defrost",
+      "No Frost"
+     ],
+     "n": 7
+    },
+    "Warranty(compressor)": {
+     "unit": null,
+     "values": [
+      "5 Years",
+      "10 Years"
+     ],
+     "n": 7
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China",
+      "Turkey",
+      "Vietnam",
+      "Indonesia",
+      "Thailand"
+     ],
+     "n": 7
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Large Refrigerator"
+     ],
+     "n": 7
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "70.3 CM",
+      "84 cm",
+      "70 cm",
+      "78 cm",
+      "91 cm"
+     ],
+     "n": 7
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "185.5 CM",
+      "182.5 CM",
+      "187 cm",
+      "185 CM",
+      "180 CM",
+      "186 cm",
+      "183 CM"
+     ],
+     "n": 7
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "70.3 cm",
+      "74.5 cm",
+      "75 cm",
+      "69.5 cm",
+      "73 cm",
+      "74 cm",
+      "77 cm"
+     ],
+     "n": 7
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "ClassPro",
+      "Beko",
+      "HAIER",
+      "LG",
+      "HITACHI"
+     ],
+     "n": 7
+    },
+    "Smart Connect": {
+     "unit": null,
+     "values": [
+      "No",
+      "WiFi"
+     ],
+     "n": 7
+    },
+    "Energy Consumption per Year": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "308 KWH"
+     ],
+     "n": 7
+    },
+    "Built-in Display": {
+     "unit": null,
+     "values": [
+      "No",
+      "Internal LED"
+     ],
+     "n": 7
+    },
+    "Installation Type": {
+     "unit": null,
+     "values": [
+      "Freestanding"
+     ],
+     "n": 7
+    },
+    "Refrigerant": {
+     "unit": null,
+     "values": [
+      "R-600a",
+      "R600a"
+     ],
+     "n": 7
+    },
+    "Inverter Compressor": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 7
+    },
+    "Lighting Type": {
+     "unit": null,
+     "values": [
+      "LED"
+     ],
+     "n": 7
+    },
+    "Adjustable Shelves": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 7
+    },
+    "Style": {
+     "unit": null,
+     "values": [
+      "Top Mount"
+     ],
+     "n": 7
+    },
+    "Multi Air Flow Technology": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "3D Flow"
+     ],
+     "n": 7
+    },
+    "Adjustable Leveling Legs": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No"
+     ],
+     "n": 7
+    },
+    "Frequency": {
+     "unit": null,
+     "values": [
+      "60 Hz",
+      "50/60 Hz"
+     ],
+     "n": 7
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 5
+    },
+    "Net Total Capacity": {
+     "unit": null,
+     "values": [
+      "16.4 Cu.ft",
+      "19.7 Cu.ft",
+      "22.4 Cu.ft",
+      "16.7 Cu.ft",
+      "17.9 Cu.ft",
+      "16.8 Cu.ft",
+      "21.2 Cu.ft"
+     ],
+     "n": 7
+    },
+    "Door in Door": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 7
+    },
+    "Thermostat": {
+     "unit": null,
+     "values": [
+      "Digital",
+      "TOUCH PANEL"
+     ],
+     "n": 7
+    },
+    "Thru-The-Door Dispenser": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 7
+    },
+    "Built-in TV": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 7
+    },
+    "Interior Camera": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 7
+    },
+    "Door Alarm": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No"
+     ],
+     "n": 7
+    },
+    "Net Refrigerator Capacity": {
+     "unit": null,
+     "values": [
+      "12.9 Cu.ft",
+      "14.3 Cu.ft",
+      "17.3 Cu.ft",
+      "13.2 Cu Ft",
+      "13.3 Cu.ft",
+      "12.5 Cu.ft",
+      "15.7 Cu.ft"
+     ],
+     "n": 7
+    },
+    "Net Freezer Capacity": {
+     "unit": null,
+     "values": [
+      "3.5 Cu.ft",
+      "5.4 Cu.ft",
+      "5.1 Cu.ft",
+      "4.6 cu.ft",
+      "4.3 Cu.ft",
+      "5.5 Cu.ft"
+     ],
+     "n": 7
+    },
+    "Ice Maker": {
+     "unit": null,
+     "values": [
+      "No",
+      "Ice Tray",
+      "Twist Ice tray"
+     ],
+     "n": 7
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 3
+    }
+   },
+   "SMALL": {
+    "Energy Efficiency Class": {
+     "unit": null,
+     "values": [
+      "C"
+     ],
+     "n": 1
+    },
+    "Water Dispenser": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Child Lock": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Touchscreen": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220V"
+     ],
+     "n": 1
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Steel"
+     ],
+     "n": 1
+    },
+    "Fast Freeze": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "52 kg"
+     ],
+     "n": 1
+    },
+    "Defrost(No/Manual)": {
+     "unit": null,
+     "values": [
+      "No Frost"
+     ],
+     "n": 1
+    },
+    "Warranty(compressor)": {
+     "unit": null,
+     "values": [
+      "5 Years"
+     ],
+     "n": 1
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 1
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Small Refrigerator"
+     ],
+     "n": 1
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "54.5 cm"
+     ],
+     "n": 1
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "59 cm"
+     ],
+     "n": 1
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "White-Westinghouse"
+     ],
+     "n": 1
+    },
+    "Smart Connect": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Energy Consumption per Year": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Built-in Display": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Installation Type": {
+     "unit": null,
+     "values": [
+      "Freestanding"
+     ],
+     "n": 1
+    },
+    "Refrigerant": {
+     "unit": null,
+     "values": [
+      "R600a"
+     ],
+     "n": 1
+    },
+    "Inverter Compressor": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Lighting Type": {
+     "unit": null,
+     "values": [
+      "LED"
+     ],
+     "n": 1
+    },
+    "Adjustable Shelves": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Style": {
+     "unit": null,
+     "values": [
+      "Top Mount"
+     ],
+     "n": 1
+    },
+    "Multi Air Flow Technology": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Adjustable Leveling Legs": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Frequency": {
+     "unit": null,
+     "values": [
+      "60 Hz"
+     ],
+     "n": 1
+    },
+    "Net Total Capacity": {
+     "unit": null,
+     "values": [
+      "8.9 Cu.ft"
+     ],
+     "n": 1
+    },
+    "Door in Door": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Thermostat": {
+     "unit": null,
+     "values": [
+      "Digital"
+     ],
+     "n": 1
+    },
+    "Thru-The-Door Dispenser": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Built-in TV": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Interior Camera": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Door Alarm": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Net Refrigerator Capacity": {
+     "unit": null,
+     "values": [
+      "7 Cu.ft"
+     ],
+     "n": 1
+    },
+    "Net Freezer Capacity": {
+     "unit": null,
+     "values": [
+      "1.9 Cu.ft"
+     ],
+     "n": 1
+    },
+    "Ice Maker": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    }
+   },
+   "SIDE BY SIDE REFRIGERATOR": {
+    "Energy Efficiency Class": {
+     "unit": null,
+     "values": [
+      "C",
+      "D"
+     ],
+     "n": 2
+    },
+    "Water Dispenser": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Child Lock": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Touchscreen": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220-230V",
+      "220V"
+     ],
+     "n": 2
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Black Glass",
+      "Silver"
+     ],
+     "n": 2
+    },
+    "Fast Freeze": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "86 KG"
+     ],
+     "n": 2
+    },
+    "Defrost(No/Manual)": {
+     "unit": null,
+     "values": [
+      "Total No Frost",
+      "No Frost"
+     ],
+     "n": 2
+    },
+    "Warranty(compressor)": {
+     "unit": null,
+     "values": [
+      "10 Years"
+     ],
+     "n": 2
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 2
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Side By Side Refrigerator"
+     ],
+     "n": 2
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "91.1 cm",
+      "91 cm"
+     ],
+     "n": 2
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "178 cm",
+      "177.5 CM"
+     ],
+     "n": 2
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "61.5cm",
+      "69.7 cm"
+     ],
+     "n": 2
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "HISENSE",
+      "PANASONIC"
+     ],
+     "n": 2
+    },
+    "Smart Connect": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Energy Consumption per Year": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Built-in Display": {
+     "unit": null,
+     "values": [
+      "Electronic LED",
+      "No"
+     ],
+     "n": 2
+    },
+    "Installation Type": {
+     "unit": null,
+     "values": [
+      "Freestanding"
+     ],
+     "n": 2
+    },
+    "Refrigerant": {
+     "unit": null,
+     "values": [
+      "R-600a",
+      "R600a"
+     ],
+     "n": 2
+    },
+    "Inverter Compressor": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Lighting Type": {
+     "unit": null,
+     "values": [
+      "LED"
+     ],
+     "n": 2
+    },
+    "Adjustable Shelves": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Style": {
+     "unit": null,
+     "values": [
+      "Side By Side"
+     ],
+     "n": 2
+    },
+    "Multi Air Flow Technology": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Adjustable Leveling Legs": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Frequency": {
+     "unit": null,
+     "values": [
+      "60 Hz",
+      "50/60 Hz"
+     ],
+     "n": 2
+    },
+    "Net Total Capacity": {
+     "unit": null,
+     "values": [
+      "18.8 Cuft",
+      "20.8 Cu.ft"
+     ],
+     "n": 2
+    },
+    "Door in Door": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Thermostat": {
+     "unit": null,
+     "values": [
+      "Electronic Control",
+      "Digital"
+     ],
+     "n": 2
+    },
+    "Thru-The-Door Dispenser": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Built-in TV": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Interior Camera": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Door Alarm": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Net Refrigerator Capacity": {
+     "unit": null,
+     "values": [
+      "12.2Cu.ft",
+      "13.7Cu.ft"
+     ],
+     "n": 2
+    },
+    "Net Freezer Capacity": {
+     "unit": null,
+     "values": [
+      "6.6 Cu Ft.",
+      "7.1 Cu.ft"
+     ],
+     "n": 2
+    },
+    "Ice Maker": {
+     "unit": null,
+     "values": [
+      "Ice Tray",
+      "No"
+     ],
+     "n": 2
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    }
+   },
+   "MEDIUM": {
+    "Energy Efficiency Class": {
+     "unit": null,
+     "values": [
+      "C"
+     ],
+     "n": 2
+    },
+    "Water Dispenser": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Child Lock": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220-240V 50/60 Hz",
+      "220V"
+     ],
+     "n": 2
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "White"
+     ],
+     "n": 2
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "58 KG",
+      "62 KG"
+     ],
+     "n": 2
+    },
+    "Defrost(No/Manual)": {
+     "unit": null,
+     "values": [
+      "No Frost",
+      "Auto defrost"
+     ],
+     "n": 2
+    },
+    "Warranty(compressor)": {
+     "unit": null,
+     "values": [
+      "10 Years"
+     ],
+     "n": 2
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "Thailand",
+      "Indonesia"
+     ],
+     "n": 2
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Medium Refrigerator"
+     ],
+     "n": 2
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "66 cm",
+      "70 cm"
+     ],
+     "n": 2
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "159.6 cm",
+      "172.0cm"
+     ],
+     "n": 2
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "72 cm",
+      "68  cm"
+     ],
+     "n": 2
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "HITACHI",
+      "LG"
+     ],
+     "n": 2
+    },
+    "Energy Consumption per Year": {
+     "unit": null,
+     "values": [
+      "260 kwh",
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Installation Type": {
+     "unit": null,
+     "values": [
+      "Freestanding"
+     ],
+     "n": 2
+    },
+    "Refrigerant": {
+     "unit": null,
+     "values": [
+      "R-600a",
+      "R600a"
+     ],
+     "n": 2
+    },
+    "Adjustable Leveling Legs": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Frequency": {
+     "unit": null,
+     "values": [
+      "50/60 Hz"
+     ],
+     "n": 2
+    },
+    "Net Total Capacity": {
+     "unit": null,
+     "values": [
+      "12.1 Cu.ft",
+      "13.3 Cu.ft"
+     ],
+     "n": 2
+    },
+    "Thermostat": {
+     "unit": null,
+     "values": [
+      "Mechanical",
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Net Refrigerator Capacity": {
+     "unit": null,
+     "values": [
+      "8.8 Cu.ft",
+      "10.1 Cu.ft"
+     ],
+     "n": 2
+    },
+    "Net Freezer Capacity": {
+     "unit": null,
+     "values": [
+      "3.3 Cu.ft",
+      "3.2 Cu.ft"
+     ],
+     "n": 2
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Built-in Display": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Inverter Compressor": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Lighting Type": {
+     "unit": null,
+     "values": [
+      "LED",
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Ice Maker": {
+     "unit": null,
+     "values": [
+      "Ice Tray"
+     ],
+     "n": 2
+    },
+    "Fast Freeze": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Adjustable Shelves": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Style": {
+     "unit": null,
+     "values": [
+      "Top Mount"
+     ],
+     "n": 1
+    },
+    "Multi Air Flow Technology": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Door Alarm": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    }
+   },
+   "COMPACT": {
+    "Energy Efficiency Class": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Child Lock": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220V"
+     ],
+     "n": 1
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Grey"
+     ],
+     "n": 1
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "28 KG"
+     ],
+     "n": 1
+    },
+    "Defrost(No/Manual)": {
+     "unit": null,
+     "values": [
+      "Frost Free"
+     ],
+     "n": 1
+    },
+    "Warranty(compressor)": {
+     "unit": null,
+     "values": [
+      "5 Years"
+     ],
+     "n": 1
+    },
+    "Fast Freeze": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 1
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Beverage Cooler"
+     ],
+     "n": 1
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "55 cm"
+     ],
+     "n": 1
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "88 CM"
+     ],
+     "n": 1
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "46 cm"
+     ],
+     "n": 1
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "Platinum"
+     ],
+     "n": 1
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Energy Consumption per Year": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Installation Type": {
+     "unit": null,
+     "values": [
+      "Freestanding"
+     ],
+     "n": 1
+    },
+    "Refrigerant": {
+     "unit": null,
+     "values": [
+      "R-600a"
+     ],
+     "n": 1
+    },
+    "Adjustable Leveling Legs": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Frequency": {
+     "unit": null,
+     "values": [
+      "50/60 Hz"
+     ],
+     "n": 1
+    },
+    "Net Total Capacity": {
+     "unit": null,
+     "values": [
+      "92 Ltr"
+     ],
+     "n": 1
+    },
+    "Thermostat": {
+     "unit": null,
+     "values": [
+      "Manual"
+     ],
+     "n": 1
+    },
+    "Net Refrigerator Capacity": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Net Freezer Capacity": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Built-in Display": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Inverter Compressor": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Lighting Type": {
+     "unit": null,
+     "values": [
+      "NO"
+     ],
+     "n": 1
+    },
+    "Style": {
+     "unit": null,
+     "values": [
+      "Single Door Fridge"
+     ],
+     "n": 1
+    },
+    "Multi Air Flow Technology": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Ice Maker": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    }
+   }
+  },
+  "washer": {
+   "AUTO FE": {
+    "Built-in Water Heater": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Washer Type": {
+     "unit": null,
+     "values": [
+      "Drum"
+     ],
+     "n": 2
+    },
+    "Operation Type": {
+     "unit": null,
+     "values": [
+      "Fully Automatic",
+      "Automatic"
+     ],
+     "n": 2
+    },
+    "Washing Capacity": {
+     "unit": null,
+     "values": [
+      "15 Kg",
+      "16 Kg"
+     ],
+     "n": 2
+    },
+    "Pedestal Available": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Maximum Spin Speed (rpm)": {
+     "unit": null,
+     "values": [
+      "650RPM",
+      "700RPM"
+     ],
+     "n": 2
+    },
+    "Inverter Motor": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Steam Function": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No"
+     ],
+     "n": 2
+    },
+    "Start Delay Option": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Time Delay": {
+     "unit": null,
+     "values": [
+      "24HRS",
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Program Type": {
+     "unit": null,
+     "values": [
+      "8 Programs",
+      "Normal; Medium; Heavy"
+     ],
+     "n": 2
+    },
+    "Loading Type": {
+     "unit": null,
+     "values": [
+      "Top Loading"
+     ],
+     "n": 2
+    },
+    "Control Type": {
+     "unit": null,
+     "values": [
+      "Button",
+      "Bottons"
+     ],
+     "n": 2
+    },
+    "Stackable": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Display Screen Type": {
+     "unit": null,
+     "values": [
+      "Electronic",
+      "LED"
+     ],
+     "n": 2
+    },
+    "Energy Efficiency Class": {
+     "unit": null,
+     "values": [
+      "B",
+      "E"
+     ],
+     "n": 2
+    },
+    "Child Lock": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 2
+    },
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220-240",
+      "220V"
+     ],
+     "n": 2
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "White"
+     ],
+     "n": 2
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 2
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Washing Machine Top Load"
+     ],
+     "n": 2
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "60.1 cm",
+      "64 cm"
+     ],
+     "n": 2
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "101.5cm",
+      "102.3 cm"
+     ],
+     "n": 2
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "61.8 cm",
+      "67 cm"
+     ],
+     "n": 2
+    },
+    "Features": {
+     "unit": null,
+     "values": [
+      "Inverter Motor; Steam",
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Drying Capacity": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Warranty(motor)": {
+     "unit": null,
+     "values": [
+      "2 Years",
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "Midea"
+     ],
+     "n": 2
+    },
+    "Smart Connect": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Built-in Display": {
+     "unit": null,
+     "values": [
+      "Electronic LED",
+      "No"
+     ],
+     "n": 2
+    },
+    "Frequency": {
+     "unit": null,
+     "values": [
+      "50/60 Hz",
+      "60 Hz"
+     ],
+     "n": 2
+    },
+    "Washer/Dryer Combo Type": {
+     "unit": null,
+     "values": [
+      "Dry Upto 65%",
+      "Dry 65%"
+     ],
+     "n": 2
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    }
+   },
+   "TWIN TUB WASHER": {
+    "Built-in Water Heater": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Washer Type": {
+     "unit": null,
+     "values": [
+      "Twin Tub"
+     ],
+     "n": 2
+    },
+    "Operation Type": {
+     "unit": null,
+     "values": [
+      "Semi Automatic"
+     ],
+     "n": 2
+    },
+    "Washing Capacity": {
+     "unit": null,
+     "values": [
+      "12 kg"
+     ],
+     "n": 2
+    },
+    "Pedestal Available": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Maximum Spin Speed (rpm)": {
+     "unit": null,
+     "values": [
+      "700RPM",
+      "1250 rpm"
+     ],
+     "n": 2
+    },
+    "Inverter Motor": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Steam Function": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Start Delay Option": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Time Delay": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 2
+    },
+    "Program Type": {
+     "unit": null,
+     "values": [
+      "Normal; Medium; Heavy"
+     ],
+     "n": 2
+    },
+    "Loading Type": {
+     "unit": null,
+     "values": [
+      "Top Loading"
+     ],
+     "n": 2
+    },
+    "Control Type": {
+     "unit": null,
+     "values": [
+      "MANUAL ROTARY",
+      "Knob"
+     ],
+     "n": 2
+    },
+    "Stackable": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Display Screen Type": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Energy Efficiency Class": {
+     "unit": null,
+     "values": [
+      "E"
+     ],
+     "n": 2
+    },
+    "Child Lock": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 2
+    },
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220V-60Hz",
+      "220-230 V 60HZ"
+     ],
+     "n": 2
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "White"
+     ],
+     "n": 2
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 2
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Washing Machine Twin Tub"
+     ],
+     "n": 2
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "51 cm",
+      "89 cm"
+     ],
+     "n": 2
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "99 cm",
+      "104.2 cm"
+     ],
+     "n": 2
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "85.1cm",
+      "53.5 cm"
+     ],
+     "n": 2
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Features": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Washer"
+     ],
+     "n": 2
+    },
+    "Drying Capacity": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 2
+    },
+    "Warranty(motor)": {
+     "unit": null,
+     "values": [
+      "2 Years"
+     ],
+     "n": 2
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "Beko",
+      "HISENSE"
+     ],
+     "n": 2
+    },
+    "Smart Connect": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Built-in Display": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Frequency": {
+     "unit": null,
+     "values": [
+      "60 Hz"
+     ],
+     "n": 2
+    },
+    "Washer/Dryer Combo Type": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 2
+    }
+   },
+   "WASHER&DRYER": {
+    "Type of Loading": {
+     "unit": null,
+     "values": [
+      "Front Loading"
+     ],
+     "n": 1
+    },
+    "Child Lock": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 5
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "White",
+      "Titanium",
+      "Gray",
+      "Silver"
+     ],
+     "n": 5
+    },
+    "Digital Display(Y/N)": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Capacity (Kg)": {
+     "unit": null,
+     "values": [
+      "7 wash/4 dryer"
+     ],
+     "n": 1
+    },
+    "Number of Programs": {
+     "unit": null,
+     "values": [
+      "15"
+     ],
+     "n": 1
+    },
+    "Voltage/Freq": {
+     "unit": null,
+     "values": [
+      "220 V"
+     ],
+     "n": 1
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "Italy",
+      "China",
+      "Vietnam"
+     ],
+     "n": 5
+    },
+    "Spining Speed RPM": {
+     "unit": null,
+     "values": [
+      "1400 rpm"
+     ],
+     "n": 1
+    },
+    "Built-in Water Heater": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Washer Type": {
+     "unit": null,
+     "values": [
+      "Drum"
+     ],
+     "n": 4
+    },
+    "Operation Type": {
+     "unit": null,
+     "values": [
+      "Fully Automatic",
+      "Automatic"
+     ],
+     "n": 4
+    },
+    "Washing Capacity": {
+     "unit": null,
+     "values": [
+      "10 Kg",
+      "12 kg",
+      "19 KG"
+     ],
+     "n": 4
+    },
+    "Pedestal Available": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 4
+    },
+    "Maximum Spin Speed (rpm)": {
+     "unit": null,
+     "values": [
+      "1400RPM",
+      "1200 RPM",
+      "1100RPM"
+     ],
+     "n": 4
+    },
+    "Inverter Motor": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Steam Function": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Start Delay Option": {
+     "unit": null,
+     "values": [
+      "24 Hours",
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Time Delay": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "24HRS"
+     ],
+     "n": 4
+    },
+    "Program Type": {
+     "unit": null,
+     "values": [
+      "14 Programs",
+      "16",
+      "Normal; Medium; Heavy"
+     ],
+     "n": 4
+    },
+    "Loading Type": {
+     "unit": null,
+     "values": [
+      "Front Loading"
+     ],
+     "n": 4
+    },
+    "Control Type": {
+     "unit": null,
+     "values": [
+      "Knob + Touch",
+      "Dial",
+      "Dial + Touch",
+      "Rotary +Touch Button"
+     ],
+     "n": 4
+    },
+    "Stackable": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Display Screen Type": {
+     "unit": null,
+     "values": [
+      "LED",
+      "LED INDICATOR"
+     ],
+     "n": 4
+    },
+    "Energy Efficiency Class": {
+     "unit": null,
+     "values": [
+      "A",
+      "Not Applicable",
+      "C"
+     ],
+     "n": 4
+    },
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220-240",
+      "220V",
+      "220-240V"
+     ],
+     "n": 4
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Washer/Dryer"
+     ],
+     "n": 4
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "53.6 CM",
+      "59.5 cm",
+      "77 mm"
+     ],
+     "n": 4
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "85 cm",
+      "89 cm",
+      "99 cm"
+     ],
+     "n": 4
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "59.5 cm",
+      "62.5 cm",
+      "70 CM"
+     ],
+     "n": 4
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 3
+    },
+    "Features": {
+     "unit": null,
+     "values": [
+      "Inverter Motor; Steam",
+      "Direct Drive Moter"
+     ],
+     "n": 4
+    },
+    "Drying Capacity": {
+     "unit": null,
+     "values": [
+      "7KG",
+      "11KG",
+      "8KG"
+     ],
+     "n": 4
+    },
+    "Warranty(motor)": {
+     "unit": null,
+     "values": [
+      "2 Years"
+     ],
+     "n": 3
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "Midea",
+      "ClassPro",
+      "LG"
+     ],
+     "n": 4
+    },
+    "Smart Connect": {
+     "unit": null,
+     "values": [
+      "WiFi",
+      "No"
+     ],
+     "n": 4
+    },
+    "Built-in Display": {
+     "unit": null,
+     "values": [
+      "Internal LED",
+      "No",
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Frequency": {
+     "unit": null,
+     "values": [
+      "50/60 Hz",
+      "60 Hz"
+     ],
+     "n": 4
+    },
+    "Washer/Dryer Combo Type": {
+     "unit": null,
+     "values": [
+      "Dry 100%",
+      "All-in-one Unit"
+     ],
+     "n": 4
+    },
+    "Comp Agreement": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    }
+   },
+   "AUTO FL": {
+    "Built-in Water Heater": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Washer Type": {
+     "unit": null,
+     "values": [
+      "Drum"
+     ],
+     "n": 4
+    },
+    "Operation Type": {
+     "unit": null,
+     "values": [
+      "Automatic",
+      "Fully Automatic"
+     ],
+     "n": 4
+    },
+    "Washing Capacity": {
+     "unit": null,
+     "values": [
+      "12 kg",
+      "9 Kg",
+      "10 Kg"
+     ],
+     "n": 4
+    },
+    "Pedestal Available": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Maximum Spin Speed (rpm)": {
+     "unit": null,
+     "values": [
+      "1400RPM"
+     ],
+     "n": 4
+    },
+    "Inverter Motor": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Steam Function": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Start Delay Option": {
+     "unit": null,
+     "values": [
+      "3-19 Hours",
+      "Yes",
+      "24 Hours"
+     ],
+     "n": 4
+    },
+    "Time Delay": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "24HRS"
+     ],
+     "n": 4
+    },
+    "Program Type": {
+     "unit": null,
+     "values": [
+      "Normal; Medium; Heavy",
+      "14 Programs"
+     ],
+     "n": 4
+    },
+    "Loading Type": {
+     "unit": null,
+     "values": [
+      "Front Loading"
+     ],
+     "n": 4
+    },
+    "Control Type": {
+     "unit": null,
+     "values": [
+      "Dial + Touch",
+      "Automatic"
+     ],
+     "n": 4
+    },
+    "Stackable": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Display Screen Type": {
+     "unit": null,
+     "values": [
+      "White LED",
+      "Black LED",
+      "LED",
+      "Digital"
+     ],
+     "n": 4
+    },
+    "Energy Efficiency Class": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "A"
+     ],
+     "n": 4
+    },
+    "Child Lock": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220V",
+      "230V"
+     ],
+     "n": 4
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Black Steel",
+      "Grey",
+      "Silver",
+      "Space Black"
+     ],
+     "n": 4
+    },
+    "Comp Agreement": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China",
+      "Turkey"
+     ],
+     "n": 4
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Washing Machine Front Load"
+     ],
+     "n": 4
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "60 cm",
+      "59.8 cm",
+      "59.5 cm"
+     ],
+     "n": 4
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "85 cm",
+      "84.5 cm"
+     ],
+     "n": 4
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "61 cm",
+      "58.8 cm",
+      "59.5 cm",
+      "50.8 cm"
+     ],
+     "n": 4
+    },
+    "Features": {
+     "unit": null,
+     "values": [
+      "AI-DD",
+      "Iron Assist & Half Load",
+      "BLDC Motor Technology",
+      "Washer"
+     ],
+     "n": 4
+    },
+    "Drying Capacity": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 4
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "LG",
+      "Bosch",
+      "Midea",
+      "HAIER"
+     ],
+     "n": 4
+    },
+    "Smart Connect": {
+     "unit": null,
+     "values": [
+      "WiFi",
+      "No",
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Built-in Display": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Frequency": {
+     "unit": null,
+     "values": [
+      "50/60 Hz",
+      "60 Hz"
+     ],
+     "n": 4
+    },
+    "Washer/Dryer Combo Type": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Dry 65%",
+      "Dry Upto 65%"
+     ],
+     "n": 4
+    },
+    "Warranty(motor)": {
+     "unit": null,
+     "values": [
+      "10 Years on Motor"
+     ],
+     "n": 2
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    }
+   }
+  },
+  "ac": {
+   "MINI SPLIT AIR CONDITIONER": {
+    "Energy Efficiency Class": {
+     "unit": null,
+     "values": [
+      "D",
+      "B",
+      "A"
+     ],
+     "n": 10
+    },
+    "Remote Control": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 10
+    },
+    "Comp Agreement": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Timer": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "YES/24hrs",
+      "Electronic"
+     ],
+     "n": 10
+    },
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220V",
+      "240V",
+      "220V-60Hz"
+     ],
+     "n": 10
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "White",
+      "Pearl White"
+     ],
+     "n": 10
+    },
+    "Air Swing": {
+     "unit": null,
+     "values": [
+      "2 Ways",
+      "4 Ways",
+      "Yes"
+     ],
+     "n": 10
+    },
+    "Compressor Type": {
+     "unit": null,
+     "values": [
+      "Rotary",
+      "Inverter"
+     ],
+     "n": 10
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "65 KG",
+      "49 KG",
+      "51 Kg",
+      "60 Kg",
+      "76 KG",
+      "50 Kg",
+      "205g",
+      "66.5 Kg"
+     ],
+     "n": 10
+    },
+    "Filter (type)": {
+     "unit": null,
+     "values": [
+      "Washable Mesh Filter",
+      "Antibacterial Mesh Filter",
+      "Pre-Filter",
+      "Antibacterial",
+      "Washable",
+      "BIO filter /carbon filter"
+     ],
+     "n": 10
+    },
+    "Cooling Capacity": {
+     "unit": null,
+     "values": [
+      "2 Ton",
+      "1.5 Ton",
+      "3 Ton",
+      "22;178 BTU"
+     ],
+     "n": 10
+    },
+    "Cold or H/C": {
+     "unit": null,
+     "values": [
+      "Hot and Cold",
+      "Cold"
+     ],
+     "n": 10
+    },
+    "Coverage Area": {
+     "unit": null,
+     "values": [
+      "19 - 22 m²",
+      "16-18 m²",
+      "19-22 M2",
+      "30 - 36 m²",
+      "24 SQ MT",
+      "36 m²"
+     ],
+     "n": 10
+    },
+    "Warranty(compressor)": {
+     "unit": null,
+     "values": [
+      "5 Years",
+      "10 Years",
+      "7 Years"
+     ],
+     "n": 10
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China",
+      "Thailand",
+      "Saudi Arabia"
+     ],
+     "n": 10
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Split Air Conditioner",
+      "Not Applicable"
+     ],
+     "n": 10
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "108 cm",
+      "103 CM",
+      "97 cm",
+      "105.5 cm",
+      "119.1 cm",
+      "140.5cm",
+      "111.0cm",
+      "99.8 cm",
+      "Not Applicable",
+      "135.5cm"
+     ],
+     "n": 10
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "33.5 cm",
+      "32.7 cm",
+      "22 cm",
+      "29.9CM",
+      "36 cm",
+      "34.5 cm",
+      "0.18 cm",
+      "36.5 cm"
+     ],
+     "n": 10
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "22.6 cm",
+      "22.7 cm",
+      "30.5 cm",
+      "21.5 cm",
+      "25.8 cm",
+      "30 cm",
+      "24cm",
+      "21 cm",
+      "Not Applicable",
+      "27.0cm"
+     ],
+     "n": 10
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "SAMSUNG",
+      "ClassPro",
+      "Gree",
+      "LG",
+      "HAIER",
+      "Danalock",
+      "ZAMIL"
+     ],
+     "n": 10
+    },
+    "Smart Connect": {
+     "unit": null,
+     "values": [
+      "No",
+      "WiFi",
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 10
+    },
+    "Number of Fan Speeds": {
+     "unit": null,
+     "values": [
+      "3",
+      "4",
+      "5",
+      "Not Applicable"
+     ],
+     "n": 10
+    },
+    "Energy Consumption per Year": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 9
+    },
+    "Built-in Display": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 10
+    },
+    "Refrigerant": {
+     "unit": null,
+     "values": [
+      "R410A",
+      "R32",
+      "Not Applicable"
+     ],
+     "n": 10
+    },
+    "Frequency": {
+     "unit": null,
+     "values": [
+      "60 Hz",
+      "50/60 Hz"
+     ],
+     "n": 10
+    },
+    "Exterior Unit Height": {
+     "unit": null,
+     "values": [
+      "81 cm",
+      "Not Applicable",
+      "No",
+      "38.0cm",
+      "76.2 cm",
+      "65cm"
+     ],
+     "n": 10
+    },
+    "Exterior Unit Width": {
+     "unit": null,
+     "values": [
+      "94.5cm",
+      "Not Applicable",
+      "No",
+      "92 Cm",
+      "87.0cm"
+     ],
+     "n": 10
+    },
+    "Exterior Unit Depth": {
+     "unit": null,
+     "values": [
+      "41 cm",
+      "Not Applicable",
+      "No",
+      "38.5 cm",
+      "33 cm"
+     ],
+     "n": 10
+    },
+    "Installation Required": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 10
+    },
+    "Installation Hardware Included": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 10
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 5
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 3
+    },
+    "Free Installation": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Yes"
+     ],
+     "n": 3
+    }
+   },
+   "WINDOW AIR CONDITIONER": {
+    "Energy Efficiency Class": {
+     "unit": null,
+     "values": [
+      "D",
+      "F"
+     ],
+     "n": 3
+    },
+    "Remote Control": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 3
+    },
+    "Timer": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 3
+    },
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220V",
+      "220-240 V 60HZ",
+      "230V"
+     ],
+     "n": 3
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "White",
+      "Grey"
+     ],
+     "n": 3
+    },
+    "Air Swing": {
+     "unit": null,
+     "values": [
+      "4 Ways",
+      "2 Ways"
+     ],
+     "n": 3
+    },
+    "Compressor Type": {
+     "unit": null,
+     "values": [
+      "Inverter",
+      "Rotary"
+     ],
+     "n": 3
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "50 Kg",
+      "63 Kg",
+      "54 Kg"
+     ],
+     "n": 3
+    },
+    "Cooling Capacity": {
+     "unit": null,
+     "values": [
+      "2 Ton",
+      "1.5 Ton"
+     ],
+     "n": 3
+    },
+    "Cold or H/C": {
+     "unit": null,
+     "values": [
+      "Cold",
+      "Hot and Cold"
+     ],
+     "n": 3
+    },
+    "Coverage Area": {
+     "unit": null,
+     "values": [
+      "19 - 22 m²",
+      "16-18 m²"
+     ],
+     "n": 3
+    },
+    "Warranty(compressor)": {
+     "unit": null,
+     "values": [
+      "5 Years"
+     ],
+     "n": 3
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China",
+      "Saudi Arabia"
+     ],
+     "n": 3
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Window Air Conditioner"
+     ],
+     "n": 3
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "64.5 cm",
+      "77 cm",
+      "66 cm"
+     ],
+     "n": 3
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "43 cm",
+      "66 cm"
+     ],
+     "n": 3
+    },
+    "Depth": {
+     "unit": null,
+     "values": [
+      "67 cm",
+      "42.40 cm",
+      "68  cm"
+     ],
+     "n": 3
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "Basic",
+      "Kelon",
+      "ZAMIL"
+     ],
+     "n": 3
+    },
+    "Smart Connect": {
+     "unit": null,
+     "values": [
+      "WiFi",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 3
+    },
+    "Number of Fan Speeds": {
+     "unit": null,
+     "values": [
+      "3",
+      "2"
+     ],
+     "n": 3
+    },
+    "Refrigerant": {
+     "unit": null,
+     "values": [
+      "R32",
+      "R410A"
+     ],
+     "n": 3
+    },
+    "Frequency": {
+     "unit": null,
+     "values": [
+      "60 Hz"
+     ],
+     "n": 3
+    },
+    "Energy Consumption per Year": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 2
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    }
+   }
+  },
+  "smartwatch": {
+   "SMART WATCH": {
+    "Cellular": {
+     "unit": null,
+     "values": [
+      "GPS + Cellular",
+      "No",
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 11
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "YES",
+      "Yes",
+      "Bluetooth 5.2"
+     ],
+     "n": 11
+    },
+    "Touchscreen": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 11
+    },
+    "Operating System": {
+     "unit": null,
+     "values": [
+      "GARMIN OPERATING SYSTEM",
+      ".",
+      "iOS 7",
+      "WatchOS 11",
+      "Watch OS 26",
+      "HarmonyOS",
+      "Watch OS 8",
+      "Not Applicable"
+     ],
+     "n": 11
+    },
+    "Processor": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      ".",
+      "S5 Chip",
+      "S10 SiP",
+      "S10 Chip",
+      "Yes",
+      "S8 Chip",
+      "DK3.5 + ST"
+     ],
+     "n": 11
+    },
+    "Battery": {
+     "unit": null,
+     "values": [
+      "UPTO 11 DAYS",
+      "524 mAh",
+      "Li-ion 200mah",
+      "Built-in lithium-ion",
+      "Not Applicable",
+      "400mAh",
+      "UPTO 23 DAYS",
+      "200mAh Li-Ion",
+      "180mAh",
+      "292 mAh"
+     ],
+     "n": 11
+    },
+    "Compatibility": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Android 6.0 or later; iOS 9.0 or later",
+      "All Devices",
+      "iOS/Android Devices",
+      "Android; iOS"
+     ],
+     "n": 11
+    },
+    "RAM SIZE": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      ".",
+      "1GB",
+      "No",
+      "32 MB"
+     ],
+     "n": 11
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Slate",
+      "Green",
+      "Silver",
+      "Jet Black Aluminium",
+      "Slate Titanium",
+      "Black",
+      "Black Grey",
+      "SILVER & STORM BLUE",
+      "Forest Green",
+      "Blue",
+      "Silver Aluminium"
+     ],
+     "n": 11
+    },
+    "Connectivity Technology": {
+     "unit": null,
+     "values": [
+      "Bluetooth & WiFi",
+      "Bluetooth",
+      "WiFi",
+      "Bluetooth; Wireless",
+      "Bluetooth 5.0",
+      "Bluetooth; Wifi"
+     ],
+     "n": 11
+    },
+    "Memory (internal)": {
+     "unit": null,
+     "values": [
+      "8GB",
+      ".",
+      "32GB",
+      "64GB",
+      "Not Applicable",
+      "Up to 32GB"
+     ],
+     "n": 11
+    },
+    "Water Resistant": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "5ATM/ IP68",
+      "5ATM"
+     ],
+     "n": 11
+    },
+    "Screen Size": {
+     "unit": null,
+     "values": [
+      "42mm",
+      "1.43 inch",
+      "0.74\"",
+      "1.65 INCH",
+      "1.8 inch",
+      "1.8'",
+      "44mm",
+      "1.64 inch",
+      "1.74 Inch"
+     ],
+     "n": 11
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      "4.22cm",
+      "4.6 cm",
+      "0.15",
+      "Not Applicable",
+      "4.3 CM",
+      "1.32 CM",
+      "29.60 cm"
+     ],
+     "n": 11
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "1.11 kg",
+      "0.05 Kg",
+      "0.007 kg",
+      "Not Applicable",
+      "0.27 kg",
+      "0.42 kg",
+      "0.021 kg",
+      "0.03kg"
+     ],
+     "n": 11
+    },
+    "Functions": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "SMART Watch"
+     ],
+     "n": 11
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "USA",
+      "China",
+      "Assorted",
+      "Taiwan"
+     ],
+     "n": 11
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "VIVOACTIVE",
+      "HUAWEI WATCH GT4",
+      "Series SE",
+      "Series 10",
+      "Series 11",
+      "HUAWEI WATCH FIT 3",
+      "FORERUNNER",
+      "WATCH FIT",
+      "HUAWEI WATCH FIT"
+     ],
+     "n": 11
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "4.23 cm",
+      "4.6 cm",
+      "0.74 cm",
+      "Not Applicable",
+      "3.6 cm",
+      "4.7 cm",
+      "7.60 cm",
+      "3 cm",
+      "3.4 CM"
+     ],
+     "n": 11
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "1.12 CM",
+      "1.09 CM",
+      "0.88 cm",
+      "Not Applicable",
+      "0.90 cm",
+      "4.7 cm",
+      "3.60 cm",
+      "1.07 cm",
+      "1.10 cm"
+     ],
+     "n": 11
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 7
+    },
+    "GPS": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 11
+    },
+    "Brand Name": {
+     "unit": null,
+     "values": [
+      "GARMIN",
+      "Huawei",
+      "APPLE"
+     ],
+     "n": 11
+    },
+    "Voice Activated": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 11
+    },
+    "Average Heart Rate Display": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 11
+    },
+    "Screen Size (inch)": {
+     "unit": null,
+     "values": [
+      "1.81 INCH",
+      "1.73 INCH",
+      "1.77 INCH",
+      "1.85 INCH"
+     ],
+     "n": 7
+    },
+    "Memory Card Slot": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Network": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Rear Camera": {
+     "unit": null,
+     "values": [
+      "12MP"
+     ],
+     "n": 1
+    },
+    "Processor Core": {
+     "unit": null,
+     "values": [
+      "Hexa-Core"
+     ],
+     "n": 1
+    },
+    "Graphics Card": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Screen Type": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Battery Size (mAH)": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Waterproof (Y/N)": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Front Camera Resolution": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Finger Print (Y/N)": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Screen Resolution": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Charger Compatibility": {
+     "unit": null,
+     "values": [
+      "USB-C"
+     ],
+     "n": 1
+    },
+    "Processor Speed": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Device Type": {
+     "unit": null,
+     "values": [
+      "APPLE WATCH"
+     ],
+     "n": 1
+    },
+    "Flexible Screen": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "SIM Type": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Call Features": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Comp Agreement": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    }
+   }
+  },
+  "headphones": {
+   "HEADPHONE": {
+    "LCD Display": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable"
+     ],
+     "n": 7
+    },
+    "Charge Time": {
+     "unit": null,
+     "values": [
+      "2.5 h"
+     ],
+     "n": 1
+    },
+    "Noise Cancellation": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No"
+     ],
+     "n": 7
+    },
+    "Foldable (Y/N)": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Volume Control": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 7
+    },
+    "Type": {
+     "unit": null,
+     "values": [
+      "Wired/Wireless",
+      "Headphone",
+      "Wireless Headphones"
+     ],
+     "n": 4
+    },
+    "Bluetooth": {
+     "unit": null,
+     "values": [
+      "Yes; V5.1"
+     ],
+     "n": 1
+    },
+    "Battery Type": {
+     "unit": null,
+     "values": [
+      "Built-in Li-ion",
+      "Rechargeable",
+      "Lithium Polymer"
+     ],
+     "n": 4
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "White",
+      "Black",
+      "Gray",
+      "Black/Brown"
+     ],
+     "n": 7
+    },
+    "Compatibility": {
+     "unit": null,
+     "values": [
+      "All Devices"
+     ],
+     "n": 1
+    },
+    "Connectivity Technology": {
+     "unit": null,
+     "values": [
+      "Bluetooth;3.5mm",
+      "Yes",
+      "Bluetooth"
+     ],
+     "n": 4
+    },
+    "Cable Length": {
+     "unit": null,
+     "values": [
+      "2.5m",
+      "0.2 m",
+      "No",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "Thailand",
+      "China"
+     ],
+     "n": 7
+    },
+    "Battery Hours": {
+     "unit": null,
+     "values": [
+      "25 Hours",
+      "Up To 35Hrs",
+      "40",
+      "80Hrs"
+     ],
+     "n": 4
+    },
+    "Battery Life": {
+     "unit": null,
+     "values": [
+      "24 Hrs"
+     ],
+     "n": 1
+    },
+    "Battery Size (mAH)": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Waterproof (Y/N)": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 7
+    },
+    "Microphone": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 4
+    },
+    "Connection Type": {
+     "unit": null,
+     "values": [
+      "Bluetooth"
+     ],
+     "n": 1
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Speaker Diameter": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Headset"
+     ],
+     "n": 1
+    },
+    "Call Features": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Comp Agreement": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 3
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    }
+   },
+   "UNKNOWN": {
+    "Warranty Period": {
+     "unit": null,
+     "values": [
+      "2 Years"
+     ],
+     "n": 3
+    },
+    "Form Factor": {
+     "unit": null,
+     "values": [
+      "Over-Ear",
+      "In-Ear"
+     ],
+     "n": 4
+    },
+    "Sound Isolation": {
+     "unit": null,
+     "values": [
+      "Active Noise Cancellation (ANC)"
+     ],
+     "n": 1
+    },
+    "Fit Type": {
+     "unit": null,
+     "values": [
+      "On-Ear"
+     ],
+     "n": 1
+    },
+    "Microphone Technology": {
+     "unit": null,
+     "values": [
+      "Built-in Mic"
+     ],
+     "n": 1
+    },
+    "Charging Type": {
+     "unit": null,
+     "values": [
+      "USB-C"
+     ],
+     "n": 1
+    }
+   },
+   "EARPHONE": {
+    "Comp Agreement": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No"
+     ],
+     "n": 2
+    },
+    "LCD Display": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 6
+    },
+    "Noise Cancellation": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 6
+    },
+    "Volume Control": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "ON DEVICE",
+      "Button Touch"
+     ],
+     "n": 6
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Black",
+      "Austin Yellow",
+      "Beige",
+      "White"
+     ],
+     "n": 6
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 6
+    },
+    "Waterproof (Y/N)": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 6
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 2
+    }
+   },
+   "TWS": {
+    "LCD Display": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 4
+    },
+    "Noise Cancellation": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "No",
+      "Active +Adaptive Noise Cancelling"
+     ],
+     "n": 18
+    },
+    "Comp Agreement": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 5
+    },
+    "Volume Control": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes",
+      "Touch Control",
+      "Earcups Touch Control"
+     ],
+     "n": 18
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Navy",
+      "Black",
+      "White",
+      "Light Grey",
+      "Beige",
+      "Graphit Black",
+      "Beats Black",
+      "Moonlight White",
+      "Silver / Blue",
+      "Light Gold"
+     ],
+     "n": 18
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China",
+      "Vietnam"
+     ],
+     "n": 18
+    },
+    "Waterproof (Y/N)": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "IPX",
+      "No",
+      "Splash Resistant",
+      "Yes; 3ATM",
+      "IPX4"
+     ],
+     "n": 18
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 10
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 4
+    },
+    "Series Name": {
+     "unit": null,
+     "values": [
+      "BEATS FIT PRO"
+     ],
+     "n": 1
+    }
+   }
+  },
+  "speaker": {
+   "SPEAKER": {
+    "LCD Display": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 5
+    },
+    "Noise Cancellation": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 5
+    },
+    "Volume Control": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Button Press",
+      "Yes",
+      "Manual Button Press"
+     ],
+     "n": 14
+    },
+    "No of Speakers": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "1",
+      "2"
+     ],
+     "n": 12
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Black",
+      "Red",
+      "Navy",
+      "Orange/Black",
+      "Pink",
+      "White",
+      "Blue"
+     ],
+     "n": 14
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 14
+    },
+    "Battery Size (mAH)": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "1020mAh",
+      "2300",
+      "1200mAh",
+      "4800mAh",
+      "5000mAh",
+      "730mAh",
+      "2400 mAh"
+     ],
+     "n": 12
+    },
+    "Waterproof (Y/N)": {
+     "unit": null,
+     "values": [
+      "No",
+      "IPX7",
+      "Yes"
+     ],
+     "n": 14
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 3
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 7
+    },
+    "Comp Agreement": {
+     "unit": null,
+     "values": [
+      "No",
+      "Yes"
+     ],
+     "n": 2
+    }
+   }
+  },
+  "vacuum": {
+   "UNKNOWN": {
+    "Water Tank Capacity": {
+     "unit": "liters",
+     "values": [
+      "1"
+     ],
+     "n": 1
+    },
+    "Self-Cleaning Function": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Separate Clean & Dirty Water Tanks": {
+     "unit": null,
+     "values": [
+      "Yes"
+     ],
+     "n": 1
+    },
+    "Cleaning Modes Available": {
+     "unit": null,
+     "values": [
+      "Deep Clean",
+      "Eco Mode",
+      "Hard Floor"
+     ],
+     "n": 1
+    },
+    "Suitable Floor Types": {
+     "unit": null,
+     "values": [
+      "Carpet",
+      "Hard Floor",
+      "Laminate",
+      "Tile"
+     ],
+     "n": 1
+    },
+    "Roller Type": {
+     "unit": null,
+     "values": [
+      "Soft"
+     ],
+     "n": 1
+    },
+    "Dustbin Capacity (Liters)": {
+     "unit": "liters",
+     "values": [
+      "0.3"
+     ],
+     "n": 1
+    },
+    "Voltage (V)": {
+     "unit": "volts",
+     "values": [
+      "22"
+     ],
+     "n": 1
+    },
+    "Product Dimensions": {
+     "unit": null,
+     "values": [
+      "260*215*1080"
+     ],
+     "n": 1
+    },
+    "Noise Level": {
+     "unit": "dB",
+     "values": [
+      "80"
+     ],
+     "n": 1
+    },
+    "Cord Type": {
+     "unit": null,
+     "values": [
+      "Cordless"
+     ],
+     "n": 1
+    },
+    "Battery Run Time (Minutes)": {
+     "unit": "minutes",
+     "values": [
+      "80"
+     ],
+     "n": 1
+    },
+    "Filter Type": {
+     "unit": null,
+     "values": [
+      "Multi-Stage Filtration"
+     ],
+     "n": 1
+    }
+   },
+   "VACUUM CLEANER": {
+    "Voltage": {
+     "unit": null,
+     "values": [
+      "220-240V",
+      "220-240 V 60HZ",
+      "Not Applicable",
+      "220V",
+      "220-240V 50/60 Hz",
+      "220-240 V 50HZ",
+      "No"
+     ],
+     "n": 11
+    },
+    "Accessories": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "2 in 1 crevice tool; Furniture",
+      "Includes Tough Stain Hand Tool, Wide Tough Stain T",
+      "Not Applicable",
+      "Roller, Dry Filter, Cleaning Tool, Storage Tray",
+      "8cm Tough Stain Tool,3-in-1 Upholstery Tool",
+      "2",
+      "No"
+     ],
+     "n": 13
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Blue",
+      "Deep Black and Coral",
+      "White",
+      "Not Applicable",
+      "Brown/Black",
+      "Black & White",
+      "Black",
+      "Black-Yellow",
+      "Multicolor",
+      "Steel"
+     ],
+     "n": 13
+    },
+    "Power": {
+     "unit": null,
+     "values": [
+      "1600W",
+      "1200W",
+      "960W",
+      "Not Applicable",
+      "1500W",
+      "18W",
+      "2100W",
+      "800W",
+      "8000Pa",
+      "Battery",
+      "No",
+      "2200W"
+     ],
+     "n": 13
+    },
+    "Comp Agreement": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "Malaysia",
+      "China",
+      "Thailand"
+     ],
+     "n": 13
+    },
+    "Bag Type": {
+     "unit": null,
+     "values": [
+      "Bagless",
+      "Not Applicable",
+      "Drum",
+      "Cloth"
+     ],
+     "n": 11
+    },
+    "Capacity (Ltr)": {
+     "unit": null,
+     "values": [
+      "2",
+      "1.3L",
+      "Not Applicable",
+      "15",
+      "18.0L/Dry",
+      "3.0 Liters",
+      "25 Liters"
+     ],
+     "n": 11
+    },
+    "Rechargeable (Y/N)": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable",
+      "N- Corded",
+      "Yes"
+     ],
+     "n": 11
+    },
+    "Cord Length (Mtr)": {
+     "unit": null,
+     "values": [
+      "5",
+      "6m",
+      "Not Applicable",
+      "8",
+      "3.2",
+      "4.5 Mtr"
+     ],
+     "n": 11
+    },
+    "Control Panel": {
+     "unit": null,
+     "values": [
+      "On/Off",
+      "Manual",
+      "Not Applicable"
+     ],
+     "n": 11
+    },
+    "Functions": {
+     "unit": null,
+     "values": [
+      "Vacuum Cleaner",
+      "Vacum Cleaner",
+      "Not Applicable",
+      "Dry Vacuum",
+      "1",
+      "Vac/Mop"
+     ],
+     "n": 11
+    },
+    "Suction Power (amps/mm)": {
+     "unit": null,
+     "values": [
+      "No",
+      "1.136Amps",
+      "Not Applicable"
+     ],
+     "n": 10
+    },
+    "Telescopic Pipe": {
+     "unit": null,
+     "values": [
+      "No",
+      "Metal",
+      "Not Applicable",
+      "Yes"
+     ],
+     "n": 11
+    },
+    "Capacity(L/Wet&Dry)": {
+     "unit": null,
+     "values": [
+      "Dry",
+      "1.3 L",
+      "Not Applicable",
+      "Dry Only",
+      "0.7 L",
+      "Not Known",
+      "25 L/Dry"
+     ],
+     "n": 11
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 8
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 5
+    },
+    "Noise Level": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "84dbA",
+      "maximum 68.1dB"
+     ],
+     "n": 4
+    },
+    "Battery Size (mAH)": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "4600mAh",
+      "10;000 mAh"
+     ],
+     "n": 5
+    },
+    "Body Material": {
+     "unit": null,
+     "values": [
+      "Metal -Plastic",
+      "Not Applicable",
+      "Plastic",
+      "Metal; plastic and rubber",
+      "ABS Plastic"
+     ],
+     "n": 5
+    },
+    "Cord Length": {
+     "unit": null,
+     "values": [
+      "7.6m",
+      "Not Applicable",
+      "9m",
+      "1.5m"
+     ],
+     "n": 5
+    },
+    "Navigation": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "LDS"
+     ],
+     "n": 4
+    },
+    "Dust capacity": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "250ml"
+     ],
+     "n": 4
+    },
+    "Clean Tank Capacity": {
+     "unit": null,
+     "values": [
+      "0.85L",
+      "Not Applicable",
+      "3.7  liter",
+      "240ml"
+     ],
+     "n": 5
+    },
+    "Max Suction": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "8000 Pa",
+      "5000 Pa"
+     ],
+     "n": 5
+    },
+    "Dirty clean capacity": {
+     "unit": null,
+     "values": [
+      "0.85L",
+      "Not Applicable",
+      "1.5 liter",
+      "2.5L"
+     ],
+     "n": 4
+    },
+    "Removable Tank": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "Not Applicable"
+     ],
+     "n": 5
+    },
+    "Brush Rotating system": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "Not Applicable",
+      "Two Side Brush+ Rolling brushimplanted with hair",
+      "Yes – High-speed motorized roller brush"
+     ],
+     "n": 5
+    },
+    "Charging time": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "4H",
+      "2 Hours"
+     ],
+     "n": 5
+    },
+    "Auto-empty dust": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Yes",
+      "No"
+     ],
+     "n": 5
+    },
+    "Heated Cleaning": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "No"
+     ],
+     "n": 5
+    },
+    "Auto Mop Cleaning": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "Yes",
+      "No"
+     ],
+     "n": 5
+    },
+    "Vacuuming & Mopping": {
+     "unit": null,
+     "values": [
+      "Yes",
+      "Not Applicable",
+      "No"
+     ],
+     "n": 5
+    },
+    "Surface Type": {
+     "unit": null,
+     "values": [
+      "Multi surface- Carpet",
+      "Not Applicable",
+      "Wet/Dry",
+      "carpet;wood;tile; lvp and laminate surface",
+      "Carpet and Hardwood Floor"
+     ],
+     "n": 5
+    },
+    "Water Tank Capacity": {
+     "unit": null,
+     "values": [
+      "0.85L",
+      "Not Applicable"
+     ],
+     "n": 4
+    },
+    "Max Run Time": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "216 mins"
+     ],
+     "n": 5
+    },
+    "Wattage": {
+     "unit": null,
+     "values": [
+      "Not Applicable",
+      "18W",
+      "800W",
+      "61.7W"
+     ],
+     "n": 4
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "VACUUM ACCESSORIES",
+      "DRY-DRUM",
+      "CARPET CLEANERS",
+      "ROBOVACS",
+      "ROBOVACS ACCESSORIES"
+     ],
+     "n": 7
+    },
+    "Monitor Included": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "App Compatible": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Light Avalible": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Compatible Floor Type": {
+     "unit": null,
+     "values": [
+      "hard floors and low-pile carpet"
+     ],
+     "n": 1
+    },
+    "Maximum Weight Capacity": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Body Metrics Measured": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "0.49 Kg"
+     ],
+     "n": 1
+    },
+    "Wi-Fi": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Remote access": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    },
+    "Angle View(Degrees)": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Connectivity": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "OS Compatability": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Sound Detection": {
+     "unit": null,
+     "values": [
+      "Not Applicable"
+     ],
+     "n": 1
+    },
+    "Automatic Power Schedule": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 1
+    }
+   }
+  },
+  "powerbank": {
+   "UNKNOWN": {
+    "Color": {
+     "unit": null,
+     "values": [
+      "Rose Gold"
+     ],
+     "n": 1
+    },
+    "Product Type": {
+     "unit": null,
+     "values": [
+      "Power Bank"
+     ],
+     "n": 1
+    }
+   },
+   "POWER BANK": {
+    "Compatibility": {
+     "unit": null,
+     "values": [
+      "All Devices",
+      "All"
+     ],
+     "n": 7
+    },
+    "Color": {
+     "unit": null,
+     "values": [
+      "Grey",
+      "Black",
+      "Gray"
+     ],
+     "n": 7
+    },
+    "Number of USB Inputs": {
+     "unit": null,
+     "values": [
+      "1 USB-C",
+      "Not Applicable",
+      "2",
+      "1x USB-A; 1x USB-C",
+      "1"
+     ],
+     "n": 7
+    },
+    "Length": {
+     "unit": null,
+     "values": [
+      ".99 cm",
+      "16.86 CM",
+      "0.04 cm",
+      "10 cm",
+      "1.95 cm",
+      "Not Applicable",
+      "6.04"
+     ],
+     "n": 7
+    },
+    "Weight": {
+     "unit": null,
+     "values": [
+      "0.19",
+      "0.4 kg",
+      "0.007 kg",
+      "0.2Kg",
+      "0.432 kg",
+      "Not Applicable",
+      "0.6 KG"
+     ],
+     "n": 7
+    },
+    "Made in": {
+     "unit": null,
+     "values": [
+      "China"
+     ],
+     "n": 7
+    },
+    "Item Has Expiration": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 3
+    },
+    "Battery Size (mAH)": {
+     "unit": null,
+     "values": [
+      "5000mAh",
+      "20000mAh",
+      "10;000 mAh",
+      "10000mAh",
+      "20100mAh"
+     ],
+     "n": 7
+    },
+    "Width": {
+     "unit": null,
+     "values": [
+      "10 cm",
+      "12.06 cm",
+      "0.43 CM",
+      "4 CM",
+      "1.99 cm",
+      "Not Applicable",
+      "3 cm"
+     ],
+     "n": 7
+    },
+    "Height": {
+     "unit": null,
+     "values": [
+      "5 cm",
+      "4.0 cm",
+      "0.16 cm",
+      "6 CM",
+      "1.57 cm",
+      "Not Applicable",
+      "2 cm"
+     ],
+     "n": 7
+    },
+    "Truva Exclusive": {
+     "unit": null,
+     "values": [
+      "No"
+     ],
+     "n": 5
+    },
+    "Wireless Charging": {
+     "unit": null,
+     "values": [
+      "No",
+      "Not Applicable",
+      "Yes"
+     ],
+     "n": 7
+    },
+    "Maximum Battery Recharge Time": {
+     "unit": null,
+     "values": [
+      "4 Hours",
+      "Unknown",
+      "1 Hour",
+      "10-12 Hours",
+      "Not Applicable",
+      "5 Hours"
+     ],
+     "n": 7
+    },
+    "Type": {
+     "unit": null,
+     "values": [
+      "Power Bank"
+     ],
+     "n": 1
+    }
+   }
+  }
+ }
+}

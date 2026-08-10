@@ -1,0 +1,610 @@
+{
+ "apparel_women": {
+  "url": "https://www.ounass.ae/women/clothing",
+  "facets": {
+   "Category": [
+    "Dresses",
+    "Tops",
+    "Swimwear",
+    "Pants",
+    "Beachwear",
+    "Activewear",
+    "Coats &amp; Jackets",
+    "Skirts",
+    "Loungewear",
+    "Knitwear",
+    "Co-ord Sets",
+    "Shorts",
+    "Abayas",
+    "Lingerie",
+    "Jeans",
+    "Sleepwear",
+    "Jumpsuits",
+    "Skiwear",
+    "Shapewear"
+   ],
+   "Sleeve Length": [
+    "Long Sleeve",
+    "Sleeveless",
+    "Short Sleeve",
+    "Strapless",
+    "Off-Shoulder",
+    "One Shoulder"
+   ],
+   "Designer": [
+    "12 STOREEZ",
+    "16ARLINGTON",
+    "21SIX",
+    "3.1 Phillip Lim",
+    "437",
+    "7 DAYS ACTIVE",
+    "A.W.A.K.E Mode",
+    "ABADIA",
+    "AC by Aanchal Chanda",
+    "Acler"
+   ],
+   "Clothing Size": [
+    "One Size",
+    "XXS",
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL",
+    "XXL",
+    "XXXL",
+    "XXXXL"
+   ],
+   "Colour": [
+    "Yellow",
+    "White",
+    "Silver",
+    "Rose Gold",
+    "Red",
+    "Purple",
+    "Pink",
+    "Orange",
+    "Neutral",
+    "Multicolour",
+    "Metallic",
+    "Grey",
+    "Green",
+    "Gold",
+    "Burgundy",
+    "Brown",
+    "Blue",
+    "Black"
+   ],
+   "Price Type": [
+    "Full Price",
+    "Sale"
+   ],
+   "Discount": [
+    "20% OFF",
+    "30% OFF",
+    "40% OFF",
+    "50% OFF",
+    "60% OFF",
+    "70% OFF",
+    "80% OFF"
+   ]
+  }
+ },
+ "apparel_dresses": {
+  "url": "https://www.ounass.ae/women/clothing/dresses",
+  "facets": {
+   "Dress Type": [
+    "Abayas &amp; Jalabiyas",
+    "Bridal Dresses",
+    "Cocktail Dresses",
+    "Day Dresses",
+    "Evening Dresses",
+    "Gowns",
+    "Kaftans"
+   ],
+   "Dress Length": [
+    "Maxi",
+    "Midi",
+    "Mini"
+   ],
+   "Sleeve Length": [
+    "Long Sleeve",
+    "Sleeveless",
+    "Short Sleeve",
+    "Strapless",
+    "Off-Shoulder",
+    "One Shoulder"
+   ],
+   "Designer": [
+    "12 STOREEZ",
+    "16ARLINGTON",
+    "21SIX",
+    "3.1 Phillip Lim",
+    "A.W.A.K.E Mode",
+    "ABADIA",
+    "AC by Aanchal Chanda",
+    "Acler",
+    "Acne Studios",
+    "Adanola"
+   ],
+   "Clothing Size": [
+    "One Size",
+    "XXS",
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL",
+    "XXL",
+    "XXXL",
+    "XXXXL"
+   ],
+   "Colour": [
+    "Yellow",
+    "White",
+    "Silver",
+    "Rose Gold",
+    "Red",
+    "Purple",
+    "Pink",
+    "Orange",
+    "Neutral",
+    "Multicolour",
+    "Grey",
+    "Green",
+    "Gold",
+    "Burgundy",
+    "Brown",
+    "Blue",
+    "Black"
+   ],
+   "Price Type": [
+    "Full Price",
+    "Sale"
+   ],
+   "Discount": [
+    "20% OFF",
+    "30% OFF",
+    "40% OFF",
+    "50% OFF",
+    "60% OFF",
+    "70% OFF",
+    "80% OFF"
+   ]
+  }
+ },
+ "apparel_men": {
+  "url": "https://www.ounass.ae/men/clothing",
+  "facets": {
+   "Category": [
+    "T-Shirts",
+    "Sweats",
+    "Shirts",
+    "Pants",
+    "Shorts",
+    "Knitwear",
+    "Coats &amp; Jackets",
+    "Polo Shirts",
+    "Jeans",
+    "Underwear",
+    "Swimwear",
+    "Nightwear",
+    "Loungewear",
+    "Skiwear",
+    "Blazers",
+    "Suits"
+   ],
+   "Designer": [
+    "12 STOREEZ",
+    "120% Lino",
+    "A Bathing Ape",
+    "A Kind of Guise",
+    "A Paper Kid",
+    "A.P.C.",
+    "About Blank",
+    "Acne Studios",
+    "adidas",
+    "adidas Statement"
+   ],
+   "Clothing Size": [
+    "XXS",
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL",
+    "XXL",
+    "XXXL",
+    "XXXXL",
+    "XXXXXL"
+   ],
+   "Colour": [
+    "Yellow",
+    "White",
+    "Red",
+    "Purple",
+    "Pink",
+    "Orange",
+    "Neutral",
+    "Multicolour",
+    "Multicolor",
+    "Metallic",
+    "Grey",
+    "Green",
+    "Gold",
+    "Colourless",
+    "Burgundy",
+    "Brown",
+    "Blue",
+    "Black"
+   ],
+   "Price Type": [
+    "Full Price",
+    "Sale"
+   ],
+   "Discount": [
+    "20% OFF",
+    "30% OFF",
+    "40% OFF",
+    "50% OFF",
+    "60% OFF",
+    "70% OFF",
+    "80% OFF"
+   ]
+  }
+ },
+ "footwear_women": {
+  "url": "https://www.ounass.ae/women/shoes",
+  "facets": {
+   "Category": [
+    "Sneakers",
+    "Sandals",
+    "Mules",
+    "Pumps",
+    "Ballerinas",
+    "Loafers",
+    "Slides",
+    "Boots",
+    "Flip Flops",
+    "Espadrilles",
+    "Slippers"
+   ],
+   "Heel Height": [
+    "Flat",
+    "Mid Heel",
+    "High Heel",
+    "Low Heel"
+   ],
+   "Designer": [
+    "12 STOREEZ",
+    "A Emery",
+    "adidas",
+    "Aera",
+    "Aeyde",
+    "Alaïa",
+    "Alexander Wang",
+    "ALOHAS",
+    "Amanu",
+    "Amina Muaddi"
+   ],
+   "Clothing Size": [
+    "XXS",
+    "XS",
+    "S",
+    "M",
+    "L"
+   ],
+   "Shoe Size": [
+    "34",
+    "34.5",
+    "35",
+    "35.5",
+    "36",
+    "36.5",
+    "37",
+    "37.5",
+    "38",
+    "38.5",
+    "39",
+    "39.5",
+    "40",
+    "40.5",
+    "41",
+    "41.5",
+    "42"
+   ],
+   "Colour": [
+    "Yellow",
+    "White",
+    "Silver",
+    "Rose Gold",
+    "Red",
+    "Purple",
+    "Pink",
+    "Orange",
+    "Neutral",
+    "Multicolour",
+    "Metallic",
+    "Grey",
+    "Green",
+    "Gold",
+    "Colourless",
+    "Burgundy",
+    "Brown",
+    "Blue",
+    "Black"
+   ],
+   "Price Type": [
+    "Full Price",
+    "Sale"
+   ],
+   "Discount": [
+    "20% OFF",
+    "30% OFF",
+    "40% OFF",
+    "50% OFF",
+    "60% OFF",
+    "70% OFF"
+   ]
+  }
+ },
+ "footwear_men": {
+  "url": "https://www.ounass.ae/men/shoes",
+  "facets": {
+   "Category": [
+    "Sneakers",
+    "Sports Shoes",
+    "Slip Ons",
+    "Loafers",
+    "Sandals",
+    "Formal Shoes",
+    "Driving Shoes",
+    "Boots",
+    "Espadrilles",
+    "Shoe Care"
+   ],
+   "Designer": [
+    "12 STOREEZ",
+    "A Bathing Ape",
+    "Acne Studios",
+    "adidas",
+    "AMI",
+    "Amiri",
+    "Ancient Greek Sandals",
+    "APL Athletic Propulsion Labs",
+    "Armani Exchange",
+    "Asics"
+   ],
+   "Clothing Size": [
+    "XXS",
+    "XS",
+    "S",
+    "M"
+   ],
+   "Shoe Size": [
+    "36",
+    "37",
+    "37.5",
+    "38",
+    "38.5",
+    "39",
+    "39.5",
+    "40",
+    "40.5",
+    "41",
+    "41.5",
+    "42",
+    "42.5",
+    "43",
+    "43.5",
+    "44",
+    "44.5",
+    "45",
+    "45.5",
+    "46",
+    "46.5",
+    "47",
+    "47.5",
+    "48",
+    "48.5",
+    "49"
+   ],
+   "Colour": [
+    "Yellow",
+    "White",
+    "Red",
+    "Purple",
+    "Pink",
+    "Orange",
+    "Neutral",
+    "Multicolour",
+    "Metallic",
+    "Grey",
+    "Green",
+    "Gold",
+    "Burgundy",
+    "Brown",
+    "Blue",
+    "Black"
+   ],
+   "Price Type": [
+    "Full Price",
+    "Sale"
+   ],
+   "Discount": [
+    "20% OFF",
+    "30% OFF",
+    "40% OFF",
+    "50% OFF",
+    "60% OFF",
+    "70% OFF"
+   ]
+  }
+ },
+ "bag": {
+  "url": "https://www.ounass.ae/women/bags",
+  "facets": {
+   "Category": [
+    "Shoulder Bags",
+    "Tote Bags",
+    "Top-Handle Bags",
+    "Mini Bags",
+    "Clutches",
+    "Crossbody Bags",
+    "Bag Accessories",
+    "Bucket Bags",
+    "Luggage",
+    "Satchel Bags",
+    "Backpacks",
+    "Belt Bags"
+   ],
+   "Designer": [
+    "0711 Tbilisi",
+    "3.1 Phillip Lim",
+    "Adanola",
+    "Agua Bendita",
+    "Alaïa",
+    "ALEMAIS",
+    "Alexander Wang",
+    "AMI",
+    "Amina Muaddi",
+    "Aquazzura"
+   ],
+   "Clothing Size": [
+    "One Size",
+    "S",
+    "M",
+    "L"
+   ],
+   "Colour": [
+    "Yellow",
+    "White",
+    "Silver",
+    "Rose Gold",
+    "Red",
+    "Purple",
+    "Pink",
+    "Orange",
+    "Neutral",
+    "Multicolour",
+    "Metallic",
+    "Grey",
+    "Green",
+    "Gold",
+    "Colourless",
+    "Burgundy",
+    "Brown",
+    "Blue",
+    "Black"
+   ],
+   "Price Type": [
+    "Full Price",
+    "Sale"
+   ],
+   "Discount": [
+    "20% OFF",
+    "30% OFF",
+    "40% OFF",
+    "50% OFF",
+    "60% OFF",
+    "70% OFF"
+   ]
+  }
+ },
+ "jewellery": {
+  "url": "https://www.ounass.ae/women/jewellery",
+  "facets": {
+   "Category": [
+    "Fine Jewellery",
+    "Fashion Jewellery",
+    "Demi-Fine Jewellery",
+    "Fine Watches",
+    "Fashion Watches",
+    "Jewellery Box"
+   ],
+   "Designer": [
+    "94 Jewelry",
+    "AIS Collective",
+    "AKILLIS",
+    "Al Zain",
+    "Alaïa",
+    "Alessandra Rich",
+    "Alexandra Hakim",
+    "Alison Lou",
+    "AMI",
+    "Anabela Chan"
+   ],
+   "Colour": [
+    "Yellow",
+    "White",
+    "Silver",
+    "Rose Gold",
+    "Red",
+    "Purple",
+    "Pink",
+    "Orange",
+    "Neutral",
+    "Multicolour",
+    "Metallic",
+    "Grey",
+    "Green",
+    "Gold",
+    "Colourless",
+    "Burgundy",
+    "Brown",
+    "Blue",
+    "Black"
+   ],
+   "Price Type": [
+    "Full Price",
+    "Sale"
+   ],
+   "Discount": [
+    "20% OFF",
+    "30% OFF",
+    "40% OFF",
+    "50% OFF",
+    "60% OFF",
+    "70% OFF",
+    "80% OFF"
+   ]
+  }
+ },
+ "beauty": {
+  "url": "https://www.ounass.ae/women/beauty",
+  "facets": {
+   "Category": [
+    "Fragrances",
+    "Skincare",
+    "Home Fragrances",
+    "Make-Up",
+    "Haircare",
+    "Bath &amp; Body",
+    "Tools &amp; Accessories",
+    "Wellbeing"
+   ],
+   "Designer": [
+    "111Skin",
+    "Aceology",
+    "Acqua Dell' Elba",
+    "Acqua di Parma",
+    "Aesop",
+    "AÏZA",
+    "Ajmal Perfumes",
+    "Alchimie Fragrances",
+    "Alexandre.J",
+    "Amouage"
+   ],
+   "Price Type": [
+    "Full Price",
+    "Sale"
+   ],
+   "Discount": [
+    "20% OFF",
+    "30% OFF",
+    "40% OFF",
+    "50% OFF"
+   ]
+  }
+ }
+}
