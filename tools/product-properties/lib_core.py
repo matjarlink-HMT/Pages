@@ -178,9 +178,15 @@ BEAUTY_BASE = [
 ]
 
 # Apparel shared block
+# Verified 2026-08-10 against Ounass UAE server-rendered facets:
+#   https://www.ounass.ae/women/clothing  ·  https://www.ounass.ae/men/clothing
+#   https://www.ounass.ae/women/clothing/dresses
+# Ounass sizes run XXS..XXXXXL (not 3XL/4XL/5XL), and its Sleeve Length facet includes
+# Strapless / Off-Shoulder / One Shoulder, which a plain length scale cannot express.
 APPAREL_BASE = [
     D('fit', 'Size (International)', 'المقاس (عالمي)',
-      'XXS, XS, S, M, L, XL, XXL, 3XL, 4XL, 5XL, One Size', required='Yes', option='Yes'),
+      'One Size, XXS, XS, S, M, L, XL, XXL, XXXL, XXXXL, XXXXXL',
+      required='Yes', option='Yes'),
     D('fit', 'Size (EU)', 'المقاس (أوروبي)',
       '32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60', option='Yes'),
     D('fit', 'Fit Type', 'نوع القصّة',
@@ -202,8 +208,8 @@ APPAREL_BASE = [
       'Everyday, Work / Office, Party & Evening, Wedding, Formal Event, Sports & Gym, '
       'Beach & Holiday, Home & Lounge, Ramadan & Eid, Travel'),
     D('design', 'Sleeve Length', 'طول الكم',
-      'Sleeveless, Cap Sleeve, Short Sleeve, Three-Quarter Sleeve, Long Sleeve, '
-      'Extra Long Sleeve, Not Applicable'),
+      'Sleeveless, Strapless, One Shoulder, Off-Shoulder, Cap Sleeve, Short Sleeve, '
+      'Three-Quarter Sleeve, Long Sleeve, Extra Long Sleeve, Not Applicable'),
     D('design', 'Neckline', 'فتحة الرقبة',
       'Crew Neck, V-Neck, Round Neck, Square Neck, Sweetheart, Halter Neck, '
       'High Neck / Turtleneck, Boat Neck, Off-Shoulder, Collared, Hooded, '
@@ -213,6 +219,12 @@ APPAREL_BASE = [
       'Snap Button, Lace-Up, Velcro, None'),
     D('fit', 'Length', 'الطول',
       'Cropped, Short, Regular, Midi, Long, Maxi, Ankle Length, Floor Length'),
+    # Ounass splits dresses by occasion-driven type and by a three-step length scale;
+    # Abayas, Jalabiyas and Kaftans are first-class types in the Gulf market.
+    D('design', 'Dress Type', 'نوع الفستان',
+      'Not Applicable, Day Dress, Evening Dress, Cocktail Dress, Gown, '
+      'Bridal Dress, Abaya, Jalabiya, Kaftan'),
+    D('fit', 'Dress Length', 'طول الفستان', 'Not Applicable, Mini, Midi, Maxi'),
     D('fit', 'Waist Rise', 'ارتفاع الخصر', 'Low Rise, Mid Rise, High Rise, Not Applicable'),
     D('usage', 'Gender', 'الجنس', 'Men, Women, Unisex, Boys, Girls, Baby', required='Yes'),
     D('usage', 'Age Group', 'الفئة العمرية',
@@ -227,10 +239,15 @@ APPAREL_BASE = [
 ]
 
 # Footwear shared block
+# Verified 2026-08-10 against Ounass UAE server-rendered facets:
+#   https://www.ounass.ae/women/shoes  ·  https://www.ounass.ae/men/shoes
+# Ounass stocks EU half sizes (34.5, 35.5, ... 46.5); a whole-number-only list cannot
+# represent most of its women's footwear inventory.
 FOOTWEAR_BASE = [
     D('fit', 'Size (EU)', 'المقاس (أوروبي)',
-      '20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, '
-      '39, 40, 41, 42, 43, 44, 45, 46, 47, 48', required='Yes', option='Yes'),
+      '20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 34.5, 35, 35.5, '
+      '36, 36.5, 37, 37.5, 38, 38.5, 39, 39.5, 40, 40.5, 41, 41.5, 42, 42.5, 43, '
+      '43.5, 44, 44.5, 45, 45.5, 46, 46.5, 47, 48', required='Yes', option='Yes'),
     D('fit', 'Size (UK)', 'المقاس (بريطاني)',
       '3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 12, 13',
       option='Yes'),
@@ -254,6 +271,11 @@ FOOTWEAR_BASE = [
       'Flat (0-1 cm), Low (1-4 cm), Mid (4-7 cm), High (7-10 cm), Very High (Above 10 cm)'),
     D('design', 'Heel Type', 'نوع الكعب',
       'Flat, Block Heel, Stiletto, Wedge, Platform, Kitten Heel, Chunky, No Heel'),
+    # Ounass footwear categories, women's and men's lists merged.
+    D('spec', 'Footwear Type', 'نوع الحذاء',
+      'Sneakers, Sports Shoes, Sandals, Slides, Flip Flops, Mules, Pumps, '
+      'Ballerinas, Loafers, Slip Ons, Boots, Espadrilles, Formal Shoes, '
+      'Driving Shoes, Slippers'),
     D('design', 'Shaft Height', 'ارتفاع الساق',
       'Low Top, Mid Top, High Top, Ankle, Mid-Calf, Knee High, Over the Knee, Not Applicable'),
     D('usage', 'Gender', 'الجنس', 'Men, Women, Unisex, Boys, Girls', required='Yes'),

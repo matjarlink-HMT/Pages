@@ -5,9 +5,19 @@ from lib_core import *
 FAM = {}
 
 # ------------------------------------------------------------------ mobile phone
+# Verified 2026-08-10 against:
+#   - GSMArena phone finder facets  https://www.gsmarena.com/search.php3
+#   - GSMArena full spec sheet      https://www.gsmarena.com/samsung_galaxy_s25_ultra-13322.php
+#   - eXtra "SMRTPHN" classification attributes, sampled from 13 live product pages
+#     under https://www.extra.com/en-sa/mobiles-tablets/mobiles/smartphone/
 FAM['mobile_phone'] = blk(IDENT, [
     D('main', 'Model Year', 'سنة الإصدار',
       '2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026', required='Yes'),
+    # eXtra exposes a "Series Name" attribute on every smartphone (iPhone 16, S Series,
+    # Redmi, OPPO A Series, Magic ...) -- shoppers browse by series, not model alone.
+    T('main', 'Product Series', 'سلسلة المنتج'),
+    D('general', 'Availability Status', 'حالة التوفر',
+      'Available, Coming Soon, Pre-Order, Discontinued'),
     D('general', 'Operating System', 'نظام التشغيل',
       'Android, iOS, HarmonyOS, KaiOS, Feature Phone OS', required='Yes'),
     T('general', 'OS Version', 'إصدار نظام التشغيل'),
@@ -27,9 +37,15 @@ FAM['mobile_phone'] = blk(IDENT, [
       '60 Hz, 90 Hz, 120 Hz, 144 Hz, 165 Hz, Adaptive 1-120 Hz'),
     I('display', 'Peak Brightness (nits)', 'أقصى سطوع (نِت)',
       'Under 600 nits, 600-1000 nits, 1001-1500 nits, 1501-2000 nits, Above 2000 nits'),
+    I('display', 'Pixel Density (ppi)', 'كثافة البكسل (ppi)',
+      'Under 300 ppi, 300-399 ppi, 400-449 ppi, 450-499 ppi, 500 ppi and above'),
+    D('display', 'HDR Support', 'دعم النطاق الديناميكي العالي',
+      'Not Supported, HDR10, HDR10+, Dolby Vision, HLG'),
+    # Gorilla Armor / Armor 2 ship on the S25 series; Victus 3 on 2024+ flagships.
     D('display', 'Screen Protection', 'حماية الشاشة',
       'Corning Gorilla Glass, Gorilla Glass Victus, Gorilla Glass Victus 2, '
-      'Ceramic Shield, Panda Glass, Dragontrail, None'),
+      'Gorilla Glass Victus 3, Gorilla Armor, Gorilla Armor 2, '
+      'Ceramic Shield, Panda Glass, Dragontrail, Schott Xensation, None'),
     D('display', 'Display Notch / Cutout', 'شكل قصّة الشاشة',
       'Punch Hole, Notch, Dynamic Island, Full Screen, Waterdrop, Under-Display Camera'),
     # performance
@@ -53,7 +69,12 @@ FAM['mobile_phone'] = blk(IDENT, [
       required='Yes', option='Yes'),
     D('storage', 'Storage Type', 'نوع التخزين',
       'eMMC 5.1, UFS 2.1, UFS 2.2, UFS 3.1, UFS 4.0, UFS 4.1, NVMe'),
-    B('storage', 'Expandable Storage (microSD)', 'تخزين قابل للتوسعة (microSD)'),
+    # eXtra records the supported card ceiling ("MicroSD up to 1TB", "up to 2TB"),
+    # and GSMArena distinguishes a dedicated slot from a hybrid SIM/SD tray.
+    D('storage', 'Expandable Storage (microSD)', 'تخزين قابل للتوسعة (microSD)',
+      'Not Supported, Dedicated Slot - up to 256 GB, Dedicated Slot - up to 512 GB, '
+      'Dedicated Slot - up to 1 TB, Dedicated Slot - up to 2 TB, '
+      'Hybrid SIM / microSD Slot'),
     # camera
     D('cam', 'Main Camera (MP)', 'الكاميرا الرئيسية (ميجابكسل)',
       'Below 12 MP, 12 MP, 13 MP, 48 MP, 50 MP, 64 MP, 108 MP, 200 MP', required='Yes'),
@@ -70,6 +91,9 @@ FAM['mobile_phone'] = blk(IDENT, [
     B('cam', 'Optical Image Stabilisation (OIS)', 'مثبّت الصورة البصري (OIS)'),
     D('cam', 'Flash Type', 'نوع الفلاش',
       'Single LED, Dual LED, Dual-Tone LED, Quad LED, Ring Flash, No Flash'),
+    B('cam', 'Front Camera Flash', 'فلاش الكاميرا الأمامية'),
+    D('cam', 'Front Camera Placement', 'موضع الكاميرا الأمامية',
+      'Punch Hole, Notch, Dynamic Island, Pop-Up, Under-Display, Bezel Mounted'),
     # battery
     D('batt', 'Battery Capacity (mAh)', 'سعة البطارية (مللي أمبير/ساعة)',
       'Below 3000 mAh, 3000-4000 mAh, 4001-5000 mAh, 5001-6000 mAh, Above 6000 mAh',
@@ -77,12 +101,15 @@ FAM['mobile_phone'] = blk(IDENT, [
     D('batt', 'Wired Charging Speed (W)', 'سرعة الشحن السلكي (واط)',
       '10 W, 15 W, 18 W, 20 W, 25 W, 33 W, 45 W, 65 W, 80 W, 100 W, 120 W, 150 W, 240 W'),
     D('batt', 'Wireless Charging', 'الشحن اللاسلكي',
-      'Not Supported, Qi Wireless, MagSafe, 15 W Wireless, 50 W Wireless'),
+      'Not Supported, Qi Wireless, Qi2, Qi2 Ready, MagSafe, 15 W Wireless, '
+      '25 W Wireless, 50 W Wireless'),
     B('batt', 'Reverse Charging', 'الشحن العكسي'),
     D('batt', 'Battery Type', 'نوع البطارية',
       'Li-Ion, Li-Polymer, Silicon-Carbon'),
     # connectivity
     D('conn', 'Network', 'الشبكة', '2G, 3G, 4G LTE, 5G', required='Yes'),
+    D('conn', '5G Band Support', 'نطاقات 5G المدعومة',
+      'Not Applicable, Sub-6 GHz, mmWave, Sub-6 GHz + mmWave'),
     D('conn', 'SIM Type', 'نوع الشريحة',
       'Single SIM, Dual SIM (Nano), Dual SIM (Nano + eSIM), eSIM Only, Triple Slot'),
     D('conn', 'Wi-Fi', 'الواي فاي',
@@ -91,6 +118,10 @@ FAM['mobile_phone'] = blk(IDENT, [
       'Bluetooth 4.2, Bluetooth 5.0, Bluetooth 5.1, Bluetooth 5.2, Bluetooth 5.3, Bluetooth 5.4, Bluetooth 6.0'),
     D('conn', 'Charging Port', 'منفذ الشحن',
       'USB Type-C, Lightning, Micro USB, USB Type-C (Thunderbolt)'),
+    D('conn', 'USB Version', 'إصدار منفذ USB',
+      'USB 2.0, USB 3.0, USB 3.1, USB 3.2, USB4 / Thunderbolt'),
+    B('conn', 'Video Out (DisplayPort / HDMI Alt Mode)', 'إخراج فيديو عبر المنفذ'),
+    B('conn', 'Ultra Wideband (UWB)', 'النطاق فائق الاتساع (UWB)'),
     B('conn', 'NFC', 'تقنية NFC'),
     B('conn', 'Infrared (IR Blaster)', 'منفذ الأشعة تحت الحمراء'),
     B('conn', '3.5mm Headphone Jack', 'منفذ سماعات 3.5 ملم'),
@@ -104,10 +135,15 @@ FAM['mobile_phone'] = blk(IDENT, [
       '2D Face Unlock, 3D Face ID, Not Available'),
     T('sensors', 'Sensors', 'المستشعرات'),
     # body
-    D('design', 'Body Material', 'خامة الهيكل',
-      'Plastic / Polycarbonate, Aluminium Frame + Glass, Titanium Frame + Glass, '
-      'Stainless Steel + Glass, Aramid Fibre, Eco Leather, Full Glass'),
+    # GSMArena models frame and back as two independent materials, and phones now mix
+    # them freely (titanium frame + glass back, aluminium frame + eco-leather back).
+    D('design', 'Frame Material', 'خامة الإطار',
+      'Plastic / Polycarbonate, Aluminium, Stainless Steel, Titanium, Ceramic'),
+    D('design', 'Back Material', 'خامة الظهر',
+      'Plastic / Polycarbonate, Glass, Aluminium, Ceramic, Aramid Fibre, '
+      'Eco Leather, Silicone'),
     D('safety', 'Water & Dust Resistance', 'مقاومة الماء والغبار', IP_RATING),
+    B('safety', 'Military Standard (MIL-STD-810)', 'مطابقة المعيار العسكري (MIL-STD-810)'),
     N('design', 'Thickness (mm)', 'السماكة (ملم)',
       'Under 7 mm, 7-8 mm, 8-9 mm, 9-10 mm, Above 10 mm'),
     N('design', 'Weight (g)', 'الوزن (جم)',
@@ -171,7 +207,11 @@ FAM['tablet'] = blk(IDENT, [
 ], COLOR, ELEC_COMMERCE)
 
 # ------------------------------------------------------------------ laptop
+# Verified 2026-08-10 against eXtra's laptop classifications (CLAMSHELL, GAMING, 2IN1,
+# MACBOOK), sampled from 46 live product pages under
+# https://www.extra.com/en-sa/computer/laptops/c/3-303
 FAM['laptop'] = blk(IDENT, [
+    T('main', 'Product Series', 'سلسلة المنتج'),
     D('spec', 'Laptop Type', 'نوع الحاسوب المحمول',
       'Everyday / Home, Business, Gaming, Ultrabook / Thin & Light, 2-in-1 Convertible, '
       'Workstation, Chromebook, Netbook', required='Yes'),
@@ -186,6 +226,17 @@ FAM['laptop'] = blk(IDENT, [
       '8th Gen, 9th Gen, 10th Gen, 11th Gen, 12th Gen, 13th Gen, 14th Gen, '
       'Series 1 / Ultra, Ryzen 5000, Ryzen 6000, Ryzen 7000, Ryzen 8000, Ryzen AI 300, Not Applicable'),
     I('perf', 'Number of Cores', 'عدد الأنوية', '2, 4, 6, 8, 10, 12, 14, 16, 20, 24'),
+    # eXtra publishes base clock, max turbo clock and cache on every laptop listing.
+    N('perf', 'Processor Base Speed (GHz)', 'سرعة المعالج الأساسية (جيجاهرتز)',
+      'Under 1.5 GHz, 1.5-1.9 GHz, 2.0-2.4 GHz, 2.5-2.9 GHz, 3.0 GHz and above'),
+    N('perf', 'Maximum Turbo Speed (GHz)', 'أقصى سرعة تيربو (جيجاهرتز)',
+      'Under 4.0 GHz, 4.0-4.4 GHz, 4.5-4.9 GHz, 5.0-5.4 GHz, 5.5 GHz and above'),
+    D('perf', 'Cache Memory', 'الذاكرة المخبأة',
+      '4 MB, 6 MB, 8 MB, 10 MB, 12 MB, 16 MB, 20 MB, 24 MB, 32 MB, 36 MB, 42 MB'),
+    # Copilot+ class machines: eXtra now lists an NPU and its TOPS rating.
+    B('perf', 'NPU (AI Accelerator)', 'وحدة معالجة عصبية (NPU)'),
+    D('perf', 'AI Performance (TOPS)', 'أداء الذكاء الاصطناعي (TOPS)',
+      'Not Available, Up to 20 TOPS, 21-40 TOPS, 41-50 TOPS, Above 50 TOPS'),
     D('perf', 'Graphics Card (GPU)', 'كرت الشاشة',
       'Integrated Graphics, Intel Iris Xe, Intel Arc, NVIDIA GeForce RTX 50 Series, '
       'NVIDIA GeForce RTX 40 Series, NVIDIA GeForce RTX 30 Series, NVIDIA GeForce GTX, '
@@ -222,18 +273,38 @@ FAM['laptop'] = blk(IDENT, [
       'Ethernet (RJ45), SD Card Reader, microSD Reader, 3.5mm Audio Jack, '
       'Barrel Charging Port, MagSafe'),
     I('conn', 'Number of USB Ports', 'عدد منافذ USB', '1, 2, 3, 4, 5, 6'),
+    # eXtra flags each of these individually rather than only inside a ports list.
+    B('conn', 'HDMI Port', 'منفذ HDMI'),
+    B('conn', 'Ethernet (RJ45) Port', 'منفذ إيثرنت (RJ45)'),
+    B('conn', 'Headphone / Microphone Jack', 'منفذ سماعة/ميكروفون'),
+    D('conn', 'Memory Card Reader', 'قارئ بطاقات الذاكرة',
+      'Not Available, SD, SDXC, microSD'),
+    B('conn', 'Optical Drive', 'مشغّل أقراص ضوئية'),
     D('conn', 'Wi-Fi', 'الواي فاي',
       'Wi-Fi 5 (802.11ac), Wi-Fi 6 (802.11ax), Wi-Fi 6E, Wi-Fi 7'),
     D('conn', 'Bluetooth Version', 'إصدار البلوتوث',
-      'Bluetooth 5.0, Bluetooth 5.1, Bluetooth 5.2, Bluetooth 5.3, Bluetooth 5.4'),
+      'Bluetooth 5.0, Bluetooth 5.1, Bluetooth 5.2, Bluetooth 5.3, Bluetooth 5.4, '
+      'Bluetooth 6.0'),
     D('batt', 'Battery Capacity (Wh)', 'سعة البطارية (واط/ساعة)',
       'Under 40 Wh, 40-50 Wh, 51-60 Wh, 61-75 Wh, 76-90 Wh, Above 90 Wh'),
     D('batt', 'Battery Life (hours)', 'عمر البطارية (ساعة)',
       'Up to 4 Hours, 5-8 Hours, 9-12 Hours, 13-18 Hours, Above 18 Hours'),
     D('batt', 'Charger Power (W)', 'قدرة الشاحن (واط)',
       '30 W, 45 W, 65 W, 90 W, 100 W, 120 W, 140 W, 180 W, 200 W, 240 W, 330 W'),
+    # eXtra keeps backlight, layout and numeric pad as three independent attributes
+    # (e.g. "Non-backlit, Arabic" / "Backlit, Arabic" / "4-zone RGB Backlit").
     D('feat', 'Keyboard Type', 'نوع لوحة المفاتيح',
-      'Standard, Backlit, RGB Backlit, Mechanical, Numeric Keypad Included, Arabic / English'),
+      'Membrane / Standard, Mechanical, Scissor Switch, Optical'),
+    D('feat', 'Keyboard Backlight', 'إضاءة لوحة المفاتيح',
+      'Non-Backlit, White Backlit, Single-Colour Backlit, 4-Zone RGB Backlit, '
+      'Per-Key RGB Backlit'),
+    D('feat', 'Keyboard Layout', 'تخطيط لوحة المفاتيح',
+      'Arabic / English, English Only, Arabic Only, French / English, Other'),
+    B('feat', 'Numeric Keypad', 'لوحة أرقام'),
+    D('feat', 'Pre-installed Software', 'البرامج المثبّتة مسبقاً',
+      'None, Microsoft Office Trial, Microsoft Office 365 (1 Year), '
+      'Microsoft Office Home & Student (Lifetime), Antivirus Trial'),
+    B('feat', 'VR Ready', 'جاهز للواقع الافتراضي'),
     D('feat', 'Webcam', 'الكاميرا',
       'HD 720p, Full HD 1080p, 2K, 5 MP, IR Camera (Windows Hello), No Webcam'),
     D('sensors', 'Biometric Security', 'الحماية البيومترية',
@@ -357,16 +428,28 @@ FAM['monitor'] = blk(IDENT, [
 ], COLOR, ELEC_COMMERCE)
 
 # ------------------------------------------------------------------ television
+# Verified 2026-08-10 against eXtra's TV classifications (LED, QLED, NEO QLED, OLED,
+# MiniLED, RGB LED), sampled from 14 live product pages under
+# https://www.extra.com/en-sa/electronics/television/c/1-109
+# QNED and RGB LED are eXtra's own on-site panel categories.
 FAM['television'] = blk(IDENT, [
+    T('main', 'Product Series', 'سلسلة المنتج'),
     D('display', 'Screen Size (inch)', 'حجم الشاشة (بوصة)',
       '24 inch, 32 inch, 40 inch, 43 inch, 50 inch, 55 inch, 65 inch, 75 inch, '
       '77 inch, 85 inch, 98 inch, 100 inch', required='Yes', option='Yes'),
     D('display', 'Resolution', 'الدقة', 'HD, Full HD, 4K UHD, 8K UHD', required='Yes'),
     D('display', 'Display Technology', 'تقنية الشاشة',
-      'LED, LCD, QLED, OLED, QD-OLED, Mini-LED, Neo QLED, Nano Cell, Crystal UHD, ULED',
+      'LED, LCD, QLED, OLED, QD-OLED, Mini-LED, Neo QLED, QNED, RGB LED, '
+      'Nano Cell, Crystal UHD, ULED',
       required='Yes'),
     D('display', 'Refresh Rate (Hz)', 'معدل التحديث (هرتز)',
       '50 Hz, 60 Hz, 100 Hz, 120 Hz, 144 Hz, 165 Hz'),
+    # eXtra lists a marketing "Motion Flow / Motion Rate" figure separately from the
+    # native panel refresh rate, plus a panel response time on gaming-oriented sets.
+    D('display', 'Motion Rate (Hz)', 'معدل الحركة (هرتز)',
+      '50 Hz, 60 Hz, 100 Hz, 120 Hz, 144 Hz, 165 Hz, 200 Hz, Not Specified'),
+    N('display', 'Response Time (ms)', 'زمن الاستجابة (مللي ثانية)',
+      'Under 1 ms, 1 ms, 2-5 ms, 6-8 ms, Above 8 ms'),
     D('display', 'HDR Support', 'دعم HDR',
       'No HDR, HDR10, HDR10+, HLG, Dolby Vision, Dolby Vision IQ'),
     I('display', 'Peak Brightness (nits)', 'أقصى سطوع (نِت)',
@@ -378,6 +461,10 @@ FAM['television'] = blk(IDENT, [
     B('smart', 'Smart TV', 'تلفزيون ذكي'),
     D('smart', 'Voice Assistant', 'المساعد الصوتي',
       'Google Assistant, Amazon Alexa, Bixby, Apple Siri (AirPlay), Multiple, None'),
+    # Smart panels carry real RAM/storage; eXtra publishes both (2-3 GB / 16-64 GB).
+    D('mem', 'RAM', 'الذاكرة العشوائية', '1 GB, 1.5 GB, 2 GB, 3 GB, 4 GB, Not Specified'),
+    D('storage', 'Internal Storage', 'التخزين الداخلي',
+      '8 GB, 16 GB, 32 GB, 64 GB, 128 GB, Not Specified'),
     B('smart', 'Screen Mirroring / Casting', 'مشاركة الشاشة'),
     D('smart', 'Streaming Apps', 'تطبيقات البث',
       'Netflix, YouTube, Shahid, StarzPlay, OSN+, Amazon Prime Video, Disney+, '

@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+master.xlsx
+report.json
+MatjarLink_Product_Properties_Expanded.xlsx
