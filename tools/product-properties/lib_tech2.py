@@ -156,6 +156,9 @@ FAM['speaker'] = blk(IDENT, [
 ], COLOR, ELEC_COMMERCE)
 
 # ------------------------------------------------------------------ smartwatch / wearable
+# Verified 2026-08-10 against eXtra's "SMART WATCH" classification, sampled from
+# 11 live product pages under
+# https://www.extra.com/en-sa/mobiles-tablets/wearable/smart-watches/
 FAM['smartwatch'] = blk(IDENT, [
     D('spec', 'Device Type', 'نوع الجهاز',
       'Smartwatch, Fitness Tracker / Band, Hybrid Smartwatch, Kids Smartwatch, '
@@ -185,6 +188,13 @@ FAM['smartwatch'] = blk(IDENT, [
       'Bluetooth Only, Bluetooth + Wi-Fi, Bluetooth + Wi-Fi + GPS, '
       'LTE / Cellular (eSIM), NFC, ANT+'),
     B('conn', 'Built-In GPS', 'نظام تحديد المواقع مدمج'),
+    # eXtra sells the GPS-only and GPS+Cellular variants as distinct SKUs, and lists
+    # the watch SiP and RAM on the product page.
+    D('conn', 'Cellular Support', 'دعم الشبكة الخلوية',
+      'Not Supported, GPS Only, GPS + Cellular (eSIM)'),
+    T('perf', 'Chipset / Processor', 'المعالج / الشريحة'),
+    D('mem', 'RAM', 'الذاكرة العشوائية',
+      '32 MB, 128 MB, 256 MB, 512 MB, 1 GB, 2 GB, Not Specified'),
     B('conn', 'NFC Payments', 'الدفع عبر NFC'),
     D('sensors', 'Health Sensors', 'مستشعرات الصحة',
       'Heart Rate, Blood Oxygen (SpO2), ECG / EKG, Body Temperature, '

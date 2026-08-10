@@ -26,10 +26,19 @@ APPLIANCE_COMMON = [
 ]
 
 # ------------------------------------------------------------------ washing machine
+# Verified 2026-08-10 against eXtra's washer classifications (AUTO FL, AUTO FE,
+# TWIN TUB WASHER, WASHER&DRYER), sampled from 13 live product pages under
+# https://www.extra.com/en-sa/large-appliances-/washing-machines/
 FAM['washer'] = blk(IDENT, [
     D('spec', 'Machine Type', 'نوع الغسالة',
       'Front Load, Top Load (Automatic), Top Load (Twin Tub / Semi-Automatic), '
       'Washer Dryer Combo, Dryer Only, Portable / Mini Washer', required='Yes'),
+    # eXtra keeps loading direction, drum construction and automation level as three
+    # separate attributes rather than folding them into one machine type.
+    D('spec', 'Loading Type', 'نوع التحميل', 'Front Loading, Top Loading'),
+    D('spec', 'Operation Type', 'نوع التشغيل',
+      'Fully Automatic, Semi Automatic, Manual'),
+    D('spec', 'Tub Type', 'نوع الحوض', 'Single Drum, Twin Tub'),
     D('cap', 'Washing Capacity (kg)', 'سعة الغسيل (كجم)',
       '5 kg, 6 kg, 7 kg, 8 kg, 9 kg, 10 kg, 11 kg, 12 kg, 13 kg, 15 kg, 20 kg, 25 kg',
       required='Yes', option='Yes'),
@@ -47,6 +56,13 @@ FAM['washer'] = blk(IDENT, [
     D('perf', 'Motor Type', 'نوع المحرك',
       'Inverter Direct Drive, Digital Inverter, Brushless DC Inverter, Belt Drive, Universal Motor'),
     B('feat', 'Steam Function', 'وظيفة البخار'),
+    B('feat', 'Built-in Water Heater', 'سخّان مياه مدمج'),
+    B('feat', 'Stackable', 'قابلة للتركيب فوق بعضها'),
+    B('feat', 'Pedestal Available', 'قاعدة متوفرة'),
+    D('perf', 'Drying Performance (Combo)', 'أداء التجفيف (غسالة نشافة)',
+      'Not Applicable, Dry up to 65%, Dry 100%, All-in-One Unit'),
+    D('warr', 'Motor Warranty', 'ضمان المحرك',
+      'No Warranty, 1 Year, 2 Years, 5 Years, 10 Years, 20 Years'),
     B('feat', 'Child Lock', 'قفل الأطفال'),
     B('feat', 'Delay Start Timer', 'مؤقت بدء مؤجل'),
     B('feat', 'Auto Dosing / Detergent Dispenser', 'موزّع منظفات تلقائي'),
@@ -64,6 +80,9 @@ FAM['washer'] = blk(IDENT, [
 ], APPLIANCE_COMMON, COLOR, ELEC_COMMERCE)
 
 # ------------------------------------------------------------------ refrigerator
+# Verified 2026-08-10 against eXtra's refrigerator classifications (LARGE, MEDIUM,
+# SMALL, COMPACT, SIDE BY SIDE REFRIGERATOR), sampled from 13 live product pages under
+# https://www.extra.com/en-sa/large-appliances-/refrigerators/
 FAM['fridge'] = blk(IDENT, [
     D('spec', 'Refrigerator Type', 'نوع الثلاجة',
       'Top Mount Freezer, Bottom Mount Freezer, Side by Side, French Door, '
@@ -78,6 +97,13 @@ FAM['fridge'] = blk(IDENT, [
       'Under 100 L, 100-200 L, 201-300 L, 301-400 L, Above 400 L'),
     N('cap', 'Freezer Compartment (Litres)', 'سعة قسم التجميد (لتر)',
       'Under 50 L, 50-100 L, 101-150 L, 151-250 L, Above 250 L'),
+    # eXtra publishes every Gulf fridge capacity in cubic feet, split three ways
+    # (net total / net refrigerator / net freezer) -- that is how shoppers compare here.
+    N('cap', 'Fridge Compartment (Cubic Feet)', 'سعة قسم التبريد (قدم مكعب)',
+      'Under 5 cu.ft, 5-8 cu.ft, 8.1-11 cu.ft, 11.1-14 cu.ft, 14.1-18 cu.ft, '
+      'Above 18 cu.ft'),
+    N('cap', 'Freezer Compartment (Cubic Feet)', 'سعة قسم التجميد (قدم مكعب)',
+      'Under 2 cu.ft, 2-3.5 cu.ft, 3.6-5 cu.ft, 5.1-7 cu.ft, Above 7 cu.ft'),
     D('spec', 'Defrost System', 'نظام إزالة الثلج',
       'No Frost / Frost Free, Direct Cool / Manual Defrost, Total No Frost, Auto Defrost'),
     D('spec', 'Cooling System', 'نظام التبريد',
@@ -87,9 +113,24 @@ FAM['fridge'] = blk(IDENT, [
       'Dual Inverter'),
     I('spec', 'Number of Doors', 'عدد الأبواب', '1, 2, 3, 4, 5'),
     B('feat', 'Water Dispenser', 'موزّع مياه'),
+    B('feat', 'Through-the-Door Dispenser', 'موزّع عبر الباب'),
     B('feat', 'Ice Maker', 'صانعة ثلج'),
     B('feat', 'Water Filter', 'فلتر مياه'),
     B('feat', 'Digital Temperature Control', 'تحكم رقمي بدرجة الحرارة'),
+    # Attributes eXtra records on every refrigerator listing.
+    D('spec', 'Thermostat Type', 'نوع الثرموستات',
+      'Digital, Electronic Control, Touch Panel, Mechanical / Manual'),
+    B('feat', 'Fast Freeze', 'التجميد السريع'),
+    B('feat', 'Multi Air Flow Technology', 'تقنية تدفق الهواء المتعدد'),
+    B('feat', 'Adjustable Shelves', 'أرفف قابلة للتعديل'),
+    B('feat', 'Adjustable Levelling Legs', 'أرجل قابلة للتسوية'),
+    B('feat', 'Door-in-Door', 'باب داخل باب'),
+    B('feat', 'Built-in Screen / TV', 'شاشة مدمجة'),
+    B('feat', 'Interior Camera', 'كاميرا داخلية'),
+    D('spec', 'Interior Lighting Type', 'نوع الإضاءة الداخلية',
+      'LED, Incandescent, None'),
+    D('warr', 'Compressor Warranty', 'ضمان الضاغط',
+      'No Warranty, 1 Year, 2 Years, 5 Years, 7 Years, 10 Years, 12 Years'),
     B('feat', 'Door Alarm', 'إنذار الباب'),
     B('feat', 'Child Lock', 'قفل الأطفال'),
     B('feat', 'Deodoriser / Air Filter', 'مزيل روائح / فلتر هواء'),
@@ -108,6 +149,9 @@ FAM['fridge'] = blk(IDENT, [
 ], APPLIANCE_COMMON, COLOR, ELEC_COMMERCE)
 
 # ------------------------------------------------------------------ air conditioner
+# Verified 2026-08-10 against eXtra's AC classifications (MINI SPLIT AIR CONDITIONER,
+# WINDOW AIR CONDITIONER), sampled from 13 live product pages under
+# https://www.extra.com/en-sa/large-appliances-/air-conditioner/
 FAM['ac'] = blk(IDENT, [
     D('spec', 'Air Conditioner Type', 'نوع المكيّف',
       'Split Wall Mounted, Window AC, Portable AC, Cassette AC, Ducted / Central, '
@@ -135,7 +179,15 @@ FAM['ac'] = blk(IDENT, [
     B('feat', 'Anti-Bacterial Filter', 'فلتر مضاد للبكتيريا'),
     B('feat', 'Dehumidifier Function', 'وظيفة إزالة الرطوبة'),
     B('feat', 'Air Purification', 'تنقية الهواء'),
-    B('feat', '4-Way Air Swing', 'توزيع الهواء رباعي الاتجاه'),
+    # eXtra records swing as a direction count (2 Ways / 4 Ways), not a yes/no flag.
+    D('feat', 'Air Swing Direction', 'اتجاه توزيع الهواء',
+      'Not Available, 2-Way Swing, 3-Way Swing, 4-Way Swing, Auto Swing'),
+    B('feat', 'Timer Function', 'وظيفة المؤقّت'),
+    B('inst', 'Installation Required', 'يتطلب تركيباً'),
+    B('inst', 'Installation Hardware Included', 'يشمل مستلزمات التركيب'),
+    B('inst', 'Free Installation Included', 'يشمل تركيباً مجانياً'),
+    D('warr', 'Compressor Warranty', 'ضمان الضاغط',
+      'No Warranty, 1 Year, 2 Years, 5 Years, 7 Years, 10 Years'),
     I('feat', 'Number of Fan Speeds', 'عدد سرعات المروحة', '2, 3, 4, 5, Auto'),
     D('feat', 'Filter Type', 'نوع الفلتر',
       'Standard Mesh, HEPA, Carbon, Anti-Dust, Silver Ion, PM2.5, Multi-Layer'),
@@ -237,6 +289,16 @@ FAM['vacuum'] = blk(IDENT, [
       'Bagless Cyclonic, Dust Bag, Water Filtration, Self-Emptying Base'),
     N('cap', 'Dust Capacity (Litres)', 'سعة الغبار (لتر)',
       '0.3 L, 0.5 L, 0.8 L, 1 L, 1.5 L, 2 L, 3 L, 5 L, 10 L, 20 L, 30 L'),
+    # eXtra lists the drum/bag construction, the clean-water tank on wet & dry and
+    # mopping units, and whether the wand is a telescopic metal tube.
+    D('spec', 'Bag / Drum Type', 'نوع الكيس / الحوض',
+      'Bagless, Dust Bag, Drum, Cloth Bag'),
+    N('cap', 'Water Tank Capacity (Litres)', 'سعة خزان المياه (لتر)',
+      'Not Applicable, 0.2 L, 0.3 L, 0.5 L, 0.85 L, 1 L, 2 L, 3.7 L, 5 L'),
+    D('design', 'Telescopic Tube', 'أنبوب تلسكوبي',
+      'Not Available, Plastic Telescopic, Metal Telescopic'),
+    D('mat', 'Body Material', 'خامة الهيكل',
+      'ABS Plastic, Plastic, Metal, Metal & Plastic, Stainless Steel'),
     D('spec', 'Filter Type', 'نوع الفلتر',
       'HEPA 13, HEPA 14, Washable Filter, Foam Filter, Carbon Filter, '
       'Multi-Cyclone, Standard Filter'),
