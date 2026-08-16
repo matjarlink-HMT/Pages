@@ -140,6 +140,50 @@ TARGETS = {  # family -> (minimum properties to aim for)
     'vehicle': 38, 'camera': 32, 'fridge': 32, 'washer': 30, 'ac': 30,
 }
 
+# ------------------------------------------------------------------ identity removal
+# Per-product identifiers: they belong on the product record (and the Brands sheet),
+# not on a category-level property definition. Matched on the normalised name.
+# NOT removed: compatibility/fitment fields (Compatible Make/Model/...), component
+# specs that merely contain the word "model" (Processor Model, Console Model),
+# year classifications (Model Year), and business terms (Pricing Model).
+DROP_NAMES = {norm_name(n) for n in [
+    'Brand', 'Brand / Manufacturer', 'Vehicle Brand', 'Controller Brand', 'Engine Brand',
+    'Manufacturer',
+    'Model Name', 'Model Number', 'Model / Part Number',
+    'Manufacturer Part Number (MPN)', 'OEM Part Number',
+    'Trim / Variant',
+    'Title', 'Author', 'Publisher', 'ISBN', 'Series Name',
+    'Course Title', 'Provider / Instructor', 'Provider Name', 'Service Name',
+    'Game Title', 'Included Game Titles',
+    'Shade Name', 'Colour Code / Name',
+    'Registration Number (MOH)', 'License / Registration Number',
+]}
+
+# ------------------------------------------------------------------ duplicate collapsing
+# Qualifier words that do not change what a property means, so "Material" and
+# "Main Material" are the same attribute. Deliberately excludes words that DO
+# change the meaning (e.g. "frame", "vehicle", "handle").
+QUALIFIERS = {'main', 'product', 'item', 'course', 'compliance', 'overall', 'total', 'net'}
+ALIASES = {  # explicit equivalences the qualifier rule must not guess at
+    'compatible vehicle make': 'compatible make',
+    'compatible vehicle model': 'compatible model',
+}
+
+
+def dedupe_key(name):
+    """Key for duplicate detection.
+
+    Unlike norm_name this KEEPS the unit in parentheses, so "Net Weight (g)" and
+    "Item Weight (kg)" stay distinct -- they are different measurements.
+    """
+    n = unicodedata.normalize('NFKC', str(name)).replace('’', "'").lower()
+    n = n.replace('&', ' and ')
+    n = ' '.join(re.sub(r'[^a-z0-9]+', ' ', n).split())
+    n = ALIASES.get(n, n)
+    return tuple(sorted(set(n.split()) - QUALIFIERS))
+
+
+dupes = collections.Counter()
 report = []
 merged = collections.OrderedDict()
 
@@ -156,10 +200,87 @@ for cat in PP:
         seen.add(k)
         base.append(p)
         added += 1
+    # drop per-product identity properties
+    n_source = len(existing_props(cat))
+    tagged = [(p, i < n_source) for i, p in enumerate(base)]
+    tagged = [(p, s) for p, s in tagged if norm_name(p[1]) not in DROP_NAMES]
+    # collapse near-duplicates ("Material" vs "Main Material"), always keeping the
+    # property that came from the source workbook so no original data is lost
+    kept, index = [], {}
+    for p, is_src in tagged:
+        k = dedupe_key(p[1])
+        if k not in index:
+            index[k] = len(kept)
+            kept.append((p, is_src))
+        else:
+            j = index[k]
+            dupes[(kept[j][0][1], p[1])] += 1
+            if is_src and not kept[j][1]:      # source wins over an added duplicate
+                kept[j] = (p, is_src)
+    base = [p for p, _ in kept]
     # stable ordering by group, keeping in-group order
     base = sorted(base, key=lambda p: gsort(p[0]))
     merged[cat] = base
     report.append((cat, fam, len(PP[cat]), len(base)))
+
+
+# ------------------------------------------------------------------ normalisation pass
+# The source workbook labels the same property differently across categories
+# (Arabic wording, property group, Integer vs Decimal). Pick the value that is
+# already the most widely used for that property name and apply it everywhere.
+# Nothing is invented: every chosen value already exists in the data.
+def _majority(counter):
+    return sorted(counter.items(), key=lambda kv: (-kv[1], str(kv[0])))[0][0]
+
+
+ar_votes = collections.defaultdict(collections.Counter)
+grp_votes = collections.defaultdict(collections.Counter)
+num_votes = collections.defaultdict(collections.Counter)
+for props in merged.values():
+    for (grp, en, ar, dtype, plist, po_data, po_vals, req, opt) in props:
+        k = norm_name(en)
+        if ar:
+            ar_votes[k][ar] += 1
+        grp_votes[k][grp] += 1
+        if dtype in ('Integer', 'Decimal'):
+            num_votes[k][dtype] += 1
+
+ar_map = {k: _majority(v) for k, v in ar_votes.items()}
+grp_map = {k: _majority(v) for k, v in grp_votes.items()}
+num_map = {k: _majority(v) for k, v in num_votes.items()}
+
+THOUSANDS = re.compile(r'(?<=\d),(?=\d{3}(?!\d))')
+
+
+def clean_list(vals):
+    """Repair values whose own comma collides with the list delimiter, and trim."""
+    if not vals:
+        return vals
+    s = THOUSANDS.sub('', str(vals))
+    return ', '.join(v.strip() for v in s.split(',') if v.strip())
+
+
+fixes = collections.Counter()
+for cat, props in merged.items():
+    out = []
+    for (grp, en, ar, dtype, plist, po_data, po_vals, req, opt) in props:
+        k = norm_name(en)
+        if ar_map.get(k) and ar != ar_map[k]:
+            ar = ar_map[k]; fixes['arabic_label'] += 1
+        if grp_map.get(k) and grp != grp_map[k]:
+            grp = grp_map[k]; fixes['property_group'] += 1
+        if dtype in ('Integer', 'Decimal') and num_map.get(k) and dtype != num_map[k]:
+            dtype = num_map[k]; fixes['numeric_type'] += 1
+        np_, nv_ = clean_list(plist), clean_list(po_vals)
+        if np_ != plist:
+            plist = np_; fixes['value_list_repair'] += 1
+        if nv_ != po_vals:
+            po_vals = nv_; fixes['value_list_repair'] += 1
+        # a free-text field cannot serve as a product variant option
+        if po_data == 'Free' and opt == 'Yes':
+            opt = 'No'; fixes['option_on_free_text'] += 1
+        out.append((grp, en, ar, dtype, plist, po_data, po_vals, req, opt))
+    merged[cat] = sorted(out, key=lambda p: gsort(p[0]))
 
 # ------------------------------------------------------------------ write
 HDR_FILL = PatternFill('solid', fgColor='1F3864')
@@ -245,6 +366,13 @@ print(f'properties before : {sum(r[2] for r in report)}')
 print(f'properties after  : {sum(counts)}')
 print(f'min / avg / max   : {min(counts)} / {sum(counts)/len(counts):.1f} / {max(counts)}')
 print(f'below 15 props    : {sum(1 for c in counts if c < 15)}')
+print('\nreview fixes applied:')
+for k, v in fixes.most_common():
+    print(f'  {v:6d}  {k}')
+print(f'  {sum(dupes.values()):6d}  duplicate_properties_collapsed')
+print('\ntop collapsed duplicates (kept ~ removed):')
+for (a, b), n in dupes.most_common(15):
+    print(f'  {n:5d}x  {a!r} ~ {b!r}')
 print('\nfamily distribution:')
 for f, c in fams.most_common():
     print(f'  {c:5d}  {f}')

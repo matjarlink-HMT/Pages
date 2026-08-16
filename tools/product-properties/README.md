@@ -6,13 +6,53 @@ sheets from `MatjarLink_Master_Data_File (LAST_UPDATE)`.
 ## What it does
 
 The source file carries ~6 properties per category (7,007 in total across 1,172 leaf
-categories). This tool expands that to **43,660 properties** — a minimum of 21 and an
-average of 37 per category, with technology-heavy categories such as mobile phones
-reaching 66.
+categories). This tool expands that to **38,802 properties** — a minimum of 19 and an
+average of 33 per category, with technology-heavy categories such as mobile phones
+reaching 62.
 
-Existing properties are never dropped or rewritten: they are read from the source,
-de-duplicated by name, and kept first in the output. New properties are appended only
-when the property name does not already exist for that category.
+Source properties are preserved: they are read from the source, kept first in the
+output, and win over any added property they duplicate. New properties are appended
+only when the attribute does not already exist for that category.
+
+## Identity properties are excluded
+
+Per-product identifiers are **not** emitted as category properties — they belong on the
+product record and, for brands, on the `Brands` / `Category Brands` sheets:
+
+> Brand · Manufacturer · Model Name · Model Number · Manufacturer Part Number (MPN) ·
+> OEM Part Number · Trim / Variant · Title · Author · Publisher · ISBN · Series Name ·
+> Course Title · Provider / Instructor · Provider Name · Service Name · Game Title ·
+> Shade Name · Colour Code / Name · registration and licence numbers
+
+Deliberately **kept**, because they are specifications rather than identity:
+
+- compatibility / fitment fields (`Compatible Make`, `Compatible Model`,
+  `Compatible Year From` / `To`, …) — an auto part without them cannot be matched to a car
+- component specs that merely contain the word "model" (`Processor Model`, `Console Model`)
+- year classifications (`Model Year`, `Year of Manufacture`) and business terms (`Pricing Model`)
+
+Brand names that appear as *values* inside technical option lists (Intel Core i5,
+Snapdragon, Dolby Atmos, Toyota under `Compatible Make`, …) are left intact — removing
+them would destroy the accuracy of the specification.
+
+## Review pass
+
+After merging, a normalisation pass repairs inconsistencies that exist in the source
+workbook. Every value it applies is one that already occurs in the data — nothing is
+invented:
+
+| Fix | Rows |
+| --- | --- |
+| Property group unified per attribute | 3,539 |
+| Arabic label unified per attribute | 2,177 |
+| Duplicate attributes collapsed (`Material` / `Main Material`) | 528 |
+| `Option = Yes` cleared on free-text fields (cannot be a variant) | 90 |
+| Integer/Decimal type unified per attribute | 77 |
+| Value lists repaired (`1,000,000:1` split by the comma delimiter) | 6 |
+
+Duplicate collapsing always keeps the source-file property. Across all 7,007 source
+properties exactly one is absorbed: `Soap` carries both `Type` and `Product Type` in the
+source, and these collapse into one.
 
 ## How it works
 
