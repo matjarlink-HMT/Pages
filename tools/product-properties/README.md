@@ -116,7 +116,17 @@ python3 repack.py    # re-packs it with a shared-strings table (~29% smaller)
 
 `repack.py` exists because openpyxl writes every cell value inline, so an option list
 shared by 200 categories is stored 200 times. Re-packing pools them in
-`sharedStrings.xml`: 4.26 MB → 2.99 MB with identical content and formatting.
+`sharedStrings.xml`, cutting the file by roughly 30% with identical content and
+formatting.
+
+Each packaging run also issues a new file name:
+
+```
+MatjarLink_Product_Properties_v<N>_<YYYY-MM-DD>.xlsx
+```
+
+`N` comes from the `VERSION` file, which `repack.py` increments on every run, so a
+freshly downloaded build never overwrites or gets confused with the previous one.
 
 ## Property families
 

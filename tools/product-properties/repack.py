@@ -8,8 +8,17 @@ the content or the formatting.
 """
 import openpyxl, xlsxwriter
 
+import datetime, pathlib
+
 SRC = 'MatjarLink_Product_Properties_Expanded.xlsx'
-OUT = 'MatjarLink_Product_Properties_Expanded_slim.xlsx'
+
+# Every packaging run gets its own file name, so a new download never overwrites
+# (or silently reuses) the previous one. VERSION holds the last number issued.
+_vfile = pathlib.Path('VERSION')
+_version = int(_vfile.read_text().strip() or 0) + 1 if _vfile.exists() else 1
+_vfile.write_text(f'{_version}\n')
+_stamp = datetime.date.today().isoformat()
+OUT = f'MatjarLink_Product_Properties_v{_version}_{_stamp}.xlsx'
 
 WIDTHS = {
     'Product Properties': [46, 30, 34, 32, 14, 95, 11],
@@ -67,5 +76,6 @@ for name in ('Product Properties', 'Properties + Options', 'Summary'):
 wb.close()
 
 import os
-print('old:', os.path.getsize(SRC), 'bytes')
-print('new:', os.path.getsize(OUT), 'bytes')
+print('version:', _version)
+print('output :', OUT)
+print('size   :', os.path.getsize(OUT), 'bytes')
