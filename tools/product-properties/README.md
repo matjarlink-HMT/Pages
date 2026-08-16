@@ -82,11 +82,16 @@ row nesting used by the source file.
 ## Running it
 
 ```bash
-pip install openpyxl
+pip install openpyxl xlsxwriter
 cd tools/product-properties
 # place the master workbook next to the scripts as master.xlsx
-python3 build.py
+python3 build.py     # generates the workbook
+python3 repack.py    # re-packs it with a shared-strings table (~29% smaller)
 ```
+
+`repack.py` exists because openpyxl writes every cell value inline, so an option list
+shared by 200 categories is stored 200 times. Re-packing pools them in
+`sharedStrings.xml`: 4.26 MB → 2.99 MB with identical content and formatting.
 
 ## Property families
 
