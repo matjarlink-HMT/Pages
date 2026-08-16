@@ -8,6 +8,8 @@ RULES = [
     # personal-care items that are tools or paper goods, not formulations
     (r'^(nail clipper|foot file|toothbrush|floss)$', 'care_tool'),
     (r'^expansion joints$', 'construction'),
+    (r'^(bearings|belts & pulleys|hydraulic components|pneumatic components|'
+     r'fasteners|measuring instruments)$', 'industrial_component'),
     (r'^tissue$', 'paper_goods'),
     (r'^camera parts$', 'camera'),
     (r'^(mobile and tablets spare parts|mobile & tablets repair tools|'

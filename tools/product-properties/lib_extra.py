@@ -288,3 +288,66 @@ FAM['paper_goods'] = blk([
       'Facial, Kitchen, Bathroom, Dining, Car, Office, General Purpose'),
     D('origin', 'Country of Origin', 'بلد المنشأ', ORIGIN),
 ], COLOR)
+
+
+# ------------------------------------------------------------------ industrial component
+# Bearings, fasteners, belts, hydraulic/pneumatic parts: mechanical components, not
+# machines. They have dimensions, grades and load ratings -- no duty cycle or RPM.
+FAM['industrial_component'] = blk([
+    D('spec', 'Component Type', 'نوع المكوّن',
+      'Ball Bearing, Roller Bearing, Thrust Bearing, Linear Bearing, V-Belt, '
+      'Timing Belt, Flat Belt, Pulley, Sprocket, Chain, Coupling, Bolt, Screw, '
+      'Nut, Washer, Rivet, Anchor, Hydraulic Cylinder, Hydraulic Hose, '
+      'Hydraulic Valve, Pneumatic Cylinder, Pneumatic Valve, Air Fitting, '
+      'Gauge, Caliper, Micrometer, Dial Indicator', required='Yes'),
+    D('mat', 'Material', 'الخامة',
+      'Carbon Steel, Stainless Steel 304, Stainless Steel 316, Alloy Steel, '
+      'Chrome Steel, Brass, Bronze, Aluminium, Cast Iron, Nylon, PTFE, '
+      'Rubber, Polyurethane, Ceramic', required='Yes'),
+    D('spec', 'Grade / Strength Class', 'الدرجة / فئة المتانة',
+      'Not Applicable, 4.8, 5.8, 8.8, 10.9, 12.9, A2-70, A4-80, Grade 5, Grade 8'),
+    D('spec', 'Standard', 'المواصفة القياسية',
+      'DIN, ISO, ANSI, BS, JIS, ASME, SAE, GOST, Not Specified'),
+    N('dims', 'Inner Diameter (mm)', 'القطر الداخلي (ملم)',
+      'Not Applicable, 5 mm, 8 mm, 10 mm, 12 mm, 15 mm, 20 mm, 25 mm, 30 mm, '
+      '40 mm, 50 mm, 60 mm, 80 mm, 100 mm', option='Yes'),
+    N('dims', 'Outer Diameter (mm)', 'القطر الخارجي (ملم)',
+      'Not Applicable, 10 mm, 16 mm, 22 mm, 26 mm, 32 mm, 42 mm, 47 mm, 52 mm, '
+      '62 mm, 72 mm, 90 mm, 110 mm, 140 mm', option='Yes'),
+    N('dims', 'Width / Thickness (mm)', 'العرض / السماكة (ملم)',
+      'Not Applicable, 4 mm, 6 mm, 8 mm, 10 mm, 12 mm, 15 mm, 20 mm, 25 mm, 30 mm'),
+    N('dims', 'Length (mm)', 'الطول (ملم)',
+      'Not Applicable, 10 mm, 16 mm, 20 mm, 25 mm, 30 mm, 40 mm, 50 mm, 60 mm, '
+      '80 mm, 100 mm, 150 mm, 200 mm', option='Yes'),
+    D('spec', 'Thread Type', 'نوع السن',
+      'Not Applicable, Metric Coarse, Metric Fine, UNC, UNF, BSP, NPT, Left Hand'),
+    D('spec', 'Head Type', 'نوع الرأس',
+      'Not Applicable, Hex, Socket Cap, Countersunk, Pan, Button, Flange, Square'),
+    D('spec', 'Surface Treatment', 'المعالجة السطحية',
+      'Plain / Black, Zinc Plated, Hot-Dip Galvanised, Nickel Plated, '
+      'Chrome Plated, Phosphate, Anodised, Passivated'),
+    N('perf', 'Load Rating (kN)', 'قدرة التحمل (كيلو نيوتن)',
+      'Not Applicable, Under 5 kN, 5-15 kN, 16-40 kN, 41-100 kN, Above 100 kN'),
+    I('perf', 'Maximum Speed (RPM)', 'أقصى سرعة (دورة/دقيقة)',
+      'Not Applicable, Up to 1500 RPM, 1501-3000 RPM, 3001-6000 RPM, Above 6000 RPM'),
+    N('perf', 'Operating Pressure (Bar)', 'ضغط التشغيل (بار)',
+      'Not Applicable, Up to 10 Bar, 11-60 Bar, 61-160 Bar, 161-350 Bar, Above 350 Bar'),
+    N('perf', 'Operating Temperature (°C)', 'درجة حرارة التشغيل (°م)',
+      'Not Applicable, -40 to 80°C, -20 to 120°C, 0 to 180°C, Up to 250°C'),
+    N('perf', 'Measuring Range', 'نطاق القياس',
+      'Not Applicable, 0-25 mm, 0-150 mm, 0-200 mm, 0-300 mm, 0-1000 mm'),
+    N('perf', 'Accuracy (mm)', 'الدقة (ملم)',
+      'Not Applicable, ±0.001 mm, ±0.01 mm, ±0.02 mm, ±0.05 mm'),
+    B('feat', 'Sealed / Shielded', 'مغلق / محمي'),
+    B('feat', 'Self-Lubricating', 'ذاتي التزييت'),
+    B('feat', 'Corrosion Resistant', 'مقاوم للتآكل'),
+    D('pack', 'Quantity per Pack', 'الكمية في العبوة',
+      '1 Piece, 2 Pieces, 5 Pieces, 10 Pieces, 25 Pieces, 50 Pieces, 100 Pieces, '
+      '500 Pieces, 1000 Pieces, Bulk', option='Yes'),
+    D('spec', 'Minimum Order Quantity', 'الحد الأدنى للطلب',
+      '1 Unit, 10 Units, 50 Units, 100 Units, 500 Units, Negotiable'),
+    D('cert', 'Certification / Compliance', 'الشهادات والمطابقة',
+      'ISO 9001, CE, DIN Certified, ANSI Approved, RoHS, None'),
+    D('origin', 'Country of Origin', 'بلد المنشأ', ORIGIN),
+    D('general', 'Condition', 'الحالة', COND, required='Yes'),
+], COLOR)
