@@ -7,6 +7,7 @@ from openpyxl.utils import get_column_letter
 
 import lib_core
 from classify import classify
+from relevance import tags_for, keep as relevant
 import lib_tech, lib_tech2, lib_home, lib_auto, lib_misc, lib_misc2, lib_ind, lib_last, lib_extra
 
 FAM = {}
@@ -30,7 +31,9 @@ _GIDX = {g: i for i, g in enumerate(GROUP_ORDER)}
 
 def gsort(group_label):
     en = group_label.split('|')[0].strip()
-    return _GIDX.get(en, len(GROUP_ORDER))
+    # the name is part of the key so groups outside GROUP_ORDER still cluster
+    # together instead of interleaving with each other
+    return (_GIDX.get(en, len(GROUP_ORDER)), en)
 
 
 def norm_name(s):
@@ -167,6 +170,9 @@ QUALIFIERS = {'main', 'product', 'item', 'course', 'compliance', 'overall', 'tot
 ALIASES = {  # explicit equivalences the qualifier rule must not guess at
     'compatible vehicle make': 'compatible make',
     'compatible vehicle model': 'compatible model',
+    'volume size ml': 'volume ml',
+    'number of plies': 'number of ply',
+    'flavour': 'flavor',
 }
 
 
@@ -184,25 +190,33 @@ def dedupe_key(name):
 
 
 dupes = collections.Counter()
+irrelevant = collections.Counter()
 report = []
 merged = collections.OrderedDict()
 
 for cat in PP:
     l1, l2 = taxonomy_of(cat)
     fam = classify(cat.split('|')[0].strip(), l1, l2)
-    base = existing_props(cat)
-    seen = {norm_name(p[1]) for p in base}
-    added = 0
+    src_props = existing_props(cat)
+    tagged = [(p, True) for p in src_props]           # True = came from the source file
+    seen = {norm_name(p[1]) for p in src_props}
     for p in FAM.get(fam, FAM['generic']):
         k = norm_name(p[1])
         if k in seen:
             continue
         seen.add(k)
-        base.append(p)
-        added += 1
+        tagged.append((p, False))
+    # drop properties whose domain this category does not have (nutrition panel on a
+    # face cream, warranty on toothpaste, hair type on a nail clipper, ...)
+    tags = tags_for(cat.split('|')[0].strip(), fam)
+    kept_rel = []
+    for p, is_src in tagged:
+        if is_src or relevant(norm_name(p[1]), tags, fam):
+            kept_rel.append((p, is_src))   # source rows are never gated away
+        else:
+            irrelevant[(fam, p[1].strip())] += 1
+    tagged = kept_rel
     # drop per-product identity properties
-    n_source = len(existing_props(cat))
-    tagged = [(p, i < n_source) for i, p in enumerate(base)]
     tagged = [(p, s) for p, s in tagged if norm_name(p[1]) not in DROP_NAMES]
     # collapse near-duplicates ("Material" vs "Main Material"), always keeping the
     # property that came from the source workbook so no original data is lost
@@ -233,20 +247,27 @@ def _majority(counter):
     return sorted(counter.items(), key=lambda kv: (-kv[1], str(kv[0])))[0][0]
 
 
+# The Arabic label is unified per property name. The property GROUP is deliberately
+# NOT unified: the same attribute legitimately sits in different groups in different
+# domains (Vegan is an Ingredient for a cream and Nutrition for a snack), so a global
+# vote would drag food groupings onto cosmetics.
 ar_votes = collections.defaultdict(collections.Counter)
-grp_votes = collections.defaultdict(collections.Counter)
 num_votes = collections.defaultdict(collections.Counter)
 for props in merged.values():
     for (grp, en, ar, dtype, plist, po_data, po_vals, req, opt) in props:
         k = norm_name(en)
         if ar:
             ar_votes[k][ar] += 1
-        grp_votes[k][grp] += 1
         if dtype in ('Integer', 'Decimal'):
             num_votes[k][dtype] += 1
 
+grp_label_votes = collections.defaultdict(collections.Counter)
+for props in merged.values():
+    for p_ in props:
+        grp_label_votes[p_[0].split('|')[0].strip()][p_[0]] += 1
+grp_label_map = {k: _majority(v) for k, v in grp_label_votes.items()}
+
 ar_map = {k: _majority(v) for k, v in ar_votes.items()}
-grp_map = {k: _majority(v) for k, v in grp_votes.items()}
 num_map = {k: _majority(v) for k, v in num_votes.items()}
 
 THOUSANDS = re.compile(r'(?<=\d),(?=\d{3}(?!\d))')
@@ -265,10 +286,11 @@ for cat, props in merged.items():
     out = []
     for (grp, en, ar, dtype, plist, po_data, po_vals, req, opt) in props:
         k = norm_name(en)
+        canon_grp = grp_label_map.get(grp.split('|')[0].strip())
+        if canon_grp and grp != canon_grp:
+            grp = canon_grp; fixes['group_label_text'] += 1
         if ar_map.get(k) and ar != ar_map[k]:
             ar = ar_map[k]; fixes['arabic_label'] += 1
-        if grp_map.get(k) and grp != grp_map[k]:
-            grp = grp_map[k]; fixes['property_group'] += 1
         if dtype in ('Integer', 'Decimal') and num_map.get(k) and dtype != num_map[k]:
             dtype = num_map[k]; fixes['numeric_type'] += 1
         np_, nv_ = clean_list(plist), clean_list(po_vals)
@@ -370,6 +392,10 @@ print('\nreview fixes applied:')
 for k, v in fixes.most_common():
     print(f'  {v:6d}  {k}')
 print(f'  {sum(dupes.values()):6d}  duplicate_properties_collapsed')
+print(f'  {sum(irrelevant.values()):6d}  irrelevant_for_category_removed')
+print('\ntop irrelevant removals (family | property):')
+for (fam, prop), n in irrelevant.most_common(20):
+    print(f'  {n:5d}x  {fam:16s} {prop}')
 print('\ntop collapsed duplicates (kept ~ removed):')
 for (a, b), n in dupes.most_common(15):
     print(f'  {n:5d}x  {a!r} ~ {b!r}')

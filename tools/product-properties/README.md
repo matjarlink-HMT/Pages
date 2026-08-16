@@ -35,6 +35,31 @@ Brand names that appear as *values* inside technical option lists (Intel Core i5
 Snapdragon, Dolby Atmos, Toyota under `Compatible Make`, …) are left intact — removing
 them would destroy the accuracy of the specification.
 
+## Relevance gates (`relevance.py`)
+
+A family hands every leaf category the same property block, which is wrong whenever a
+family spans different kinds of product. The gate layer derives domain tags from the
+leaf category name and drops properties whose domain the category does not have:
+
+| Removed | From | Because |
+| --- | --- | --- |
+| `Hair Type` | body creams, soaps, oral care | not a hair product |
+| `SPF Protection`, `Waterproof` | lifting cream, body lotion | only sun care and makeup |
+| `Skin Type`, `Non-Comedogenic` | non-skin items | no skin contact |
+| `Warranty Type` / `Period`, `Condition` | food, beauty, medicine, cleaning | consumables are not repaired or sold refurbished |
+| nutrition panel fields | anything not edible | no nutrition label exists |
+| `Bristle Type`, `Flavour`, `Power Source` | nail clippers, foot files | oral-care attributes |
+
+Every rule is scoped to the families where it applies, because the same property name
+means different things elsewhere — `Application Area` is where you rub a cream, but
+also where a luminaire is installed, so lighting keeps it.
+
+Two families were added for products that were being treated as formulations:
+`care_tool` (nail clipper, foot file, toothbrush, floss) and `paper_goods` (tissue).
+
+**The gates never touch a property that came from the source workbook** — they only
+filter properties this tool adds.
+
 ## Review pass
 
 After merging, a normalisation pass repairs inconsistencies that exist in the source

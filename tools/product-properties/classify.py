@@ -5,6 +5,10 @@ import re
 # Ordered rules: (regex on lowercased English leaf name, family). First match wins.
 RULES = [
     # ---------------- explicit overrides (must precede the broad rules below)
+    # personal-care items that are tools or paper goods, not formulations
+    (r'^(nail clipper|foot file|toothbrush|floss)$', 'care_tool'),
+    (r'^expansion joints$', 'construction'),
+    (r'^tissue$', 'paper_goods'),
     (r'^camera parts$', 'camera'),
     (r'^(mobile and tablets spare parts|mobile & tablets repair tools|'
      r'mobile and tablets accessories|charging cables and converters|'

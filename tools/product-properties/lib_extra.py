@@ -215,3 +215,76 @@ FAM['video_game'] = blk([
     D('general', 'Condition', 'الحالة', 'New / Sealed, Opened - Like New, Pre-Owned'),
     D('origin', 'Country of Origin', 'بلد المنشأ', ORIGIN),
 ])
+
+
+# ------------------------------------------------------------------ personal-care implement
+# Nail clippers, foot files, toothbrushes, floss: tools, not formulations. They must
+# not inherit Formulation / SPF / Skin Type / Period After Opening.
+FAM['care_tool'] = blk([
+    D('spec', 'Product Type', 'نوع المنتج',
+      'Nail Clipper, Nail Scissors, Nail File, Foot File, Pumice Stone, Cuticle Pusher, '
+      'Tweezers, Manicure Set, Toothbrush, Electric Toothbrush, Interdental Brush, '
+      'Dental Floss, Floss Picks, Tongue Cleaner, Razor, Shaving Brush, Comb, Hair Brush',
+      required='Yes'),
+    D('mat', 'Material', 'الخامة',
+      'Stainless Steel, Carbon Steel, Plastic / ABS, Nylon, Silicone, Rubber, '
+      'Bamboo, Wood, Glass, Ceramic, Aluminium'),
+    D('spec', 'Bristle Type', 'نوع الشعيرات',
+      'Not Applicable, Extra Soft, Soft, Medium, Hard, Charcoal Infused, Nylon'),
+    D('spec', 'Head Size', 'حجم الرأس', 'Not Applicable, Small, Compact, Medium, Large'),
+    D('power', 'Power Source', 'مصدر الطاقة',
+      'Manual, AA Batteries, AAA Batteries, Rechargeable, USB Charging'),
+    D('pack', 'Pack Quantity', 'الكمية في العبوة', PACK_QTY, option='Yes'),
+    N('spec', 'Length (m)', 'الطول (متر)',
+      'Not Applicable, 25 m, 40 m, 50 m, 100 m, 200 m'),
+    D('spec', 'Coating / Treatment', 'الطلاء / المعالجة',
+      'Not Applicable, Waxed, Unwaxed, Mint Coated, Fluoride Coated, Antibacterial'),
+    D('spec', 'Flavour', 'النكهة',
+      'Not Applicable, Unflavoured, Mint, Spearmint, Cinnamon, Charcoal'),
+    # nail- and foot-care tool attributes
+    D('spec', 'Grit / Coarseness', 'درجة الخشونة',
+      'Not Applicable, Coarse, Medium, Fine, Extra Fine, Dual-Sided (Coarse & Fine)'),
+    D('spec', 'Blade / Edge Type', 'نوع الشفرة',
+      'Not Applicable, Straight Edge, Curved Edge, Angled Edge, Serrated'),
+    D('spec', 'Surface Type', 'نوع السطح',
+      'Not Applicable, Metal Rasp, Emery, Sandpaper, Pumice, Ceramic, Glass, Diamond Dust'),
+    N('spec', 'Tool Length (cm)', 'طول الأداة (سم)',
+      'Under 6 cm, 6-10 cm, 11-15 cm, 16-20 cm, 21-30 cm'),
+    B('feat', 'Built-In Nail Catcher', 'حاوية لقصاصات الأظافر'),
+    B('feat', 'Rust Resistant', 'مقاوم للصدأ'),
+    B('feat', 'Sterilisable', 'قابل للتعقيم'),
+    B('feat', 'Dual-Sided', 'وجهان'),
+    B('feat', 'Hanging Hole / Loop', 'فتحة تعليق'),
+    B('feat', 'Travel Size / Portable', 'حجم سفر / محمول'),
+    B('feat', 'Case Included', 'يشمل علبة'),
+    B('feat', 'Replaceable Head', 'رأس قابل للاستبدال'),
+    B('feat', 'Ergonomic Handle', 'مقبض مريح'),
+    B('feat', 'Non-Slip Grip', 'قبضة مانعة للانزلاق'),
+    D('usage', 'Gender / Target User', 'الفئة المستهدفة', 'Men, Women, Unisex, Kids, Babies'),
+    D('usage', 'Age Group', 'الفئة العمرية',
+      'Adults, Teens, Kids (3-12 Years), Babies (0-2 Years), All Ages'),
+    D('origin', 'Country of Origin', 'بلد المنشأ', ORIGIN),
+], COLOR)
+
+# ------------------------------------------------------------------ disposable paper goods
+FAM['paper_goods'] = blk([
+    D('spec', 'Product Type', 'نوع المنتج',
+      'Facial Tissue, Pocket Tissue, Box Tissue, Kitchen Towel, Toilet Paper, '
+      'Napkins, Paper Towel, Table Cover', required='Yes'),
+    I('spec', 'Number of Plies', 'عدد الطبقات', '1, 2, 3, 4'),
+    I('spec', 'Sheets per Pack', 'عدد المناديل في العبوة',
+      '50, 70, 100, 120, 150, 200, 250, 300, 400, 600'),
+    D('pack', 'Pack Quantity', 'عدد العبوات', PACK_QTY, option='Yes'),
+    D('pack', 'Packaging Type', 'نوع التغليف',
+      'Box, Soft Pack, Roll, Pocket Pack, Bulk Carton, Dispenser Refill'),
+    T('dims', 'Sheet Size (cm)', 'مقاس الورقة (سم)'),
+    D('mat', 'Material', 'الخامة',
+      'Virgin Pulp, Recycled Paper, Bamboo Pulp, Mixed Pulp'),
+    B('feat', 'Embossed', 'منقّش'),
+    B('feat', 'Lotion Infused', 'مشبع بمرطب'),
+    B('feat', 'Biodegradable', 'قابل للتحلل'),
+    B('feat', 'Chlorine Free', 'خالٍ من الكلور'),
+    D('usage', 'Recommended Use', 'الاستخدام الموصى به',
+      'Facial, Kitchen, Bathroom, Dining, Car, Office, General Purpose'),
+    D('origin', 'Country of Origin', 'بلد المنشأ', ORIGIN),
+], COLOR)
