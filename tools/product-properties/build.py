@@ -173,6 +173,7 @@ ALIASES = {  # explicit equivalences the qualifier rule must not guess at
     'volume size ml': 'volume ml',
     'number of plies': 'number of ply',
     'flavour': 'flavor',
+    'recommended needle size mm': 'needle hook size',
 }
 
 
@@ -189,6 +190,34 @@ def dedupe_key(name):
     return tuple(sorted(set(n.split()) - QUALIFIERS))
 
 
+# where a one-property group goes instead of standing alone
+GROUP_FALLBACK = {
+    'Origin': 'General', 'Certification': 'General', 'Warranty': 'General',
+    'Main': 'General', 'Animal Info': 'General', 'Dosage': 'General',
+    'Packaging': 'Specifications', 'Dimensions': 'Specifications',
+    'Capacity': 'Specifications', 'Material': 'Specifications',
+    'Fit & Size': 'Specifications', 'Scent': 'Specifications',
+    'Ingredients': 'Specifications', 'Nutrition': 'Specifications',
+    'Memory': 'Specifications', 'Storage': 'Specifications',
+    'Audio': 'Specifications', 'Sensors': 'Specifications',
+    'Battery': 'Specifications', 'Power': 'Specifications',
+    'Electrical': 'Specifications', 'Engine': 'Specifications',
+    'Display': 'Specifications', 'Camera': 'Specifications',
+    'Performance': 'Specifications', 'Compatibility': 'Specifications',
+    'Vehicle Fitment': 'Specifications', 'Environment': 'Specifications',
+    'Installation': 'Specifications', 'Design': 'Specifications',
+    'Course Info': 'Specifications', 'Service Info': 'Specifications',
+    'Smart Features': 'Features', 'Safety': 'Features',
+    'Health': 'Usage', 'Care': 'Usage',
+}
+
+CONCEPTS = {
+    'weight':     re.compile(r'\bweight\b', re.I),
+    'volume':     re.compile(r'\bvolume\b', re.I),
+    'dimensions': re.compile(r'\bdimensions?\b', re.I),
+}
+
+measures = collections.Counter()
 dupes = collections.Counter()
 irrelevant = collections.Counter()
 report = []
@@ -218,6 +247,21 @@ for cat in PP:
     tagged = kept_rel
     # drop per-product identity properties
     tagged = [(p, s) for p, s in tagged if norm_name(p[1]) not in DROP_NAMES]
+    # if the source already measures weight / volume / dimensions, do not add a second
+    # measurement of the same thing in another unit
+    src_concepts = {con for p, is_src in tagged if is_src
+                    for con, rx in CONCEPTS.items() if rx.search(p[1])}
+    trimmed, added_concepts = [], set()
+    for p, is_src in tagged:
+        if not is_src:
+            con = next((c for c, rx in CONCEPTS.items() if rx.search(p[1])), None)
+            if con and (con in src_concepts or con in added_concepts):
+                measures[(fam, p[1].strip())] += 1
+                continue
+            if con:
+                added_concepts.add(con)
+        trimmed.append((p, is_src))
+    tagged = trimmed
     # collapse near-duplicates ("Material" vs "Main Material"), always keeping the
     # property that came from the source workbook so no original data is lost
     kept, index = [], {}
@@ -302,7 +346,20 @@ for cat, props in merged.items():
         if po_data == 'Free' and opt == 'Yes':
             opt = 'No'; fixes['option_on_free_text'] += 1
         out.append((grp, en, ar, dtype, plist, po_data, po_vals, req, opt))
-    merged[cat] = sorted(out, key=lambda p: gsort(p[0]))
+    # A group holding a single property renders as a header with one row under it,
+    # which reads like an empty section. Fold those into a broader group.
+    counts = collections.Counter(p[0] for p in out)
+    folded = []
+    for p in out:
+        en = p[0].split('|')[0].strip()
+        if counts[p[0]] == 1 and en in GROUP_FALLBACK:
+            target_en = GROUP_FALLBACK[en]
+            target = grp_label_map.get(target_en)
+            if target and target != p[0]:
+                folded.append((target,) + p[1:]); fixes['single_property_group_folded'] += 1
+                continue
+        folded.append(p)
+    merged[cat] = sorted(folded, key=lambda p: gsort(p[0]))
 
 # ------------------------------------------------------------------ write
 HDR_FILL = PatternFill('solid', fgColor='1F3864')
@@ -393,6 +450,7 @@ for k, v in fixes.most_common():
     print(f'  {v:6d}  {k}')
 print(f'  {sum(dupes.values()):6d}  duplicate_properties_collapsed')
 print(f'  {sum(irrelevant.values()):6d}  irrelevant_for_category_removed')
+print(f'  {sum(measures.values()):6d}  duplicate_measurements_removed')
 print('\ntop irrelevant removals (family | property):')
 for (fam, prop), n in irrelevant.most_common(20):
     print(f'  {n:5d}x  {fam:16s} {prop}')

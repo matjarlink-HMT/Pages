@@ -25,6 +25,18 @@ _TAG_RULES = [
     ('implement', r'clipper|foot file|^nail file|toothbrush|tweezer|razor|comb|'
                   r'^floss$|pumice'),
     ('paper',     r'^tissue|napkin|kitchen towel|toilet paper'),
+    # craft sub-domains
+    ('craft_liquid', r'paint|watercolo|glaze|ink|dye|glue|adhesive|varnish|stain|'
+                     r'finish|wax|fragrance oil|soap base|colorant|resin|medium'),
+    ('craft_yarn',   r'yarn|thread|floss|cord|macram|string|fibre|fiber'),
+    ('craft_tool',   r'needle|hook|chisel|knife|knives|wheel|kiln|blowpipe|tool|'
+                     r'stand|frame|hoop|cutter|torch|pen$|brush'),
+    # medical-device sub-domains
+    ('med_monitor',  r'monitor|glucomet|oximet|thermomet|ecg|diagnostic|examination|'
+                     r'blood pressure|glucose|pulse'),
+    ('med_mobility', r'wheelchair|walker|cane|crutch|rollator|mobility|scooter'),
+    ('med_support',  r'brace|splint|orthopedic|orthopaedic|support|belt'),
+    ('med_sterile',  r'surgical|sterile|instrument|glove|mask|dressing|bandage|syringe'),
     ('cosmetic',  r'makeup|make-?up|lipstick|mascara|eyeshadow|foundation|concealer|'
                   r'blush|bronzer|highlighter|eyeliner|eyebrow|lip |manicure|hairdress'),
 ]
@@ -40,11 +52,16 @@ FAMILY_TAGS = {
 CONSUMABLE_FAMILIES = {
     'food', 'beverage', 'supplement', 'medicine',
     'personal_care', 'makeup', 'perfume', 'cleaning',
+    # low-value supplies: they are not repaired and not sold refurbished
+    'craft', 'stationery', 'paper_goods', 'care_tool', 'gift',
+    'paint', 'auto_consumable',
 }
 # families where the personal-care formulation rules apply
 CARE_FAMILIES = {'personal_care', 'makeup', 'perfume'}
 # inside the personal-care tool family, oral-care attributes belong to oral items only
 TOOL_FAMILY = {'care_tool'}
+CRAFT_FAMILY = {'craft'}
+MED_FAMILY = {'medical_device'}
 
 
 def tags_for(cat_en, family):
@@ -97,6 +114,28 @@ RULES = {
     'coating treatment':           ({'oral'},                       TOOL_FAMILY),
     'length':                      ({'oral'},                       TOOL_FAMILY),
     'power source':                ({'oral'},                       TOOL_FAMILY),
+    # craft supplies: a skein of yarn has no volume, a chisel has no drying time
+    'volume':                      ({'craft_liquid'},               CRAFT_FAMILY),
+    'quick drying':                ({'craft_liquid'},               CRAFT_FAMILY),
+    'water resistant':             ({'craft_liquid'},               CRAFT_FAMILY),
+    'finish':                      ({'craft_liquid'},               CRAFT_FAMILY),
+    'yarn weight thickness':       ({'craft_yarn'},                 CRAFT_FAMILY),
+    'needle hook size':            ({'craft_yarn', 'craft_tool'},   CRAFT_FAMILY),
+    'net weight':                  ({'craft_liquid', 'craft_yarn'}, CRAFT_FAMILY),
+    # a wheelchair does not take readings; a blood-pressure monitor has no seat
+    'measurement type':            ({'med_monitor'},                MED_FAMILY),
+    'display type':                ({'med_monitor'},                MED_FAMILY),
+    'memory storage':              ({'med_monitor'},                MED_FAMILY),
+    'number of user profiles':     ({'med_monitor'},                MED_FAMILY),
+    'measurement accuracy':        ({'med_monitor'},                MED_FAMILY),
+    'irregular heartbeat detection': ({'med_monitor'},              MED_FAMILY),
+    'voice guidance':              ({'med_monitor'},                MED_FAMILY),
+    'mobile app support':          ({'med_monitor'},                MED_FAMILY),
+    'connectivity':                ({'med_monitor'},                MED_FAMILY),
+    'automatic shut off':          ({'med_monitor'},                MED_FAMILY),
+    'sterile':                     ({'med_sterile'},                MED_FAMILY),
+    'single use disposable':       ({'med_sterile'},                MED_FAMILY),
+    'weight capacity':             ({'med_mobility', 'med_support'}, MED_FAMILY),
     # nutrition panel -- only for things you eat
     'energy per 100 g ml':         ({'edible'}, None),
     'protein per 100 g':           ({'edible'}, None),
