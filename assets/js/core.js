@@ -75,6 +75,19 @@ const HMT = (() => {
     { href: "life.html", label: "🎯 الأهداف والعادات" },
     { href: "settings.html", label: "⚙️ الإعدادات" },
   ];
+  const renderSeedBanner = () => {
+    if (window.HMT_SEED_LOADED) return;
+    const h = document.getElementById("siteHeader");
+    if (!h || document.getElementById("seedBanner")) return;
+    const d = document.createElement("div");
+    d.id = "seedBanner";
+    d.className = "alert warn";
+    d.style.cssText = "margin:12px auto;max-width:1100px";
+    d.innerHTML = '🔒 <b>بياناتك الشخصية غير محمّلة على هذا المتصفح.</b> ' +
+      'هذا المستودع عام، فالبيانات لا تُخزَّن فيه — استوردها من ' +
+      '<a href="settings.html">الإعدادات ← استعادة نسخة احتياطية</a>.';
+    h.insertAdjacentElement("afterend", d);
+  };
   const renderHeader = (active) => {
     const el = document.getElementById("siteHeader");
     if (!el) return;
@@ -95,6 +108,7 @@ const HMT = (() => {
       <nav class="main">
         ${NAV.map(n => `<a href="${n.href}" class="${n.href === active ? "active" : ""}">${n.label}</a>`).join("")}
       </nav>`;
+    renderSeedBanner();
   };
 
   /* ---------- Tabs ---------- */
@@ -152,5 +166,5 @@ const HMT = (() => {
       series.map(s => `<span><span style="color:${s.color}">●</span> ${esc(s.label)}</span>`).join("") + `</div>`;
   };
 
-  return { get, set, del, allKeys, exportAll, importAll, todayKey, fmtDate, isTrainingDay, isWorkDay, cycleInfo, daysBetween, toast, esc, renderHeader, initTabs, lineChart, DAYS };
+  return { get, set, del, allKeys, exportAll, importAll, renderSeedBanner, todayKey, fmtDate, isTrainingDay, isWorkDay, cycleInfo, daysBetween, toast, esc, renderHeader, initTabs, lineChart, DAYS };
 })();

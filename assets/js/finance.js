@@ -199,6 +199,10 @@
     const hasData = f.base?.salary || (f.debts || []).length;
     document.getElementById("finEmpty").innerHTML = hasData ? "" :
       `<div class="alert warn">⚠️ القسم المالي فارغ. ابدأ بتبويب <b>"البيانات الأساسية"</b> لتسجيل دخلك والتزاماتك، ثم أضف ديونك — أو افتح <b>المستشار المالي</b> واكتب له "ابدأ المقابلة المالية" وسيجمع كل شيء منك خطوة بخطوة.</div>`;
+    const finAlerts = f.alerts || [];
+    if (finAlerts.length) document.getElementById("finEmpty").innerHTML +=
+      `<div class="alert warn"><b>🔎 نقاط مفتوحة تحتاج تحققًا</b><ul style="margin:6px 0 0;padding-inline-start:20px;line-height:1.9">` +
+      finAlerts.map(a => `<li>${HMT.esc(a)}</li>`).join("") + `</ul></div>`;
 
     const income = (f.base?.salary || 0) + (f.base?.bizIncome || 0) + (f.base?.otherIncome || 0);
     const fixedTotal = (f.fixed || []).reduce((s, x) => s + x.amount, 0);

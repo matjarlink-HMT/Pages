@@ -7,16 +7,19 @@
   /* ========== 1) التقرير الصحي ========== */
   const latestWeekly = () => (HMT.get("weekly_logs", []).slice(-1)[0] || null);
 
+  { const ld = document.getElementById("labsDate");
+    if (ld) ld.textContent = S.labs.date ? "(" + S.labs.date.split("-").reverse().join("/") + ")" : "— لم تُستورد بعد"; }
   const ovStats = document.getElementById("ovStats");
   const lw = latestWeekly();
   const curW = lw?.weight ?? S.measurements.weight;
   const curWaist = lw?.waist ?? S.measurements.waist;
-  const bmi = (curW / ((S.measurements.height / 100) ** 2)).toFixed(1);
+  const D = (v, suffix = "") => (v === null || v === undefined || v === "" || Number.isNaN(v)) ? "—" : v + suffix;
+  const bmi = (curW && S.measurements.height) ? (curW / ((S.measurements.height / 100) ** 2)).toFixed(1) : null;
   ovStats.innerHTML = `
-    <div class="stat"><div class="lbl">الوزن الحالي</div><div class="val">${curW} كجم</div><div class="sub">البداية: ${S.measurements.weight} كجم</div></div>
-    <div class="stat"><div class="lbl">الخصر</div><div class="val">${curWaist} سم</div><div class="sub">الهدف: ≤88 سم</div></div>
-    <div class="stat warn"><div class="lbl">BMI</div><div class="val">${bmi}</div><div class="sub">الطبيعي: 18.5–24.9</div></div>
-    <div class="stat warn"><div class="lbl">نسبة الدهون (تقديري)</div><div class="val">~${S.measurements.bodyFat}%</div><div class="sub">Navy method</div></div>`;
+    <div class="stat"><div class="lbl">الوزن الحالي</div><div class="val">${D(curW, " كجم")}</div><div class="sub">البداية: ${D(S.measurements.weight, " كجم")}</div></div>
+    <div class="stat"><div class="lbl">الخصر</div><div class="val">${D(curWaist, " سم")}</div><div class="sub">الهدف: ≤88 سم</div></div>
+    <div class="stat warn"><div class="lbl">BMI</div><div class="val">${D(bmi)}</div><div class="sub">الطبيعي: 18.5–24.9</div></div>
+    <div class="stat warn"><div class="lbl">نسبة الدهون (تقديري)</div><div class="val">${S.measurements.bodyFat ? "~" + S.measurements.bodyFat + "%" : "—"}</div><div class="sub">Navy method</div></div>`;
 
   // الأهداف
   const goalsEl = document.getElementById("ovGoals");
@@ -82,12 +85,12 @@
   document.getElementById("dayHint").textContent =
     (!planStarted ? "⏳ الخطة تنطلق رسميًا الأحد 2/8 — اعتبر اليوم تمهيديًا للتعود. " : "") +
     (cycle.vacation
-      ? "أسبوع إجازة: أنت في بيت صحار — لا دوام، استيقاظ ≤07:30. "
+      ? `أسبوع إجازة: أنت في بيت ${HMT_HOME} — لا دوام، استيقاظ ≤07:30. `
       : isWeekend ? "عطلة نهاية الأسبوع: لا دوام اليوم — استيقاظ ≤07:30. " : "") +
     (isTraining
       ? (cycle.vacation
-        ? "🏋️ اليوم يوم تمرين — بديل البيت أو جيم صحار (17:00)."
-        : "🏋️ اليوم يوم تمرين مقاومة في جيم المصنعة (17:00–18:00).")
+        ? `🏋️ اليوم يوم تمرين — بديل البيت أو جيم ${HMT_HOME} (17:00).`
+        : `🏋️ اليوم يوم تمرين مقاومة في جيم ${HMT_WORK} (17:00–18:00).`)
       : "اليوم بدون مقاومة — المشي والتصحيحي أساسيان.");
 
   // تكييف جدول اليوم: أيام الإجازة وعطلة نهاية الأسبوع بدون دوام واستيقاظ مرن
@@ -97,7 +100,7 @@
       if (!offDay) return i;
       if (i.key === "wake") return { ...i, time: "07:30", txt: "استيقاظ ≤07:30 + ماء + ضوء (فرق ≤ ساعة عن أيام الدوام)" };
       if (i.key === "breakfast") return { ...i, time: "07:45" };
-      if (i.key === "gym" && cycle.vacation) return { ...i, txt: "تمرين — بديل البيت أو جيم صحار" };
+      if (i.key === "gym" && cycle.vacation) return { ...i, txt: `تمرين — بديل البيت أو جيم ${HMT_HOME}` };
       return i;
     });
   const dayStateKey = `day_${today}`;
@@ -132,7 +135,7 @@
   document.getElementById("workoutToday").innerHTML = (isTraining
     ? `🏋️ <b>اليوم يوم تمرين!</b> الموعد 17:00–18:00. بدّل بين A وB (آخر خطة سجلتها: ${lastPlanUsed() || "لم تبدأ بعد — ابدأ بـ A"}).`
     : `اليوم راحة من المقاومة. أيام التمرين: <b>الاثنين والخميس</b> 17:00. لا تنسَ المشي والتصحيحي.`)
-    + (cycle.vacation ? ` <br>🏖️ <b>أسبوع إجازة:</b> أنت في صحار — استخدم بديل البيت (تبويبه هنا) أو جيم صحار بنفس خطة A/B.` : "");
+    + (cycle.vacation ? ` <br>🏖️ <b>أسبوع إجازة:</b> أنت في ${HMT_HOME} — استخدم بديل البيت (تبويبه هنا) أو جيم ${HMT_HOME} بنفس خطة A/B.` : "");
 
   function lastPlanUsed() {
     const logs = HMT.get("workout_logs", []);
@@ -144,7 +147,7 @@
     if (id === "home") {
       planView.innerHTML = `<div class="card"><h3><span class="ic">🏠</span> ${S.workouts.homeAlt.name}</h3>
         <div>${S.workouts.homeAlt.desc}</div>
-        <div class="alert warn small" style="margin-top:8px">توصية: الاشتراك بجيم قريب من بيت صحار خلال شهر.</div></div>`;
+        <div class="alert warn small" style="margin-top:8px">توصية: الاشتراك بجيم قريب من بيت ${HMT_HOME} خلال شهر.</div></div>`;
       return;
     }
     if (id === "corrective") {
@@ -340,7 +343,7 @@
     const logs = HMT.get("weekly_logs", []);
     // الرسم — نضيف نقطة البداية
     const base = { date: S.measurements.date, weight: S.measurements.weight, waist: S.measurements.waist };
-    const pts = [base, ...logs];
+    const pts = [base, ...logs].filter(l => l && l.date);
     HMT.lineChart(document.getElementById("weightChart"), [
       { label: "الوزن (كجم)", color: "#8E1B5B", points: pts.map(l => ({ x: l.date.slice(5), y: l.weight })) },
       { label: "الخصر (سم)", color: "#F2A03D", points: pts.map(l => ({ x: l.date.slice(5), y: l.waist })) },

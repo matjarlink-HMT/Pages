@@ -1,78 +1,25 @@
-/* بيانات السياق الأساسية — من الملف الصحي الشامل (31/07/2026) */
-window.HMT_SEED = {
+/* HMT OS — الهيكل والمكتبات العامة فقط.
+   ⚠️ لا تضع أي بيانات شخصية هنا — هذا المستودع عام على الإنترنت.
+   بياناتك الحقيقية تُستورد من الإعدادات وتُحفظ في متصفحك (localStorage). */
+const DEFAULT_SEED = {
   profile: {
-    name: "إبراهيم",
-    age: 32, gender: "ذكر", nationality: "عُماني",
-    home: "صحار", work: "المصنعة (يبيت في مقر العمل أيام الدوام)",
-    family: "متزوج + 3 أطفال",
-    job: "موظف إداري مكتبي + مالك مشروع متجرلينك",
-    schedule: "الأحد–الخميس 07:00–13:30 · نظام 3 أسابيع دوام / أسبوع إجازة",
+    name: "", age: null, gender: "", nationality: "",
+    home: "", work: "", family: "", job: "", schedule: "",
   },
   measurements: {
-    date: "2026-07-31",
-    height: 168, weight: 78, bmi: 27.6,
-    waist: 95, neck: 39, chest: 96, arm: 28, hip: 106, thigh: 66,
-    bodyFat: 31, whr: 0.90,
+    date: null, height: null, weight: null, bmi: null,
+    waist: null, neck: null, chest: null, arm: null, hip: null, thigh: null,
+    bodyFat: null, whr: null,
   },
-  labs: {
-    date: "2025-10-30", place: "مستشفى أستر الرفاعة — صحار",
-    echo: "طبيعي بالكامل: LVEF 60%، حجرات وصمامات طبيعية، لا RWMA.",
-    lipids: [
-      { name: "الكوليسترول الكلي", val: "6.49", unit: "mmol/L", ref: "<5.2", status: "high" },
-      { name: "الدهون الثلاثية (TG)", val: "2.46", unit: "mmol/L", ref: "<1.7", status: "high" },
-      { name: "HDL", val: "0.98", unit: "mmol/L", ref: ">1.68", status: "low" },
-      { name: "LDL المباشر", val: "4.44", unit: "mmol/L", ref: "<2.59", status: "high" },
-      { name: "Non-HDL", val: "5.51", unit: "mmol/L", ref: "—", status: "high" },
-      { name: "TC/HDL", val: "6.62", unit: "", ref: "<4.5", status: "high" },
-    ],
-    other: [
-      { name: "سكر صائم", val: "5.35 mmol/L", status: "ok" },
-      { name: "حمض اليوريك", val: "463 µmol/L (مرجع 210–432)", status: "warn" },
-      { name: "وظائف الكبد والكلى والأملاح", val: "طبيعية", status: "ok" },
-      { name: "CBC", val: "طبيعي عمومًا؛ صفائح 443 (حد أعلى)", status: "ok" },
-    ],
-    missing: "ضغط الدم الموثق، فيتامين D، B12، فيريتين/حديد، TSH، HbA1c — تُفحص أسبوع 10–12",
-    metabolicNote: "يستوفي 3 معايير متلازمة أيضية وفق IDF (خصر ≥94 + TG ≥1.7 + HDL <1.03) — محور الخطة.",
-  },
-  ratings: [
-    { k: "بنية القلب والأعضاء", v: 9 }, { k: "الجاهزية والدافعية", v: 9 },
-    { k: "التوتر", v: 5 }, { k: "العادات الرقمية", v: 5 },
-    { k: "التغذية", v: 4 }, { k: "النوم", v: 4 },
-    { k: "الأيض (دهون/خصر)", v: 3 }, { k: "النشاط واللياقة", v: 2 },
-  ],
+  labs: { date: null, place: "", echo: "", lipids: [], other: [], missing: "", metabolicNote: "" },
+  ratings: [],
   workCycle: {
-    // نظام الدوام: أسبوع إجازة ثم 3 أسابيع دوام (دورة 4 أسابيع)
-    // المرساة: الأسبوع الذي يبدأ الأحد 2/8/2026 = أسبوع إجازة
     anchor: "2026-08-02",
     pattern: ["إجازة", "دوام", "دوام", "دوام"],
-    note: "أيام الإجازة: نفس هيكل اليوم، استيقاظ ≤07:30 (فرق ≤ ساعة). الموقع: بيت صحار — التمرين ببديل البيت أو جيم صحار.",
+    note: "",
   },
-  goals12w: {
-    deadline: "2026-10-24",
-    start: "2026-08-02",
-    items: [
-      { key: "waist", label: "الخصر", from: 95, to: 88, unit: "سم", dir: "down" },
-      { key: "weight", label: "الوزن", from: 78, to: 72, unit: "كجم", dir: "down" },
-      { key: "steps", label: "الخطوات اليومية", from: 2800, to: 7500, unit: "خطوة", dir: "up" },
-      { key: "sleep", label: "النوم الليلي", from: 6.5, to: 7.5, unit: "ساعة", dir: "up" },
-    ],
-  },
-  nutrition: {
-    calories: 1850, protein: 135, fat: 60, carbs: 190, fiber: "30+", water: "2.5–3 لتر",
-    rules: [
-      "صفر عصائر وكولا كنمط — فاكهة كاملة بدلًا منها",
-      "وجبة حرة واحدة أسبوعيًا (يفضل غداءً)",
-      "القهوة حرة حتى 16:00 — بعدها ديكاف فقط",
-      "عشاء قبل 19:30 (حد أقصى 20:00 أول أسبوعين)",
-    ],
-    meals: [
-      { time: "06:45", name: "فطور", desc: "بيضتان + تمرة + قهوة" },
-      { time: "14:00", name: "غداء", desc: "سلطة أولًا · بروتين كف ونصف · رز 1.5 كوب مطبوخ · لبن + D3 وأوميغا-3" },
-      { time: "16:00", name: "سناك", desc: "فاكهة + مكسرات + آخر كافيين لليوم" },
-      { time: "19:30", name: "عشاء", desc: "بروتين مشوي + خضار + كارب خفيف" },
-      { time: "22:30", name: "قبل النوم", desc: "كوب لبن" },
-    ],
-  },
+  goals12w: { start: "2026-08-02", deadline: "2026-10-24", items: [] },
+  nutrition: { calories: null, protein: null, fat: null, carbs: null, fiber: "", water: "", rules: [], meals: [] },
   daySchedule: [
     { time: "06:30", txt: "استيقاظ + ماء + تعرض للضوء", key: "wake" },
     { time: "06:45", txt: "فطور بروتيني + قهوة", key: "breakfast" },
@@ -152,7 +99,7 @@ window.HMT_SEED = {
       ],
     },
     homeAlt: {
-      name: "بديل بيت صحار (دمبل 5 كجم + جهاز كارديو)",
+      name: "بديل المنزل (دمبل 5 كجم + جهاز كارديو)",
       desc: "دائرة 3 جولات: سكوات كأس ×15 · اندفاع ×10 لكل رجل · ضغط أرضي ×أقصى · تجديف بالدمبل ×12 · ضغط كتف ×12 · بلانك 30ث — ثم 15 دقيقة كارديو. راحة 60-90ث بين الجولات.",
     },
     corrective: {
@@ -161,14 +108,27 @@ window.HMT_SEED = {
     },
     progression: "أسبوعان تعويد سهلان → ثم Double Progression: زد التكرارات حتى سقف المدى ثم زد الوزن. دائمًا 1-2 تكرار بالخزان. لا فشل عضلي أول 12 أسبوعًا.",
   },
-  supplements: [
-    { id: "creatine", name: "كرياتين", dose: "5 غ", when: "يوميًا — مع شيك البروتين", daily: true },
-    { id: "whey", name: "واي آيزوليت", dose: "سكوب واحد", when: "بعد التمرين أو مع الفطور", daily: true },
-    { id: "d3", name: "فيتامين D3", dose: "2000 IU", when: "مع الغداء (يُقاس مستواه أسبوع 10)", daily: true },
-    { id: "omega", name: "أوميغا-3", dose: "حبتان", when: "مع الغداء", daily: true },
-    { id: "mag", name: "مغنيسيوم جلايسينيت", dose: "350 ملغ", when: "قبل النوم بساعة", daily: true },
-    { id: "zinc", name: "زنك بيكولينات", dose: "50 ملغ", when: "يوم بعد يوم مع الغداء — حتى نهاية العبوة ثم إيقاف", daily: false },
-  ],
-  stoppedSupplements: "Myo Plus وOLIMAG (تكرار مغنيسيوم) · ALA وكارنتين وماكا (أدلة ضعيفة) — لا إعادة شراء.",
+  supplements: [],
+  stoppedSupplements: "",
   safetyRule: "⚠️ أي ألم صدر يزداد مع الجهد / ضيق نفس / دوخة → أوقف فورًا وقيّم طبيًا.",
 };
+
+/* ---------- دمج بياناتك الخاصة من المتصفح ----------
+   يعمل قبل core.js، لذا يقرأ localStorage مباشرة بنفس البادئة "hmtos_". */
+(function () {
+  const deepMerge = (base, over) => {
+    if (Array.isArray(over)) return over.slice();
+    if (over && typeof over === "object" && !Array.isArray(base) && base && typeof base === "object") {
+      const out = { ...base };
+      for (const k of Object.keys(over)) out[k] = deepMerge(base[k], over[k]);
+      return out;
+    }
+    return over === undefined ? base : over;
+  };
+  let priv = null;
+  try { priv = JSON.parse(localStorage.getItem("hmtos_seed") || "null"); } catch (e) { priv = null; }
+  window.HMT_SEED = priv ? deepMerge(DEFAULT_SEED, priv) : DEFAULT_SEED;
+  window.HMT_HOME = window.HMT_SEED.profile.home || "المنزل";
+  window.HMT_WORK = String(window.HMT_SEED.profile.work || "").split(" (")[0] || "مقر العمل";
+  window.HMT_SEED_LOADED = !!(priv && priv.measurements && priv.measurements.weight);
+})();
